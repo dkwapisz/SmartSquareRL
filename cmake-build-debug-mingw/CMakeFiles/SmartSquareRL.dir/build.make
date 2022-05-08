@@ -83,56 +83,26 @@ CMakeFiles/SmartSquareRL.dir/Game/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/main.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\main.cpp -o CMakeFiles\SmartSquareRL.dir\Game\main.cpp.s
 
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj: ../Game/Board.cpp
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\Board.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\Board.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Board.cpp
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj: ../Game/Game.cpp
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\Game.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\Game.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Game.cpp
 
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Board.cpp > CMakeFiles\SmartSquareRL.dir\Game\Board.cpp.i
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.i"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Game.cpp > CMakeFiles\SmartSquareRL.dir\Game\Game.cpp.i
 
-CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Board.cpp -o CMakeFiles\SmartSquareRL.dir\Game\Board.cpp.s
-
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj: ../Game/Square.cpp
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\Square.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\Square.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Square.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Square.cpp > CMakeFiles\SmartSquareRL.dir\Game\Square.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Square.cpp -o CMakeFiles\SmartSquareRL.dir\Game\Square.cpp.s
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj: ../Game/GameObjects/GameObject.cpp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\GameObject.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\GameObject.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\GameObject.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\GameObject.cpp > CMakeFiles\SmartSquareRL.dir\Game\GameObjects\GameObject.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\GameObject.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\GameObject.cpp.s
+CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.s"
+	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\Game.cpp -o CMakeFiles\SmartSquareRL.dir\Game\Game.cpp.s
 
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj: ../Game/GameObjects/Player.cpp
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Player.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Player.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Player.cpp
 
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.i: cmake_force
@@ -143,71 +113,11 @@ CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.s"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Player.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Player.cpp.s
 
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj: ../Game/GameObjects/StaticEnemy.cpp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\StaticEnemy.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\StaticEnemy.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\StaticEnemy.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\StaticEnemy.cpp > CMakeFiles\SmartSquareRL.dir\Game\GameObjects\StaticEnemy.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\StaticEnemy.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\StaticEnemy.cpp.s
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj: ../Game/GameObjects/MovingEnemy.cpp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\MovingEnemy.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\MovingEnemy.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\MovingEnemy.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\MovingEnemy.cpp > CMakeFiles\SmartSquareRL.dir\Game\GameObjects\MovingEnemy.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\MovingEnemy.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\MovingEnemy.cpp.s
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj: ../Game/GameObjects/Box.cpp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Box.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Box.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Box.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Box.cpp > CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Box.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Box.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Box.cpp.s
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj: ../Game/GameObjects/Coin.cpp
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Coin.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Coin.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Coin.cpp
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Coin.cpp > CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Coin.cpp.i
-
-CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Coin.cpp -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Coin.cpp.s
-
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj: CMakeFiles/SmartSquareRL.dir/flags.make
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj: CMakeFiles/SmartSquareRL.dir/includes_CXX.rsp
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj: ../Game/GameObjects/Bullet.cpp
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj: CMakeFiles/SmartSquareRL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj"
 	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj -MF CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Bullet.cpp.obj.d -o CMakeFiles\SmartSquareRL.dir\Game\GameObjects\Bullet.cpp.obj -c D:\PROJEKTY\EngineerThesis\SmartSquareRL\Game\GameObjects\Bullet.cpp
 
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.i: cmake_force
@@ -221,28 +131,16 @@ CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.s: cmake_force
 # Object files for target SmartSquareRL
 SmartSquareRL_OBJECTS = \
 "CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj" \
+"CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj" \
 "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj" \
-"CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj" \
 "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj"
 
 # External object files for target SmartSquareRL
 SmartSquareRL_EXTERNAL_OBJECTS =
 
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj
+SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj
-SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/build.make
 SmartSquareRL.exe: C:/SFML/lib/libsfml-system-s-d.a
@@ -254,7 +152,7 @@ SmartSquareRL.exe: C:/SFML/lib/libfreetype.a
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/linklibs.rsp
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/objects1.rsp
 SmartSquareRL.exe: CMakeFiles/SmartSquareRL.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable SmartSquareRL.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\PROJEKTY\EngineerThesis\SmartSquareRL\cmake-build-debug-mingw\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable SmartSquareRL.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\SmartSquareRL.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -128,53 +128,29 @@ SmartSquareRL/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/build
 .PHONY : SmartSquareRL/fast
 
-Game/Board.obj: Game/Board.cpp.obj
-.PHONY : Game/Board.obj
+Game/Game.obj: Game/Game.cpp.obj
+.PHONY : Game/Game.obj
 
 # target to build an object file
-Game/Board.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.obj
-.PHONY : Game/Board.cpp.obj
+Game/Game.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj
+.PHONY : Game/Game.cpp.obj
 
-Game/Board.i: Game/Board.cpp.i
-.PHONY : Game/Board.i
-
-# target to preprocess a source file
-Game/Board.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.i
-.PHONY : Game/Board.cpp.i
-
-Game/Board.s: Game/Board.cpp.s
-.PHONY : Game/Board.s
-
-# target to generate assembly for a file
-Game/Board.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Board.cpp.s
-.PHONY : Game/Board.cpp.s
-
-Game/GameObjects/Box.obj: Game/GameObjects/Box.cpp.obj
-.PHONY : Game/GameObjects/Box.obj
-
-# target to build an object file
-Game/GameObjects/Box.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.obj
-.PHONY : Game/GameObjects/Box.cpp.obj
-
-Game/GameObjects/Box.i: Game/GameObjects/Box.cpp.i
-.PHONY : Game/GameObjects/Box.i
+Game/Game.i: Game/Game.cpp.i
+.PHONY : Game/Game.i
 
 # target to preprocess a source file
-Game/GameObjects/Box.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.i
-.PHONY : Game/GameObjects/Box.cpp.i
+Game/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.i
+.PHONY : Game/Game.cpp.i
 
-Game/GameObjects/Box.s: Game/GameObjects/Box.cpp.s
-.PHONY : Game/GameObjects/Box.s
+Game/Game.s: Game/Game.cpp.s
+.PHONY : Game/Game.s
 
 # target to generate assembly for a file
-Game/GameObjects/Box.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Box.cpp.s
-.PHONY : Game/GameObjects/Box.cpp.s
+Game/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.s
+.PHONY : Game/Game.cpp.s
 
 Game/GameObjects/Bullet.obj: Game/GameObjects/Bullet.cpp.obj
 .PHONY : Game/GameObjects/Bullet.obj
@@ -200,78 +176,6 @@ Game/GameObjects/Bullet.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.s
 .PHONY : Game/GameObjects/Bullet.cpp.s
 
-Game/GameObjects/Coin.obj: Game/GameObjects/Coin.cpp.obj
-.PHONY : Game/GameObjects/Coin.obj
-
-# target to build an object file
-Game/GameObjects/Coin.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.obj
-.PHONY : Game/GameObjects/Coin.cpp.obj
-
-Game/GameObjects/Coin.i: Game/GameObjects/Coin.cpp.i
-.PHONY : Game/GameObjects/Coin.i
-
-# target to preprocess a source file
-Game/GameObjects/Coin.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.i
-.PHONY : Game/GameObjects/Coin.cpp.i
-
-Game/GameObjects/Coin.s: Game/GameObjects/Coin.cpp.s
-.PHONY : Game/GameObjects/Coin.s
-
-# target to generate assembly for a file
-Game/GameObjects/Coin.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Coin.cpp.s
-.PHONY : Game/GameObjects/Coin.cpp.s
-
-Game/GameObjects/GameObject.obj: Game/GameObjects/GameObject.cpp.obj
-.PHONY : Game/GameObjects/GameObject.obj
-
-# target to build an object file
-Game/GameObjects/GameObject.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.obj
-.PHONY : Game/GameObjects/GameObject.cpp.obj
-
-Game/GameObjects/GameObject.i: Game/GameObjects/GameObject.cpp.i
-.PHONY : Game/GameObjects/GameObject.i
-
-# target to preprocess a source file
-Game/GameObjects/GameObject.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.i
-.PHONY : Game/GameObjects/GameObject.cpp.i
-
-Game/GameObjects/GameObject.s: Game/GameObjects/GameObject.cpp.s
-.PHONY : Game/GameObjects/GameObject.s
-
-# target to generate assembly for a file
-Game/GameObjects/GameObject.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/GameObject.cpp.s
-.PHONY : Game/GameObjects/GameObject.cpp.s
-
-Game/GameObjects/MovingEnemy.obj: Game/GameObjects/MovingEnemy.cpp.obj
-.PHONY : Game/GameObjects/MovingEnemy.obj
-
-# target to build an object file
-Game/GameObjects/MovingEnemy.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.obj
-.PHONY : Game/GameObjects/MovingEnemy.cpp.obj
-
-Game/GameObjects/MovingEnemy.i: Game/GameObjects/MovingEnemy.cpp.i
-.PHONY : Game/GameObjects/MovingEnemy.i
-
-# target to preprocess a source file
-Game/GameObjects/MovingEnemy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.i
-.PHONY : Game/GameObjects/MovingEnemy.cpp.i
-
-Game/GameObjects/MovingEnemy.s: Game/GameObjects/MovingEnemy.cpp.s
-.PHONY : Game/GameObjects/MovingEnemy.s
-
-# target to generate assembly for a file
-Game/GameObjects/MovingEnemy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/MovingEnemy.cpp.s
-.PHONY : Game/GameObjects/MovingEnemy.cpp.s
-
 Game/GameObjects/Player.obj: Game/GameObjects/Player.cpp.obj
 .PHONY : Game/GameObjects/Player.obj
 
@@ -295,54 +199,6 @@ Game/GameObjects/Player.s: Game/GameObjects/Player.cpp.s
 Game/GameObjects/Player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.s
 .PHONY : Game/GameObjects/Player.cpp.s
-
-Game/GameObjects/StaticEnemy.obj: Game/GameObjects/StaticEnemy.cpp.obj
-.PHONY : Game/GameObjects/StaticEnemy.obj
-
-# target to build an object file
-Game/GameObjects/StaticEnemy.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.obj
-.PHONY : Game/GameObjects/StaticEnemy.cpp.obj
-
-Game/GameObjects/StaticEnemy.i: Game/GameObjects/StaticEnemy.cpp.i
-.PHONY : Game/GameObjects/StaticEnemy.i
-
-# target to preprocess a source file
-Game/GameObjects/StaticEnemy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.i
-.PHONY : Game/GameObjects/StaticEnemy.cpp.i
-
-Game/GameObjects/StaticEnemy.s: Game/GameObjects/StaticEnemy.cpp.s
-.PHONY : Game/GameObjects/StaticEnemy.s
-
-# target to generate assembly for a file
-Game/GameObjects/StaticEnemy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/StaticEnemy.cpp.s
-.PHONY : Game/GameObjects/StaticEnemy.cpp.s
-
-Game/Square.obj: Game/Square.cpp.obj
-.PHONY : Game/Square.obj
-
-# target to build an object file
-Game/Square.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.obj
-.PHONY : Game/Square.cpp.obj
-
-Game/Square.i: Game/Square.cpp.i
-.PHONY : Game/Square.i
-
-# target to preprocess a source file
-Game/Square.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.i
-.PHONY : Game/Square.cpp.i
-
-Game/Square.s: Game/Square.cpp.s
-.PHONY : Game/Square.s
-
-# target to generate assembly for a file
-Game/Square.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/Square.cpp.s
-.PHONY : Game/Square.cpp.s
 
 Game/main.obj: Game/main.cpp.obj
 .PHONY : Game/main.obj
@@ -377,33 +233,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... SmartSquareRL
-	@echo ... Game/Board.obj
-	@echo ... Game/Board.i
-	@echo ... Game/Board.s
-	@echo ... Game/GameObjects/Box.obj
-	@echo ... Game/GameObjects/Box.i
-	@echo ... Game/GameObjects/Box.s
+	@echo ... Game/Game.obj
+	@echo ... Game/Game.i
+	@echo ... Game/Game.s
 	@echo ... Game/GameObjects/Bullet.obj
 	@echo ... Game/GameObjects/Bullet.i
 	@echo ... Game/GameObjects/Bullet.s
-	@echo ... Game/GameObjects/Coin.obj
-	@echo ... Game/GameObjects/Coin.i
-	@echo ... Game/GameObjects/Coin.s
-	@echo ... Game/GameObjects/GameObject.obj
-	@echo ... Game/GameObjects/GameObject.i
-	@echo ... Game/GameObjects/GameObject.s
-	@echo ... Game/GameObjects/MovingEnemy.obj
-	@echo ... Game/GameObjects/MovingEnemy.i
-	@echo ... Game/GameObjects/MovingEnemy.s
 	@echo ... Game/GameObjects/Player.obj
 	@echo ... Game/GameObjects/Player.i
 	@echo ... Game/GameObjects/Player.s
-	@echo ... Game/GameObjects/StaticEnemy.obj
-	@echo ... Game/GameObjects/StaticEnemy.i
-	@echo ... Game/GameObjects/StaticEnemy.s
-	@echo ... Game/Square.obj
-	@echo ... Game/Square.i
-	@echo ... Game/Square.s
 	@echo ... Game/main.obj
 	@echo ... Game/main.i
 	@echo ... Game/main.s

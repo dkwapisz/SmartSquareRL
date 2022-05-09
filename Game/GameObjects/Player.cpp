@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include <iostream>
 
 Player::Player() = default;
 

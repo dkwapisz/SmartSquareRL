@@ -107,11 +107,13 @@ void Game::inputShooting() {
 
 void Game::shot(float directionX, float directionY) {
     if (player -> isShotPossible()) {
+        float positionX = this -> player -> getCenterPosition() -> x - gameObjectsShape["Bullet"] -> getSize().x / 2;
+        float positionY = this -> player -> getCenterPosition() -> y - gameObjectsShape["Bullet"] -> getSize().y / 2;
+
         this -> bullets.push_back(new Bullet(this -> gameObjectsShape["Bullet"],
-                                             this -> player -> getCenterPosition() -> x,
-                                             this -> player -> getCenterPosition() -> y,
+                                             positionX, positionY,
                                              directionX, directionY,
-                                             4.f ));
+                                             this -> player -> getShotSpeed()));
     } else {
         player -> incrementCooldown();
     }

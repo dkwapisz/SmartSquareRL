@@ -5,6 +5,7 @@ Player::Player() {
     this -> moveSpeed = 2.f;
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
+    this -> shotSpeed = 4.f;
 
     initializeSquare();
 }
@@ -35,6 +36,10 @@ const sf::Vector2f* Player::getCenterPosition() const {
 
 void Player::incrementCooldown() {
     shotCooldown++;
+}
+
+float Player::getShotSpeed() const {
+    return shotSpeed;
 }
 
 bool Player::isShotPossible() {

@@ -10,6 +10,7 @@ private:
 
     int shotCooldown;
     int shotCooldownMax;
+    float shotSpeed;
     float moveSpeed;
     void initializeSquare();
 
@@ -19,6 +20,7 @@ public:
 
     const sf::Vector2f* getCenterPosition() const;
 
+    float getShotSpeed() const;
     void incrementCooldown();
     bool isShotPossible();
     void move(float directionX, float directionY);

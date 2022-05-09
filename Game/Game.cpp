@@ -58,12 +58,12 @@ void Game::updateBullets() {
     for (auto *bullet : this -> bullets) {
         bullet -> update();
 
-        // TODO collision with wall in future
-        // Collision with screen bounds in up
-        if (bullet -> getBounds().top + bullet -> getBounds().height < 0.f) {
-            delete this -> bullets.at(counter);
-            this -> bullets.erase(this -> bullets.begin() + counter);
-            --counter;
+        for (auto *wall : this -> walls) {
+            if (bullet -> getBounds().intersects(wall -> getBounds())) {
+                delete this -> bullets.at(counter);
+                this -> bullets.erase(this -> bullets.begin() + counter);
+                --counter;
+            }
         }
 
         ++counter;

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "GameObjects/Player.hpp"
+#include "GameObjects/Bullet.hpp"
 #include <map>
 
 class Game {
@@ -10,12 +11,16 @@ class Game {
 private:
     sf::RenderWindow* window;
 
-    std::map<std::string, sf::RectangleShape> gameObjects;
+    std::map<std::string, sf::RectangleShape*> gameObjectsShape;
+    std::vector<Bullet*> bullets;
     Player* player;
 
     void initializeWindow();
     void initializeGameObjects();
     void initializePlayer();
+    void inputMovement();
+    void inputShooting();
+    void shot(float directionX, float directionY);
 
 public:
     Game();
@@ -24,6 +29,7 @@ public:
     void run();
     void updateWindowEvents();
     void updatePlayerInput();
+    void updateBullets();
     void update();
     void render();
 

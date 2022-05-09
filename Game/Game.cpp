@@ -1,13 +1,23 @@
 #include "Game.hpp"
+#include <iostream>
 
 Game::Game() {
     this -> initializeWindow();
+    this -> initializeGameObjects();
     this -> initializePlayer();
 }
 
 Game::~Game() {
     delete this -> window;
     delete this -> player;
+
+    for (auto &gameObject : this -> gameObjectsShape) {
+        delete gameObject.second;
+    }
+
+    for (auto *bullet : this -> bullets) {
+        delete bullet;
+    }
 }
 
 void Game::initializeWindow() {
@@ -19,7 +29,7 @@ void Game::initializeWindow() {
 }
 
 void Game::initializeGameObjects() {
-    //TODO
+    this -> gameObjectsShape["Bullet"] = new sf::RectangleShape();
 }
 
 void Game::initializePlayer() {
@@ -27,12 +37,27 @@ void Game::initializePlayer() {
 }
 
 void Game::run() {
-
     while (this -> window -> isOpen()) {
         this -> update();
         this -> render();
     }
+}
 
+void Game::updateBullets() {
+    unsigned counter = 0;
+    for (auto *bullet : this -> bullets) {
+        bullet -> update();
+
+        // TODO collision with wall in future
+        // Collision with screen bounds in up
+        if (bullet -> getBounds().top + bullet -> getBounds().height < 0.f) {
+            delete this -> bullets.at(counter);
+            this -> bullets.erase(this -> bullets.begin() + counter);
+            --counter;
+        }
+
+        ++counter;
+    }
 }
 
 void Game::updateWindowEvents() {
@@ -46,6 +71,11 @@ void Game::updateWindowEvents() {
 }
 
 void Game::updatePlayerInput() {
+    inputMovement();
+    inputShooting();
+}
+
+void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
         this -> player -> move(-1.f, 0.f);
     }
@@ -60,15 +90,47 @@ void Game::updatePlayerInput() {
     }
 }
 
+void Game::inputShooting() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
+        shot(-1.f, 0.f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
+        shot(1.f, 0.f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
+        shot(0.f, -1.f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
+        shot(0.f, 1.f);
+    }
+}
+
+void Game::shot(float directionX, float directionY) {
+    if (player -> isShotPossible()) {
+        this -> bullets.push_back(new Bullet(this -> gameObjectsShape["Bullet"],
+                                             this -> player -> getCenterPosition() -> x,
+                                             this -> player -> getCenterPosition() -> y,
+                                             directionX, directionY,
+                                             4.f ));
+    } else {
+        player -> incrementCooldown();
+    }
+}
+
 void Game::update() {
-    this->updateWindowEvents();
-    this->updatePlayerInput();
+    this -> updateWindowEvents();
+    this -> updateBullets();
+    this -> updatePlayerInput();
 }
 
 void Game::render() {
     this -> window -> clear();
 
     this -> player -> render(*this -> window);
+
+    for (auto *bullet : this -> bullets) {
+        bullet -> render(this -> window);
+    }
 
     this -> window -> display();
 }

@@ -12,8 +12,13 @@ private:
 
 public:
     Bullet();
-    Bullet(sf::RectangleShape bulletShape, float directionX, float directionY, float moveSpeed);
+    Bullet(sf::RectangleShape* bulletShape,
+           float positionX, float positionY,
+           float directionX, float directionY,
+           float moveSpeed);
     virtual ~Bullet();
+
+    sf::FloatRect getBounds() const;
 
     void update();
     void render(sf::RenderTarget* target);

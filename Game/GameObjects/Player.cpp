@@ -1,33 +1,45 @@
 #include "Player.hpp"
+#include <iostream>
 
 Player::Player() {
-
     this -> moveSpeed = 2.f;
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
 
-    initializeSquare();
+    this -> playerShape.setFillColor(sf::Color::Blue);
+    this -> playerShape.setSize(sf::Vector2f(20.f, 20.f));
 }
 
 Player::~Player() = default;
 
-void Player::initializeSquare() {
-    this -> playerSquare.setFillColor(sf::Color::Blue);
-    this -> playerSquare.setSize(sf::Vector2f(30.f, 30.f));
-}
-
 void Player::render(sf::RenderTarget &target) {
-    target.draw(this -> playerSquare);
+    target.draw(this -> playerShape);
 }
 
-void Player::move(float directionX, float directionY) {
-    this -> playerSquare.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
+bool Player::checkWallCollision(std::vector<Wall*> &walls) const {
+    for (const auto& wall : walls) {
+        if (wall -> getBounds().intersects(this -> getBounds())) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Player::movePlayer(float directionX, float directionY, std::vector<Wall*> &walls) {
+    float startPosX = playerShape.getPosition().x;
+    float startPosY = playerShape.getPosition().y;
+
+    this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
+
+    if (checkWallCollision(walls)) {
+        playerShape.setPosition(startPosX, startPosY);
+    }
 }
 
 const sf::Vector2f* Player::getCenterPosition() const {
-    float x = this -> playerSquare.getPosition().x + playerSquare.getSize().x / 2;
-    float y = this -> playerSquare.getPosition().y + playerSquare.getSize().y / 2;
+    float x = this -> playerShape.getPosition().x + playerShape.getSize().x / 2;
+    float y = this -> playerShape.getPosition().y + playerShape.getSize().y / 2;
 
     auto *centerPosition = new sf::Vector2f(x, y);
 
@@ -40,6 +52,10 @@ void Player::incrementCooldown() {
 
 float Player::getShotSpeed() const {
     return shotSpeed;
+}
+
+sf::FloatRect Player::getBounds() const {
+    return this -> playerShape.getGlobalBounds();
 }
 
 bool Player::isShotPossible() {

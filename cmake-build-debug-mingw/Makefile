@@ -200,6 +200,30 @@ Game/GameObjects/Player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.s
 .PHONY : Game/GameObjects/Player.cpp.s
 
+Game/GameObjects/Wall.obj: Game/GameObjects/Wall.cpp.obj
+.PHONY : Game/GameObjects/Wall.obj
+
+# target to build an object file
+Game/GameObjects/Wall.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Wall.cpp.obj
+.PHONY : Game/GameObjects/Wall.cpp.obj
+
+Game/GameObjects/Wall.i: Game/GameObjects/Wall.cpp.i
+.PHONY : Game/GameObjects/Wall.i
+
+# target to preprocess a source file
+Game/GameObjects/Wall.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Wall.cpp.i
+.PHONY : Game/GameObjects/Wall.cpp.i
+
+Game/GameObjects/Wall.s: Game/GameObjects/Wall.cpp.s
+.PHONY : Game/GameObjects/Wall.s
+
+# target to generate assembly for a file
+Game/GameObjects/Wall.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\SmartSquareRL.dir\build.make CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Wall.cpp.s
+.PHONY : Game/GameObjects/Wall.cpp.s
+
 Game/main.obj: Game/main.cpp.obj
 .PHONY : Game/main.obj
 
@@ -242,6 +266,9 @@ help:
 	@echo ... Game/GameObjects/Player.obj
 	@echo ... Game/GameObjects/Player.i
 	@echo ... Game/GameObjects/Player.s
+	@echo ... Game/GameObjects/Wall.obj
+	@echo ... Game/GameObjects/Wall.i
+	@echo ... Game/GameObjects/Wall.s
 	@echo ... Game/main.obj
 	@echo ... Game/main.i
 	@echo ... Game/main.s

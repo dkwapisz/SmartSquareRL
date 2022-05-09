@@ -5,6 +5,7 @@ Game::Game() {
     this -> initializeWindow();
     this -> initializeGameObjects();
     this -> initializePlayer();
+    this -> initializeWalls();
 }
 
 Game::~Game() {
@@ -18,10 +19,14 @@ Game::~Game() {
     for (auto *bullet : this -> bullets) {
         delete bullet;
     }
+
+    for (auto *wall : this -> walls) {
+        delete wall;
+    }
 }
 
 void Game::initializeWindow() {
-    this -> window = new sf::RenderWindow(sf::VideoMode(800, 600),
+    this -> window = new sf::RenderWindow(sf::VideoMode(600, 600),
                                           "SmartSquareRL",
                                           sf::Style::Close | sf::Style::Titlebar);
     this -> window -> setFramerateLimit(75);
@@ -30,10 +35,15 @@ void Game::initializeWindow() {
 
 void Game::initializeGameObjects() {
     this -> gameObjectsShape["Bullet"] = new sf::RectangleShape();
+    this -> gameObjectsShape["Wall"] = new sf::RectangleShape();
 }
 
 void Game::initializePlayer() {
     this -> player = new Player();
+}
+
+void Game::initializeWalls() {
+    this -> walls.push_back(new Wall(this -> gameObjectsShape["Wall"], 60.f, 60.f));
 }
 
 void Game::run() {
@@ -77,16 +87,16 @@ void Game::updatePlayerInput() {
 
 void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        this -> player -> move(-1.f, 0.f);
+        this->player->movePlayer(-1.f, 0.f, walls);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this -> player -> move(1.f, 0.f);
+        this->player->movePlayer(1.f, 0.f, walls);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        this -> player -> move(0.f, -1.f);
+        this->player->movePlayer(0.f, -1.f, walls);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this -> player -> move(0.f, 1.f);
+        this->player->movePlayer(0.f, 1.f, walls);
     }
 }
 
@@ -132,6 +142,10 @@ void Game::render() {
 
     for (auto *bullet : this -> bullets) {
         bullet -> render(this -> window);
+    }
+
+    for (auto *wall : this -> walls) {
+        wall -> render(this -> window);
     }
 
     this -> window -> display();

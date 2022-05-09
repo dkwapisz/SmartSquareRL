@@ -7,13 +7,13 @@ Bullet::Bullet(sf::RectangleShape* bulletShape,
                float directionX, float directionY,
                float moveSpeed) {
     this -> bulletShape = *bulletShape;
-    this -> bulletShape.setPosition(positionX, positionY);
     this -> direction.x = directionX;
     this -> direction.y = directionY;
     this -> moveSpeed = moveSpeed;
 
-    bulletShape -> setFillColor(sf::Color::Red);
-    bulletShape -> setSize(sf::Vector2f(5.f, 5.f));
+    this -> bulletShape.setPosition(positionX, positionY);
+    this -> bulletShape.setFillColor(sf::Color::Red);
+    this -> bulletShape.setSize(sf::Vector2f(5.f, 5.f));
 }
 
 Bullet::~Bullet() = default;

@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include "GameObjects/Player.hpp"
 #include "GameObjects/Bullet.hpp"
+#include "GameObjects/Wall.hpp"
 #include <map>
 
 class Game {
@@ -13,11 +14,13 @@ private:
 
     std::map<std::string, sf::RectangleShape*> gameObjectsShape;
     std::vector<Bullet*> bullets;
+    std::vector<Wall*> walls;
     Player* player;
 
     void initializeWindow();
     void initializeGameObjects();
     void initializePlayer();
+    void initializeWalls();
     void inputMovement();
     void inputShooting();
     void shot(float directionX, float directionY);

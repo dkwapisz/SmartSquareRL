@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj.d"
   "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj"
   "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Player.cpp.obj.d"
+  "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Wall.cpp.obj"
+  "CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Wall.cpp.obj.d"
   "CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj"
   "CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj.d"
   "SmartSquareRL.exe"

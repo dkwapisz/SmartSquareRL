@@ -2,17 +2,19 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "Wall.hpp"
 
 class Player {
 
 private:
-    sf::RectangleShape playerSquare;
+    sf::RectangleShape playerShape;
 
     int shotCooldown;
     int shotCooldownMax;
     float shotSpeed;
     float moveSpeed;
-    void initializeSquare();
+
+    bool checkWallCollision(std::vector<Wall*> &walls) const;
 
 public:
     Player();
@@ -21,9 +23,10 @@ public:
     const sf::Vector2f* getCenterPosition() const;
 
     float getShotSpeed() const;
-    void incrementCooldown();
+    sf::FloatRect getBounds() const;
     bool isShotPossible();
-    void move(float directionX, float directionY);
+    void incrementCooldown();
+    void movePlayer(float directionX, float directionY, std::vector<Wall*> &walls);
     void render(sf::RenderTarget& target);
 };
 

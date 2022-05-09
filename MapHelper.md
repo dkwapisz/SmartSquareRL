@@ -20,3 +20,5 @@ There is a Python script in the [Maps](Game/Maps) folder that converts a map in 
 | Floor  | (255, 255, 255) | 0   |
 | Wall   | (0, 0, 0)       | 1   |
 | Player | (0, 255, 0)     | 9   |
+
+

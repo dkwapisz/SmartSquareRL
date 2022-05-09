@@ -1,12 +1,15 @@
 #include "Player.hpp"
 #include <iostream>
 
-Player::Player() {
+Player::Player() = default;
+
+Player::Player(float positionX, float positionY) {
     this -> moveSpeed = 2.f;
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
 
+    this -> playerShape.setPosition(positionX, positionY);
     this -> playerShape.setFillColor(sf::Color::Blue);
     this -> playerShape.setSize(sf::Vector2f(20.f, 20.f));
 }

@@ -252,7 +252,11 @@ CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj: ../Game/Game.cpp \
   ../Game/GameObjects/Wall.hpp \
   ../Game/GameObjects/Bullet.hpp \
   ../Game/GameObjects/Wall.hpp \
-  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/fstream \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc
 
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj: ../Game/GameObjects/Bullet.cpp \
   ../Game/GameObjects/Bullet.hpp \
@@ -1250,7 +1254,12 @@ CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj: ../Game/main.cpp \
   ../Game/GameObjects/Player.hpp \
   ../Game/GameObjects/Wall.hpp \
   ../Game/GameObjects/Bullet.hpp \
-  ../Game/GameObjects/Wall.hpp
+  ../Game/GameObjects/Wall.hpp \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/fstream \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc
 
 
 C:/SFML/include/SFML/Config.hpp:
@@ -1483,6 +1492,8 @@ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/stl_multimap.h:
 
 C:/mingw64/x86_64-w64-mingw32/include/process.h:
 
+C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc:
+
 C:/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h:
 
 C:/SFML/include/SFML/System/Thread.inl:
@@ -1683,6 +1694,8 @@ C:/SFML/include/SFML/Window/ContextSettings.hpp:
 
 C:/SFML/include/SFML/Window/Joystick.hpp:
 
+C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/c++io.h:
+
 C:/SFML/include/SFML/Window/Keyboard.hpp:
 
 C:/SFML/include/SFML/Window/Mouse.hpp:
@@ -1748,6 +1761,10 @@ C:/SFML/include/SFML/Graphics/VertexBuffer.hpp:
 ../Game/GameObjects/Bullet.hpp:
 
 C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream:
+
+C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/fstream:
+
+C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h:
 
 ../Game/GameObjects/Bullet.cpp:
 

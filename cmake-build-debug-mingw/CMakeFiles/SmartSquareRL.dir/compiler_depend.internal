@@ -254,6 +254,10 @@ CMakeFiles/SmartSquareRL.dir/Game/Game.cpp.obj
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Bullet.hpp
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Wall.hpp
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/fstream
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/c++io.h
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc
 
 CMakeFiles/SmartSquareRL.dir/Game/GameObjects/Bullet.cpp.obj
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Bullet.cpp
@@ -1256,4 +1260,9 @@ CMakeFiles/SmartSquareRL.dir/Game/main.cpp.obj
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Wall.hpp
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Bullet.hpp
  D:/PROJEKTY/EngineerThesis/SmartSquareRL/Game/GameObjects/Wall.hpp
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/iostream
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/fstream
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32/bits/c++io.h
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc
 

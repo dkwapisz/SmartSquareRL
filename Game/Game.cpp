@@ -1,11 +1,9 @@
 #include "Game.hpp"
-#include <iostream>
 
 Game::Game() {
     this -> initializeWindow();
     this -> initializeGameObjects();
-    this -> initializePlayer();
-    this -> initializeWalls();
+    this -> generateMap();
 }
 
 Game::~Game() {
@@ -38,12 +36,31 @@ void Game::initializeGameObjects() {
     this -> gameObjectsShape["Wall"] = new sf::RectangleShape();
 }
 
-void Game::initializePlayer() {
-    this -> player = new Player();
-}
+void Game::generateMap() {
+    std::fstream mapFile;
+    mapFile.open("..\\Game\\Maps\\test_map.txt");
+    int mapSizeX = 20;
+    int mapSizeY = 20;
+    int number = 0;
 
-void Game::initializeWalls() {
-    this -> walls.push_back(new Wall(this -> gameObjectsShape["Wall"], 60.f, 60.f));
+    if (mapFile.is_open()) {
+        for (int y = 0; y < mapSizeX; y++) {
+            for (int x = 0; x < mapSizeY; x++) {
+                mapFile >> number;
+
+                if (number == 1) {
+                    this -> walls.push_back(new Wall(this -> gameObjectsShape["Wall"],
+                                                     30.f * x, 30.f * y));
+                } else if (number == 9) {
+                    this -> player = new Player(30.f * x, 30.f * y);
+                }
+            }
+        }
+    } else {
+        std::cerr << "Could not open map file" << "\n";
+    }
+
+    mapFile.close();
 }
 
 void Game::run() {
@@ -54,19 +71,20 @@ void Game::run() {
 }
 
 void Game::updateBullets() {
-    unsigned counter = 0;
-    for (auto *bullet : this -> bullets) {
-        bullet -> update();
+    for (int i = 0; i < this -> bullets.size(); i++) {
+        bullets[i] -> update();
 
-        for (auto *wall : this -> walls) {
-            if (bullet -> getBounds().intersects(wall -> getBounds())) {
-                delete this -> bullets.at(counter);
-                this -> bullets.erase(this -> bullets.begin() + counter);
-                --counter;
+        bool bullet_deleted = false;
+
+        for (int j = 0; j < this -> walls.size() && !bullet_deleted; j++) {
+            if (bullets[i] -> getBounds().intersects(walls[j] -> getBounds())) {
+
+                delete this -> bullets[i];
+                this -> bullets.erase(this -> bullets.begin() + i);
+
+                bullet_deleted = true;
             }
         }
-
-        ++counter;
     }
 }
 

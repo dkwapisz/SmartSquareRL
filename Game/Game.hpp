@@ -5,6 +5,8 @@
 #include "GameObjects/Player.hpp"
 #include "GameObjects/Bullet.hpp"
 #include "GameObjects/Wall.hpp"
+#include <iostream>
+#include <fstream>
 #include <map>
 
 class Game {
@@ -19,8 +21,7 @@ private:
 
     void initializeWindow();
     void initializeGameObjects();
-    void initializePlayer();
-    void initializeWalls();
+    void generateMap();
     void inputMovement();
     void inputShooting();
     void shot(float directionX, float directionY);

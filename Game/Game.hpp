@@ -32,6 +32,8 @@ private:
     void initializeGameObjects();
     void generateMap();
     void inputMovement();
+    void movePlayer(float directionX, float directionY);
+    bool checkCollision();
     void inputShooting();
     void checkPlayerCoins();
     void shot(float directionX, float directionY);

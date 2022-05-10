@@ -159,17 +159,59 @@ void Game::updatePlayerInput() {
 
 void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        this -> player -> movePlayer(-1.f, 0.f, walls, boxes, staticDangers, coins);
+        movePlayer(-1.f, 0.f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this -> player -> movePlayer(1.f, 0.f, walls, boxes, staticDangers, coins);
+        movePlayer(1.f, 0.f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        this -> player -> movePlayer(0.f, -1.f, walls, boxes, staticDangers, coins);
+        movePlayer(0.f, -1.f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this -> player -> movePlayer(0.f, 1.f, walls, boxes, staticDangers, coins);
+        movePlayer(0.f, 1.f);
     }
+}
+
+void Game::movePlayer(float directionX, float directionY) {
+    float startPosX = player -> getPosX();
+    float startPosY = player -> getPosY();
+
+    this -> player -> movePlayer(directionX, directionY);
+
+    if (checkCollision()) {
+        this -> player -> setPosition(startPosX, startPosY);
+    }
+}
+
+bool Game::checkCollision() {
+    for (const auto& wall : walls) {
+        if (wall -> getBounds().intersects(this -> player -> getBounds())) {
+            return true;
+        }
+    }
+
+    for (const auto& box : boxes) {
+        if (box -> getBounds().intersects(this -> player -> getBounds())) {
+            return true;
+        }
+    }
+
+    for (const auto& staticDanger : staticDangers) {
+        if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
+            this -> player -> resetPosition();
+            return false;
+        }
+    }
+
+    for (int i = 0; i < coins.size(); i++) {
+        if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
+            delete coins[i];
+            coins.erase(coins.begin() + i);
+            this -> player -> addCoin();
+        }
+    }
+
+    return false;
 }
 
 void Game::inputShooting() {

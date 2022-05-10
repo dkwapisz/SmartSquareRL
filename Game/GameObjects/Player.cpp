@@ -25,41 +25,6 @@ void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
 }
 
-bool Player::checkCollision(std::vector<Wall*> &walls,
-                            std::vector<Box*> &boxes,
-                            std::vector<StaticDanger*> &staticDangers,
-                            std::vector<Coin*> &coins) {
-
-    for (const auto& wall : walls) {
-        if (wall -> getBounds().intersects(this -> getBounds())) {
-            return true;
-        }
-    }
-
-    for (const auto& box : boxes) {
-        if (box -> getBounds().intersects(this -> getBounds())) {
-            return true;
-        }
-    }
-
-    for (const auto& staticDanger : staticDangers) {
-        if (staticDanger -> getBounds().intersects(this -> getBounds())) {
-            this -> resetPosition();
-            return false;
-        }
-    }
-
-    for (int i = 0; i < coins.size(); i++) {
-        if (coins[i] -> getBounds().intersects(this -> getBounds())) {
-            delete coins[i];
-            coins.erase(coins.begin() + i);
-            playerCoins++;
-        }
-    }
-
-    return false;
-}
-
 int Player::getPlayerCoins() const {
     return playerCoins;
 }
@@ -68,20 +33,8 @@ void Player::resetPosition() {
     this -> playerShape.setPosition(respawnPosX, respawnPosY);
 }
 
-void Player::movePlayer(float directionX, float directionY,
-                        std::vector<Wall*> &walls,
-                        std::vector<Box*> &boxes,
-                        std::vector<StaticDanger*> &staticDangers,
-                        std::vector<Coin*> &coins) {
-
-    float startPosX = playerShape.getPosition().x;
-    float startPosY = playerShape.getPosition().y;
-
+void Player::movePlayer(float directionX, float directionY) {
     this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
-
-    if (checkCollision(walls, boxes, staticDangers, coins)) {
-        playerShape.setPosition(startPosX, startPosY);
-    }
 }
 
 const sf::Vector2f* Player::getCenterPosition() const {
@@ -105,6 +58,7 @@ sf::FloatRect Player::getBounds() const {
     return this -> playerShape.getGlobalBounds();
 }
 
+
 bool Player::isShotPossible() {
     if (shotCooldown >= shotCooldownMax) {
         shotCooldown = 0;
@@ -112,4 +66,20 @@ bool Player::isShotPossible() {
     } else {
         return false;
     }
+}
+
+float Player::getPosX() const {
+    return this -> playerShape.getPosition().x;
+}
+
+float Player::getPosY() const {
+    return this -> playerShape.getPosition().y;
+}
+
+void Player::setPosition(float positionX, float positionY) {
+    this -> playerShape.setPosition(positionX, positionY);
+}
+
+void Player::addCoin() {
+    this -> playerCoins++;
 }

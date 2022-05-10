@@ -39,11 +39,11 @@ public:
     sf::FloatRect getBounds() const;
     bool isShotPossible();
     void incrementCooldown();
-    void movePlayer(float directionX, float directionY,
-                    std::vector<Wall*> &walls,
-                    std::vector<Box*> &boxes,
-                    std::vector<StaticDanger*> &staticDangers,
-                    std::vector<Coin*> &coins);
+    void movePlayer(float directionX, float directionY);
     void resetPosition();
+    float getPosX() const;
+    float getPosY() const;
+    void setPosition(float positionX, float positionY);
+    void addCoin();
     void render(sf::RenderTarget& target);
 };

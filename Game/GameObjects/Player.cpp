@@ -2,8 +2,6 @@
 
 Player::Player() = default;
 
-//TODO -> Inheritance GameObject class <-> all gameObjects
-
 Player::Player(float positionX, float positionY) {
     this -> moveSpeed = 2.f;
     this -> shotCooldown = 10;

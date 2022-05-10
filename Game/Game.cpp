@@ -11,7 +11,7 @@ Game::~Game() {
     delete this -> window;
     delete this -> player;
 
-    for (auto &gameObject : this -> rectangleShapes) {
+    for (auto &gameObject : this -> squareShapes) {
         delete gameObject.second;
     }
 
@@ -45,15 +45,14 @@ void Game::initializeWindow() {
 }
 
 void Game::initializeGameObjects() {
-    this -> rectangleShapes["Bullet"] = new sf::RectangleShape();
-    this -> rectangleShapes["Wall"] = new sf::RectangleShape();
-    this -> rectangleShapes["Box"] = new sf::RectangleShape();
-    this -> rectangleShapes["StaticDanger"] = new sf::RectangleShape();
+    this -> squareShapes["Bullet"] = new sf::RectangleShape();
+    this -> squareShapes["Wall"] = new sf::RectangleShape();
+    this -> squareShapes["Box"] = new sf::RectangleShape();
+    this -> squareShapes["StaticDanger"] = new sf::RectangleShape();
     this -> circleShapes["Coin"] = new sf::CircleShape();
 }
 
 void Game::generateMap() {
-    //TODO -> Reference to all vectors (walls, boxes etc) to player -> easier collision detection with player
 
     std::fstream mapFile;
     mapFile.open("..\\Game\\Maps\\test_map.txt");
@@ -67,13 +66,13 @@ void Game::generateMap() {
                 mapFile >> number;
 
                 if (number == 1) {
-                    this -> walls.push_back(new Wall(this -> rectangleShapes["Wall"],
+                    this -> walls.push_back(new Wall(this -> squareShapes["Wall"],
                                                      30.f * x, 30.f * y));
                 } else if (number == 2) {
-                    this -> boxes.push_back(new Box(this -> rectangleShapes["Box"],
+                    this -> boxes.push_back(new Box(this -> squareShapes["Box"],
                                                      30.f * x, 30.f * y));
                 } else if (number == 3) {
-                    this -> staticDangers.push_back(new StaticDanger(this -> rectangleShapes["StaticDanger"],
+                    this -> staticDangers.push_back(new StaticDanger(this -> squareShapes["StaticDanger"],
                                                                      30.f * x, 30.f * y));
                 } else if (number == 4) {
                     this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
@@ -231,10 +230,10 @@ void Game::inputShooting() {
 
 void Game::shot(float directionX, float directionY) {
     if (player -> isShotPossible()) {
-        float positionX = this -> player -> getCenterPosition() -> x - rectangleShapes["Bullet"] -> getSize().x / 2;
-        float positionY = this -> player -> getCenterPosition() -> y - rectangleShapes["Bullet"] -> getSize().y / 2;
+        float positionX = this -> player -> getCenterPosition() -> x - squareShapes["Bullet"] -> getSize().x / 2;
+        float positionY = this -> player -> getCenterPosition() -> y - squareShapes["Bullet"] -> getSize().y / 2;
 
-        this -> bullets.push_back(new Bullet(this -> rectangleShapes["Bullet"],
+        this -> bullets.push_back(new Bullet(this -> squareShapes["Bullet"],
                                              positionX, positionY,
                                              directionX, directionY,
                                              this -> player -> getShotSpeed()));

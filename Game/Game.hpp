@@ -17,7 +17,7 @@ class Game {
 private:
     sf::RenderWindow* window;
 
-    std::map<std::string, sf::RectangleShape*> rectangleShapes;
+    std::map<std::string, sf::RectangleShape*> squareShapes;
     std::map<std::string, sf::CircleShape*> circleShapes;
     std::vector<Bullet*> bullets;
     std::vector<Wall*> walls;

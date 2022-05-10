@@ -22,11 +22,6 @@ private:
     float respawnPosX;
     float respawnPosY;
 
-    bool checkCollision(std::vector<Wall*> &walls,
-                        std::vector<Box*> &boxes,
-                        std::vector<StaticDanger*> &staticDangers,
-                        std::vector<Coin*> &coins);
-
 public:
     Player();
     Player(float positionX, float positionY);

@@ -15,13 +15,17 @@ There is a Python script in the [Maps](Game/Maps) folder that converts a map in 
 
 ### Bitmap color - value mapping:
 
-| Object       | Color value     | ID  |
-|--------------|-----------------|-----|
-| Floor        | (255, 255, 255) | 0   |
-| Wall         | (0, 0, 0)       | 1   |
-| Box          | (50, 0, 0)      | 2   |
-| StaticDanger | (170, 0, 139)   | 3   |
-| Player       | (0, 255, 0)     | 9   |
+| Object        | Color value     | ID  |
+|---------------|-----------------|-----|
+| Floor         | (255, 255, 255) | 0   |
+| Wall          | (0, 0, 0)       | 1   |
+| Box           | (50, 0, 0)      | 2   |
+| StaticDanger  | (170, 0, 150)   | 3   |
+| Coin          | (255, 255, 0)   | 4   |
+| MovingDangerH | (255, 0, 0)     | 5   |
+| MovingDangerV | (120, 0, 0)     | 6   |
+| Finish        | (80, 120, 0)    | 7   |
+| Player        | (0, 255, 0)     | 9   |
 
 
 

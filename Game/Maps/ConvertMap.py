@@ -17,8 +17,16 @@ for y in range(image_out.width):
             map_txt.write("0 ")
         elif image_out.getpixel((x, y)) == (50, 0, 0):  # Box
             map_txt.write("2 ")
-        elif image_out.getpixel((x, y)) == (170, 0, 139):  # StaticDanger
+        elif image_out.getpixel((x, y)) == (170, 0, 150):  # StaticDanger
             map_txt.write("3 ")
+        elif image_out.getpixel((x, y)) == (255, 255, 0):  # Coin
+            map_txt.write("4 ")
+        elif image_out.getpixel((x, y)) == (255, 0, 0):  # MovingDangerH
+            map_txt.write("5 ")
+        elif image_out.getpixel((x, y)) == (120, 0, 0):  # MovingDangerV
+            map_txt.write("6 ")
+        elif image_out.getpixel((x, y)) == (80, 120, 0):  # Finish
+            map_txt.write("7 ")
         elif image_out.getpixel((x, y)) == (0, 255, 0):  # Player
             map_txt.write("9 ")
     map_txt.write("\n")

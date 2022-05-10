@@ -13,7 +13,8 @@ add_executable(
         Game/GameObjects/StaticDanger.cpp Game/GameObjects/StaticDanger.hpp
         Game/GameObjects/Coin.cpp Game/GameObjects/Coin.hpp
         Game/GameObjects/SquareObject.cpp Game/GameObjects/SquareObject.hpp
-        Game/GameObjects/CircleObject.cpp Game/GameObjects/CircleObject.hpp)
+        Game/GameObjects/CircleObject.cpp Game/GameObjects/CircleObject.hpp
+        Game/GameObjects/MovingDanger.cpp Game/GameObjects/MovingDanger.hpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)

@@ -1,7 +1,6 @@
 #ifndef WALL_HPP
 #define WALL_HPP
 
-#include <SFML/Graphics.hpp>
 #include "SquareObject.hpp"
 
 class Wall : public SquareObject {

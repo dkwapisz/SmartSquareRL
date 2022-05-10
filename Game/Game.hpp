@@ -8,6 +8,7 @@
 #include "GameObjects/Box.hpp"
 #include "GameObjects/StaticDanger.hpp"
 #include "GameObjects/Coin.hpp"
+#include "GameObjects/MovingDanger.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -24,6 +25,7 @@ private:
     std::vector<Box*> boxes;
     std::vector<StaticDanger*> staticDangers;
     std::vector<Coin*> coins;
+    std::vector<MovingDanger*> movingDangers;
     Player* player;
 
     int coinsCount;
@@ -46,6 +48,8 @@ public:
     void updateWindowEvents();
     void updatePlayerInput();
     void updateBullets();
+    void updateDangerMovement();
+    void checkDangerCollision(MovingDanger *movingDanger);
     void update();
     void render();
 

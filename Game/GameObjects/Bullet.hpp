@@ -1,7 +1,6 @@
 #ifndef BULLET_HPP
 #define BULLET_HPP
 
-#include <SFML/Graphics.hpp>
 #include "SquareObject.hpp"
 
 class Bullet : public SquareObject {

@@ -1,7 +1,6 @@
 #ifndef STATICDANGER_HPP
 #define STATICDANGER_HPP
 
-#include <SFML/Graphics.hpp>
 #include "SquareObject.hpp"
 
 class StaticDanger : public SquareObject {

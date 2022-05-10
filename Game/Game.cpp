@@ -34,6 +34,10 @@ Game::~Game() {
     for (auto *coin : this -> coins) {
         delete coin;
     }
+
+    for (auto *movingDanger : this -> movingDangers) {
+        delete movingDanger;
+    }
 }
 
 void Game::initializeWindow() {
@@ -50,6 +54,7 @@ void Game::initializeGameObjects() {
     this -> squareShapes["Box"] = new sf::RectangleShape();
     this -> squareShapes["StaticDanger"] = new sf::RectangleShape();
     this -> circleShapes["Coin"] = new sf::CircleShape();
+    this -> circleShapes["MovingDanger"] = new sf::CircleShape();
 }
 
 void Game::generateMap() {
@@ -78,7 +83,14 @@ void Game::generateMap() {
                     this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
                                                     30.f * x, 30.f * y));
                     coinsCount++;
-                } else if (number == 9) {
+                } else if (number == 5) {
+                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
+                                                    30.f * x, 30.f * y, true));
+                } else if (number == 6) {
+                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
+                                                    30.f * x, 30.f * y, false));
+                }
+                else if (number == 9) {
                     this -> player = new Player(30.f * x, 30.f * y);
                 }
             }
@@ -213,6 +225,25 @@ bool Game::checkCollision() {
     return false;
 }
 
+void Game::updateDangerMovement() {
+    for (auto *movingDanger : this -> movingDangers) {
+        checkDangerCollision(movingDanger);
+        movingDanger -> move();
+    }
+}
+
+void Game::checkDangerCollision(MovingDanger *movingDanger) {
+    if (movingDanger -> getBounds().intersects(this -> player -> getBounds())) {
+        this -> player -> resetPosition();
+    }
+
+    for (auto *wall : this -> walls) {
+        if (movingDanger -> getBounds().intersects(wall -> getBounds())) {
+            movingDanger -> reverseDirection();
+        }
+    }
+}
+
 void Game::inputShooting() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
         shot(-1.f, 0.f);
@@ -253,6 +284,7 @@ void Game::update() {
     this -> updateBullets();
     this -> updatePlayerInput();
     this -> checkPlayerCoins();
+    this -> updateDangerMovement();
 }
 
 void Game::render() {
@@ -278,6 +310,10 @@ void Game::render() {
 
     for (auto *coin : this -> coins) {
         coin -> render(this -> window);
+    }
+
+    for (auto *movingDanger : this -> movingDangers) {
+        movingDanger -> render(this -> window);
     }
 
     this -> window -> display();

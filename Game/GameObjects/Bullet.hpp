@@ -2,11 +2,11 @@
 #define BULLET_HPP
 
 #include <SFML/Graphics.hpp>
+#include "SquareObject.hpp"
 
-class Bullet {
+class Bullet : public SquareObject {
 
 private:
-    sf::RectangleShape bulletShape;
     sf::Vector2f direction;
     float moveSpeed{};
 
@@ -18,10 +18,7 @@ public:
            float moveSpeed);
     virtual ~Bullet();
 
-    sf::FloatRect getBounds() const;
-
     void update();
-    void render(sf::RenderTarget* target);
 };
 
 #endif //BULLET_HPP

@@ -2,20 +2,14 @@
 #define WALL_HPP
 
 #include <SFML/Graphics.hpp>
+#include "SquareObject.hpp"
 
-class Wall {
-
-private:
-    sf::RectangleShape wallShape;
+class Wall : public SquareObject {
 
 public:
     Wall();
     Wall(sf::RectangleShape* wallShape, float positionX, float positionY);
     virtual ~Wall();
-
-    sf::FloatRect getBounds() const;
-
-    void render(sf::RenderTarget* target);
 };
 
 

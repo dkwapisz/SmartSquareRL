@@ -2,20 +2,14 @@
 #define BOX_HPP
 
 #include <SFML/Graphics.hpp>
+#include "SquareObject.hpp"
 
-class Box {
-
-private:
-    sf::RectangleShape boxShape;
+class Box : public SquareObject {
 
 public:
     Box();
     Box(sf::RectangleShape* boxShape, float positionX, float positionY);
-    virtual ~Box();
-
-    sf::FloatRect getBounds() const;
-
-    void render(sf::RenderTarget* target);
+    ~Box() override;
 };
 
 

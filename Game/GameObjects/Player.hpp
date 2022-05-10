@@ -47,4 +47,3 @@ public:
     void resetPosition();
     void render(sf::RenderTarget& target);
 };
-

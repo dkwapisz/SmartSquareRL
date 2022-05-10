@@ -2,21 +2,14 @@
 #define STATICDANGER_HPP
 
 #include <SFML/Graphics.hpp>
+#include "SquareObject.hpp"
 
-class StaticDanger {
-
-private:
-    sf::RectangleShape staticDangerShape;
+class StaticDanger : public SquareObject {
 
 public:
     StaticDanger();
     StaticDanger(sf::RectangleShape* staticDangerShape, float positionX, float positionY);
     virtual ~StaticDanger();
-
-    sf::FloatRect getBounds() const;
-
-    void render(sf::RenderTarget* target);
-
 };
 
 

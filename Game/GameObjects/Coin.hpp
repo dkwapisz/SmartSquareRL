@@ -11,7 +11,7 @@ private:
 
 public:
     Coin();
-    Coin(sf::CircleShape* boxShape, float positionX, float positionY);
+    Coin(sf::CircleShape* coinShape, float positionX, float positionY);
     virtual ~Coin();
 
     sf::FloatRect getBounds() const;

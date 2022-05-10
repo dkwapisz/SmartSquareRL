@@ -7,6 +7,7 @@
 #include "GameObjects/Wall.hpp"
 #include "GameObjects/Box.hpp"
 #include "GameObjects/StaticDanger.hpp"
+#include "GameObjects/Coin.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -16,18 +17,23 @@ class Game {
 private:
     sf::RenderWindow* window;
 
-    std::map<std::string, sf::RectangleShape*> gameObjectsShape;
+    std::map<std::string, sf::RectangleShape*> rectangleShapes;
+    std::map<std::string, sf::CircleShape*> circleShapes;
     std::vector<Bullet*> bullets;
     std::vector<Wall*> walls;
     std::vector<Box*> boxes;
     std::vector<StaticDanger*> staticDangers;
+    std::vector<Coin*> coins;
     Player* player;
+
+    int coinsCount;
 
     void initializeWindow();
     void initializeGameObjects();
     void generateMap();
     void inputMovement();
     void inputShooting();
+    void checkPlayerCoins();
     void shot(float directionX, float directionY);
 
 public:

@@ -3,6 +3,7 @@
 Game::Game() {
     this -> initializeWindow();
     this -> initializeGameObjects();
+    this -> coinsCount = 0;
     this -> generateMap();
 }
 
@@ -10,7 +11,7 @@ Game::~Game() {
     delete this -> window;
     delete this -> player;
 
-    for (auto &gameObject : this -> gameObjectsShape) {
+    for (auto &gameObject : this -> rectangleShapes) {
         delete gameObject.second;
     }
 
@@ -29,6 +30,10 @@ Game::~Game() {
     for (auto *staticDanger : this -> staticDangers) {
         delete staticDanger;
     }
+
+    for (auto *coin : this -> coins) {
+        delete coin;
+    }
 }
 
 void Game::initializeWindow() {
@@ -40,10 +45,11 @@ void Game::initializeWindow() {
 }
 
 void Game::initializeGameObjects() {
-    this -> gameObjectsShape["Bullet"] = new sf::RectangleShape();
-    this -> gameObjectsShape["Wall"] = new sf::RectangleShape();
-    this -> gameObjectsShape["Box"] = new sf::RectangleShape();
-    this -> gameObjectsShape["StaticDanger"] = new sf::RectangleShape();
+    this -> rectangleShapes["Bullet"] = new sf::RectangleShape();
+    this -> rectangleShapes["Wall"] = new sf::RectangleShape();
+    this -> rectangleShapes["Box"] = new sf::RectangleShape();
+    this -> rectangleShapes["StaticDanger"] = new sf::RectangleShape();
+    this -> circleShapes["Coin"] = new sf::CircleShape();
 }
 
 void Game::generateMap() {
@@ -61,14 +67,18 @@ void Game::generateMap() {
                 mapFile >> number;
 
                 if (number == 1) {
-                    this -> walls.push_back(new Wall(this -> gameObjectsShape["Wall"],
+                    this -> walls.push_back(new Wall(this -> rectangleShapes["Wall"],
                                                      30.f * x, 30.f * y));
                 } else if (number == 2) {
-                    this -> boxes.push_back(new Box(this -> gameObjectsShape["Box"],
+                    this -> boxes.push_back(new Box(this -> rectangleShapes["Box"],
                                                      30.f * x, 30.f * y));
                 } else if (number == 3) {
-                    this -> staticDangers.push_back(new StaticDanger(this -> gameObjectsShape["StaticDanger"],
+                    this -> staticDangers.push_back(new StaticDanger(this -> rectangleShapes["StaticDanger"],
+                                                                     30.f * x, 30.f * y));
+                } else if (number == 4) {
+                    this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
                                                     30.f * x, 30.f * y));
+                    coinsCount++;
                 } else if (number == 9) {
                     this -> player = new Player(30.f * x, 30.f * y);
                 }
@@ -119,6 +129,16 @@ void Game::updateBullets() {
                 box_deleted = true;
             }
         }
+
+        for (int j = 0; j < staticDangers.size() && !bullet_deleted; j++) {
+            if (bullets[i] -> getBounds().intersects(staticDangers[j] -> getBounds())) {
+                delete this -> bullets[i];
+                this -> bullets.erase(this -> bullets.begin() + i);
+
+                bullet_deleted = true;
+            }
+
+        }
     }
 }
 
@@ -139,16 +159,16 @@ void Game::updatePlayerInput() {
 
 void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        this -> player -> movePlayer(-1.f, 0.f, walls, boxes, staticDangers);
+        this -> player -> movePlayer(-1.f, 0.f, walls, boxes, staticDangers, coins);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this -> player -> movePlayer(1.f, 0.f, walls, boxes, staticDangers);
+        this -> player -> movePlayer(1.f, 0.f, walls, boxes, staticDangers, coins);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        this -> player -> movePlayer(0.f, -1.f, walls, boxes, staticDangers);
+        this -> player -> movePlayer(0.f, -1.f, walls, boxes, staticDangers, coins);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this -> player -> movePlayer(0.f, 1.f, walls, boxes, staticDangers);
+        this -> player -> movePlayer(0.f, 1.f, walls, boxes, staticDangers, coins);
     }
 }
 
@@ -169,10 +189,10 @@ void Game::inputShooting() {
 
 void Game::shot(float directionX, float directionY) {
     if (player -> isShotPossible()) {
-        float positionX = this -> player -> getCenterPosition() -> x - gameObjectsShape["Bullet"] -> getSize().x / 2;
-        float positionY = this -> player -> getCenterPosition() -> y - gameObjectsShape["Bullet"] -> getSize().y / 2;
+        float positionX = this -> player -> getCenterPosition() -> x - rectangleShapes["Bullet"] -> getSize().x / 2;
+        float positionY = this -> player -> getCenterPosition() -> y - rectangleShapes["Bullet"] -> getSize().y / 2;
 
-        this -> bullets.push_back(new Bullet(this -> gameObjectsShape["Bullet"],
+        this -> bullets.push_back(new Bullet(this -> rectangleShapes["Bullet"],
                                              positionX, positionY,
                                              directionX, directionY,
                                              this -> player -> getShotSpeed()));
@@ -181,10 +201,17 @@ void Game::shot(float directionX, float directionY) {
     }
 }
 
+void Game::checkPlayerCoins() {
+    if (this -> coinsCount == this -> player -> getPlayerCoins()) {
+        std::cout << "Player wins! \n" << coinsCount;
+    }
+}
+
 void Game::update() {
     this -> updateWindowEvents();
     this -> updateBullets();
     this -> updatePlayerInput();
+    this -> checkPlayerCoins();
 }
 
 void Game::render() {
@@ -206,6 +233,10 @@ void Game::render() {
 
     for (auto *staticDanger : this -> staticDangers) {
         staticDanger -> render(this -> window);
+    }
+
+    for (auto *coin : this -> coins) {
+        coin -> render(this -> window);
     }
 
     this -> window -> display();

@@ -9,6 +9,7 @@ Player::Player(float positionX, float positionY) {
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
+    this -> playerCoins = 0;
 
     this -> respawnPosX = positionX;
     this -> respawnPosY = positionY;
@@ -24,9 +25,10 @@ void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
 }
 
-bool Player::checkWallCollision(std::vector<Wall*> &walls,
-                                std::vector<Box*> &boxes,
-                                std::vector<StaticDanger*> &staticDangers) {
+bool Player::checkCollision(std::vector<Wall*> &walls,
+                            std::vector<Box*> &boxes,
+                            std::vector<StaticDanger*> &staticDangers,
+                            std::vector<Coin*> &coins) {
 
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> getBounds())) {
@@ -47,7 +49,19 @@ bool Player::checkWallCollision(std::vector<Wall*> &walls,
         }
     }
 
+    for (int i = 0; i < coins.size(); i++) {
+        if (coins[i] -> getBounds().intersects(this -> getBounds())) {
+            delete coins[i];
+            coins.erase(coins.begin() + i);
+            playerCoins++;
+        }
+    }
+
     return false;
+}
+
+int Player::getPlayerCoins() const {
+    return playerCoins;
 }
 
 void Player::resetPosition() {
@@ -57,14 +71,15 @@ void Player::resetPosition() {
 void Player::movePlayer(float directionX, float directionY,
                         std::vector<Wall*> &walls,
                         std::vector<Box*> &boxes,
-                        std::vector<StaticDanger*> &staticDangers) {
+                        std::vector<StaticDanger*> &staticDangers,
+                        std::vector<Coin*> &coins) {
 
     float startPosX = playerShape.getPosition().x;
     float startPosY = playerShape.getPosition().y;
 
     this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
 
-    if (checkWallCollision(walls, boxes, staticDangers)) {
+    if (checkCollision(walls, boxes, staticDangers, coins)) {
         playerShape.setPosition(startPosX, startPosY);
     }
 }

@@ -5,6 +5,7 @@
 #include "GameObjects/Player.hpp"
 #include "GameObjects/Bullet.hpp"
 #include "GameObjects/Wall.hpp"
+#include "GameObjects/Box.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -17,6 +18,7 @@ private:
     std::map<std::string, sf::RectangleShape*> gameObjectsShape;
     std::vector<Bullet*> bullets;
     std::vector<Wall*> walls;
+    std::vector<Box*> boxes;
     Player* player;
 
     void initializeWindow();

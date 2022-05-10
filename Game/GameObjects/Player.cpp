@@ -19,22 +19,29 @@ void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
 }
 
-bool Player::checkWallCollision(std::vector<Wall*> &walls) const {
+bool Player::checkWallCollision(std::vector<Wall*> &walls, std::vector<Box*> &boxes) const {
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> getBounds())) {
+            return true;
+        }
+    }
+    for (const auto& box : boxes) {
+        if (box -> getBounds().intersects(this -> getBounds())) {
             return true;
         }
     }
     return false;
 }
 
-void Player::movePlayer(float directionX, float directionY, std::vector<Wall*> &walls) {
+void Player::movePlayer(float directionX, float directionY,
+                        std::vector<Wall*> &walls,
+                        std::vector<Box*> &boxes) {
     float startPosX = playerShape.getPosition().x;
     float startPosY = playerShape.getPosition().y;
 
     this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
 
-    if (checkWallCollision(walls)) {
+    if (checkWallCollision(walls, boxes)) {
         playerShape.setPosition(startPosX, startPosY);
     }
 }

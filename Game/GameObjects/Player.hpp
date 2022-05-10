@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include "Wall.hpp"
+#include "Box.hpp"
 
 class Player {
 
@@ -15,7 +16,7 @@ private:
     float shotSpeed;
     float moveSpeed;
 
-    bool checkWallCollision(std::vector<Wall*> &walls) const;
+    bool checkWallCollision(std::vector<Wall*> &walls, std::vector<Box*> &boxes) const;
 
 public:
     Player();
@@ -28,7 +29,9 @@ public:
     sf::FloatRect getBounds() const;
     bool isShotPossible();
     void incrementCooldown();
-    void movePlayer(float directionX, float directionY, std::vector<Wall*> &walls);
+    void movePlayer(float directionX, float directionY,
+                    std::vector<Wall*> &walls,
+                    std::vector<Box*> &boxes);
     void render(sf::RenderTarget& target);
 };
 

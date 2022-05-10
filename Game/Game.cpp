@@ -21,6 +21,10 @@ Game::~Game() {
     for (auto *wall : this -> walls) {
         delete wall;
     }
+
+    for (auto *box : this -> boxes) {
+        delete box;
+    }
 }
 
 void Game::initializeWindow() {
@@ -34,6 +38,7 @@ void Game::initializeWindow() {
 void Game::initializeGameObjects() {
     this -> gameObjectsShape["Bullet"] = new sf::RectangleShape();
     this -> gameObjectsShape["Wall"] = new sf::RectangleShape();
+    this -> gameObjectsShape["Box"] = new sf::RectangleShape();
 }
 
 void Game::generateMap() {
@@ -50,6 +55,9 @@ void Game::generateMap() {
 
                 if (number == 1) {
                     this -> walls.push_back(new Wall(this -> gameObjectsShape["Wall"],
+                                                     30.f * x, 30.f * y));
+                } else if (number == 2) {
+                    this -> boxes.push_back(new Box(this -> gameObjectsShape["Box"],
                                                      30.f * x, 30.f * y));
                 } else if (number == 9) {
                     this -> player = new Player(30.f * x, 30.f * y);
@@ -75,6 +83,7 @@ void Game::updateBullets() {
         bullets[i] -> update();
 
         bool bullet_deleted = false;
+        bool box_deleted = false;
 
         for (int j = 0; j < this -> walls.size() && !bullet_deleted; j++) {
             if (bullets[i] -> getBounds().intersects(walls[j] -> getBounds())) {
@@ -83,6 +92,21 @@ void Game::updateBullets() {
                 this -> bullets.erase(this -> bullets.begin() + i);
 
                 bullet_deleted = true;
+            }
+        }
+
+        for (int j = 0; j < this -> boxes.size() && !bullet_deleted && !box_deleted; j++) {
+            if (bullets[i] -> getBounds().intersects(boxes[j] -> getBounds())) {
+
+                delete this -> bullets[i];
+                this -> bullets.erase(this -> bullets.begin() + i);
+
+                bullet_deleted = true;
+
+                delete this -> boxes[j];
+                this -> boxes.erase(this -> boxes.begin() + j);
+
+                box_deleted = true;
             }
         }
     }
@@ -105,16 +129,16 @@ void Game::updatePlayerInput() {
 
 void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        this->player->movePlayer(-1.f, 0.f, walls);
+        this -> player -> movePlayer(-1.f, 0.f, walls, boxes);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this->player->movePlayer(1.f, 0.f, walls);
+        this -> player -> movePlayer(1.f, 0.f, walls, boxes);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        this->player->movePlayer(0.f, -1.f, walls);
+        this -> player -> movePlayer(0.f, -1.f, walls, boxes);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this->player->movePlayer(0.f, 1.f, walls);
+        this -> player -> movePlayer(0.f, 1.f, walls, boxes);
     }
 }
 
@@ -164,6 +188,10 @@ void Game::render() {
 
     for (auto *wall : this -> walls) {
         wall -> render(this -> window);
+    }
+
+    for (auto *box : this -> boxes) {
+        box -> render(this -> window);
     }
 
     this -> window -> display();

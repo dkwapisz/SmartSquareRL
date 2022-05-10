@@ -25,6 +25,10 @@ Game::~Game() {
     for (auto *box : this -> boxes) {
         delete box;
     }
+
+    for (auto *staticDanger : this -> staticDangers) {
+        delete staticDanger;
+    }
 }
 
 void Game::initializeWindow() {
@@ -39,9 +43,12 @@ void Game::initializeGameObjects() {
     this -> gameObjectsShape["Bullet"] = new sf::RectangleShape();
     this -> gameObjectsShape["Wall"] = new sf::RectangleShape();
     this -> gameObjectsShape["Box"] = new sf::RectangleShape();
+    this -> gameObjectsShape["StaticDanger"] = new sf::RectangleShape();
 }
 
 void Game::generateMap() {
+    //TODO -> Reference to all vectors (walls, boxes etc) to player -> easier collision detection with player
+
     std::fstream mapFile;
     mapFile.open("..\\Game\\Maps\\test_map.txt");
     int mapSizeX = 20;
@@ -59,6 +66,9 @@ void Game::generateMap() {
                 } else if (number == 2) {
                     this -> boxes.push_back(new Box(this -> gameObjectsShape["Box"],
                                                      30.f * x, 30.f * y));
+                } else if (number == 3) {
+                    this -> staticDangers.push_back(new StaticDanger(this -> gameObjectsShape["StaticDanger"],
+                                                    30.f * x, 30.f * y));
                 } else if (number == 9) {
                     this -> player = new Player(30.f * x, 30.f * y);
                 }
@@ -129,16 +139,16 @@ void Game::updatePlayerInput() {
 
 void Game::inputMovement() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        this -> player -> movePlayer(-1.f, 0.f, walls, boxes);
+        this -> player -> movePlayer(-1.f, 0.f, walls, boxes, staticDangers);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this -> player -> movePlayer(1.f, 0.f, walls, boxes);
+        this -> player -> movePlayer(1.f, 0.f, walls, boxes, staticDangers);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        this -> player -> movePlayer(0.f, -1.f, walls, boxes);
+        this -> player -> movePlayer(0.f, -1.f, walls, boxes, staticDangers);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this -> player -> movePlayer(0.f, 1.f, walls, boxes);
+        this -> player -> movePlayer(0.f, 1.f, walls, boxes, staticDangers);
     }
 }
 
@@ -192,6 +202,10 @@ void Game::render() {
 
     for (auto *box : this -> boxes) {
         box -> render(this -> window);
+    }
+
+    for (auto *staticDanger : this -> staticDangers) {
+        staticDanger -> render(this -> window);
     }
 
     this -> window -> display();

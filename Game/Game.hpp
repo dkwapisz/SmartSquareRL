@@ -6,6 +6,7 @@
 #include "GameObjects/Bullet.hpp"
 #include "GameObjects/Wall.hpp"
 #include "GameObjects/Box.hpp"
+#include "GameObjects/StaticDanger.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -19,6 +20,7 @@ private:
     std::vector<Bullet*> bullets;
     std::vector<Wall*> walls;
     std::vector<Box*> boxes;
+    std::vector<StaticDanger*> staticDangers;
     Player* player;
 
     void initializeWindow();

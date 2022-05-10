@@ -2,11 +2,16 @@
 
 Player::Player() = default;
 
+//TODO -> Inheritance GameObject class <-> all gameObjects
+
 Player::Player(float positionX, float positionY) {
     this -> moveSpeed = 2.f;
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
+
+    this -> respawnPosX = positionX;
+    this -> respawnPosY = positionY;
 
     this -> playerShape.setPosition(positionX, positionY);
     this -> playerShape.setFillColor(sf::Color::Blue);
@@ -19,29 +24,47 @@ void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
 }
 
-bool Player::checkWallCollision(std::vector<Wall*> &walls, std::vector<Box*> &boxes) const {
+bool Player::checkWallCollision(std::vector<Wall*> &walls,
+                                std::vector<Box*> &boxes,
+                                std::vector<StaticDanger*> &staticDangers) {
+
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> getBounds())) {
             return true;
         }
     }
+
     for (const auto& box : boxes) {
         if (box -> getBounds().intersects(this -> getBounds())) {
             return true;
         }
     }
+
+    for (const auto& staticDanger : staticDangers) {
+        if (staticDanger -> getBounds().intersects(this -> getBounds())) {
+            this -> resetPosition();
+            return false;
+        }
+    }
+
     return false;
+}
+
+void Player::resetPosition() {
+    this -> playerShape.setPosition(respawnPosX, respawnPosY);
 }
 
 void Player::movePlayer(float directionX, float directionY,
                         std::vector<Wall*> &walls,
-                        std::vector<Box*> &boxes) {
+                        std::vector<Box*> &boxes,
+                        std::vector<StaticDanger*> &staticDangers) {
+
     float startPosX = playerShape.getPosition().x;
     float startPosY = playerShape.getPosition().y;
 
     this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
 
-    if (checkWallCollision(walls, boxes)) {
+    if (checkWallCollision(walls, boxes, staticDangers)) {
         playerShape.setPosition(startPosX, startPosY);
     }
 }

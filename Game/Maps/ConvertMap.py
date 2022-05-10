@@ -17,10 +17,14 @@ for y in range(image_out.width):
             map_txt.write("0 ")
         elif image_out.getpixel((x, y)) == (50, 0, 0):  # Box
             map_txt.write("2 ")
+        elif image_out.getpixel((x, y)) == (170, 0, 139):  # StaticDanger
+            map_txt.write("3 ")
         elif image_out.getpixel((x, y)) == (0, 255, 0):  # Player
             map_txt.write("9 ")
     map_txt.write("\n")
 
 image.close()
 map_txt.close()
+
+print("Map correctly converted from PNG to TXT \n")
 

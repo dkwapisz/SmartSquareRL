@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Wall.hpp"
 #include "Box.hpp"
+#include "StaticDanger.hpp"
 
 class Player {
 
@@ -16,7 +17,12 @@ private:
     float shotSpeed;
     float moveSpeed;
 
-    bool checkWallCollision(std::vector<Wall*> &walls, std::vector<Box*> &boxes) const;
+    float respawnPosX;
+    float respawnPosY;
+
+    bool checkWallCollision(std::vector<Wall*> &walls,
+                            std::vector<Box*> &boxes,
+                            std::vector<StaticDanger*> &staticDangers);
 
 public:
     Player();
@@ -31,7 +37,9 @@ public:
     void incrementCooldown();
     void movePlayer(float directionX, float directionY,
                     std::vector<Wall*> &walls,
-                    std::vector<Box*> &boxes);
+                    std::vector<Box*> &boxes,
+                    std::vector<StaticDanger*> &staticDangers);
+    void resetPosition();
     void render(sf::RenderTarget& target);
 };
 

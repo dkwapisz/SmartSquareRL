@@ -16,6 +16,7 @@ private:
     int shotCooldown;
     int shotCooldownMax;
     int playerCoins;
+    int deaths;
     float shotSpeed;
     float moveSpeed;
 
@@ -40,5 +41,7 @@ public:
     float getPosY() const;
     void setPosition(float positionX, float positionY);
     void addCoin();
+    int getDeathsCount() const;
+    void increaseDeathCount();
     void render(sf::RenderTarget& target);
 };

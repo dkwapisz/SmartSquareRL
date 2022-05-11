@@ -1,15 +1,18 @@
 #include "Game.hpp"
 
 Game::Game() {
+    this -> loadFont();
     this -> initializeWindow();
     this -> initializeGameObjects();
     this -> coinsCount = 0;
+    this -> initializeLabels();
     this -> generateMap();
 }
 
 Game::~Game() {
     delete this -> window;
     delete this -> player;
+    deleteLabels();
 
     for (auto &gameObject : this -> squareShapes) {
         delete gameObject.second;
@@ -44,12 +47,70 @@ Game::~Game() {
     }
 }
 
+void Game::loadFont() {
+    this -> font = new sf::Font();
+
+    if (!font -> loadFromFile("..\\Game\\Upheaval-font.ttf")) {
+        std::cout << "Font cannot be loaded";
+    }
+}
+
 void Game::initializeWindow() {
-    this -> window = new sf::RenderWindow(sf::VideoMode(600, 600),
+    this -> window = new sf::RenderWindow(sf::VideoMode(600, 650),
                                           "SmartSquareRL",
                                           sf::Style::Close | sf::Style::Titlebar);
     this -> window -> setFramerateLimit(75);
     this -> window -> setVerticalSyncEnabled(false);
+}
+
+void Game::initializeLabels() {
+    this -> clock = new sf::Clock();
+    this -> clockLabel = new sf::Text();
+    this -> deathCountLabel = new sf::Text();
+    this -> coinCountLabel = new sf::Text();
+
+    clockLabel -> setFont(*font);
+    deathCountLabel -> setFont(*font);
+    coinCountLabel -> setFont(*font);
+
+    clockLabel -> setPosition(10.f, 10.f);
+    deathCountLabel -> setPosition(240.f, 10.f);
+    coinCountLabel -> setPosition(480.f, 10.f);
+
+    clockLabel -> setFillColor(sf::Color::White);
+    deathCountLabel -> setFillColor(sf::Color::White);
+    coinCountLabel -> setFillColor(sf::Color::White);
+
+    clockLabel -> setCharacterSize(22);
+    deathCountLabel -> setCharacterSize(22);
+    coinCountLabel -> setCharacterSize(22);
+}
+
+void Game::deleteLabels() {
+    delete this -> clock;
+    delete this -> clockLabel;
+    delete this -> deathCountLabel;
+    delete this -> coinCountLabel;
+
+    delete this -> font;
+}
+
+void Game::updateLabels() {
+    std::string time = std::to_string((int) clock -> getElapsedTime().asSeconds());
+    clockLabel -> setString("Time: " + time + " [s]");
+
+    std::string deaths = std::to_string(this -> player -> getDeathsCount());
+    deathCountLabel -> setString("Deaths: " + deaths);
+
+    std::string coinsCollected = std::to_string(this -> player -> getPlayerCoins());
+    std::string allCoins = std::to_string(this -> coinsCount);
+    coinCountLabel -> setString(coinsCollected + "/" + allCoins + " coins");
+}
+
+void Game::renderLabels() {
+    this -> window -> draw(*clockLabel);
+    this -> window -> draw(*deathCountLabel);
+    this -> window -> draw(*coinCountLabel);
 }
 
 void Game::initializeGameObjects() {
@@ -75,31 +136,34 @@ void Game::generateMap() {
             for (int x = 0; x < mapSizeY; x++) {
                 mapFile >> number;
 
+                float posX = 30.f * (float) x;
+                float posY = (30.f * (float) y) + 50;
+
                 if (number == 1) {
                     this -> walls.push_back(new Wall(this -> squareShapes["Wall"],
-                                                     30.f * x, 30.f * y));
+                                                     posX, posY));
                 } else if (number == 2) {
                     this -> boxes.push_back(new Box(this -> squareShapes["Box"],
-                                                     30.f * x, 30.f * y));
+                                                    posX, posY));
                 } else if (number == 3) {
                     this -> staticDangers.push_back(new StaticDanger(this -> squareShapes["StaticDanger"],
-                                                                     30.f * x, 30.f * y));
+                                             posX, posY));
                 } else if (number == 4) {
                     this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
-                                                    30.f * x, 30.f * y));
+                                                     posX, posY));
                     coinsCount++;
                 } else if (number == 5) {
                     this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                    30.f * x, 30.f * y, true));
+                                                                     posX, posY, true));
                 } else if (number == 6) {
                     this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                    30.f * x, 30.f * y, false));
+                                                                     posX, posY, false));
                 } else if (number == 7) {
                     this -> finishes.push_back(new Finish(this -> squareShapes["Finish"],
-                                                                     30.f * x, 30.f * y));
+                                                          posX, posY));
                 }
                 else if (number == 9) {
-                    this -> player = new Player(30.f * x, 30.f * y);
+                    this -> player = new Player(posX, posY);
                 }
             }
         }
@@ -165,7 +229,7 @@ void Game::updateWindowEvents() {
     sf::Event e;
 
     while (this -> window -> pollEvent(e)) {
-        if (e.Event::type == sf::Event::Closed || e.Event::key.code == sf::Keyboard::Escape) {
+        if (e.Event::type == sf::Event::Closed) {
             this -> window -> close();
         }
     }
@@ -297,6 +361,7 @@ void Game::update() {
     this -> updateBullets();
     this -> updatePlayerInput();
     this -> updateDangerMovement();
+    this -> updateLabels();
 }
 
 void Game::render() {
@@ -331,6 +396,8 @@ void Game::render() {
     for (auto *movingDanger : this -> movingDangers) {
         movingDanger -> render(this -> window);
     }
+
+    renderLabels();
 
     this -> window -> display();
 }

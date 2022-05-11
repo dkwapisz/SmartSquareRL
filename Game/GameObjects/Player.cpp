@@ -8,6 +8,7 @@ Player::Player(float positionX, float positionY) {
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
     this -> playerCoins = 0;
+    this -> deaths = 0;
 
     this -> respawnPosX = positionX;
     this -> respawnPosY = positionY;
@@ -29,6 +30,7 @@ int Player::getPlayerCoins() const {
 
 void Player::resetPosition() {
     this -> playerShape.setPosition(respawnPosX, respawnPosY);
+    deaths++;
 }
 
 void Player::movePlayer(float directionX, float directionY) {
@@ -80,4 +82,12 @@ void Player::setPosition(float positionX, float positionY) {
 
 void Player::addCoin() {
     this -> playerCoins++;
+}
+
+int Player::getDeathsCount() const {
+    return this -> deaths;
+}
+
+void Player::increaseDeathCount() {
+    this -> deaths++;
 }

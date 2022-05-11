@@ -13,11 +13,17 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <cmath>
 
 class Game {
 
 private:
     sf::RenderWindow* window;
+    sf::Clock* clock;
+    sf::Text* clockLabel;
+    sf::Text* coinCountLabel;
+    sf::Text* deathCountLabel;
+    sf::Font* font;
 
     std::map<std::string, sf::RectangleShape*> squareShapes;
     std::map<std::string, sf::CircleShape*> circleShapes;
@@ -32,6 +38,7 @@ private:
 
     int coinsCount;
 
+    void loadFont();
     void initializeWindow();
     void initializeGameObjects();
     void generateMap();
@@ -42,6 +49,10 @@ private:
     bool checkPlayerCoins();
     void shot(float directionX, float directionY);
     void finishLevel();
+    void initializeLabels();
+    void deleteLabels();
+    void updateLabels();
+    void renderLabels();
 
 public:
     Game();

@@ -9,6 +9,7 @@
 #include "GameObjects/StaticDanger.hpp"
 #include "GameObjects/Coin.hpp"
 #include "GameObjects/MovingDanger.hpp"
+#include "GameObjects/Finish.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -26,6 +27,7 @@ private:
     std::vector<StaticDanger*> staticDangers;
     std::vector<Coin*> coins;
     std::vector<MovingDanger*> movingDangers;
+    std::vector<Finish*> finishes;
     Player* player;
 
     int coinsCount;
@@ -37,8 +39,9 @@ private:
     void movePlayer(float directionX, float directionY);
     bool checkCollision();
     void inputShooting();
-    void checkPlayerCoins();
+    bool checkPlayerCoins();
     void shot(float directionX, float directionY);
+    void finishLevel();
 
 public:
     Game();

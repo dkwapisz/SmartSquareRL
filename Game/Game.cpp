@@ -38,6 +38,10 @@ Game::~Game() {
     for (auto *movingDanger : this -> movingDangers) {
         delete movingDanger;
     }
+
+    for (auto *finish : this -> finishes) {
+        delete finish;
+    }
 }
 
 void Game::initializeWindow() {
@@ -53,6 +57,7 @@ void Game::initializeGameObjects() {
     this -> squareShapes["Wall"] = new sf::RectangleShape();
     this -> squareShapes["Box"] = new sf::RectangleShape();
     this -> squareShapes["StaticDanger"] = new sf::RectangleShape();
+    this -> squareShapes["Finish"] = new sf::RectangleShape;
     this -> circleShapes["Coin"] = new sf::CircleShape();
     this -> circleShapes["MovingDanger"] = new sf::CircleShape();
 }
@@ -89,6 +94,9 @@ void Game::generateMap() {
                 } else if (number == 6) {
                     this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
                                                     30.f * x, 30.f * y, false));
+                } else if (number == 7) {
+                    this -> finishes.push_back(new Finish(this -> squareShapes["Finish"],
+                                                                     30.f * x, 30.f * y));
                 }
                 else if (number == 9) {
                     this -> player = new Player(30.f * x, 30.f * y);
@@ -214,6 +222,13 @@ bool Game::checkCollision() {
         }
     }
 
+    for (const auto& finish : finishes) {
+        if (finish -> getBounds().intersects(this -> player -> getBounds())) {
+            this -> finishLevel();
+            return false;
+        }
+    }
+
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
             delete coins[i];
@@ -273,22 +288,23 @@ void Game::shot(float directionX, float directionY) {
     }
 }
 
-void Game::checkPlayerCoins() {
-    if (this -> coinsCount == this -> player -> getPlayerCoins()) {
-        std::cout << "Player wins! \n" << coinsCount;
-    }
+bool Game::checkPlayerCoins() {
+    return this -> coinsCount == this -> player -> getPlayerCoins();
 }
 
 void Game::update() {
     this -> updateWindowEvents();
     this -> updateBullets();
     this -> updatePlayerInput();
-    this -> checkPlayerCoins();
     this -> updateDangerMovement();
 }
 
 void Game::render() {
     this -> window -> clear();
+
+    for (auto *finish : this -> finishes) {
+        finish -> render(this -> window);
+    }
 
     this -> player -> render(*this -> window);
 
@@ -317,4 +333,10 @@ void Game::render() {
     }
 
     this -> window -> display();
+}
+
+void Game::finishLevel() {
+    if (this -> checkPlayerCoins()) {
+        std::cout << "Player wins! \n";
+    }
 }

@@ -126,7 +126,7 @@ void Game::initializeGameObjects() {
 void Game::generateMap() {
 
     std::fstream mapFile;
-    mapFile.open("..\\Game\\Maps\\test_map.txt");
+    mapFile.open("..\\Game\\Maps\\map1.txt");
     int mapSizeX = 20;
     int mapSizeY = 20;
     int number = 0;
@@ -318,6 +318,12 @@ void Game::checkDangerCollision(MovingDanger *movingDanger) {
 
     for (auto *wall : this -> walls) {
         if (movingDanger -> getBounds().intersects(wall -> getBounds())) {
+            movingDanger -> reverseDirection();
+        }
+    }
+
+    for (auto *box : this -> boxes) {
+        if (movingDanger -> getBounds().intersects(box -> getBounds())) {
             movingDanger -> reverseDirection();
         }
     }

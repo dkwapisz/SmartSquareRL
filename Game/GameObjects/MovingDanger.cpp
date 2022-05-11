@@ -5,7 +5,7 @@ MovingDanger::MovingDanger() = default;
 MovingDanger::MovingDanger(sf::CircleShape *movingDangerShape, float positionX, float positionY, bool isHorizontal):
 CircleObject(movingDangerShape, positionX, positionY) {
 
-    this -> moveSpeed = 3.f;
+    this -> moveSpeed = 2.f;
     this -> isHorizontal = isHorizontal;
     this -> isReverseDirection = false;
 

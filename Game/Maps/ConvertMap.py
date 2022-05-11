@@ -1,9 +1,9 @@
 from PIL import Image
 
-image = Image.open("test_map.png")
+image = Image.open("map1.png")
 image_out = image.convert("RGB")
 
-map_txt = open("test_map.txt", "a")
+map_txt = open("map1.txt", "a")
 
 # Clear file before writing
 map_txt.seek(0)

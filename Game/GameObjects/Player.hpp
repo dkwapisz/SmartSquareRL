@@ -41,6 +41,7 @@ public:
     float getPosY() const;
     void setPosition(float positionX, float positionY);
     void addCoin();
+    void resetCoinsCount();
     int getDeathsCount() const;
     void increaseDeathCount();
     void render(sf::RenderTarget& target);

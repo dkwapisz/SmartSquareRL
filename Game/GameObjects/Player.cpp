@@ -91,3 +91,7 @@ int Player::getDeathsCount() const {
 void Player::increaseDeathCount() {
     this -> deaths++;
 }
+
+void Player::resetCoinsCount() {
+    this -> playerCoins = 0;
+}

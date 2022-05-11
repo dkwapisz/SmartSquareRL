@@ -34,6 +34,8 @@ private:
     std::vector<Coin*> coins;
     std::vector<MovingDanger*> movingDangers;
     std::vector<Finish*> finishes;
+    std::string mapPath;
+
     Player* player;
 
     int coinsCount;
@@ -53,6 +55,7 @@ private:
     void deleteLabels();
     void updateLabels();
     void renderLabels();
+    void resetLevel();
 
 public:
     Game();

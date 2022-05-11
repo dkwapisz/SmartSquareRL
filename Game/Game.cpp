@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 Game::Game() {
+    this -> mapPath = "..\\Game\\Maps\\map1.txt";
     this -> loadFont();
     this -> initializeWindow();
     this -> initializeGameObjects();
@@ -126,14 +127,14 @@ void Game::initializeGameObjects() {
 void Game::generateMap() {
 
     std::fstream mapFile;
-    mapFile.open("..\\Game\\Maps\\map1.txt");
+    mapFile.open(mapPath);
     int mapSizeX = 20;
     int mapSizeY = 20;
     int number = 0;
 
     if (mapFile.is_open()) {
-        for (int y = 0; y < mapSizeX; y++) {
-            for (int x = 0; x < mapSizeY; x++) {
+        for (int y = 0; y < mapSizeY; y++) {
+            for (int x = 0; x < mapSizeX; x++) {
                 mapFile >> number;
 
                 float posX = 30.f * (float) x;
@@ -179,6 +180,62 @@ void Game::run() {
         this -> update();
         this -> render();
     }
+}
+
+void Game::resetLevel() {
+    this -> player -> resetPosition();
+    this -> player -> resetCoinsCount();
+    this -> clock -> restart();
+
+    for (int i = 0; i < this -> movingDangers.size(); i++) {
+        delete this -> movingDangers[i];
+        this -> movingDangers.clear();
+    }
+
+    for (int i = 0; i < this -> boxes.size(); i++) {
+        delete this -> boxes[i];
+        this -> boxes.clear();
+    }
+
+    for (int i = 0; i < this -> coins.size(); i++) {
+        delete this -> coins[i];
+        this -> coins.clear();
+    }
+
+    std::fstream mapFile;
+    mapFile.open(mapPath);
+    int mapSizeX = 20;
+    int mapSizeY = 20;
+    int number = 0;
+
+    if (mapFile.is_open()) {
+        for (int y = 0; y < mapSizeY; y++) {
+            for (int x = 0; x < mapSizeX; x++) {
+                mapFile >> number;
+
+                float posX = 30.f * (float) x;
+                float posY = (30.f * (float) y) + 50;
+
+                if (number == 2) {
+                    this -> boxes.push_back(new Box(this -> squareShapes["Box"],
+                                                    posX, posY));
+                } else if (number == 4) {
+                    this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
+                                                     posX, posY));
+                } else if (number == 5) {
+                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
+                                                                     posX, posY, true));
+                } else if (number == 6) {
+                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
+                                                                     posX, posY, false));
+                }
+            }
+        }
+    } else {
+        std::cerr << "Could not open map file" << "\n";
+    }
+
+    mapFile.close();
 }
 
 void Game::updateBullets() {
@@ -281,7 +338,7 @@ bool Game::checkCollision() {
 
     for (const auto& staticDanger : staticDangers) {
         if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
-            this -> player -> resetPosition();
+            this -> resetLevel();
             return false;
         }
     }
@@ -313,7 +370,7 @@ void Game::updateDangerMovement() {
 
 void Game::checkDangerCollision(MovingDanger *movingDanger) {
     if (movingDanger -> getBounds().intersects(this -> player -> getBounds())) {
-        this -> player -> resetPosition();
+        this -> resetLevel();
     }
 
     for (auto *wall : this -> walls) {

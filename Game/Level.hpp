@@ -34,13 +34,12 @@ private:
     int coinsCount;
     int playerCoinsCount;
     int levelNumber;
+    bool levelFinished;
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
     void initializeGameObjects();
     void generateMap();
     bool checkCollision();
-    bool checkPlayerCoins() const;
-    void finishLevel();
     void resetLevel();
     void checkDangerCollision(MovingDanger *movingDanger);
 
@@ -49,6 +48,7 @@ public:
     explicit Level(int levelNumber);
     virtual ~Level();
 
+    bool isLevelFinished() const;
     void movePlayer(float directionX, float directionY);
     void shot(float directionX, float directionY);
     void updateBullets();
@@ -59,6 +59,8 @@ public:
     Player* getPlayer() const;
     int getCoinsCount() const;
     int getPlayerCoinsCount() const;
+    int getLevelNumber() const;
+    int getMapsCount() const;
 };
 
 

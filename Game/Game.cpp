@@ -136,6 +136,20 @@ void Game::update() {
 
     this -> level -> updateBullets();
     this -> level -> updateDangerMovement();
+
+    if (this -> level -> isLevelFinished()) {
+        int lastLevelNum = this -> level -> getLevelNumber();
+        int mapsCount = this -> level -> getMapsCount();
+        delete this -> level;
+
+        if (lastLevelNum > mapsCount) {
+            std::cout << "Player wins \n";
+            delete this;
+        } else {
+            this -> level = new Level(lastLevelNum + 1);
+        }
+
+    }
 }
 
 void Game::render() {

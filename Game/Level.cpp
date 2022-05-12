@@ -18,6 +18,10 @@ Level::~Level() {
         delete gameObject.second;
     }
 
+    for (auto &gameObject : this -> circleShapes) {
+        delete gameObject.second;
+    }
+
     for (auto *bullet : this -> bullets) {
         delete bullet;
     }
@@ -48,12 +52,14 @@ Level::~Level() {
 };
 
 void Level::initializeMapPaths() {
-    this -> mapPath[1] = R"(..\Game\Maps\map1.txt)";
+    this -> mapPath[1] = R"(..\Game\Maps\test_map.txt)";
+    this -> mapPath[2] = R"(..\Game\Maps\map1.txt)";
 }
 
 void Level::initializeLevelAttributes(int levelNr) {
     this -> coinsCount = 0;
     this -> playerCoinsCount = 0;
+    this -> levelFinished = false;
     this -> levelNumber = levelNr;
     this -> clock = new sf::Clock();
 }
@@ -152,7 +158,11 @@ bool Level::checkCollision() {
 
     for (const auto& finish : finishes) {
         if (finish -> getBounds().intersects(this -> player -> getBounds())) {
-            this -> finishLevel();
+
+            if (this -> coinsCount == this -> playerCoinsCount) {
+                levelFinished = true;
+            }
+
             return false;
         }
     }
@@ -166,10 +176,6 @@ bool Level::checkCollision() {
     }
 
     return false;
-}
-
-bool Level::checkPlayerCoins() const {
-    return this -> coinsCount == this -> playerCoinsCount;
 }
 
 void Level::shot(float directionX, float directionY) {
@@ -186,11 +192,8 @@ void Level::shot(float directionX, float directionY) {
     }
 }
 
-void Level::finishLevel() {
-    //TODO Change level to level+1
-    if (this -> checkPlayerCoins()) {
-        std::cout << "Player wins! \n";
-    }
+bool Level::isLevelFinished() const {
+    return levelFinished;
 }
 
 void Level::resetLevel() {
@@ -355,13 +358,21 @@ int Level::getClockTime() const {
 }
 
 Player* Level::getPlayer() const {
-    return player;
+    return this -> player;
 }
 
 int Level::getCoinsCount() const {
-    return coinsCount;
+    return this -> coinsCount;
 }
 
 int Level::getPlayerCoinsCount() const {
-    return playerCoinsCount;
+    return this -> playerCoinsCount;
+}
+
+int Level::getLevelNumber() const {
+    return this -> levelNumber;
+}
+
+int Level::getMapsCount() const {
+    return (int) mapPath.size();
 }

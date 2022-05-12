@@ -15,6 +15,6 @@ sf::FloatRect CircleObject::getBounds() const {
     return this -> objectShape.getGlobalBounds();
 }
 
-void CircleObject::render(sf::RenderTarget *target) {
-    target -> draw(this -> objectShape);
+void CircleObject::render(sf::RenderTarget &target) {
+    target.draw(this -> objectShape);
 }

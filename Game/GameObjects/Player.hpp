@@ -15,7 +15,6 @@ private:
 
     int shotCooldown;
     int shotCooldownMax;
-    int playerCoins;
     int deaths;
     float shotSpeed;
     float moveSpeed;
@@ -31,7 +30,6 @@ public:
     const sf::Vector2f* getCenterPosition() const;
 
     float getShotSpeed() const;
-    int getPlayerCoins() const;
     sf::FloatRect getBounds() const;
     bool isShotPossible();
     void incrementCooldown();
@@ -40,8 +38,6 @@ public:
     float getPosX() const;
     float getPosY() const;
     void setPosition(float positionX, float positionY);
-    void addCoin();
-    void resetCoinsCount();
     int getDeathsCount() const;
     void increaseDeathCount();
     void render(sf::RenderTarget& target);

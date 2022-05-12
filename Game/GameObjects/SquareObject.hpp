@@ -15,7 +15,7 @@ public:
 
     sf::FloatRect getBounds() const;
 
-    void render(sf::RenderTarget* target);
+    void render(sf::RenderTarget &target);
 };
 
 

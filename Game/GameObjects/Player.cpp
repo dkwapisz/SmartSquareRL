@@ -7,7 +7,6 @@ Player::Player(float positionX, float positionY) {
     this -> shotCooldown = 10;
     this -> shotCooldownMax = 10;
     this -> shotSpeed = 4.f;
-    this -> playerCoins = 0;
     this -> deaths = 0;
 
     this -> respawnPosX = positionX;
@@ -22,10 +21,6 @@ Player::~Player() = default;
 
 void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
-}
-
-int Player::getPlayerCoins() const {
-    return playerCoins;
 }
 
 void Player::resetPosition() {
@@ -80,18 +75,10 @@ void Player::setPosition(float positionX, float positionY) {
     this -> playerShape.setPosition(positionX, positionY);
 }
 
-void Player::addCoin() {
-    this -> playerCoins++;
-}
-
 int Player::getDeathsCount() const {
     return this -> deaths;
 }
 
 void Player::increaseDeathCount() {
     this -> deaths++;
-}
-
-void Player::resetCoinsCount() {
-    this -> playerCoins = 0;
 }

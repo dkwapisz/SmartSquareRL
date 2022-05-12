@@ -13,6 +13,6 @@ sf::FloatRect SquareObject::getBounds() const {
     return this -> objectShape.getGlobalBounds();
 }
 
-void SquareObject::render(sf::RenderTarget *target) {
-    target -> draw(this -> objectShape);
+void SquareObject::render(sf::RenderTarget &target) {
+    target.draw(this -> objectShape);
 }

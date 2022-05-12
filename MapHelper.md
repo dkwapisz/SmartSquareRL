@@ -1,6 +1,6 @@
 ## Map Configuration
 
-There is a Python script in the [Maps](Game/Maps) folder that converts a map in png format, to a map in txt format based on pixel colors. Each color used in the map is assigned a value. Then, these values are used in the [Game.cpp](Game/Game.cpp) file when creating the map.
+There is a Python script in the [Maps](Game/Maps) folder that converts a map in png format, to a map in txt format based on pixel colors. Each color used in the map is assigned a value. Then, these values are used in the [Level.cpp](Level/Level.cpp) file when creating the map.
 
 ### Actual sizes: 
 

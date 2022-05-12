@@ -13,7 +13,7 @@ private:
 public:
     MovingDanger();
     MovingDanger(sf::CircleShape* movingDangerShape, float positionX, float positionY, bool isHorizontal);
-    virtual ~MovingDanger();
+    ~MovingDanger();
 
     void reverseDirection();
     void move();

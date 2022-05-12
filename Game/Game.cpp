@@ -5,6 +5,7 @@ Game::Game() {
     this -> initializeWindow();
     this -> initializeLabels();
 
+    this -> gameFinished = false;
     this -> level = new Level(1);
 }
 
@@ -81,6 +82,12 @@ void Game::run() {
     while (this -> window -> isOpen()) {
         this -> update();
         this -> render();
+
+        if (gameFinished) {
+            //TODO Fix ending game -> "virtual" error
+            delete this;
+            return;
+        }
     }
 }
 
@@ -142,9 +149,9 @@ void Game::update() {
         int mapsCount = this -> level -> getMapsCount();
         delete this -> level;
 
-        if (lastLevelNum > mapsCount) {
+        if (lastLevelNum + 1 > mapsCount) {
             std::cout << "Player wins \n";
-            delete this;
+            gameFinished = true;
         } else {
             this -> level = new Level(lastLevelNum + 1);
         }

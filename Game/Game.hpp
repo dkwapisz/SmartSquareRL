@@ -18,6 +18,7 @@ private:
     sf::Font* font;
 
     Level* level;
+    bool gameFinished;
 
     void loadFont();
     void initializeWindow();
@@ -38,6 +39,6 @@ private:
 
 public:
     Game();
-    virtual ~Game();
+    ~Game();
     void run();
 };

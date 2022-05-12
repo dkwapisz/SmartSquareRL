@@ -11,7 +11,7 @@ protected:
 public:
     CircleObject();
     CircleObject(sf::CircleShape* objectShape, float posX, float posY);
-    virtual ~CircleObject();
+    ~CircleObject();
 
     sf::FloatRect getBounds() const;
 

@@ -46,7 +46,7 @@ private:
 public:
     Level();
     explicit Level(int levelNumber);
-    virtual ~Level();
+    ~Level();
 
     bool isLevelFinished() const;
     void movePlayer(float directionX, float directionY);

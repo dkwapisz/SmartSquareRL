@@ -8,7 +8,7 @@ class Finish : public SquareObject {
 public:
     Finish();
     Finish(sf::RectangleShape* wallShape, float positionX, float positionY);
-    virtual ~Finish();
+    ~Finish();
 };
 
 

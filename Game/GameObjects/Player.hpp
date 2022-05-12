@@ -25,7 +25,7 @@ private:
 public:
     Player();
     Player(float positionX, float positionY);
-    virtual ~Player();
+    ~Player();
 
     const sf::Vector2f* getCenterPosition() const;
 

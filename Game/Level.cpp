@@ -69,7 +69,7 @@ void Level::initializeGameObjects() {
     this -> squareShapes["Wall"] = new sf::RectangleShape();
     this -> squareShapes["Box"] = new sf::RectangleShape();
     this -> squareShapes["StaticDanger"] = new sf::RectangleShape();
-    this -> squareShapes["Finish"] = new sf::RectangleShape;
+    this -> squareShapes["Finish"] = new sf::RectangleShape();
     this -> circleShapes["Coin"] = new sf::CircleShape();
     this -> circleShapes["MovingDanger"] = new sf::CircleShape();
 }

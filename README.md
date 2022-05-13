@@ -12,7 +12,7 @@
 The player's goal is to collect all the coins in the level and reach the exit marked in green.
 
 ## Download
-[Here you can download executable file](https://drive.google.com/file/d/1700YQ1u7C03_LmEXU30wiHm3VWWRbKco/view?usp=sharing)
+[Here you can download executable file.](https://drive.google.com/file/d/1700YQ1u7C03_LmEXU30wiHm3VWWRbKco/view?usp=sharing)
 
 ## Video
 [Here you can check how game looks like.](https://youtube.com/shorts/BdZh8jy2RsA?feature=share)

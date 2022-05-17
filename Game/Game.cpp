@@ -10,8 +10,8 @@ Game::Game() {
 }
 
 Game::~Game() {
-    delete this -> window;
     delete this -> level;
+    delete this -> window;
     deleteLabels();
 }
 
@@ -80,11 +80,10 @@ void Game::renderLabels() {
 
 void Game::run() {
     while (this -> window -> isOpen()) {
-        this -> update();
-        this -> render();
-
-        if (gameFinished) {
-            //TODO Fix ending game -> "virtual" error
+        if (!gameFinished) {
+            this -> update();
+            this -> render();
+        } else {
             delete this;
             return;
         }
@@ -147,12 +146,12 @@ void Game::update() {
     if (this -> level -> isLevelFinished()) {
         int lastLevelNum = this -> level -> getLevelNumber();
         int mapsCount = this -> level -> getMapsCount();
-        delete this -> level;
 
         if (lastLevelNum + 1 > mapsCount) {
             std::cout << "Player wins \n";
             gameFinished = true;
         } else {
+            delete this -> level;
             this -> level = new Level(lastLevelNum + 1);
         }
 

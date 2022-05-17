@@ -9,8 +9,6 @@ CircleObject::CircleObject(sf::CircleShape *objectShape, float positionX, float 
                                     positionY + this -> objectShape.getRadius() / 2);
 }
 
-CircleObject::~CircleObject() = default;
-
 sf::FloatRect CircleObject::getBounds() const {
     return this -> objectShape.getGlobalBounds();
 }

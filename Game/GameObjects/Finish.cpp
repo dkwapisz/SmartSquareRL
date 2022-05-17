@@ -8,5 +8,3 @@ Finish::Finish(sf::RectangleShape *wallShape, float positionX, float positionY):
     this -> objectShape.setFillColor(sf::Color(0, 255, 0, 200));
     this -> objectShape.setSize(sf::Vector2f(30.f, 30.f));
 }
-
-Finish::~Finish() = default;

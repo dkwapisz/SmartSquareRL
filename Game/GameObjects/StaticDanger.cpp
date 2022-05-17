@@ -9,4 +9,3 @@ SquareObject(staticDangerShape, positionX, positionY){
     this -> objectShape.setSize(sf::Vector2f(30.f, 30.f));
 }
 
-StaticDanger::~StaticDanger() = default;

@@ -9,8 +9,3 @@ CircleObject(coinShape, positionX, positionY) {
     this -> objectShape.setFillColor(sf::Color(255, 255, 0));
 
 }
-
-Coin::~Coin() = default;
-
-
-

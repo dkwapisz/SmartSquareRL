@@ -9,5 +9,3 @@ SquareObject(wallShape, positionX, positionY) {
     this -> objectShape.setSize(sf::Vector2f(30.f, 30.f));
 }
 
-Wall::~Wall() = default;
-

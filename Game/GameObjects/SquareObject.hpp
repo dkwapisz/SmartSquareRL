@@ -11,7 +11,6 @@ protected:
 public:
     SquareObject();
     SquareObject(sf::RectangleShape* objectShape, float posX, float posY);
-    ~SquareObject();
 
     sf::FloatRect getBounds() const;
 

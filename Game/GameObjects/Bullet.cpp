@@ -15,8 +15,6 @@ Bullet::Bullet(sf::RectangleShape* bulletShape,
     this -> objectShape.setSize(sf::Vector2f(5.f, 5.f));
 }
 
-Bullet::~Bullet() = default;
-
 void Bullet::update() {
     this -> objectShape.move(this -> moveSpeed * this -> direction);
 

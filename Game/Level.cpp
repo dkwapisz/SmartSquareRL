@@ -53,7 +53,7 @@ Level::~Level() {
 
 void Level::initializeMapPaths() {
     this -> mapPath[1] = R"(..\Game\Maps\test_map.txt)";
-    this -> mapPath[2] = R"(..\Game\Maps\map1.txt)";
+    //this -> mapPath[2] = R"(..\Game\Maps\map1.txt)";
 }
 
 void Level::initializeLevelAttributes(int levelNr) {

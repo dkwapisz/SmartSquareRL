@@ -8,7 +8,6 @@ class Box : public SquareObject {
 public:
     Box();
     Box(sf::RectangleShape* boxShape, float positionX, float positionY);
-    ~Box();
 };
 
 

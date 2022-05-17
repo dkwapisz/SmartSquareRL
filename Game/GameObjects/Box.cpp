@@ -8,5 +8,3 @@ SquareObject(boxShape, positionX, positionY) {
     this -> objectShape.setFillColor(sf::Color(50, 0, 0));
     this -> objectShape.setSize(sf::Vector2f(30.f, 30.f));
 }
-
-Box::~Box() = default;

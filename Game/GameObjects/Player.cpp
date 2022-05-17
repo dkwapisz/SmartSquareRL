@@ -17,8 +17,6 @@ Player::Player(float positionX, float positionY) {
     this -> playerShape.setSize(sf::Vector2f(20.f, 20.f));
 }
 
-Player::~Player() = default;
-
 void Player::render(sf::RenderTarget &target) {
     target.draw(this -> playerShape);
 }

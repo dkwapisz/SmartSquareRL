@@ -15,7 +15,6 @@ public:
            float positionX, float positionY,
            float directionX, float directionY,
            float moveSpeed);
-    ~Bullet();
 
     void update();
 };

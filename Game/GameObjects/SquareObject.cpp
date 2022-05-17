@@ -7,8 +7,6 @@ SquareObject::SquareObject(sf::RectangleShape *objectShape, float posX, float po
     this -> objectShape.setPosition(posX, posY);
 }
 
-SquareObject::~SquareObject() = default;
-
 sf::FloatRect SquareObject::getBounds() const {
     return this -> objectShape.getGlobalBounds();
 }

@@ -8,7 +8,6 @@ class StaticDanger : public SquareObject {
 public:
     StaticDanger();
     StaticDanger(sf::RectangleShape* staticDangerShape, float positionX, float positionY);
-    ~StaticDanger();
 };
 
 

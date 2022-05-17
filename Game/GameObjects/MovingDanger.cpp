@@ -12,8 +12,6 @@ CircleObject(movingDangerShape, positionX, positionY) {
     this -> objectShape.setFillColor(sf::Color(255, 0, 0));
 }
 
-MovingDanger::~MovingDanger() = default;
-
 void MovingDanger::move() {
     float direction;
 

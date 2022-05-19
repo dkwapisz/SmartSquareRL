@@ -49,11 +49,12 @@ Level::~Level() {
     for (auto *finish : this -> finishes) {
         delete finish;
     }
-};
+}
 
 void Level::initializeMapPaths() {
-    this -> mapPath[1] = R"(..\Game\Maps\test_map.txt)";
-    //this -> mapPath[2] = R"(..\Game\Maps\map1.txt)";
+    this -> mapPath[1] = R"(..\Game\Maps\map1.txt)";
+    this -> mapPath[2] = R"(..\Game\Maps\map2.txt)";
+    this -> mapPath[3] = R"(..\Game\Maps\map3.txt)";
 }
 
 void Level::initializeLevelAttributes(int levelNr) {

@@ -11,8 +11,9 @@ Game::Game() {
 
 Game::~Game() {
     delete this -> level;
-    delete this -> window;
     deleteLabels();
+    delete this -> window;
+    exit(0);
 }
 
 void Game::loadFont() {
@@ -84,6 +85,7 @@ void Game::run() {
             this -> update();
             this -> render();
         } else {
+            this -> window -> close();
             delete this;
             return;
         }

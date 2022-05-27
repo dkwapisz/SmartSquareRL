@@ -4,6 +4,7 @@
 
 cmake-build-debug
 cmake-build-debug-mingw
+cmake-build-release-mingw
 
 # User-specific stuff:
 .idea/workspace.xml

@@ -16,7 +16,7 @@ add_executable(
         Game/GameObjects/CircleObject.cpp Game/GameObjects/CircleObject.hpp
         Game/GameObjects/MovingDanger.cpp Game/GameObjects/MovingDanger.hpp
         Game/GameObjects/Finish.cpp Game/GameObjects/Finish.hpp
-        Game/Level.cpp Game/Level.hpp)
+        Game/Level.cpp Game/Level.hpp Game/PipeCommunication.cpp Game/PipeCommunication.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)

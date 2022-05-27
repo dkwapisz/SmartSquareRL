@@ -5,7 +5,6 @@
 #include "Level.hpp"
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <cmath>
 
 class Game {
@@ -41,4 +40,5 @@ public:
     Game();
     virtual ~Game();
     void run();
+    Level* getLevel();
 };

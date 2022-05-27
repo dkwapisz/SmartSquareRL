@@ -16,6 +16,10 @@ Game::~Game() {
     exit(0);
 }
 
+Level* Game::getLevel() {
+    return this -> level;
+}
+
 void Game::loadFont() {
     this -> font = new sf::Font();
 
@@ -84,6 +88,7 @@ void Game::run() {
         if (!gameFinished) {
             this -> update();
             this -> render();
+
         } else {
             this -> window -> close();
             delete this;

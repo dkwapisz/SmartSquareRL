@@ -23,7 +23,7 @@ Level* Game::getLevel() {
 void Game::loadFont() {
     this -> font = new sf::Font();
 
-    if (!font -> loadFromFile("..\\Game\\Upheaval-font.ttf")) {
+    if (!font -> loadFromFile("../Game/GameFiles/Upheaval-font.ttf")) {
         std::cout << "Font cannot be loaded";
     }
 }

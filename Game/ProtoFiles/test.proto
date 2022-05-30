@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message LevelInfo {
+  int32 playerCoins = 1;
+  int32 levelCoins = 2;
+}

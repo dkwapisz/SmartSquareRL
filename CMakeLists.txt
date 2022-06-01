@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 project(SmartSquareRL)
 
-set(CMAKE_CXX_STANDARD 17)
-
 if (MINGW)
     add_definitions(-D_WIN32_WINNT=0x600)
 endif()
@@ -25,13 +23,20 @@ add_executable(
         Game/GameFiles/GameObjects/CircleObject.cpp Game/GameFiles/GameObjects/CircleObject.hpp
         Game/GameFiles/GameObjects/MovingDanger.cpp Game/GameFiles/GameObjects/MovingDanger.hpp
         Game/GameFiles/GameObjects/Finish.cpp Game/GameFiles/GameObjects/Finish.hpp
-        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoFiles Game/ProtoFiles Game/ProtoClient/ProtoClient.cpp)
+        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/ProtoClient.cpp
+)
 
 find_package(gRPC CONFIG REQUIRED)
 if(gRPC_FOUND)
     include_directories(gRPC::grpc++)
-    include_directories(gRPC::grpc)
+endif()
+
+find_package(Protobuf CONFIG REQUIRED)
+if(Protobuf_FOUND)
+    include_directories(${Protobuf_INCLUDE_DIRS})
+    include_directories(${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
 target_link_libraries(SmartSquareRL sfml-system sfml-window sfml-graphics)
-target_link_libraries(SmartSquareRL gRPC::grpc gRPC::grpc++)
+target_link_libraries(SmartSquareRL gRPC::grpc++)
+target_link_libraries(SmartSquareRL ${Protobuf_LIBRARIES})

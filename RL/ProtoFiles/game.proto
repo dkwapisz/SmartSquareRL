@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./game.proto
+
+package Game;
+
+service ExchangeGameState {
+    rpc Exchange (GameState) returns (Action) {}
+}
+
+message GameState {
+    enum ObjectDirection {
+        DEFAULT = 0;
+        UP = 1;
+        RIGHT = 2;
+        DOWN = 3;
+        LEFT = 4;
+    }
+    
+    bool isClosestObstacleBox = 1;
+    int32 coinsNeeded = 2;
+    ObjectDirection closestObstacle = 3;
+    ObjectDirection closestCoin = 4;
+    ObjectDirection closestEnemy = 5;
+    ObjectDirection finishDirection = 6;
+}
+
+message Action {
+    enum ActionDirection {
+        DEFAULT = 0;
+        UP = 1;
+        RIGHT = 2;
+        DOWN = 3;
+        LEFT = 4;
+    }
+
+    ActionDirection moveDirection = 1;
+    ActionDirection shotDirection = 2;
+}
+

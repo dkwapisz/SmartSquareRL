@@ -7,9 +7,6 @@ cmake-build-debug-mingw
 cmake-build-release-mingw
 cmake-build-release
 
-# External libraries
-gRPC
-
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml

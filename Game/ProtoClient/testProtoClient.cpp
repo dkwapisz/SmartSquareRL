@@ -93,12 +93,12 @@ int main() {
     // localhost at port 50051). We indicate that the channel isn't authenticated
     // (use of InsecureChannelCredentials()).
     TestClient getLevelInfo(grpc::CreateChannel(
-            "localhost:50052", grpc::InsecureChannelCredentials()));
+            "localhost:50051", grpc::InsecureChannelCredentials()));
 
     // Spawn reader thread that loops indefinitely
     std::thread thread_ = std::thread(&TestClient::AsyncCompleteRpc, &getLevelInfo);
 
-    for (int i = 0; i < 100; i++) {
+    while(true) {
         getLevelInfo.GetLevelInfo(10, 10);  // The actual RPC call!
     }
 

@@ -1,23 +1,26 @@
-from grpc import aio
-import asyncio
+from concurrent import futures
 import logging
-import os
 
-import testPython_pb2_grpc as pb2GRPC
-import testPython_pb2 as pb2
+import grpc
+import testPython_pb2
+import testPython_pb2_grpc
 
-async def run() -> None:
-    async with aio.insecure_channel('0.0.0.0:50051', options=(('grpc.enable_http_proxy', 0),)) as channel:
-        stub = pb2GRPC.GetInfoStub(channel)
-        response = await stub.GetLevelInfo(pb2.LevelInfoRequest(playerCoins=5, levelCoins=5))
 
-    print("Client received: " + response.playerCoins)
-    print("Client received: " + response.levelCoins)
+class LevelInfo(testPython_pb2_grpc.GetInfoServicer):
+
+    def GetLevelInfo(self, request, context):
+        print(request)
+        return testPython_pb2.LevelInfoReply(playerCoins=5, levelCoins=5)
+
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    testPython_pb2_grpc.add_GetInfoServicer_to_server(LevelInfo(), server)
+    server.add_insecure_port('[::]:50051')
+    server.start()
+    server.wait_for_termination()
 
 
 if __name__ == '__main__':
     logging.basicConfig()
-    asyncio.run(run())
-
-# status = StatusCode.UNAVAILABLE
-# "failed to connect to all addresses"
+    serve()

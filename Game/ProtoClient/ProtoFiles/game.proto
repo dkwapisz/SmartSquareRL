@@ -7,54 +7,30 @@ service ExchangeGameState {
 }
 
 message GameState {
-    enum ClosestObstacle {
-        UP = 1;
-        RIGHT = 2;
-        DOWN = 3;
-        LEFT = 4;
-    }
-    enum ClosestCoin {
-        UP = 1;
-        RIGHT = 2;
-        DOWN = 3;
-        LEFT = 4;
-    }
-    enum ClosestEnemy {
-        UP = 1;
-        RIGHT = 2;
-        DOWN = 3;
-        LEFT = 4;
-    }
-    enum FinishDirection {
-        UP = 1;
-        RIGHT = 2;
-        DOWN = 3;
-        LEFT = 4;
+    enum ObjectDirection {
+        UP = 0;
+        RIGHT = 1;
+        DOWN = 2;
+        LEFT = 3;
     }
     
     bool isClosestObstacleBox = 1;
     int32 coinsNeeded = 2;
-    ClosestObstacle = 3;
-    ClosestCoin = 4;
-    ClosestEnemy = 5;
-    FinishDirection = 6;
+    ObjectDirection closestObstacle = 3;
+    ObjectDirection closestCoin = 4;
+    ObjectDirection closestEnemy = 5;
+    ObjectDirection finishDirection = 6;
 }
 
 message Action {
-    enum MoveDirection {
+    enum ActionDirection {
         UP = 0;
         RIGHT = 1;
         DOWN = 2;
         LEFT = 3;
     }
-    enum ShotDirection {
-        UP = 0;
-        RIGHT = 1;
-        DOWN = 2;
-        LEFT = 3;
-    }
-    
-    MoveDirection moveDirection = 1;
-    ShotDirection shotDirection = 2;
+
+    ActionDirection moveDirection = 1;
+    ActionDirection shotDirection = 2;
 }
 

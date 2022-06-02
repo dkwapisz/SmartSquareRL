@@ -1,23 +1,23 @@
-import grpc
+from grpc import aio
+import asyncio
+import logging
+import os
+
 import testPython_pb2_grpc as pb2GRPC
 import testPython_pb2 as pb2
-from concurrent import futures
+
+async def run() -> None:
+    async with aio.insecure_channel('0.0.0.0:50051', options=(('grpc.enable_http_proxy', 0),)) as channel:
+        stub = pb2GRPC.GetInfoStub(channel)
+        response = await stub.GetLevelInfo(pb2.LevelInfoRequest(playerCoins=5, levelCoins=5))
+
+    print("Client received: " + response.playerCoins)
+    print("Client received: " + response.levelCoins)
 
 
-class SquareRootServiceServicer(pb2GRPC.SquareRootServiceServicer):
+if __name__ == '__main__':
+    logging.basicConfig()
+    asyncio.run(run())
 
-    def squareRoot(self, request, context):
-        resultA = request.input * request.input
-        return pb2.Result(resultA=resultA)
-
-
-def main():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=5))
-    pb2GRPC.add_SquareRootServiceServicer_to_server(SquareRootServiceServicer(), server)
-    server.add_insecure_port('[::]:50052')
-    server.start()
-    server.wait_for_termination()
-
-
-if __name__ == "__main__":
-    main()
+# status = StatusCode.UNAVAILABLE
+# "failed to connect to all addresses"

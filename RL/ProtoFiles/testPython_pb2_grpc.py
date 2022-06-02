@@ -4,7 +4,7 @@ import grpc
 import testPython_pb2 as testPython__pb2
 
 
-class SquareRootServiceStub(object):
+class GetInfoStub(object):
   # missing associated documentation comment in .proto file
   pass
 
@@ -14,18 +14,18 @@ class SquareRootServiceStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.squareRoot = channel.unary_unary(
-        '/SquareRootService/squareRoot',
-        request_serializer=testPython__pb2.Number.SerializeToString,
-        response_deserializer=testPython__pb2.Result.FromString,
+    self.GetLevelInfo = channel.unary_unary(
+        '/Test.GetInfo/GetLevelInfo',
+        request_serializer=testPython__pb2.LevelInfoRequest.SerializeToString,
+        response_deserializer=testPython__pb2.LevelInfoReply.FromString,
         )
 
 
-class SquareRootServiceServicer(object):
+class GetInfoServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def squareRoot(self, request, context):
+  def GetLevelInfo(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -33,14 +33,14 @@ class SquareRootServiceServicer(object):
     raise NotImplementedError('Method not implemented!')
 
 
-def add_SquareRootServiceServicer_to_server(servicer, server):
+def add_GetInfoServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'squareRoot': grpc.unary_unary_rpc_method_handler(
-          servicer.squareRoot,
-          request_deserializer=testPython__pb2.Number.FromString,
-          response_serializer=testPython__pb2.Result.SerializeToString,
+      'GetLevelInfo': grpc.unary_unary_rpc_method_handler(
+          servicer.GetLevelInfo,
+          request_deserializer=testPython__pb2.LevelInfoRequest.FromString,
+          response_serializer=testPython__pb2.LevelInfoReply.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'SquareRootService', rpc_method_handlers)
+      'Test.GetInfo', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./testPython.proto
+// protoc -I=. --cpp_out=. test.proto
+// protoc -I=. --grpc_out=. --plugin=protoc-gen-grpc=/home/dkwapisz/grpc/cmake/build/grpc_cpp_plugin test.proto
 
 package Test;
 

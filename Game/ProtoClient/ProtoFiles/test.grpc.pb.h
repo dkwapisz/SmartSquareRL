@@ -35,41 +35,41 @@ class GetInfo final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::Test::LevelInfoReplay* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>> AsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>>(AsyncGetLevelInfoRaw(context, request, cq));
+    virtual ::grpc::Status GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::Test::LevelInfoReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>> AsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>>(AsyncGetLevelInfoRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>> PrepareAsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>>(PrepareAsyncGetLevelInfoRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>> PrepareAsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>>(PrepareAsyncGetLevelInfoRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>* AsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReplay>* PrepareAsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>* AsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Test::LevelInfoReply>* PrepareAsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::Test::LevelInfoReplay* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>> AsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>>(AsyncGetLevelInfoRaw(context, request, cq));
+    ::grpc::Status GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::Test::LevelInfoReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>> AsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>>(AsyncGetLevelInfoRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>> PrepareAsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>>(PrepareAsyncGetLevelInfoRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>> PrepareAsyncGetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>>(PrepareAsyncGetLevelInfoRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response, std::function<void(::grpc::Status)>) override;
-      void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response, std::function<void(::grpc::Status)>) override;
+      void GetLevelInfo(::grpc::ClientContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -81,8 +81,8 @@ class GetInfo final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>* AsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReplay>* PrepareAsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>* AsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Test::LevelInfoReply>* PrepareAsyncGetLevelInfoRaw(::grpc::ClientContext* context, const ::Test::LevelInfoRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetLevelInfo_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -91,7 +91,7 @@ class GetInfo final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status GetLevelInfo(::grpc::ServerContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response);
+    virtual ::grpc::Status GetLevelInfo(::grpc::ServerContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_GetLevelInfo : public BaseClass {
@@ -105,11 +105,11 @@ class GetInfo final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetLevelInfo(::grpc::ServerContext* context, ::Test::LevelInfoRequest* request, ::grpc::ServerAsyncResponseWriter< ::Test::LevelInfoReplay>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetLevelInfo(::grpc::ServerContext* context, ::Test::LevelInfoRequest* request, ::grpc::ServerAsyncResponseWriter< ::Test::LevelInfoReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -121,25 +121,25 @@ class GetInfo final {
    public:
     WithCallbackMethod_GetLevelInfo() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::Test::LevelInfoRequest, ::Test::LevelInfoReplay>(
+          new ::grpc::internal::CallbackUnaryHandler< ::Test::LevelInfoRequest, ::Test::LevelInfoReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReplay* response) { return this->GetLevelInfo(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::Test::LevelInfoRequest* request, ::Test::LevelInfoReply* response) { return this->GetLevelInfo(context, request, response); }));}
     void SetMessageAllocatorFor_GetLevelInfo(
-        ::grpc::MessageAllocator< ::Test::LevelInfoRequest, ::Test::LevelInfoReplay>* allocator) {
+        ::grpc::MessageAllocator< ::Test::LevelInfoRequest, ::Test::LevelInfoReply>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::Test::LevelInfoRequest, ::Test::LevelInfoReplay>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Test::LevelInfoRequest, ::Test::LevelInfoReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_GetLevelInfo() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* GetLevelInfo(
-      ::grpc::CallbackServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_GetLevelInfo<Service > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -155,7 +155,7 @@ class GetInfo final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -172,7 +172,7 @@ class GetInfo final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -195,7 +195,7 @@ class GetInfo final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -210,10 +210,10 @@ class GetInfo final {
     WithStreamedUnaryMethod_GetLevelInfo() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::Test::LevelInfoRequest, ::Test::LevelInfoReplay>(
+          ::Test::LevelInfoRequest, ::Test::LevelInfoReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::Test::LevelInfoRequest, ::Test::LevelInfoReplay>* streamer) {
+                     ::Test::LevelInfoRequest, ::Test::LevelInfoReply>* streamer) {
                        return this->StreamedGetLevelInfo(context,
                          streamer);
                   }));
@@ -222,12 +222,12 @@ class GetInfo final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReplay* /*response*/) override {
+    ::grpc::Status GetLevelInfo(::grpc::ServerContext* /*context*/, const ::Test::LevelInfoRequest* /*request*/, ::Test::LevelInfoReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetLevelInfo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Test::LevelInfoRequest,::Test::LevelInfoReplay>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGetLevelInfo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Test::LevelInfoRequest,::Test::LevelInfoReply>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_GetLevelInfo<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;

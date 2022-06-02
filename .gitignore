@@ -5,6 +5,7 @@
 cmake-build-debug
 cmake-build-debug-mingw
 cmake-build-release-mingw
+cmake-build-release
 
 # External libraries
 gRPC

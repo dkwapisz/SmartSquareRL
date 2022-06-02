@@ -22,9 +22,10 @@ namespace _pbi = _pb::internal;
 
 namespace Test {
 PROTOBUF_CONSTEXPR LevelInfoRequest::LevelInfoRequest(
-    ::_pbi::ConstantInitialized)
-  : playercoins_(0)
-  , levelcoins_(0){}
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.playercoins_)*/0
+  , /*decltype(_impl_.levelcoins_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct LevelInfoRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR LevelInfoRequestDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -34,19 +35,20 @@ struct LevelInfoRequestDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LevelInfoRequestDefaultTypeInternal _LevelInfoRequest_default_instance_;
-PROTOBUF_CONSTEXPR LevelInfoReplay::LevelInfoReplay(
-    ::_pbi::ConstantInitialized)
-  : playercoins_(0)
-  , levelcoins_(0){}
-struct LevelInfoReplayDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR LevelInfoReplayDefaultTypeInternal()
+PROTOBUF_CONSTEXPR LevelInfoReply::LevelInfoReply(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.playercoins_)*/0
+  , /*decltype(_impl_.levelcoins_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct LevelInfoReplyDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR LevelInfoReplyDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~LevelInfoReplayDefaultTypeInternal() {}
+  ~LevelInfoReplyDefaultTypeInternal() {}
   union {
-    LevelInfoReplay _instance;
+    LevelInfoReply _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LevelInfoReplayDefaultTypeInternal _LevelInfoReplay_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LevelInfoReplyDefaultTypeInternal _LevelInfoReply_default_instance_;
 }  // namespace Test
 static ::_pb::Metadata file_level_metadata_test_2eproto[2];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_test_2eproto = nullptr;
@@ -59,38 +61,38 @@ const uint32_t TableStruct_test_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoRequest, playercoins_),
-  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoRequest, levelcoins_),
+  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoRequest, _impl_.playercoins_),
+  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoRequest, _impl_.levelcoins_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReplay, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReply, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReplay, playercoins_),
-  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReplay, levelcoins_),
+  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReply, _impl_.playercoins_),
+  PROTOBUF_FIELD_OFFSET(::Test::LevelInfoReply, _impl_.levelcoins_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Test::LevelInfoRequest)},
-  { 8, -1, -1, sizeof(::Test::LevelInfoReplay)},
+  { 8, -1, -1, sizeof(::Test::LevelInfoReply)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::Test::_LevelInfoRequest_default_instance_._instance,
-  &::Test::_LevelInfoReplay_default_instance_._instance,
+  &::Test::_LevelInfoReply_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_test_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\ntest.proto\022\004Test\";\n\020LevelInfoRequest\022\023"
   "\n\013playerCoins\030\001 \001(\005\022\022\n\nlevelCoins\030\002 \001(\005\""
-  ":\n\017LevelInfoReplay\022\023\n\013playerCoins\030\001 \001(\005\022"
-  "\022\n\nlevelCoins\030\002 \001(\0052J\n\007GetInfo\022\?\n\014GetLev"
-  "elInfo\022\026.Test.LevelInfoRequest\032\025.Test.Le"
-  "velInfoReplay\"\000b\006proto3"
+  "9\n\016LevelInfoReply\022\023\n\013playerCoins\030\001 \001(\005\022\022"
+  "\n\nlevelCoins\030\002 \001(\0052I\n\007GetInfo\022>\n\014GetLeve"
+  "lInfo\022\026.Test.LevelInfoRequest\032\024.Test.Lev"
+  "elInfoReply\"\000b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_test_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_test_2eproto = {
-    false, false, 223, descriptor_table_protodef_test_2eproto,
+    false, false, 221, descriptor_table_protodef_test_2eproto,
     "test.proto",
     &descriptor_table_test_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_test_2eproto::offsets,
@@ -114,23 +116,33 @@ class LevelInfoRequest::_Internal {
 LevelInfoRequest::LevelInfoRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor();
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:Test.LevelInfoRequest)
 }
 LevelInfoRequest::LevelInfoRequest(const LevelInfoRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
+  LevelInfoRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playercoins_){}
+    , decltype(_impl_.levelcoins_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&playercoins_, &from.playercoins_,
-    static_cast<size_t>(reinterpret_cast<char*>(&levelcoins_) -
-    reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
+  ::memcpy(&_impl_.playercoins_, &from._impl_.playercoins_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.levelcoins_) -
+    reinterpret_cast<char*>(&_impl_.playercoins_)) + sizeof(_impl_.levelcoins_));
   // @@protoc_insertion_point(copy_constructor:Test.LevelInfoRequest)
 }
 
-inline void LevelInfoRequest::SharedCtor() {
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&playercoins_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&levelcoins_) -
-    reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
+inline void LevelInfoRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playercoins_){0}
+    , decltype(_impl_.levelcoins_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
 LevelInfoRequest::~LevelInfoRequest() {
@@ -147,7 +159,7 @@ inline void LevelInfoRequest::SharedDtor() {
 }
 
 void LevelInfoRequest::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
+  _impl_._cached_size_.Set(size);
 }
 
 void LevelInfoRequest::Clear() {
@@ -156,9 +168,9 @@ void LevelInfoRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&playercoins_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&levelcoins_) -
-      reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
+  ::memset(&_impl_.playercoins_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.levelcoins_) -
+      reinterpret_cast<char*>(&_impl_.playercoins_)) + sizeof(_impl_.levelcoins_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -171,7 +183,7 @@ const char* LevelInfoRequest::_InternalParse(const char* ptr, ::_pbi::ParseConte
       // int32 playerCoins = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          playercoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.playercoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -179,7 +191,7 @@ const char* LevelInfoRequest::_InternalParse(const char* ptr, ::_pbi::ParseConte
       // int32 levelCoins = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          levelcoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.levelcoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -251,35 +263,31 @@ size_t LevelInfoRequest::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_levelcoins());
   }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LevelInfoRequest::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
     LevelInfoRequest::MergeImpl
 };
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LevelInfoRequest::GetClassData() const { return &_class_data_; }
 
-void LevelInfoRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
-                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-  static_cast<LevelInfoRequest *>(to)->MergeFrom(
-      static_cast<const LevelInfoRequest &>(from));
-}
 
-
-void LevelInfoRequest::MergeFrom(const LevelInfoRequest& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Test.LevelInfoRequest)
-  GOOGLE_DCHECK_NE(&from, this);
+void LevelInfoRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<LevelInfoRequest*>(&to_msg);
+  auto& from = static_cast<const LevelInfoRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Test.LevelInfoRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from._internal_playercoins() != 0) {
-    _internal_set_playercoins(from._internal_playercoins());
+    _this->_internal_set_playercoins(from._internal_playercoins());
   }
   if (from._internal_levelcoins() != 0) {
-    _internal_set_levelcoins(from._internal_levelcoins());
+    _this->_internal_set_levelcoins(from._internal_levelcoins());
   }
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void LevelInfoRequest::CopyFrom(const LevelInfoRequest& from) {
@@ -297,11 +305,11 @@ void LevelInfoRequest::InternalSwap(LevelInfoRequest* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(LevelInfoRequest, levelcoins_)
-      + sizeof(LevelInfoRequest::levelcoins_)
-      - PROTOBUF_FIELD_OFFSET(LevelInfoRequest, playercoins_)>(
-          reinterpret_cast<char*>(&playercoins_),
-          reinterpret_cast<char*>(&other->playercoins_));
+      PROTOBUF_FIELD_OFFSET(LevelInfoRequest, _impl_.levelcoins_)
+      + sizeof(LevelInfoRequest::_impl_.levelcoins_)
+      - PROTOBUF_FIELD_OFFSET(LevelInfoRequest, _impl_.playercoins_)>(
+          reinterpret_cast<char*>(&_impl_.playercoins_),
+          reinterpret_cast<char*>(&other->_impl_.playercoins_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata LevelInfoRequest::GetMetadata() const {
@@ -312,34 +320,44 @@ void LevelInfoRequest::InternalSwap(LevelInfoRequest* other) {
 
 // ===================================================================
 
-class LevelInfoReplay::_Internal {
+class LevelInfoReply::_Internal {
  public:
 };
 
-LevelInfoReplay::LevelInfoReplay(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+LevelInfoReply::LevelInfoReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor();
-  // @@protoc_insertion_point(arena_constructor:Test.LevelInfoReplay)
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Test.LevelInfoReply)
 }
-LevelInfoReplay::LevelInfoReplay(const LevelInfoReplay& from)
+LevelInfoReply::LevelInfoReply(const LevelInfoReply& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
+  LevelInfoReply* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playercoins_){}
+    , decltype(_impl_.levelcoins_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&playercoins_, &from.playercoins_,
-    static_cast<size_t>(reinterpret_cast<char*>(&levelcoins_) -
-    reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
-  // @@protoc_insertion_point(copy_constructor:Test.LevelInfoReplay)
+  ::memcpy(&_impl_.playercoins_, &from._impl_.playercoins_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.levelcoins_) -
+    reinterpret_cast<char*>(&_impl_.playercoins_)) + sizeof(_impl_.levelcoins_));
+  // @@protoc_insertion_point(copy_constructor:Test.LevelInfoReply)
 }
 
-inline void LevelInfoReplay::SharedCtor() {
-::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&playercoins_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&levelcoins_) -
-    reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
+inline void LevelInfoReply::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playercoins_){0}
+    , decltype(_impl_.levelcoins_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
-LevelInfoReplay::~LevelInfoReplay() {
-  // @@protoc_insertion_point(destructor:Test.LevelInfoReplay)
+LevelInfoReply::~LevelInfoReply() {
+  // @@protoc_insertion_point(destructor:Test.LevelInfoReply)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -347,27 +365,27 @@ LevelInfoReplay::~LevelInfoReplay() {
   SharedDtor();
 }
 
-inline void LevelInfoReplay::SharedDtor() {
+inline void LevelInfoReply::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
 }
 
-void LevelInfoReplay::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
+void LevelInfoReply::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
 }
 
-void LevelInfoReplay::Clear() {
-// @@protoc_insertion_point(message_clear_start:Test.LevelInfoReplay)
+void LevelInfoReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:Test.LevelInfoReply)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&playercoins_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&levelcoins_) -
-      reinterpret_cast<char*>(&playercoins_)) + sizeof(levelcoins_));
+  ::memset(&_impl_.playercoins_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.levelcoins_) -
+      reinterpret_cast<char*>(&_impl_.playercoins_)) + sizeof(_impl_.levelcoins_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* LevelInfoReplay::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* LevelInfoReply::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
@@ -376,7 +394,7 @@ const char* LevelInfoReplay::_InternalParse(const char* ptr, ::_pbi::ParseContex
       // int32 playerCoins = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          playercoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.playercoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -384,7 +402,7 @@ const char* LevelInfoReplay::_InternalParse(const char* ptr, ::_pbi::ParseContex
       // int32 levelCoins = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          levelcoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.levelcoins_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -412,9 +430,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* LevelInfoReplay::_InternalSerialize(
+uint8_t* LevelInfoReply::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Test.LevelInfoReplay)
+  // @@protoc_insertion_point(serialize_to_array_start:Test.LevelInfoReply)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -434,12 +452,12 @@ uint8_t* LevelInfoReplay::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Test.LevelInfoReplay)
+  // @@protoc_insertion_point(serialize_to_array_end:Test.LevelInfoReply)
   return target;
 }
 
-size_t LevelInfoReplay::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Test.LevelInfoReplay)
+size_t LevelInfoReply::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Test.LevelInfoReply)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -456,60 +474,56 @@ size_t LevelInfoReplay::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_levelcoins());
   }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LevelInfoReplay::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-    LevelInfoReplay::MergeImpl
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData LevelInfoReply::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    LevelInfoReply::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LevelInfoReplay::GetClassData() const { return &_class_data_; }
-
-void LevelInfoReplay::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
-                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-  static_cast<LevelInfoReplay *>(to)->MergeFrom(
-      static_cast<const LevelInfoReplay &>(from));
-}
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*LevelInfoReply::GetClassData() const { return &_class_data_; }
 
 
-void LevelInfoReplay::MergeFrom(const LevelInfoReplay& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Test.LevelInfoReplay)
-  GOOGLE_DCHECK_NE(&from, this);
+void LevelInfoReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<LevelInfoReply*>(&to_msg);
+  auto& from = static_cast<const LevelInfoReply&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Test.LevelInfoReply)
+  GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from._internal_playercoins() != 0) {
-    _internal_set_playercoins(from._internal_playercoins());
+    _this->_internal_set_playercoins(from._internal_playercoins());
   }
   if (from._internal_levelcoins() != 0) {
-    _internal_set_levelcoins(from._internal_levelcoins());
+    _this->_internal_set_levelcoins(from._internal_levelcoins());
   }
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void LevelInfoReplay::CopyFrom(const LevelInfoReplay& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Test.LevelInfoReplay)
+void LevelInfoReply::CopyFrom(const LevelInfoReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Test.LevelInfoReply)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool LevelInfoReplay::IsInitialized() const {
+bool LevelInfoReply::IsInitialized() const {
   return true;
 }
 
-void LevelInfoReplay::InternalSwap(LevelInfoReplay* other) {
+void LevelInfoReply::InternalSwap(LevelInfoReply* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(LevelInfoReplay, levelcoins_)
-      + sizeof(LevelInfoReplay::levelcoins_)
-      - PROTOBUF_FIELD_OFFSET(LevelInfoReplay, playercoins_)>(
-          reinterpret_cast<char*>(&playercoins_),
-          reinterpret_cast<char*>(&other->playercoins_));
+      PROTOBUF_FIELD_OFFSET(LevelInfoReply, _impl_.levelcoins_)
+      + sizeof(LevelInfoReply::_impl_.levelcoins_)
+      - PROTOBUF_FIELD_OFFSET(LevelInfoReply, _impl_.playercoins_)>(
+          reinterpret_cast<char*>(&_impl_.playercoins_),
+          reinterpret_cast<char*>(&other->_impl_.playercoins_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata LevelInfoReplay::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata LevelInfoReply::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_test_2eproto_getter, &descriptor_table_test_2eproto_once,
       file_level_metadata_test_2eproto[1]);
@@ -522,9 +536,9 @@ template<> PROTOBUF_NOINLINE ::Test::LevelInfoRequest*
 Arena::CreateMaybeMessage< ::Test::LevelInfoRequest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Test::LevelInfoRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Test::LevelInfoReplay*
-Arena::CreateMaybeMessage< ::Test::LevelInfoReplay >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::Test::LevelInfoReplay >(arena);
+template<> PROTOBUF_NOINLINE ::Test::LevelInfoReply*
+Arena::CreateMaybeMessage< ::Test::LevelInfoReply >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Test::LevelInfoReply >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -1,14 +1,34 @@
 cmake_minimum_required(VERSION 3.8)
 project(SmartSquareRL)
 
-if (MINGW)
-    add_definitions(-D_WIN32_WINNT=0x600)
-endif()
+#find_package(SFML COMPONENTS system window graphics REQUIRED)
 
-# SFML
-set(SFML_STATIC_LIBRARIES TRUE)
-set(SFML_DIR C:/SFML/lib/cmake/SFML)
-find_package(SFML COMPONENTS system window graphics REQUIRED)
+include(gRPC.cmake)
+
+get_filename_component(testProto "Game/ProtoClient/ProtoFiles/test.proto" ABSOLUTE)
+get_filename_component(testProtoPath "${testProto}" PATH)
+set(testProtoSrcs "Game/ProtoClient/ProtoFiles/test.pb.cc")
+set(testProtoHdrs "Game/ProtoClient/ProtoFiles/test.pb.h")
+set(testGrpcSrcs "Game/ProtoClient/ProtoFiles/test.grpc.pb.cc")
+set(testGrpcHdrs "Game/ProtoClient/ProtoFiles/test.grpc.pb.h")
+
+#add_custom_command(
+#        OUTPUT "${testProtoSrcs}" "${testProtoHdrs}" "${testGrpcSrcs}" "${testGrpcHdrs}"
+#        COMMAND ${_PROTOBUF_PROTOC}
+#        ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
+#        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+#        -I "${testProtoPath}"
+#        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+#        "${testProto}"
+#        DEPENDS "${testProto}")
+
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+
+add_library(gRPC_Client
+        ${testProtoSrcs}
+        ${testProtoHdrs}
+        ${testGrpcSrcs}
+        ${testGrpcHdrs})
 
 add_executable(
         SmartSquareRL Game/GameFiles/main.cpp
@@ -23,20 +43,13 @@ add_executable(
         Game/GameFiles/GameObjects/CircleObject.cpp Game/GameFiles/GameObjects/CircleObject.hpp
         Game/GameFiles/GameObjects/MovingDanger.cpp Game/GameFiles/GameObjects/MovingDanger.hpp
         Game/GameFiles/GameObjects/Finish.cpp Game/GameFiles/GameObjects/Finish.hpp
-        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/ProtoClient.cpp
-)
+        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/testProtoClient.cpp)
 
-find_package(gRPC CONFIG REQUIRED)
-if(gRPC_FOUND)
-    include_directories(gRPC::grpc++)
-endif()
-
-find_package(Protobuf CONFIG REQUIRED)
-if(Protobuf_FOUND)
-    include_directories(${Protobuf_INCLUDE_DIRS})
-    include_directories(${CMAKE_CURRENT_BINARY_DIR})
-endif()
-
-target_link_libraries(SmartSquareRL sfml-system sfml-window sfml-graphics)
-target_link_libraries(SmartSquareRL gRPC::grpc++)
-target_link_libraries(SmartSquareRL ${Protobuf_LIBRARIES})
+target_link_libraries(SmartSquareRL
+        gRPC_Client
+        sfml-system
+        sfml-window
+        sfml-graphics
+        ${_REFLECTION}
+        ${_GRPC_GRPCPP}
+        ${_PROTOBUF_LIBPROTOBUF})

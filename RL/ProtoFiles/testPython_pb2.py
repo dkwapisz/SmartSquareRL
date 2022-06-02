@@ -16,25 +16,32 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='testPython.proto',
-  package='',
+  package='Test',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x10testPython.proto\"\x17\n\x06Number\x12\r\n\x05input\x18\x01 \x01(\x05\"\x19\n\x06Result\x12\x0f\n\x07resultA\x18\x01 \x01(\x05\x32\x33\n\x11SquareRootService\x12\x1e\n\nsquareRoot\x12\x07.Number\x1a\x07.Resultb\x06proto3')
+  serialized_pb=_b('\n\x10testPython.proto\x12\x04Test\";\n\x10LevelInfoRequest\x12\x13\n\x0bplayerCoins\x18\x01 \x01(\x05\x12\x12\n\nlevelCoins\x18\x02 \x01(\x05\"9\n\x0eLevelInfoReply\x12\x13\n\x0bplayerCoins\x18\x01 \x01(\x05\x12\x12\n\nlevelCoins\x18\x02 \x01(\x05\x32I\n\x07GetInfo\x12>\n\x0cGetLevelInfo\x12\x16.Test.LevelInfoRequest\x1a\x14.Test.LevelInfoReply\"\x00\x62\x06proto3')
 )
 
 
 
 
-_NUMBER = _descriptor.Descriptor(
-  name='Number',
-  full_name='Number',
+_LEVELINFOREQUEST = _descriptor.Descriptor(
+  name='LevelInfoRequest',
+  full_name='Test.LevelInfoRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='input', full_name='Number.input', index=0,
+      name='playerCoins', full_name='Test.LevelInfoRequest.playerCoins', index=0,
       number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='levelCoins', full_name='Test.LevelInfoRequest.levelCoins', index=1,
+      number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -51,21 +58,28 @@ _NUMBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20,
-  serialized_end=43,
+  serialized_start=26,
+  serialized_end=85,
 )
 
 
-_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='Result',
+_LEVELINFOREPLY = _descriptor.Descriptor(
+  name='LevelInfoReply',
+  full_name='Test.LevelInfoReply',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='resultA', full_name='Result.resultA', index=0,
+      name='playerCoins', full_name='Test.LevelInfoReply.playerCoins', index=0,
       number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='levelCoins', full_name='Test.LevelInfoReply.levelCoins', index=1,
+      number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -82,51 +96,51 @@ _RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=45,
-  serialized_end=70,
+  serialized_start=87,
+  serialized_end=144,
 )
 
-DESCRIPTOR.message_types_by_name['Number'] = _NUMBER
-DESCRIPTOR.message_types_by_name['Result'] = _RESULT
+DESCRIPTOR.message_types_by_name['LevelInfoRequest'] = _LEVELINFOREQUEST
+DESCRIPTOR.message_types_by_name['LevelInfoReply'] = _LEVELINFOREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Number = _reflection.GeneratedProtocolMessageType('Number', (_message.Message,), dict(
-  DESCRIPTOR = _NUMBER,
+LevelInfoRequest = _reflection.GeneratedProtocolMessageType('LevelInfoRequest', (_message.Message,), dict(
+  DESCRIPTOR = _LEVELINFOREQUEST,
   __module__ = 'testPython_pb2'
-  # @@protoc_insertion_point(class_scope:Number)
+  # @@protoc_insertion_point(class_scope:Test.LevelInfoRequest)
   ))
-_sym_db.RegisterMessage(Number)
+_sym_db.RegisterMessage(LevelInfoRequest)
 
-Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-  DESCRIPTOR = _RESULT,
+LevelInfoReply = _reflection.GeneratedProtocolMessageType('LevelInfoReply', (_message.Message,), dict(
+  DESCRIPTOR = _LEVELINFOREPLY,
   __module__ = 'testPython_pb2'
-  # @@protoc_insertion_point(class_scope:Result)
+  # @@protoc_insertion_point(class_scope:Test.LevelInfoReply)
   ))
-_sym_db.RegisterMessage(Result)
+_sym_db.RegisterMessage(LevelInfoReply)
 
 
 
-_SQUAREROOTSERVICE = _descriptor.ServiceDescriptor(
-  name='SquareRootService',
-  full_name='SquareRootService',
+_GETINFO = _descriptor.ServiceDescriptor(
+  name='GetInfo',
+  full_name='Test.GetInfo',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=72,
-  serialized_end=123,
+  serialized_start=146,
+  serialized_end=219,
   methods=[
   _descriptor.MethodDescriptor(
-    name='squareRoot',
-    full_name='SquareRootService.squareRoot',
+    name='GetLevelInfo',
+    full_name='Test.GetInfo.GetLevelInfo',
     index=0,
     containing_service=None,
-    input_type=_NUMBER,
-    output_type=_RESULT,
+    input_type=_LEVELINFOREQUEST,
+    output_type=_LEVELINFOREPLY,
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_SQUAREROOTSERVICE)
+_sym_db.RegisterServiceDescriptor(_GETINFO)
 
-DESCRIPTOR.services_by_name['SquareRootService'] = _SQUAREROOTSERVICE
+DESCRIPTOR.services_by_name['GetInfo'] = _GETINFO
 
 # @@protoc_insertion_point(module_scope)

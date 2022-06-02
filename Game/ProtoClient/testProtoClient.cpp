@@ -1,6 +1,6 @@
 #include <grpc/support/log.h>
 #include <grpcpp/grpcpp.h>
-#include "../ProtoFiles/test.grpc.pb.h"
+#include "ProtoFiles/test.grpc.pb.h"
 
 #include <iostream>
 #include <memory>
@@ -13,7 +13,7 @@ using grpc::CompletionQueue;
 using grpc::Status;
 
 using Test::GetInfo;
-using Test::LevelInfoReplay;
+using Test::LevelInfoReply;
 using Test::LevelInfoRequest;
 
 
@@ -66,7 +66,7 @@ private:
 
     struct AsyncClientCall {
         // Container for the data we expect from the server.
-        LevelInfoReplay reply;
+        LevelInfoReply reply;
 
         // Context for the client. It could be used to convey extra information to
         // the server and/or tweak certain RPC behaviors.
@@ -75,7 +75,7 @@ private:
         // Storage for the status of the RPC upon completion.
         Status status;
 
-        std::unique_ptr<ClientAsyncResponseReader<LevelInfoReplay>> response_reader;
+        std::unique_ptr<ClientAsyncResponseReader<LevelInfoReply>> response_reader;
     };
 
     // Out of the passed in Channel comes the stub, stored here, our view of the
@@ -93,7 +93,7 @@ int main() {
     // localhost at port 50051). We indicate that the channel isn't authenticated
     // (use of InsecureChannelCredentials()).
     TestClient getLevelInfo(grpc::CreateChannel(
-            "localhost:50051", grpc::InsecureChannelCredentials()));
+            "localhost:50052", grpc::InsecureChannelCredentials()));
 
     // Spawn reader thread that loops indefinitely
     std::thread thread_ = std::thread(&TestClient::AsyncCompleteRpc, &getLevelInfo);

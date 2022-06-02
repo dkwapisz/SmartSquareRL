@@ -1,34 +1,24 @@
 cmake_minimum_required(VERSION 3.8)
 project(SmartSquareRL)
 
-#find_package(SFML COMPONENTS system window graphics REQUIRED)
+find_package(SFML COMPONENTS system window graphics REQUIRED)
 
 include(gRPC.cmake)
 
-get_filename_component(testProto "Game/ProtoClient/ProtoFiles/test.proto" ABSOLUTE)
-get_filename_component(testProtoPath "${testProto}" PATH)
-set(testProtoSrcs "Game/ProtoClient/ProtoFiles/test.pb.cc")
-set(testProtoHdrs "Game/ProtoClient/ProtoFiles/test.pb.h")
-set(testGrpcSrcs "Game/ProtoClient/ProtoFiles/test.grpc.pb.cc")
-set(testGrpcHdrs "Game/ProtoClient/ProtoFiles/test.grpc.pb.h")
-
-#add_custom_command(
-#        OUTPUT "${testProtoSrcs}" "${testProtoHdrs}" "${testGrpcSrcs}" "${testGrpcHdrs}"
-#        COMMAND ${_PROTOBUF_PROTOC}
-#        ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-#        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-#        -I "${testProtoPath}"
-#        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-#        "${testProto}"
-#        DEPENDS "${testProto}")
+get_filename_component(gameProto "Game/ProtoClient/ProtoFiles/game.proto" ABSOLUTE)
+get_filename_component(gameProtoPath "${gameProto}" PATH)
+set(gameProtoSrcs "Game/ProtoClient/ProtoFiles/game.pb.cc")
+set(gameProtoHdrs "Game/ProtoClient/ProtoFiles/game.pb.h")
+set(gameGrpcSrcs "Game/ProtoClient/ProtoFiles/game.grpc.pb.cc")
+set(gameGrpcHdrs "Game/ProtoClient/ProtoFiles/game.grpc.pb.h")
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 add_library(gRPC_Client
-        ${testProtoSrcs}
-        ${testProtoHdrs}
-        ${testGrpcSrcs}
-        ${testGrpcHdrs})
+        ${gameProtoSrcs}
+        ${gameProtoHdrs}
+        ${gameGrpcSrcs}
+        ${gameGrpcHdrs})
 
 add_executable(
         SmartSquareRL Game/GameFiles/main.cpp

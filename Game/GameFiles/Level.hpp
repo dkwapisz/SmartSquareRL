@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <fstream>
+#include <cmath>
 
 class Level {
 
@@ -35,6 +36,13 @@ private:
     int playerCoinsCount;
     int levelNumber;
     bool levelFinished;
+
+    bool closestObstacleBox;
+    char closestObstacle;
+    char closestCoin;
+    char closestEnemy;
+    char finishDirection;
+
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
     void initializeGameObjects();
@@ -42,6 +50,7 @@ private:
     bool checkCollision();
     void resetLevel();
     void checkDangerCollision(MovingDanger *movingDanger);
+    void calculatePlayerDistance();
 
 public:
     Level();
@@ -61,6 +70,15 @@ public:
     int getPlayerCoinsCount() const;
     int getLevelNumber() const;
     int getMapsCount() const;
+
+    // gRPC message
+    bool isClosestObstacleBox();
+    int32_t getCoinsNeeded();
+    char getClosestObstacle();
+    char getClosestCoin();
+    char getClosestEnemy();
+    char getFinishDirection();
+    // --------
 };
 
 

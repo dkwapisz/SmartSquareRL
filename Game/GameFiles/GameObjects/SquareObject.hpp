@@ -13,8 +13,10 @@ public:
     SquareObject(sf::RectangleShape* objectShape, float posX, float posY);
 
     sf::FloatRect getBounds() const;
-
     void render(sf::RenderTarget &target);
+
+    float getCenterPosX() const;
+    float getCenterPosY() const;
 };
 
 

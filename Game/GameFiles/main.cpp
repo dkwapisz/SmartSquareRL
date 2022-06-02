@@ -9,12 +9,12 @@ void runGame() {
     game.run();
 }
 
-//int main() {
-//    std::thread th1(runGame);
-//    //std::thread th2();
-//
-//    th1.join();
-//    //th2.join();
-//
-//    return 0;
-//}
+int main() {
+    std::thread th1(runGame);
+    //std::thread th2();
+
+    th1.join();
+    //th2.join();
+
+    return 0;
+}

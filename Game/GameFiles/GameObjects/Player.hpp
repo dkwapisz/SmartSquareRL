@@ -36,6 +36,8 @@ public:
     void resetPosition();
     float getPosX() const;
     float getPosY() const;
+    float getCenterPosX() const;
+    float getCenterPosY() const;
     void setPosition(float positionX, float positionY);
     int getDeathsCount() const;
     void increaseDeathCount();

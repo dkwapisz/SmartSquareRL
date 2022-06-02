@@ -69,6 +69,14 @@ float Player::getPosY() const {
     return this -> playerShape.getPosition().y;
 }
 
+float Player::getCenterPosX() const {
+    return this -> playerShape.getPosition().x + playerShape.getSize().x / 2;
+}
+
+float Player::getCenterPosY() const {
+    return this -> playerShape.getPosition().y + playerShape.getSize().y / 2;
+}
+
 void Player::setPosition(float positionX, float positionY) {
     this -> playerShape.setPosition(positionX, positionY);
 }

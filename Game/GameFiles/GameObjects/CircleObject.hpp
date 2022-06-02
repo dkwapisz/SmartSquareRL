@@ -15,7 +15,8 @@ public:
     sf::FloatRect getBounds() const;
 
     void render(sf::RenderTarget &target);
+    float getCenterPosX() const;
+    float getCenterPosY() const;
 };
-
 
 #endif //CIRCLEOBJECT_HPP

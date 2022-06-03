@@ -15,7 +15,7 @@ class ExchangeGameStateStub(object):
       channel: A grpc.Channel.
     """
     self.Exchange = channel.unary_unary(
-        '/Game.ExchangeGameState/Exchange',
+        '/GameMessage.ExchangeGameState/Exchange',
         request_serializer=game__pb2.GameState.SerializeToString,
         response_deserializer=game__pb2.Action.FromString,
         )
@@ -42,5 +42,5 @@ def add_ExchangeGameStateServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'Game.ExchangeGameState', rpc_method_handlers)
+      'GameMessage.ExchangeGameState', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

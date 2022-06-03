@@ -19,10 +19,10 @@
 #include <grpcpp/impl/codegen/server_context.h>
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
-namespace Game {
+namespace GameMessage {
 
 static const char* ExchangeGameState_method_names[] = {
-  "/Game.ExchangeGameState/Exchange",
+  "/GameMessage.ExchangeGameState/Exchange",
 };
 
 std::unique_ptr< ExchangeGameState::Stub> ExchangeGameState::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -35,23 +35,23 @@ ExchangeGameState::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& 
   : channel_(channel), rpcmethod_Exchange_(ExchangeGameState_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status ExchangeGameState::Stub::Exchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::Game::Action* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::Game::GameState, ::Game::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Exchange_, context, request, response);
+::grpc::Status ExchangeGameState::Stub::Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::GameMessage::Action* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::GameMessage::GameState, ::GameMessage::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Exchange_, context, request, response);
 }
 
-void ExchangeGameState::Stub::async::Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::Game::GameState, ::Game::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Exchange_, context, request, response, std::move(f));
+void ExchangeGameState::Stub::async::Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::GameMessage::GameState, ::GameMessage::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Exchange_, context, request, response, std::move(f));
 }
 
-void ExchangeGameState::Stub::async::Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, ::grpc::ClientUnaryReactor* reactor) {
+void ExchangeGameState::Stub::async::Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Exchange_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::Game::Action>* ExchangeGameState::Stub::PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Game::Action, ::Game::GameState, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Exchange_, context, request);
+::grpc::ClientAsyncResponseReader< ::GameMessage::Action>* ExchangeGameState::Stub::PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::GameMessage::Action, ::GameMessage::GameState, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Exchange_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::Game::Action>* ExchangeGameState::Stub::AsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::GameMessage::Action>* ExchangeGameState::Stub::AsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncExchangeRaw(context, request, cq);
   result->StartCall();
@@ -62,11 +62,11 @@ ExchangeGameState::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       ExchangeGameState_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< ExchangeGameState::Service, ::Game::GameState, ::Game::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< ExchangeGameState::Service, ::GameMessage::GameState, ::GameMessage::Action, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](ExchangeGameState::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::Game::GameState* req,
-             ::Game::Action* resp) {
+             const ::GameMessage::GameState* req,
+             ::GameMessage::Action* resp) {
                return service->Exchange(ctx, req, resp);
              }, this)));
 }
@@ -74,7 +74,7 @@ ExchangeGameState::Service::Service() {
 ExchangeGameState::Service::~Service() {
 }
 
-::grpc::Status ExchangeGameState::Service::Exchange(::grpc::ServerContext* context, const ::Game::GameState* request, ::Game::Action* response) {
+::grpc::Status ExchangeGameState::Service::Exchange(::grpc::ServerContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -82,5 +82,5 @@ ExchangeGameState::Service::~Service() {
 }
 
 
-}  // namespace Game
+}  // namespace GameMessage
 

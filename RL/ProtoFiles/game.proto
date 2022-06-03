@@ -2,7 +2,7 @@ syntax = "proto3";
 
 // python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./game.proto
 
-package Game;
+package GameMessage;
 
 service ExchangeGameState {
     rpc Exchange (GameState) returns (Action) {}

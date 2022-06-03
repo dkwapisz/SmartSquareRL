@@ -7,6 +7,8 @@ cmake-build-debug-mingw
 cmake-build-release-mingw
 cmake-build-release
 
+RL/.idea
+
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml

@@ -1,8 +1,5 @@
 #include "Level.hpp"
 
-#include <cmath>
-
-
 Level::Level() = default;
 
 Level::Level(int levelNumber) {
@@ -10,6 +7,11 @@ Level::Level(int levelNumber) {
     this -> initializeLevelAttributes(levelNumber);
     this -> initializeGameObjects();
     this -> generateMap();
+
+    closestCoinDir = 'N';
+    closestEnemyDir = 'N';
+    closestObstacleDir = 'N';
+    finishDir = 'N';
 }
 
 Level::~Level() {
@@ -300,7 +302,6 @@ void Level::updateBullets() {
 }
 
 void Level::updateDangerMovement() {
-    calculatePlayerDistance();
     for (auto *movingDanger : this -> movingDangers) {
         checkDangerCollision(movingDanger);
         movingDanger -> move();
@@ -381,11 +382,18 @@ int Level::getMapsCount() const {
     return (int) mapPath.size();
 }
 
-void Level::calculatePlayerDistance() {
+void Level::calculateClosestObjectsDir() {
+    calculateClosestObstacleDir();
+    calculateClosestEnemyDir();
+    calculateClosestCoinDir();
+    calculateFinishDirectionDir();
+}
+
+void Level::calculateClosestObstacleDir() {
     float playerDistanceToWall = 99999999.f;
-    float tempDistanceWall = 0.f;
+    float tempDistanceWall;
     float playerDistanceToBox = 99999999.f;
-    float tempDistanceBox = 0.f;
+    float tempDistanceBox;
 
     Wall closestWall;
     Box closestBox;
@@ -401,15 +409,19 @@ void Level::calculatePlayerDistance() {
         }
     }
 
-    for (Box *box : boxes) {
-        tempDistanceBox = std::sqrt(
-                powf((player -> getCenterPosX() - box -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - box -> getCenterPosY()), 2.f));
+    if (!boxes.empty()) {
+        for (Box *box : boxes) {
+            tempDistanceBox = std::sqrt(
+                    powf((player -> getCenterPosX() - box -> getCenterPosX()), 2.f) +
+                    powf((player -> getCenterPosY() - box -> getCenterPosY()), 2.f));
 
-        if (playerDistanceToBox > tempDistanceBox) {
-            playerDistanceToBox = tempDistanceBox;
-            closestBox = *box;
+            if (playerDistanceToBox > tempDistanceBox) {
+                playerDistanceToBox = tempDistanceBox;
+                closestBox = *box;
+            }
         }
+    } else {
+        playerDistanceToBox = 99999999.f;
     }
 
     float dirVecX;
@@ -423,42 +435,181 @@ void Level::calculatePlayerDistance() {
 
         if (std::abs(dirVecX) <= std::abs(dirVecY)) {
             if (dirVecY >= 0) {
-                closestObstacle = 'D';
+                closestObstacleDir = 'D';
             } else {
-                closestObstacle = 'U';
+                closestObstacleDir = 'U';
             }
         } else {
             if (dirVecX >= 0) {
-                closestObstacle = 'R';
+                closestObstacleDir = 'R';
             } else {
-                closestObstacle = 'L';
+                closestObstacleDir = 'L';
             }
         }
     } else {
         closestObstacleBox = false;
-
-        std::cout << "closeX: " << closestWall.getCenterPosX() << "\n";
-        std::cout << "closeY: " << closestWall.getCenterPosY() << "\n";
 
         dirVecX = closestWall.getCenterPosX() - player -> getCenterPosX();
         dirVecY = closestWall.getCenterPosY() - player -> getCenterPosY();
 
         if (std::abs(dirVecX) <= std::abs(dirVecY)) {
             if (dirVecY >= 0) {
-                closestObstacle = 'D';
+                closestObstacleDir = 'D';
             } else {
-                closestObstacle = 'U';
+                closestObstacleDir = 'U';
             }
         } else {
             if (dirVecX >= 0) {
-                closestObstacle = 'R';
+                closestObstacleDir = 'R';
             } else {
-                closestObstacle = 'L';
+                closestObstacleDir = 'L';
             }
         }
     }
+}
 
-    // TODO Closest coin, closest enemy, finish direction
+void Level::calculateClosestEnemyDir() {
+    float playerDistanceToStaticDanger = 99999999.f;
+    float tempDistanceStaticDanger;
+    float playerDistanceToMovingDanger = 99999999.f;
+    float tempDistanceMovingDanger;
+
+    StaticDanger closestStaticDanger;
+    MovingDanger closestMovingDanger;
+
+    for (StaticDanger *staticDanger : staticDangers) {
+        tempDistanceStaticDanger = std::sqrt(
+                powf((player -> getCenterPosX() - staticDanger -> getCenterPosX()), 2.f) +
+                powf((player -> getCenterPosY() - staticDanger -> getCenterPosY()), 2.f));
+
+        if (playerDistanceToStaticDanger > tempDistanceStaticDanger) {
+            playerDistanceToStaticDanger = tempDistanceStaticDanger;
+            closestStaticDanger = *staticDanger;
+        }
+    }
+
+    for (MovingDanger *movingDanger : movingDangers) {
+        tempDistanceMovingDanger = std::sqrt(
+                powf((player -> getCenterPosX() - movingDanger -> getCenterPosX()), 2.f) +
+                powf((player -> getCenterPosY() - movingDanger -> getCenterPosY()), 2.f));
+
+        if (playerDistanceToMovingDanger > tempDistanceMovingDanger) {
+            playerDistanceToMovingDanger = tempDistanceMovingDanger;
+            closestMovingDanger = *movingDanger;
+        }
+    }
+
+    float dirVecX;
+    float dirVecY;
+
+    if (playerDistanceToStaticDanger <= playerDistanceToMovingDanger) {
+        dirVecX = closestStaticDanger.getCenterPosX() - player -> getCenterPosX();
+        dirVecY = closestStaticDanger.getCenterPosY() - player -> getCenterPosY();
+
+        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
+            if (dirVecY >= 0) {
+                closestEnemyDir = 'D';
+            } else {
+                closestEnemyDir = 'U';
+            }
+        } else {
+            if (dirVecX >= 0) {
+                closestEnemyDir = 'R';
+            } else {
+                closestEnemyDir = 'L';
+            }
+        }
+    } else {
+        dirVecX = closestMovingDanger.getCenterPosX() - player -> getCenterPosX();
+        dirVecY = closestMovingDanger.getCenterPosY() - player -> getCenterPosY();
+
+        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
+            if (dirVecY >= 0) {
+                closestEnemyDir = 'D';
+            } else {
+                closestEnemyDir = 'U';
+            }
+        } else {
+            if (dirVecX >= 0) {
+                closestEnemyDir = 'R';
+            } else {
+                closestEnemyDir = 'L';
+            }
+        }
+    }
+}
+
+void Level::calculateClosestCoinDir() {
+    float playerDistanceToCoin = 99999999.f;
+    float tempDistanceCoin;
+
+    Coin closestCoin;
+
+    if (coins.empty()) {
+        closestCoinDir = 'N';
+        return;
+    }
+
+    for (Coin *coin : coins) {
+        tempDistanceCoin = std::sqrt(
+                powf((player -> getCenterPosX() - coin -> getCenterPosX()), 2.f) +
+                powf((player -> getCenterPosY() - coin -> getCenterPosY()), 2.f));
+
+        if (playerDistanceToCoin > tempDistanceCoin) {
+            playerDistanceToCoin = tempDistanceCoin;
+            closestCoin = *coin;
+        }
+    }
+
+    float dirVecX = closestCoin.getCenterPosX() - player -> getCenterPosX();
+    float dirVecY = closestCoin.getCenterPosY() - player -> getCenterPosY();
+    if (std::abs(dirVecX) <= std::abs(dirVecY)) {
+        if (dirVecY >= 0) {
+            closestCoinDir = 'D';
+        } else {
+            closestCoinDir = 'U';
+        }
+    } else {
+        if (dirVecX >= 0) {
+            closestCoinDir = 'R';
+        } else {
+            closestCoinDir = 'L';
+        }
+    }
+}
+
+void Level::calculateFinishDirectionDir() {
+    float playerDistanceToFinish = 99999999.f;
+    float tempDistanceFinish;
+
+    Finish closestFinish;
+
+    for (Finish *finish : finishes) {
+        tempDistanceFinish = std::sqrt(
+                powf((player -> getCenterPosX() - finish -> getCenterPosX()), 2.f) +
+                powf((player -> getCenterPosY() - finish -> getCenterPosY()), 2.f));
+
+        if (playerDistanceToFinish > tempDistanceFinish) {
+            playerDistanceToFinish = tempDistanceFinish;
+            closestFinish = *finish;
+        }
+    }
+
+    float dirVecX = closestFinish.getCenterPosX() - player -> getCenterPosX();
+    float dirVecY = closestFinish.getCenterPosY() - player -> getCenterPosY();
+    if (std::abs(dirVecX) <= std::abs(dirVecY)) {
+        if (dirVecY >= 0) {
+            finishDir = 'D';
+        } else {
+            finishDir = 'U';
+        }
+    } else {
+        if (dirVecX >= 0) {
+            finishDir = 'R';
+        } else {
+            finishDir = 'L';
+        }
+    }
 }
 
 bool Level::isClosestObstacleBox() {
@@ -469,19 +620,19 @@ int32_t Level::getCoinsNeeded() {
     return coinsCount - playerCoinsCount;
 }
 
-char Level::getClosestObstacle() {
-    return closestObstacle;
+char Level::getClosestObstacleDir() {
+    return closestObstacleDir;
 }
 
-char Level::getClosestCoin() {
-    return closestCoin;
+char Level::getClosestCoinDir() {
+    return closestCoinDir;
 }
 
-char Level::getClosestEnemy() {
-    return closestEnemy;
+char Level::getClosestEnemyDir() {
+    return closestEnemyDir;
 }
 
-char Level::getFinishDirection() {
-    return finishDirection;
+char Level::getFinishDirectionDir() {
+    return finishDir;
 }
 

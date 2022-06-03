@@ -38,10 +38,10 @@ private:
     bool levelFinished;
 
     bool closestObstacleBox;
-    char closestObstacle;
-    char closestCoin;
-    char closestEnemy;
-    char finishDirection;
+    char closestObstacleDir;
+    char closestCoinDir;
+    char closestEnemyDir;
+    char finishDir;
 
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
@@ -50,7 +50,11 @@ private:
     bool checkCollision();
     void resetLevel();
     void checkDangerCollision(MovingDanger *movingDanger);
-    void calculatePlayerDistance();
+
+    void calculateClosestObstacleDir();
+    void calculateClosestEnemyDir();
+    void calculateClosestCoinDir();
+    void calculateFinishDirectionDir();
 
 public:
     Level();
@@ -74,11 +78,12 @@ public:
     // gRPC message
     bool isClosestObstacleBox();
     int32_t getCoinsNeeded();
-    char getClosestObstacle();
-    char getClosestCoin();
-    char getClosestEnemy();
-    char getFinishDirection();
+    char getClosestObstacleDir();
+    char getClosestCoinDir();
+    char getClosestEnemyDir();
+    char getFinishDirectionDir();
     // --------
+    void calculateClosestObjectsDir();
 };
 
 

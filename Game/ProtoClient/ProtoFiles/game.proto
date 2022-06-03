@@ -4,7 +4,7 @@ syntax = "proto3";
 // /usr/local/bin/protoc -I=. --grpc_out=. --plugin=protoc-gen-grpc=/home/dkwapisz/grpc/cmake/build/grpc_cpp_plugin game.proto
 
 
-package Game;
+package GameMessage;
 
 service ExchangeGameState {
   rpc Exchange (GameState) returns (Action) {}

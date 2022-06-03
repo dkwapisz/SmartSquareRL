@@ -16,17 +16,17 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='game.proto',
-  package='Game',
+  package='GameMessage',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ngame.proto\x12\x04Game\"\xe6\x02\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12\x38\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32\x1f.Game.GameState.ObjectDirection\x12\x34\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32\x1f.Game.GameState.ObjectDirection\x12\x35\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32\x1f.Game.GameState.ObjectDirection\x12\x38\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32\x1f.Game.GameState.ObjectDirection\"E\n\x0fObjectDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\xb9\x01\n\x06\x41\x63tion\x12\x33\n\rmoveDirection\x18\x01 \x01(\x0e\x32\x1c.Game.Action.ActionDirection\x12\x33\n\rshotDirection\x18\x02 \x01(\x0e\x32\x1c.Game.Action.ActionDirection\"E\n\x0f\x41\x63tionDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x32@\n\x11\x45xchangeGameState\x12+\n\x08\x45xchange\x12\x0f.Game.GameState\x1a\x0c.Game.Action\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\ngame.proto\x12\x0bGameMessage\"\x82\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\"E\n\x0fObjectDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\xc7\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\"E\n\x0f\x41\x63tionDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3')
 )
 
 
 
 _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   name='ObjectDirection',
-  full_name='Game.GameState.ObjectDirection',
+  full_name='GameMessage.GameState.ObjectDirection',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -53,14 +53,14 @@ _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=310,
-  serialized_end=379,
+  serialized_start=345,
+  serialized_end=414,
 )
 _sym_db.RegisterEnumDescriptor(_GAMESTATE_OBJECTDIRECTION)
 
 _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   name='ActionDirection',
-  full_name='Game.Action.ActionDirection',
+  full_name='GameMessage.Action.ActionDirection',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -87,56 +87,56 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=498,
-  serialized_end=567,
+  serialized_start=547,
+  serialized_end=616,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION_ACTIONDIRECTION)
 
 
 _GAMESTATE = _descriptor.Descriptor(
   name='GameState',
-  full_name='Game.GameState',
+  full_name='GameMessage.GameState',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='isClosestObstacleBox', full_name='Game.GameState.isClosestObstacleBox', index=0,
+      name='isClosestObstacleBox', full_name='GameMessage.GameState.isClosestObstacleBox', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coinsNeeded', full_name='Game.GameState.coinsNeeded', index=1,
+      name='coinsNeeded', full_name='GameMessage.GameState.coinsNeeded', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='closestObstacle', full_name='Game.GameState.closestObstacle', index=2,
+      name='closestObstacle', full_name='GameMessage.GameState.closestObstacle', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='closestCoin', full_name='Game.GameState.closestCoin', index=3,
+      name='closestCoin', full_name='GameMessage.GameState.closestCoin', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='closestEnemy', full_name='Game.GameState.closestEnemy', index=4,
+      name='closestEnemy', full_name='GameMessage.GameState.closestEnemy', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='finishDirection', full_name='Game.GameState.finishDirection', index=5,
+      name='finishDirection', full_name='GameMessage.GameState.finishDirection', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -155,27 +155,27 @@ _GAMESTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=21,
-  serialized_end=379,
+  serialized_start=28,
+  serialized_end=414,
 )
 
 
 _ACTION = _descriptor.Descriptor(
   name='Action',
-  full_name='Game.Action',
+  full_name='GameMessage.Action',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='moveDirection', full_name='Game.Action.moveDirection', index=0,
+      name='moveDirection', full_name='GameMessage.Action.moveDirection', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shotDirection', full_name='Game.Action.shotDirection', index=1,
+      name='shotDirection', full_name='GameMessage.Action.shotDirection', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -194,8 +194,8 @@ _ACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=382,
-  serialized_end=567,
+  serialized_start=417,
+  serialized_end=616,
 )
 
 _GAMESTATE.fields_by_name['closestObstacle'].enum_type = _GAMESTATE_OBJECTDIRECTION
@@ -213,14 +213,14 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 GameState = _reflection.GeneratedProtocolMessageType('GameState', (_message.Message,), dict(
   DESCRIPTOR = _GAMESTATE,
   __module__ = 'game_pb2'
-  # @@protoc_insertion_point(class_scope:Game.GameState)
+  # @@protoc_insertion_point(class_scope:GameMessage.GameState)
   ))
 _sym_db.RegisterMessage(GameState)
 
 Action = _reflection.GeneratedProtocolMessageType('Action', (_message.Message,), dict(
   DESCRIPTOR = _ACTION,
   __module__ = 'game_pb2'
-  # @@protoc_insertion_point(class_scope:Game.Action)
+  # @@protoc_insertion_point(class_scope:GameMessage.Action)
   ))
 _sym_db.RegisterMessage(Action)
 
@@ -228,16 +228,16 @@ _sym_db.RegisterMessage(Action)
 
 _EXCHANGEGAMESTATE = _descriptor.ServiceDescriptor(
   name='ExchangeGameState',
-  full_name='Game.ExchangeGameState',
+  full_name='GameMessage.ExchangeGameState',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=569,
-  serialized_end=633,
+  serialized_start=618,
+  serialized_end=696,
   methods=[
   _descriptor.MethodDescriptor(
     name='Exchange',
-    full_name='Game.ExchangeGameState.Exchange',
+    full_name='GameMessage.ExchangeGameState.Exchange',
     index=0,
     containing_service=None,
     input_type=_GAMESTATE,

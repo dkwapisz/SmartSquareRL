@@ -17,11 +17,10 @@ void CircleObject::render(sf::RenderTarget &target) {
     target.draw(this -> objectShape);
 }
 
-//TODO Check if it's center position!
 float CircleObject::getCenterPosX() const {
-    return this -> objectShape.getPosition().x;
+    return this -> objectShape.getPosition().x + objectShape.getRadius();
 }
 
 float CircleObject::getCenterPosY() const {
-    return this -> objectShape.getPosition().y;
+    return this -> objectShape.getPosition().y + objectShape.getRadius();
 }

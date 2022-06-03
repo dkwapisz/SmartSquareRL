@@ -149,6 +149,7 @@ void Game::update() {
 
     this -> level -> updateBullets();
     this -> level -> updateDangerMovement();
+    this -> level -> calculateClosestObjectsDir();
 
     if (this -> level -> isLevelFinished()) {
         int lastLevelNum = this -> level -> getLevelNumber();

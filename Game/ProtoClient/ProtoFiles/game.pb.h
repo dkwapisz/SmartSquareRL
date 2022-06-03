@@ -45,19 +45,19 @@ struct TableStruct_game_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto;
-namespace Game {
+namespace GameMessage {
 class Action;
 struct ActionDefaultTypeInternal;
 extern ActionDefaultTypeInternal _Action_default_instance_;
 class GameState;
 struct GameStateDefaultTypeInternal;
 extern GameStateDefaultTypeInternal _GameState_default_instance_;
-}  // namespace Game
+}  // namespace GameMessage
 PROTOBUF_NAMESPACE_OPEN
-template<> ::Game::Action* Arena::CreateMaybeMessage<::Game::Action>(Arena*);
-template<> ::Game::GameState* Arena::CreateMaybeMessage<::Game::GameState>(Arena*);
+template<> ::GameMessage::Action* Arena::CreateMaybeMessage<::GameMessage::Action>(Arena*);
+template<> ::GameMessage::GameState* Arena::CreateMaybeMessage<::GameMessage::GameState>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace Game {
+namespace GameMessage {
 
 enum GameState_ObjectDirection : int {
   GameState_ObjectDirection_DEFAULT = 0,
@@ -118,7 +118,7 @@ inline bool Action_ActionDirection_Parse(
 // ===================================================================
 
 class GameState final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Game.GameState) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.GameState) */ {
  public:
   inline GameState() : GameState(nullptr) {}
   ~GameState() override;
@@ -221,7 +221,7 @@ class GameState final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Game.GameState";
+    return "GameMessage.GameState";
   }
   protected:
   explicit GameState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -299,43 +299,43 @@ class GameState final :
   void _internal_set_coinsneeded(int32_t value);
   public:
 
-  // .Game.GameState.ObjectDirection closestObstacle = 3;
+  // .GameMessage.GameState.ObjectDirection closestObstacle = 3;
   void clear_closestobstacle();
-  ::Game::GameState_ObjectDirection closestobstacle() const;
-  void set_closestobstacle(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection closestobstacle() const;
+  void set_closestobstacle(::GameMessage::GameState_ObjectDirection value);
   private:
-  ::Game::GameState_ObjectDirection _internal_closestobstacle() const;
-  void _internal_set_closestobstacle(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection _internal_closestobstacle() const;
+  void _internal_set_closestobstacle(::GameMessage::GameState_ObjectDirection value);
   public:
 
-  // .Game.GameState.ObjectDirection closestCoin = 4;
+  // .GameMessage.GameState.ObjectDirection closestCoin = 4;
   void clear_closestcoin();
-  ::Game::GameState_ObjectDirection closestcoin() const;
-  void set_closestcoin(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection closestcoin() const;
+  void set_closestcoin(::GameMessage::GameState_ObjectDirection value);
   private:
-  ::Game::GameState_ObjectDirection _internal_closestcoin() const;
-  void _internal_set_closestcoin(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection _internal_closestcoin() const;
+  void _internal_set_closestcoin(::GameMessage::GameState_ObjectDirection value);
   public:
 
-  // .Game.GameState.ObjectDirection closestEnemy = 5;
+  // .GameMessage.GameState.ObjectDirection closestEnemy = 5;
   void clear_closestenemy();
-  ::Game::GameState_ObjectDirection closestenemy() const;
-  void set_closestenemy(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection closestenemy() const;
+  void set_closestenemy(::GameMessage::GameState_ObjectDirection value);
   private:
-  ::Game::GameState_ObjectDirection _internal_closestenemy() const;
-  void _internal_set_closestenemy(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection _internal_closestenemy() const;
+  void _internal_set_closestenemy(::GameMessage::GameState_ObjectDirection value);
   public:
 
-  // .Game.GameState.ObjectDirection finishDirection = 6;
+  // .GameMessage.GameState.ObjectDirection finishDirection = 6;
   void clear_finishdirection();
-  ::Game::GameState_ObjectDirection finishdirection() const;
-  void set_finishdirection(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection finishdirection() const;
+  void set_finishdirection(::GameMessage::GameState_ObjectDirection value);
   private:
-  ::Game::GameState_ObjectDirection _internal_finishdirection() const;
-  void _internal_set_finishdirection(::Game::GameState_ObjectDirection value);
+  ::GameMessage::GameState_ObjectDirection _internal_finishdirection() const;
+  void _internal_set_finishdirection(::GameMessage::GameState_ObjectDirection value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Game.GameState)
+  // @@protoc_insertion_point(class_scope:GameMessage.GameState)
  private:
   class _Internal;
 
@@ -357,7 +357,7 @@ class GameState final :
 // -------------------------------------------------------------------
 
 class Action final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Game.Action) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.Action) */ {
  public:
   inline Action() : Action(nullptr) {}
   ~Action() override;
@@ -460,7 +460,7 @@ class Action final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Game.Action";
+    return "GameMessage.Action";
   }
   protected:
   explicit Action(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -516,25 +516,25 @@ class Action final :
     kMoveDirectionFieldNumber = 1,
     kShotDirectionFieldNumber = 2,
   };
-  // .Game.Action.ActionDirection moveDirection = 1;
+  // .GameMessage.Action.ActionDirection moveDirection = 1;
   void clear_movedirection();
-  ::Game::Action_ActionDirection movedirection() const;
-  void set_movedirection(::Game::Action_ActionDirection value);
+  ::GameMessage::Action_ActionDirection movedirection() const;
+  void set_movedirection(::GameMessage::Action_ActionDirection value);
   private:
-  ::Game::Action_ActionDirection _internal_movedirection() const;
-  void _internal_set_movedirection(::Game::Action_ActionDirection value);
+  ::GameMessage::Action_ActionDirection _internal_movedirection() const;
+  void _internal_set_movedirection(::GameMessage::Action_ActionDirection value);
   public:
 
-  // .Game.Action.ActionDirection shotDirection = 2;
+  // .GameMessage.Action.ActionDirection shotDirection = 2;
   void clear_shotdirection();
-  ::Game::Action_ActionDirection shotdirection() const;
-  void set_shotdirection(::Game::Action_ActionDirection value);
+  ::GameMessage::Action_ActionDirection shotdirection() const;
+  void set_shotdirection(::GameMessage::Action_ActionDirection value);
   private:
-  ::Game::Action_ActionDirection _internal_shotdirection() const;
-  void _internal_set_shotdirection(::Game::Action_ActionDirection value);
+  ::GameMessage::Action_ActionDirection _internal_shotdirection() const;
+  void _internal_set_shotdirection(::GameMessage::Action_ActionDirection value);
   public:
 
-  // @@protoc_insertion_point(class_scope:Game.Action)
+  // @@protoc_insertion_point(class_scope:GameMessage.Action)
  private:
   class _Internal;
 
@@ -568,7 +568,7 @@ inline bool GameState::_internal_isclosestobstaclebox() const {
   return _impl_.isclosestobstaclebox_;
 }
 inline bool GameState::isclosestobstaclebox() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.isClosestObstacleBox)
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.isClosestObstacleBox)
   return _internal_isclosestobstaclebox();
 }
 inline void GameState::_internal_set_isclosestobstaclebox(bool value) {
@@ -577,7 +577,7 @@ inline void GameState::_internal_set_isclosestobstaclebox(bool value) {
 }
 inline void GameState::set_isclosestobstaclebox(bool value) {
   _internal_set_isclosestobstaclebox(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.isClosestObstacleBox)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.isClosestObstacleBox)
 }
 
 // int32 coinsNeeded = 2;
@@ -588,7 +588,7 @@ inline int32_t GameState::_internal_coinsneeded() const {
   return _impl_.coinsneeded_;
 }
 inline int32_t GameState::coinsneeded() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.coinsNeeded)
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.coinsNeeded)
   return _internal_coinsneeded();
 }
 inline void GameState::_internal_set_coinsneeded(int32_t value) {
@@ -597,131 +597,131 @@ inline void GameState::_internal_set_coinsneeded(int32_t value) {
 }
 inline void GameState::set_coinsneeded(int32_t value) {
   _internal_set_coinsneeded(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.coinsNeeded)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.coinsNeeded)
 }
 
-// .Game.GameState.ObjectDirection closestObstacle = 3;
+// .GameMessage.GameState.ObjectDirection closestObstacle = 3;
 inline void GameState::clear_closestobstacle() {
   _impl_.closestobstacle_ = 0;
 }
-inline ::Game::GameState_ObjectDirection GameState::_internal_closestobstacle() const {
-  return static_cast< ::Game::GameState_ObjectDirection >(_impl_.closestobstacle_);
+inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestobstacle() const {
+  return static_cast< ::GameMessage::GameState_ObjectDirection >(_impl_.closestobstacle_);
 }
-inline ::Game::GameState_ObjectDirection GameState::closestobstacle() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.closestObstacle)
+inline ::GameMessage::GameState_ObjectDirection GameState::closestobstacle() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestObstacle)
   return _internal_closestobstacle();
 }
-inline void GameState::_internal_set_closestobstacle(::Game::GameState_ObjectDirection value) {
+inline void GameState::_internal_set_closestobstacle(::GameMessage::GameState_ObjectDirection value) {
   
   _impl_.closestobstacle_ = value;
 }
-inline void GameState::set_closestobstacle(::Game::GameState_ObjectDirection value) {
+inline void GameState::set_closestobstacle(::GameMessage::GameState_ObjectDirection value) {
   _internal_set_closestobstacle(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.closestObstacle)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestObstacle)
 }
 
-// .Game.GameState.ObjectDirection closestCoin = 4;
+// .GameMessage.GameState.ObjectDirection closestCoin = 4;
 inline void GameState::clear_closestcoin() {
   _impl_.closestcoin_ = 0;
 }
-inline ::Game::GameState_ObjectDirection GameState::_internal_closestcoin() const {
-  return static_cast< ::Game::GameState_ObjectDirection >(_impl_.closestcoin_);
+inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestcoin() const {
+  return static_cast< ::GameMessage::GameState_ObjectDirection >(_impl_.closestcoin_);
 }
-inline ::Game::GameState_ObjectDirection GameState::closestcoin() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.closestCoin)
+inline ::GameMessage::GameState_ObjectDirection GameState::closestcoin() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestCoin)
   return _internal_closestcoin();
 }
-inline void GameState::_internal_set_closestcoin(::Game::GameState_ObjectDirection value) {
+inline void GameState::_internal_set_closestcoin(::GameMessage::GameState_ObjectDirection value) {
   
   _impl_.closestcoin_ = value;
 }
-inline void GameState::set_closestcoin(::Game::GameState_ObjectDirection value) {
+inline void GameState::set_closestcoin(::GameMessage::GameState_ObjectDirection value) {
   _internal_set_closestcoin(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.closestCoin)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestCoin)
 }
 
-// .Game.GameState.ObjectDirection closestEnemy = 5;
+// .GameMessage.GameState.ObjectDirection closestEnemy = 5;
 inline void GameState::clear_closestenemy() {
   _impl_.closestenemy_ = 0;
 }
-inline ::Game::GameState_ObjectDirection GameState::_internal_closestenemy() const {
-  return static_cast< ::Game::GameState_ObjectDirection >(_impl_.closestenemy_);
+inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestenemy() const {
+  return static_cast< ::GameMessage::GameState_ObjectDirection >(_impl_.closestenemy_);
 }
-inline ::Game::GameState_ObjectDirection GameState::closestenemy() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.closestEnemy)
+inline ::GameMessage::GameState_ObjectDirection GameState::closestenemy() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestEnemy)
   return _internal_closestenemy();
 }
-inline void GameState::_internal_set_closestenemy(::Game::GameState_ObjectDirection value) {
+inline void GameState::_internal_set_closestenemy(::GameMessage::GameState_ObjectDirection value) {
   
   _impl_.closestenemy_ = value;
 }
-inline void GameState::set_closestenemy(::Game::GameState_ObjectDirection value) {
+inline void GameState::set_closestenemy(::GameMessage::GameState_ObjectDirection value) {
   _internal_set_closestenemy(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.closestEnemy)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestEnemy)
 }
 
-// .Game.GameState.ObjectDirection finishDirection = 6;
+// .GameMessage.GameState.ObjectDirection finishDirection = 6;
 inline void GameState::clear_finishdirection() {
   _impl_.finishdirection_ = 0;
 }
-inline ::Game::GameState_ObjectDirection GameState::_internal_finishdirection() const {
-  return static_cast< ::Game::GameState_ObjectDirection >(_impl_.finishdirection_);
+inline ::GameMessage::GameState_ObjectDirection GameState::_internal_finishdirection() const {
+  return static_cast< ::GameMessage::GameState_ObjectDirection >(_impl_.finishdirection_);
 }
-inline ::Game::GameState_ObjectDirection GameState::finishdirection() const {
-  // @@protoc_insertion_point(field_get:Game.GameState.finishDirection)
+inline ::GameMessage::GameState_ObjectDirection GameState::finishdirection() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.finishDirection)
   return _internal_finishdirection();
 }
-inline void GameState::_internal_set_finishdirection(::Game::GameState_ObjectDirection value) {
+inline void GameState::_internal_set_finishdirection(::GameMessage::GameState_ObjectDirection value) {
   
   _impl_.finishdirection_ = value;
 }
-inline void GameState::set_finishdirection(::Game::GameState_ObjectDirection value) {
+inline void GameState::set_finishdirection(::GameMessage::GameState_ObjectDirection value) {
   _internal_set_finishdirection(value);
-  // @@protoc_insertion_point(field_set:Game.GameState.finishDirection)
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.finishDirection)
 }
 
 // -------------------------------------------------------------------
 
 // Action
 
-// .Game.Action.ActionDirection moveDirection = 1;
+// .GameMessage.Action.ActionDirection moveDirection = 1;
 inline void Action::clear_movedirection() {
   _impl_.movedirection_ = 0;
 }
-inline ::Game::Action_ActionDirection Action::_internal_movedirection() const {
-  return static_cast< ::Game::Action_ActionDirection >(_impl_.movedirection_);
+inline ::GameMessage::Action_ActionDirection Action::_internal_movedirection() const {
+  return static_cast< ::GameMessage::Action_ActionDirection >(_impl_.movedirection_);
 }
-inline ::Game::Action_ActionDirection Action::movedirection() const {
-  // @@protoc_insertion_point(field_get:Game.Action.moveDirection)
+inline ::GameMessage::Action_ActionDirection Action::movedirection() const {
+  // @@protoc_insertion_point(field_get:GameMessage.Action.moveDirection)
   return _internal_movedirection();
 }
-inline void Action::_internal_set_movedirection(::Game::Action_ActionDirection value) {
+inline void Action::_internal_set_movedirection(::GameMessage::Action_ActionDirection value) {
   
   _impl_.movedirection_ = value;
 }
-inline void Action::set_movedirection(::Game::Action_ActionDirection value) {
+inline void Action::set_movedirection(::GameMessage::Action_ActionDirection value) {
   _internal_set_movedirection(value);
-  // @@protoc_insertion_point(field_set:Game.Action.moveDirection)
+  // @@protoc_insertion_point(field_set:GameMessage.Action.moveDirection)
 }
 
-// .Game.Action.ActionDirection shotDirection = 2;
+// .GameMessage.Action.ActionDirection shotDirection = 2;
 inline void Action::clear_shotdirection() {
   _impl_.shotdirection_ = 0;
 }
-inline ::Game::Action_ActionDirection Action::_internal_shotdirection() const {
-  return static_cast< ::Game::Action_ActionDirection >(_impl_.shotdirection_);
+inline ::GameMessage::Action_ActionDirection Action::_internal_shotdirection() const {
+  return static_cast< ::GameMessage::Action_ActionDirection >(_impl_.shotdirection_);
 }
-inline ::Game::Action_ActionDirection Action::shotdirection() const {
-  // @@protoc_insertion_point(field_get:Game.Action.shotDirection)
+inline ::GameMessage::Action_ActionDirection Action::shotdirection() const {
+  // @@protoc_insertion_point(field_get:GameMessage.Action.shotDirection)
   return _internal_shotdirection();
 }
-inline void Action::_internal_set_shotdirection(::Game::Action_ActionDirection value) {
+inline void Action::_internal_set_shotdirection(::GameMessage::Action_ActionDirection value) {
   
   _impl_.shotdirection_ = value;
 }
-inline void Action::set_shotdirection(::Game::Action_ActionDirection value) {
+inline void Action::set_shotdirection(::GameMessage::Action_ActionDirection value) {
   _internal_set_shotdirection(value);
-  // @@protoc_insertion_point(field_set:Game.Action.shotDirection)
+  // @@protoc_insertion_point(field_set:GameMessage.Action.shotDirection)
 }
 
 #ifdef __GNUC__
@@ -732,19 +732,19 @@ inline void Action::set_shotdirection(::Game::Action_ActionDirection value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Game
+}  // namespace GameMessage
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Game::GameState_ObjectDirection> : ::std::true_type {};
+template <> struct is_proto_enum< ::GameMessage::GameState_ObjectDirection> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Game::GameState_ObjectDirection>() {
-  return ::Game::GameState_ObjectDirection_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::GameState_ObjectDirection>() {
+  return ::GameMessage::GameState_ObjectDirection_descriptor();
 }
-template <> struct is_proto_enum< ::Game::Action_ActionDirection> : ::std::true_type {};
+template <> struct is_proto_enum< ::GameMessage::Action_ActionDirection> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Game::Action_ActionDirection>() {
-  return ::Game::Action_ActionDirection_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::Action_ActionDirection>() {
+  return ::GameMessage::Action_ActionDirection_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

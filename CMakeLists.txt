@@ -33,7 +33,7 @@ add_executable(
         Game/GameFiles/GameObjects/CircleObject.cpp Game/GameFiles/GameObjects/CircleObject.hpp
         Game/GameFiles/GameObjects/MovingDanger.cpp Game/GameFiles/GameObjects/MovingDanger.hpp
         Game/GameFiles/GameObjects/Finish.cpp Game/GameFiles/GameObjects/Finish.hpp
-        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/testProtoClient.cpp)
+        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/ProtoClient.cpp Game/ProtoClient/ProtoClient.hpp)
 
 target_link_libraries(SmartSquareRL
         gRPC_Client

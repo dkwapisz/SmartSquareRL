@@ -25,51 +25,51 @@
 #include <grpcpp/impl/codegen/stub_options.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
 
-namespace Game {
+namespace GameMessage {
 
 class ExchangeGameState final {
  public:
   static constexpr char const* service_full_name() {
-    return "Game.ExchangeGameState";
+    return "GameMessage.ExchangeGameState";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status Exchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::Game::Action* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>> AsyncExchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>>(AsyncExchangeRaw(context, request, cq));
+    virtual ::grpc::Status Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::GameMessage::Action* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>> AsyncExchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>>(AsyncExchangeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>> PrepareAsyncExchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>>(PrepareAsyncExchangeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>> PrepareAsyncExchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>>(PrepareAsyncExchangeRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>* AsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Game::Action>* PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>* AsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::GameMessage::Action>* PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status Exchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::Game::Action* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Game::Action>> AsyncExchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Game::Action>>(AsyncExchangeRaw(context, request, cq));
+    ::grpc::Status Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::GameMessage::Action* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>> AsyncExchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>>(AsyncExchangeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Game::Action>> PrepareAsyncExchange(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Game::Action>>(PrepareAsyncExchangeRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>> PrepareAsyncExchange(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>>(PrepareAsyncExchangeRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, std::function<void(::grpc::Status)>) override;
-      void Exchange(::grpc::ClientContext* context, const ::Game::GameState* request, ::Game::Action* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, std::function<void(::grpc::Status)>) override;
+      void Exchange(::grpc::ClientContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -81,8 +81,8 @@ class ExchangeGameState final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::Game::Action>* AsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::Game::Action>* PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::Game::GameState& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>* AsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::GameMessage::Action>* PrepareAsyncExchangeRaw(::grpc::ClientContext* context, const ::GameMessage::GameState& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_Exchange_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -91,7 +91,7 @@ class ExchangeGameState final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status Exchange(::grpc::ServerContext* context, const ::Game::GameState* request, ::Game::Action* response);
+    virtual ::grpc::Status Exchange(::grpc::ServerContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_Exchange : public BaseClass {
@@ -105,11 +105,11 @@ class ExchangeGameState final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestExchange(::grpc::ServerContext* context, ::Game::GameState* request, ::grpc::ServerAsyncResponseWriter< ::Game::Action>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestExchange(::grpc::ServerContext* context, ::GameMessage::GameState* request, ::grpc::ServerAsyncResponseWriter< ::GameMessage::Action>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -121,25 +121,25 @@ class ExchangeGameState final {
    public:
     WithCallbackMethod_Exchange() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::Game::GameState, ::Game::Action>(
+          new ::grpc::internal::CallbackUnaryHandler< ::GameMessage::GameState, ::GameMessage::Action>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::Game::GameState* request, ::Game::Action* response) { return this->Exchange(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::GameMessage::GameState* request, ::GameMessage::Action* response) { return this->Exchange(context, request, response); }));}
     void SetMessageAllocatorFor_Exchange(
-        ::grpc::MessageAllocator< ::Game::GameState, ::Game::Action>* allocator) {
+        ::grpc::MessageAllocator< ::GameMessage::GameState, ::GameMessage::Action>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::Game::GameState, ::Game::Action>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::GameMessage::GameState, ::GameMessage::Action>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Exchange() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Exchange(
-      ::grpc::CallbackServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_Exchange<Service > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -155,7 +155,7 @@ class ExchangeGameState final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -172,7 +172,7 @@ class ExchangeGameState final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -195,7 +195,7 @@ class ExchangeGameState final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -210,10 +210,10 @@ class ExchangeGameState final {
     WithStreamedUnaryMethod_Exchange() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::Game::GameState, ::Game::Action>(
+          ::GameMessage::GameState, ::GameMessage::Action>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::Game::GameState, ::Game::Action>* streamer) {
+                     ::GameMessage::GameState, ::GameMessage::Action>* streamer) {
                        return this->StreamedExchange(context,
                          streamer);
                   }));
@@ -222,19 +222,19 @@ class ExchangeGameState final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::Game::GameState* /*request*/, ::Game::Action* /*response*/) override {
+    ::grpc::Status Exchange(::grpc::ServerContext* /*context*/, const ::GameMessage::GameState* /*request*/, ::GameMessage::Action* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedExchange(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Game::GameState,::Game::Action>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedExchange(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::GameMessage::GameState,::GameMessage::Action>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_Exchange<Service > StreamedUnaryService;
   typedef Service SplitStreamedService;
   typedef WithStreamedUnaryMethod_Exchange<Service > StreamedService;
 };
 
-}  // namespace Game
+}  // namespace GameMessage
 
 
 #endif  // GRPC_game_2eproto__INCLUDED

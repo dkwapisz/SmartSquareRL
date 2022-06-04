@@ -20,16 +20,6 @@ using GameMessage::GameState;
 using GameMessage::Action;
 
 class ProtoClient {
-public:
-    explicit ProtoClient(std::shared_ptr<Channel> channel) : stub_(ExchangeGameState::NewStub(channel)) {}
-    void Exchange(bool closestObstacleBox,
-                  int32_t coinsNeeded,
-                  GameMessage::GameState_ObjectDirection closestObstacleDir,
-                  GameMessage::GameState_ObjectDirection closestCoinDir,
-                  GameMessage::GameState_ObjectDirection closestEnemyDir,
-                  GameMessage::GameState_ObjectDirection finishDir);
-    void AsyncCompleteRpc();
-
 private:
     struct AsyncClientCall {
         Action reply;
@@ -39,6 +29,17 @@ private:
     };
     std::unique_ptr<ExchangeGameState::Stub> stub_;
     CompletionQueue cq_;
+
+public:
+    explicit ProtoClient(std::shared_ptr<Channel> channel) : stub_(ExchangeGameState::NewStub(channel)) {}
+    void Exchange(bool closestObstacleBox,
+                              int32_t coinsNeeded,
+                              GameMessage::GameState_ObjectDirection closestObstacleDir,
+                              GameMessage::GameState_ObjectDirection closestCoinDir,
+                              GameMessage::GameState_ObjectDirection closestEnemyDir,
+                              GameMessage::GameState_ObjectDirection finishDir);
+
+    void AsyncCompleteRpc();
 };
 
 #endif //PROTOCLIENT_HPP

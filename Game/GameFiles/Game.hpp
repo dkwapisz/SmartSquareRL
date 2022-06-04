@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "../ProtoClient/ProtoClient.hpp"
 #include "Level.hpp"
 #include <iostream>
 #include <fstream>
@@ -32,13 +33,13 @@ private:
     void updateWindowEvents();
     void updatePlayerInput();
     void update();
-
     void renderLabels();
     void render();
+    GameMessage::GameState_ObjectDirection convertDirFromChar(char dir);
+    void sendGameStateToServer(ProtoClient *client);
 
 public:
     Game();
     virtual ~Game();
-    void run();
-    Level* getLevel();
+    void run(ProtoClient* client);
 };

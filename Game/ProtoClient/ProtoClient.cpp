@@ -33,12 +33,13 @@ void ProtoClient::Exchange(bool closestObstacleBox,
     request.set_closestenemy(closestEnemyDir);
     request.set_finishdirection(finishDir);
 
-    auto* call = new AsyncClientCall;
+    auto call = new AsyncClientCall;
 
     call -> response_reader = stub_ -> PrepareAsyncExchange(&call -> context, request, &cq_);
     call -> response_reader -> StartCall();
     call -> response_reader -> Finish(&call -> reply, &call -> status, (void*) call);
 }
+
 
 void ProtoClient::AsyncCompleteRpc() {
     void* got_tag;

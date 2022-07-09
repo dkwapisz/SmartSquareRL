@@ -117,8 +117,7 @@ void Level::generateMap() {
                 } else if (number == 7) {
                     this -> finishes.push_back(new Finish(this -> squareShapes["Finish"],
                                                           posX, posY));
-                }
-                else if (number == 9) {
+                } else if (number == 8) {
                     this -> player = new Player(posX, posY);
                 }
             }

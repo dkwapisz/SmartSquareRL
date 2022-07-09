@@ -17,20 +17,20 @@
 class Level {
 
 private:
-    std::map<std::string, sf::RectangleShape*> squareShapes;
-    std::map<std::string, sf::CircleShape*> circleShapes;
-    std::vector<Bullet*> bullets;
-    std::vector<Wall*> walls;
-    std::vector<Box*> boxes;
-    std::vector<StaticDanger*> staticDangers;
-    std::vector<Coin*> coins;
-    std::vector<MovingDanger*> movingDangers;
-    std::vector<Finish*> finishes;
+    std::map<std::string, sf::RectangleShape *> squareShapes;
+    std::map<std::string, sf::CircleShape *> circleShapes;
+    std::vector<Bullet *> bullets;
+    std::vector<Wall *> walls;
+    std::vector<Box *> boxes;
+    std::vector<StaticDanger *> staticDangers;
+    std::vector<Coin *> coins;
+    std::vector<MovingDanger *> movingDangers;
+    std::vector<Finish *> finishes;
 
     std::map<int, std::string> mapPath;
 
-    Player* player;
-    sf::Clock* clock;
+    Player *player;
+    sf::Clock *clock;
 
     int coinsCount;
     int playerCoinsCount;
@@ -69,7 +69,7 @@ public:
     void renderGameObjects(sf::RenderTarget &target);
 
     int getClockTime() const;
-    Player* getPlayer() const;
+    Player *getPlayer() const;
     int getCoinsCount() const;
     int getPlayerCoinsCount() const;
     int getLevelNumber() const;

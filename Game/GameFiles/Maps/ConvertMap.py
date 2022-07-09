@@ -28,7 +28,7 @@ for y in range(image_out.width):
         elif image_out.getpixel((x, y)) == (80, 120, 0):  # Finish
             map_txt.write("7 ")
         elif image_out.getpixel((x, y)) == (0, 255, 0):  # Player
-            map_txt.write("9 ")
+            map_txt.write("8 ")
     map_txt.write("\n")
 
 image.close()

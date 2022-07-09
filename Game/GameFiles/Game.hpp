@@ -11,13 +11,13 @@
 class Game {
 
 private:
-    sf::RenderWindow* window;
-    sf::Text* clockLabel;
-    sf::Text* coinCountLabel;
-    sf::Text* deathCountLabel;
-    sf::Font* font;
+    sf::RenderWindow *window;
+    sf::Text *clockLabel;
+    sf::Text *coinCountLabel;
+    sf::Text *deathCountLabel;
+    sf::Font *font;
 
-    Level* level;
+    Level *level;
     bool gameFinished;
 
     char moveAction;
@@ -36,8 +36,10 @@ private:
     void updateWindowEvents();
     void updatePlayerInput();
     void update();
+
     void renderLabels();
     void render();
+
     GameMessage::GameState_ObjectDirection convertDirFromChar(char dir);
     void sendGameStateToServer(ProtoClient *client);
     void getActionsFromServer(ProtoClient *client);
@@ -45,5 +47,6 @@ private:
 public:
     Game();
     virtual ~Game();
-    void run(ProtoClient* client);
+    void run(ProtoClient *client);
+
 };

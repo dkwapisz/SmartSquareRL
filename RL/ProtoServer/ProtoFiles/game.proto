@@ -17,6 +17,7 @@ message GameState {
     RIGHT = 2;
     DOWN = 3;
     LEFT = 4;
+    NOT_EXIST = 5;
   }
 
   bool isClosestObstacleBox = 1;
@@ -34,6 +35,7 @@ message Action {
     RIGHT = 2;
     DOWN = 3;
     LEFT = 4;
+    IDLE = 5;
   }
 
   ActionDirection moveDirection = 1;

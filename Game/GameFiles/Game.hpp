@@ -20,6 +20,9 @@ private:
     Level* level;
     bool gameFinished;
 
+    char moveAction;
+    char shotAction;
+
     void loadFont();
     void initializeWindow();
     void initializeLabels();
@@ -37,6 +40,7 @@ private:
     void render();
     GameMessage::GameState_ObjectDirection convertDirFromChar(char dir);
     void sendGameStateToServer(ProtoClient *client);
+    void getActionsFromServer(ProtoClient *client);
 
 public:
     Game();

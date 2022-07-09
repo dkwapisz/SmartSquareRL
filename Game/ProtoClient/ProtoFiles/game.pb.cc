@@ -91,7 +91,7 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\202\003\n\tGameState\022"
+  "\n\ngame.proto\022\013GameMessage\"\221\003\n\tGameState\022"
   "\034\n\024isClosestObstacleBox\030\001 \001(\010\022\023\n\013coinsNe"
   "eded\030\002 \001(\005\022\?\n\017closestObstacle\030\003 \001(\0162&.Ga"
   "meMessage.GameState.ObjectDirection\022;\n\013c"
@@ -99,20 +99,21 @@ const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   ".ObjectDirection\022<\n\014closestEnemy\030\005 \001(\0162&"
   ".GameMessage.GameState.ObjectDirection\022\?"
   "\n\017finishDirection\030\006 \001(\0162&.GameMessage.Ga"
-  "meState.ObjectDirection\"E\n\017ObjectDirecti"
+  "meState.ObjectDirection\"T\n\017ObjectDirecti"
   "on\022\013\n\007DEFAULT\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DO"
-  "WN\020\003\022\010\n\004LEFT\020\004\"\307\001\n\006Action\022:\n\rmoveDirecti"
-  "on\030\001 \001(\0162#.GameMessage.Action.ActionDire"
-  "ction\022:\n\rshotDirection\030\002 \001(\0162#.GameMessa"
-  "ge.Action.ActionDirection\"E\n\017ActionDirec"
-  "tion\022\013\n\007DEFAULT\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004"
-  "DOWN\020\003\022\010\n\004LEFT\020\0042N\n\021ExchangeGameState\0229\n"
-  "\010Exchange\022\026.GameMessage.GameState\032\023.Game"
-  "Message.Action\"\000b\006proto3"
+  "WN\020\003\022\010\n\004LEFT\020\004\022\r\n\tNOT_EXIST\020\005\"\321\001\n\006Action"
+  "\022:\n\rmoveDirection\030\001 \001(\0162#.GameMessage.Ac"
+  "tion.ActionDirection\022:\n\rshotDirection\030\002 "
+  "\001(\0162#.GameMessage.Action.ActionDirection"
+  "\"O\n\017ActionDirection\022\013\n\007DEFAULT\020\000\022\006\n\002UP\020\001"
+  "\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020\004\022\010\n\004IDLE\020"
+  "\0052N\n\021ExchangeGameState\0229\n\010Exchange\022\026.Gam"
+  "eMessage.GameState\032\023.GameMessage.Action\""
+  "\000b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_game_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_game_2eproto = {
-    false, false, 704, descriptor_table_protodef_game_2eproto,
+    false, false, 729, descriptor_table_protodef_game_2eproto,
     "game.proto",
     &descriptor_table_game_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_game_2eproto::offsets,
@@ -137,6 +138,7 @@ bool GameState_ObjectDirection_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -149,6 +151,7 @@ constexpr GameState_ObjectDirection GameState::UP;
 constexpr GameState_ObjectDirection GameState::RIGHT;
 constexpr GameState_ObjectDirection GameState::DOWN;
 constexpr GameState_ObjectDirection GameState::LEFT;
+constexpr GameState_ObjectDirection GameState::NOT_EXIST;
 constexpr GameState_ObjectDirection GameState::ObjectDirection_MIN;
 constexpr GameState_ObjectDirection GameState::ObjectDirection_MAX;
 constexpr int GameState::ObjectDirection_ARRAYSIZE;
@@ -164,6 +167,7 @@ bool Action_ActionDirection_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
       return true;
     default:
       return false;
@@ -176,6 +180,7 @@ constexpr Action_ActionDirection Action::UP;
 constexpr Action_ActionDirection Action::RIGHT;
 constexpr Action_ActionDirection Action::DOWN;
 constexpr Action_ActionDirection Action::LEFT;
+constexpr Action_ActionDirection Action::IDLE;
 constexpr Action_ActionDirection Action::ActionDirection_MIN;
 constexpr Action_ActionDirection Action::ActionDirection_MAX;
 constexpr int Action::ActionDirection_ARRAYSIZE;

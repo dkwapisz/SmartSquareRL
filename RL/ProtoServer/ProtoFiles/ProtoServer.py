@@ -12,7 +12,7 @@ class ExchangeGameState(game_pb2_grpc.ExchangeGameStateServicer):
     def Exchange(self, request, context):
         print(request)
     
-        return game_pb2.Action(moveDirection=0, shotDirection=0)
+        return game_pb2.Action(moveDirection=2, shotDirection=1)
 
 
 def serve():

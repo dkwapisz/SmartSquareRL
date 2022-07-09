@@ -94,7 +94,11 @@ GameMessage::GameState_ObjectDirection Game::convertDirFromChar(char dir) {
     }
     else if (dir == 'L') {
         return GameMessage::GameState_ObjectDirection_LEFT;
-    } else {
+    }
+    else if (dir == 'N') {
+        return GameMessage::GameState_ObjectDirection_NOT_EXIST;
+    }
+    else {
         return GameMessage::GameState_ObjectDirection_DEFAULT;
     }
 }
@@ -105,6 +109,7 @@ void Game::run(ProtoClient* client) {
             this -> update();
             this -> render();
             this -> sendGameStateToServer(client);
+            this -> getActionsFromServer(client);
         } else {
             this -> window -> close();
             delete this;
@@ -129,31 +134,31 @@ void Game::updatePlayerInput() {
 }
 
 void Game::inputMovement() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+    if (moveAction == 'L') {
         this -> level -> movePlayer(-1.f, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+    if (moveAction == 'R') {
         this -> level -> movePlayer(1.f, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+    if (moveAction == 'U') {
         this -> level -> movePlayer(0.f, -1.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+    if (moveAction == 'D') {
         this -> level -> movePlayer(0.f, 1.f);
     }
 }
 
 void Game::inputShooting() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
+    if (shotAction == 'L') {
         this -> level -> shot(-1.f, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
+    if (shotAction == 'R') {
         this -> level -> shot(1.f, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
+    if (shotAction == 'U') {
         this -> level -> shot(0.f, -1.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
+    if (shotAction == 'D') {
         this -> level -> shot(0.f, 1.f);
     }
 }
@@ -198,4 +203,9 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestCoinDir()),
                        convertDirFromChar(level -> getClosestEnemyDir()),
                        convertDirFromChar(level -> getFinishDirectionDir()));
+}
+
+void Game::getActionsFromServer(ProtoClient *client) {
+    this -> moveAction = client -> getMoveAction();
+    this -> shotAction = client -> getShotAction();
 }

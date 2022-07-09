@@ -65,12 +65,13 @@ enum GameState_ObjectDirection : int {
   GameState_ObjectDirection_RIGHT = 2,
   GameState_ObjectDirection_DOWN = 3,
   GameState_ObjectDirection_LEFT = 4,
+  GameState_ObjectDirection_NOT_EXIST = 5,
   GameState_ObjectDirection_GameState_ObjectDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   GameState_ObjectDirection_GameState_ObjectDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool GameState_ObjectDirection_IsValid(int value);
 constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MIN = GameState_ObjectDirection_DEFAULT;
-constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MAX = GameState_ObjectDirection_LEFT;
+constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MAX = GameState_ObjectDirection_NOT_EXIST;
 constexpr int GameState_ObjectDirection_ObjectDirection_ARRAYSIZE = GameState_ObjectDirection_ObjectDirection_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameState_ObjectDirection_descriptor();
@@ -93,12 +94,13 @@ enum Action_ActionDirection : int {
   Action_ActionDirection_RIGHT = 2,
   Action_ActionDirection_DOWN = 3,
   Action_ActionDirection_LEFT = 4,
+  Action_ActionDirection_IDLE = 5,
   Action_ActionDirection_Action_ActionDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   Action_ActionDirection_Action_ActionDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool Action_ActionDirection_IsValid(int value);
 constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MIN = Action_ActionDirection_DEFAULT;
-constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MAX = Action_ActionDirection_LEFT;
+constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MAX = Action_ActionDirection_IDLE;
 constexpr int Action_ActionDirection_ActionDirection_ARRAYSIZE = Action_ActionDirection_ActionDirection_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Action_ActionDirection_descriptor();
@@ -246,6 +248,8 @@ class GameState final :
     GameState_ObjectDirection_DOWN;
   static constexpr ObjectDirection LEFT =
     GameState_ObjectDirection_LEFT;
+  static constexpr ObjectDirection NOT_EXIST =
+    GameState_ObjectDirection_NOT_EXIST;
   static inline bool ObjectDirection_IsValid(int value) {
     return GameState_ObjectDirection_IsValid(value);
   }
@@ -485,6 +489,8 @@ class Action final :
     Action_ActionDirection_DOWN;
   static constexpr ActionDirection LEFT =
     Action_ActionDirection_LEFT;
+  static constexpr ActionDirection IDLE =
+    Action_ActionDirection_IDLE;
   static inline bool ActionDirection_IsValid(int value) {
     return Action_ActionDirection_IsValid(value);
   }

@@ -29,7 +29,10 @@ private:
     };
     std::unique_ptr<ExchangeGameState::Stub> stub_;
     CompletionQueue cq_;
-
+    char shotAction;
+    char moveAction;
+    void setMoveAction(GameMessage::Action_ActionDirection moveDirection);
+    void setShotAction(GameMessage::Action_ActionDirection moveDirection);
 public:
     explicit ProtoClient(std::shared_ptr<Channel> channel) : stub_(ExchangeGameState::NewStub(channel)) {}
     void Exchange(bool closestObstacleBox,
@@ -40,6 +43,8 @@ public:
                               GameMessage::GameState_ObjectDirection finishDir);
 
     void AsyncCompleteRpc();
+    char getMoveAction() const;
+    char getShotAction() const;
 };
 
 #endif //PROTOCLIENT_HPP

@@ -7,7 +7,7 @@ class Coin : public CircleObject {
 
 public:
     Coin();
-    Coin(sf::CircleShape* coinShape, float positionX, float positionY);
+    Coin(sf::CircleShape *coinShape, float positionX, float positionY);
 };
 
 #endif //COIN_HPP

@@ -26,7 +26,7 @@ public:
     Player();
     Player(float positionX, float positionY);
 
-    const sf::Vector2f* getCenterPosition() const;
+    const sf::Vector2f *getCenterPosition() const;
 
     float getShotSpeed() const;
     sf::FloatRect getBounds() const;

@@ -361,7 +361,7 @@ int Level::getClockTime() const {
     return (int) this -> clock -> getElapsedTime().asSeconds();
 }
 
-Player* Level::getPlayer() const {
+Player *Level::getPlayer() const {
     return this -> player;
 }
 

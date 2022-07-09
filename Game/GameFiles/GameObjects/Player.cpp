@@ -30,7 +30,7 @@ void Player::movePlayer(float directionX, float directionY) {
     this -> playerShape.move(this -> moveSpeed * directionX, this -> moveSpeed * directionY);
 }
 
-const sf::Vector2f* Player::getCenterPosition() const {
+const sf::Vector2f *Player::getCenterPosition() const {
     float x = this -> playerShape.getPosition().x + playerShape.getSize().x / 2;
     float y = this -> playerShape.getPosition().y + playerShape.getSize().y / 2;
 

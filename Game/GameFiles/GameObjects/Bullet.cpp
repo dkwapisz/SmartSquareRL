@@ -2,7 +2,7 @@
 
 Bullet::Bullet() = default;
 
-Bullet::Bullet(sf::RectangleShape* bulletShape,
+Bullet::Bullet(sf::RectangleShape *bulletShape,
                float positionX, float positionY,
                float directionX, float directionY,
                float moveSpeed): SquareObject(bulletShape, positionX, positionY) {

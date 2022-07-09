@@ -10,7 +10,7 @@ protected:
 
 public:
     SquareObject();
-    SquareObject(sf::RectangleShape* objectShape, float posX, float posY);
+    SquareObject(sf::RectangleShape *objectShape, float posX, float posY);
 
     sf::FloatRect getBounds() const;
     void render(sf::RenderTarget &target);

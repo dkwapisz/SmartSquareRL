@@ -11,7 +11,7 @@ private:
 
 public:
     Bullet();
-    Bullet(sf::RectangleShape* bulletShape,
+    Bullet(sf::RectangleShape *bulletShape,
            float positionX, float positionY,
            float directionX, float directionY,
            float moveSpeed);

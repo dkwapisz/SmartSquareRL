@@ -7,7 +7,7 @@ class Finish : public SquareObject {
 
 public:
     Finish();
-    Finish(sf::RectangleShape* wallShape, float positionX, float positionY);
+    Finish(sf::RectangleShape *wallShape, float positionX, float positionY);
 };
 
 #endif //FINISH_HPP

@@ -42,10 +42,10 @@ void ProtoClient::Exchange(bool closestObstacleBox,
 
 
 void ProtoClient::AsyncCompleteRpc() {
-    void* got_tag;
+    void *got_tag;
     bool ok = false;
     while (cq_.Next(&got_tag, &ok)) {
-        auto* call = static_cast<AsyncClientCall*>(got_tag);
+        auto *call = static_cast<AsyncClientCall*>(got_tag);
 
         GPR_ASSERT(ok);
 

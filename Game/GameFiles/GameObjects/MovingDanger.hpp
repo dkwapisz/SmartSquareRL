@@ -12,7 +12,7 @@ private:
 
 public:
     MovingDanger();
-    MovingDanger(sf::CircleShape* movingDangerShape, float positionX, float positionY, bool isHorizontal);
+    MovingDanger(sf::CircleShape *movingDangerShape, float positionX, float positionY, bool isHorizontal);
 
     void reverseDirection();
     void move();

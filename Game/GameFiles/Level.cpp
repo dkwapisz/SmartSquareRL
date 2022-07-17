@@ -12,6 +12,7 @@ Level::Level(int levelNumber) {
     closestEnemyDir = 'N';
     closestObstacleDir = 'N';
     finishDir = 'N';
+    reward = 0;
 }
 
 Level::~Level() {
@@ -143,18 +144,21 @@ void Level::movePlayer(float directionX, float directionY) {
 bool Level::checkCollision() {
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
+            reward = -10;
             return true;
         }
     }
 
     for (const auto& box : boxes) {
         if (box -> getBounds().intersects(this -> player -> getBounds())) {
+            reward = -10;
             return true;
         }
     }
 
     for (const auto& staticDanger : staticDangers) {
         if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
+            reward = -100;
             this -> resetLevel();
             return false;
         }
@@ -164,6 +168,7 @@ bool Level::checkCollision() {
         if (finish -> getBounds().intersects(this -> player -> getBounds())) {
 
             if (this -> coinsCount == this -> playerCoinsCount) {
+                reward = 100;
                 levelFinished = true;
             }
 
@@ -173,6 +178,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
+            reward = 10;
             delete coins[i];
             coins.erase(coins.begin() + i);
             this -> playerCoinsCount++;
@@ -196,7 +202,7 @@ void Level::shot(float directionX, float directionY) {
     }
 }
 
-bool Level::isLevelFinished() const {
+bool Level::isLevelFinished() {
     return levelFinished;
 }
 
@@ -633,5 +639,13 @@ char Level::getClosestEnemyDir() {
 
 char Level::getFinishDirectionDir() {
     return finishDir;
+}
+
+int32_t Level::getReward() {
+    return reward;
+}
+
+void Level::setReward(int32_t reward) {
+    this -> reward = reward;
 }
 

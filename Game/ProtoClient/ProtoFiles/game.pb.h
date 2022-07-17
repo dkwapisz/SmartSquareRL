@@ -284,6 +284,7 @@ class GameState final :
     kClosestCoinFieldNumber = 4,
     kClosestEnemyFieldNumber = 5,
     kFinishDirectionFieldNumber = 6,
+    kRewardFieldNumber = 7,
   };
   // bool isClosestObstacleBox = 1;
   void clear_isclosestobstaclebox();
@@ -339,6 +340,15 @@ class GameState final :
   void _internal_set_finishdirection(::GameMessage::GameState_ObjectDirection value);
   public:
 
+  // int32 reward = 7;
+  void clear_reward();
+  int32_t reward() const;
+  void set_reward(int32_t value);
+  private:
+  int32_t _internal_reward() const;
+  void _internal_set_reward(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:GameMessage.GameState)
  private:
   class _Internal;
@@ -353,6 +363,7 @@ class GameState final :
     int closestcoin_;
     int closestenemy_;
     int finishdirection_;
+    int32_t reward_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -684,6 +695,26 @@ inline void GameState::_internal_set_finishdirection(::GameMessage::GameState_Ob
 inline void GameState::set_finishdirection(::GameMessage::GameState_ObjectDirection value) {
   _internal_set_finishdirection(value);
   // @@protoc_insertion_point(field_set:GameMessage.GameState.finishDirection)
+}
+
+// int32 reward = 7;
+inline void GameState::clear_reward() {
+  _impl_.reward_ = 0;
+}
+inline int32_t GameState::_internal_reward() const {
+  return _impl_.reward_;
+}
+inline int32_t GameState::reward() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.reward)
+  return _internal_reward();
+}
+inline void GameState::_internal_set_reward(int32_t value) {
+  
+  _impl_.reward_ = value;
+}
+inline void GameState::set_reward(int32_t value) {
+  _internal_set_reward(value);
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.reward)
 }
 
 // -------------------------------------------------------------------

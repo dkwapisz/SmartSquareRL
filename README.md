@@ -20,4 +20,17 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 - Python 3.10
 - Pillow Library
 - gRPC
-- Protobuffer
+- Protobuf
+
+
+## Reinforcement Learning algorithms:
+
+1. Deep Q-Learning
+
+### Rewards:
+#### Map 1
+- Touching the wall: -10
+- Touching the box: -10
+- Touching enemy: -100
+- Collecting the coin: +10
+- Reaching the finish: +100

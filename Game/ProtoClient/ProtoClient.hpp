@@ -40,7 +40,8 @@ public:
                               GameMessage::GameState_ObjectDirection closestObstacleDir,
                               GameMessage::GameState_ObjectDirection closestCoinDir,
                               GameMessage::GameState_ObjectDirection closestEnemyDir,
-                              GameMessage::GameState_ObjectDirection finishDir);
+                              GameMessage::GameState_ObjectDirection finishDir,
+                              int32_t reward);
 
     void AsyncCompleteRpc();
     char getMoveAction() const;

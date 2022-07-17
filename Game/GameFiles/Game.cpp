@@ -110,6 +110,7 @@ void Game::run(ProtoClient* client) {
             this -> render();
             this -> sendGameStateToServer(client);
             this -> getActionsFromServer(client);
+            this -> level -> setReward(0);
         } else {
             this -> window -> close();
             delete this;
@@ -202,7 +203,8 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestObstacleDir()),
                        convertDirFromChar(level -> getClosestCoinDir()),
                        convertDirFromChar(level -> getClosestEnemyDir()),
-                       convertDirFromChar(level -> getFinishDirectionDir()));
+                       convertDirFromChar(level -> getFinishDirectionDir()),
+                       level -> getReward());
 }
 
 void Game::getActionsFromServer(ProtoClient *client) {

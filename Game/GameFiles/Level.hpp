@@ -42,6 +42,7 @@ private:
     char closestCoinDir;
     char closestEnemyDir;
     char finishDir;
+    int32_t reward;
 
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
@@ -61,7 +62,7 @@ public:
     explicit Level(int levelNumber);
     virtual ~Level();
 
-    bool isLevelFinished() const;
+    bool isLevelFinished();
     void movePlayer(float directionX, float directionY);
     void shot(float directionX, float directionY);
     void updateBullets();
@@ -82,6 +83,8 @@ public:
     char getClosestCoinDir();
     char getClosestEnemyDir();
     char getFinishDirectionDir();
+    int32_t getReward();
+    void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
 };

@@ -1,18 +1,29 @@
 from concurrent import futures
-import logging
-
+from AI.model import StateActionHandling
+import threading
 import grpc
-
 import game_pb2
 import game_pb2_grpc
 
 
 class ExchangeGameState(game_pb2_grpc.ExchangeGameStateServicer):
 
+    def __init__(self):
+        self.stateActionHandling = StateActionHandling()
+
     def Exchange(self, request, context):
-        print(request)
-    
-        return game_pb2.Action(moveDirection=2, shotDirection=1)
+        # isClosestObstacleBox = request.isClosestObstacleBox
+        # closestEnemy = request.closestEnemy,
+
+        self.stateActionHandling.set_state(request.coinsNeeded,
+                                           request.closestObstacle,
+                                           request.closestCoin,
+                                           request.finishDirection,
+                                           request.reward)
+
+        moveDir, shotDir = self.stateActionHandling.get_action()
+
+        return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir)
 
 
 def serve():
@@ -20,10 +31,9 @@ def serve():
     game_pb2_grpc.add_ExchangeGameStateServicer_to_server(ExchangeGameState(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    print("Server is ready")
     server.wait_for_termination()
 
 
 if __name__ == '__main__':
-    logging.basicConfig()
     serve()
-

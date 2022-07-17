@@ -22,7 +22,8 @@ void ProtoClient::Exchange(bool closestObstacleBox,
                            GameMessage::GameState_ObjectDirection closestObstacleDir,
                            GameMessage::GameState_ObjectDirection closestCoinDir,
                            GameMessage::GameState_ObjectDirection closestEnemyDir,
-                           GameMessage::GameState_ObjectDirection finishDir) {
+                           GameMessage::GameState_ObjectDirection finishDir,
+                           int32_t reward) {
 
     GameState request;
 
@@ -32,6 +33,7 @@ void ProtoClient::Exchange(bool closestObstacleBox,
     request.set_closestcoin(closestCoinDir);
     request.set_closestenemy(closestEnemyDir);
     request.set_finishdirection(finishDir);
+    request.set_reward(reward);
 
     auto call = new AsyncClientCall;
 

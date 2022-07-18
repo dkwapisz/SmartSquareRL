@@ -43,7 +43,6 @@ private:
     char closestEnemyDir;
     char finishDir;
     int32_t reward;
-    bool cancelResetRequest;
     bool setReset;
 
     void initializeMapPaths();
@@ -89,8 +88,6 @@ public:
     void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
-    bool isCancelResetRequest() const;
-    void setCancelResetRequest(bool cancelResetRequest);
     bool isSetReset() const;
     void setSetReset(bool setReset);
 };

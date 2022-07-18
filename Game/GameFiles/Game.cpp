@@ -80,9 +80,6 @@ void Game::renderLabels() {
 }
 
 GameMessage::GameState_ObjectDirection Game::convertDirFromChar(char dir) {
-    // TODO IMPORTANT - ADD NEW ENUM VALUE, DIFFERENT THAN 0 WHICH DESCRIBES STATE "OBJECT NOT ON THE MAP"
-    // TODO BOOL FALSE VALUE IS A DEFAULT VALUE - DOES NOT APPEAR ON REQUEST IN SERVER SIDE
-
     if (dir == 'U') {
         return GameMessage::GameState_ObjectDirection_UP;
     }
@@ -106,11 +103,11 @@ GameMessage::GameState_ObjectDirection Game::convertDirFromChar(char dir) {
 void Game::run(ProtoClient* client) {
     while (this -> window -> isOpen()) {
         if (!gameFinished) {
-            this -> update();
-            this -> render();
             this -> sendGameStateToServer(client);
             this -> getActionsFromServer(client);
             this -> level -> setReward(0);
+            this -> update();
+            this -> render();
         } else {
             this -> window -> close();
             delete this;
@@ -208,12 +205,8 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestCoinDir()),
                        convertDirFromChar(level -> getClosestEnemyDir()),
                        convertDirFromChar(level -> getFinishDirectionDir()),
-                       level -> getReward(),
-                       level -> isCancelResetRequest());
+                       level -> getReward());
 
-    if (level -> isCancelResetRequest()) {
-        level -> setCancelResetRequest(false);
-    }
 }
 
 void Game::getActionsFromServer(ProtoClient *client) {

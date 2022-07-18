@@ -278,15 +278,23 @@ class GameState final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kIsClosestObstacleBoxFieldNumber = 1,
     kCoinsNeededFieldNumber = 2,
     kClosestObstacleFieldNumber = 3,
     kClosestCoinFieldNumber = 4,
-    kIsClosestObstacleBoxFieldNumber = 1,
-    kCancelResetRequestFieldNumber = 8,
     kClosestEnemyFieldNumber = 5,
     kFinishDirectionFieldNumber = 6,
     kRewardFieldNumber = 7,
   };
+  // bool isClosestObstacleBox = 1;
+  void clear_isclosestobstaclebox();
+  bool isclosestobstaclebox() const;
+  void set_isclosestobstaclebox(bool value);
+  private:
+  bool _internal_isclosestobstaclebox() const;
+  void _internal_set_isclosestobstaclebox(bool value);
+  public:
+
   // int32 coinsNeeded = 2;
   void clear_coinsneeded();
   int32_t coinsneeded() const;
@@ -312,24 +320,6 @@ class GameState final :
   private:
   ::GameMessage::GameState_ObjectDirection _internal_closestcoin() const;
   void _internal_set_closestcoin(::GameMessage::GameState_ObjectDirection value);
-  public:
-
-  // bool isClosestObstacleBox = 1;
-  void clear_isclosestobstaclebox();
-  bool isclosestobstaclebox() const;
-  void set_isclosestobstaclebox(bool value);
-  private:
-  bool _internal_isclosestobstaclebox() const;
-  void _internal_set_isclosestobstaclebox(bool value);
-  public:
-
-  // bool cancelResetRequest = 8;
-  void clear_cancelresetrequest();
-  bool cancelresetrequest() const;
-  void set_cancelresetrequest(bool value);
-  private:
-  bool _internal_cancelresetrequest() const;
-  void _internal_set_cancelresetrequest(bool value);
   public:
 
   // .GameMessage.GameState.ObjectDirection closestEnemy = 5;
@@ -367,11 +357,10 @@ class GameState final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    bool isclosestobstaclebox_;
     int32_t coinsneeded_;
     int closestobstacle_;
     int closestcoin_;
-    bool isclosestobstaclebox_;
-    bool cancelresetrequest_;
     int closestenemy_;
     int finishdirection_;
     int32_t reward_;
@@ -737,26 +726,6 @@ inline void GameState::_internal_set_reward(int32_t value) {
 inline void GameState::set_reward(int32_t value) {
   _internal_set_reward(value);
   // @@protoc_insertion_point(field_set:GameMessage.GameState.reward)
-}
-
-// bool cancelResetRequest = 8;
-inline void GameState::clear_cancelresetrequest() {
-  _impl_.cancelresetrequest_ = false;
-}
-inline bool GameState::_internal_cancelresetrequest() const {
-  return _impl_.cancelresetrequest_;
-}
-inline bool GameState::cancelresetrequest() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.cancelResetRequest)
-  return _internal_cancelresetrequest();
-}
-inline void GameState::_internal_set_cancelresetrequest(bool value) {
-  
-  _impl_.cancelresetrequest_ = value;
-}
-inline void GameState::set_cancelresetrequest(bool value) {
-  _internal_set_cancelresetrequest(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.cancelResetRequest)
 }
 
 // -------------------------------------------------------------------

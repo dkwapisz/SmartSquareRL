@@ -27,7 +27,6 @@ message GameState {
   ObjectDirection closestEnemy = 5;
   ObjectDirection finishDirection = 6;
   int32 reward = 7;
-  bool cancelResetRequest = 8;
 }
 
 message Action {
@@ -44,10 +43,3 @@ message Action {
   ActionDirection shotDirection = 2;
   bool setReset = 3;
 }
-
-// setReset | cancelReset | nextSetReset | nextCancelReset
-// 0        | 0           | 0            | 0
-// 1        | 0           | 0            | 1 - send cancel request after successful reset
-// 1        | 1           | 0            | 0
-//
-// 0        | 1           | 0            | 0           <--- this should not appear, but if, values => 0

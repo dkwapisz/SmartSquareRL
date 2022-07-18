@@ -17,7 +17,7 @@ class StateActionHandling:
         self.resetEnv = False
         self.ticks = 0
 
-    def set_state(self, coinsNeeded, closestObstacle, closestCoin, finishDirection, reward, cancelResetRequest):
+    def set_state(self, coinsNeeded, closestObstacle, closestCoin, finishDirection, reward):
 
         # testing reset
         self.ticks += 1
@@ -41,11 +41,11 @@ class StateActionHandling:
         else:
             self.moveDir = 1
 
-        if cancelResetRequest:
-            self.resetEnv = False
-
     def get_action(self):
         return self.moveDir, self.shotDir
 
     def get_reset(self):
         return self.resetEnv
+
+    def set_reset(self, resetEnv):
+        self.resetEnv = resetEnv

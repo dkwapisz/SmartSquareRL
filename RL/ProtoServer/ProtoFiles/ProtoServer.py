@@ -19,11 +19,11 @@ class ExchangeGameState(game_pb2_grpc.ExchangeGameStateServicer):
                                            request.closestObstacle,
                                            request.closestCoin,
                                            request.finishDirection,
-                                           request.reward,
-                                           request.cancelResetRequest)
+                                           request.reward)
 
         moveDir, shotDir = self.stateActionHandling.get_action()
         resetEnv = self.stateActionHandling.get_reset()
+        self.stateActionHandling.set_reset(False)
 
         return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir, setReset=resetEnv)
 

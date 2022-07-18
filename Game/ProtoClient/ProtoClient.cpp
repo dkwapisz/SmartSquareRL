@@ -23,7 +23,8 @@ void ProtoClient::Exchange(bool closestObstacleBox,
                            GameMessage::GameState_ObjectDirection closestCoinDir,
                            GameMessage::GameState_ObjectDirection closestEnemyDir,
                            GameMessage::GameState_ObjectDirection finishDir,
-                           int32_t reward) {
+                           int32_t reward,
+                           bool cancelResetRequest) {
 
     GameState request;
 
@@ -34,6 +35,7 @@ void ProtoClient::Exchange(bool closestObstacleBox,
     request.set_closestenemy(closestEnemyDir);
     request.set_finishdirection(finishDir);
     request.set_reward(reward);
+    request.set_cancelresetrequest(cancelResetRequest);
 
     auto call = new AsyncClientCall;
 
@@ -54,6 +56,7 @@ void ProtoClient::AsyncCompleteRpc() {
         if (call -> status.ok()) {
             setMoveAction(call -> reply.movedirection());
             setShotAction(call -> reply.shotdirection());
+            setSetReset(call -> reply.setreset());
         }
         else {
             std::cout << "RPC failed" << std::endl;
@@ -107,4 +110,12 @@ char ProtoClient::getMoveAction() const {
 
 char ProtoClient::getShotAction() const {
     return this -> shotAction;
+}
+
+bool ProtoClient::isSetReset() const {
+    return setReset;
+}
+
+void ProtoClient::setSetReset(bool setReset) {
+    ProtoClient::setReset = setReset;
 }

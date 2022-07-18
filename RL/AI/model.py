@@ -1,8 +1,3 @@
-import numpy as np
-from keras import Sequential, layers
-from keras.losses import Huber
-
-
 def create_one_hot_encoding(state, length):
     one_hot = []
     for _ in range(length - 1):
@@ -19,8 +14,19 @@ class StateActionHandling:
         self.moveDir = 1
         self.shotDir = 5
         self.state = []
+        self.resetEnv = False
+        self.ticks = 0
 
-    def set_state(self, coinsNeeded, closestObstacle, closestCoin, finishDirection, reward):
+    def set_state(self, coinsNeeded, closestObstacle, closestCoin, finishDirection, reward, cancelResetRequest):
+
+        # testing reset
+        self.ticks += 1
+        print(self.ticks)
+        if self.ticks > 500:
+            self.resetEnv = True
+            self.ticks = 0
+        # testing reset
+
         if coinsNeeded == 0:
             self.state += [0, 1]
         else:
@@ -35,5 +41,11 @@ class StateActionHandling:
         else:
             self.moveDir = 1
 
+        if cancelResetRequest:
+            self.resetEnv = False
+
     def get_action(self):
         return self.moveDir, self.shotDir
+
+    def get_reset(self):
+        return self.resetEnv

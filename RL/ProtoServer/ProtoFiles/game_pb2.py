@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='GameMessage',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ngame.proto\x12\x0bGameMessage\"\xa1\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\"T\n\x0fObjectDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\r\n\tNOT_EXIST\x10\x05\"\xd1\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\"O\n\x0f\x41\x63tionDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\x08\n\x04IDLE\x10\x05\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\ngame.proto\x12\x0bGameMessage\"\xbd\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\x12\x1a\n\x12\x63\x61ncelResetRequest\x18\x08 \x01(\x08\"T\n\x0fObjectDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\r\n\tNOT_EXIST\x10\x05\"\xe3\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12\x10\n\x08setReset\x18\x03 \x01(\x08\"O\n\x0f\x41\x63tionDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\x08\n\x04IDLE\x10\x05\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3')
 )
 
 
@@ -57,8 +57,8 @@ _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=361,
-  serialized_end=445,
+  serialized_start=389,
+  serialized_end=473,
 )
 _sym_db.RegisterEnumDescriptor(_GAMESTATE_OBJECTDIRECTION)
 
@@ -95,8 +95,8 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=578,
-  serialized_end=657,
+  serialized_start=624,
+  serialized_end=703,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION_ACTIONDIRECTION)
 
@@ -157,6 +157,13 @@ _GAMESTATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cancelResetRequest', full_name='GameMessage.GameState.cancelResetRequest', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -171,7 +178,7 @@ _GAMESTATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=28,
-  serialized_end=445,
+  serialized_end=473,
 )
 
 
@@ -196,6 +203,13 @@ _ACTION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='setReset', full_name='GameMessage.Action.setReset', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -209,8 +223,8 @@ _ACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=448,
-  serialized_end=657,
+  serialized_start=476,
+  serialized_end=703,
 )
 
 _GAMESTATE.fields_by_name['closestObstacle'].enum_type = _GAMESTATE_OBJECTDIRECTION
@@ -247,8 +261,8 @@ _EXCHANGEGAMESTATE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=659,
-  serialized_end=737,
+  serialized_start=705,
+  serialized_end=783,
   methods=[
   _descriptor.MethodDescriptor(
     name='Exchange',

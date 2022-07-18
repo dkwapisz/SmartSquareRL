@@ -31,8 +31,11 @@ private:
     CompletionQueue cq_;
     char shotAction;
     char moveAction;
+    bool setReset;
+
     void setMoveAction(GameMessage::Action_ActionDirection moveDirection);
     void setShotAction(GameMessage::Action_ActionDirection moveDirection);
+
 public:
     explicit ProtoClient(std::shared_ptr<Channel> channel) : stub_(ExchangeGameState::NewStub(channel)) {}
     void Exchange(bool closestObstacleBox,
@@ -41,11 +44,14 @@ public:
                               GameMessage::GameState_ObjectDirection closestCoinDir,
                               GameMessage::GameState_ObjectDirection closestEnemyDir,
                               GameMessage::GameState_ObjectDirection finishDir,
-                              int32_t reward);
+                              int32_t reward,
+                              bool cancelResetRequest);
 
     void AsyncCompleteRpc();
     char getMoveAction() const;
     char getShotAction() const;
+    bool isSetReset() const;
+    void setSetReset(bool setReset);
 };
 
 #endif //PROTOCLIENT_HPP

@@ -43,13 +43,14 @@ private:
     char closestEnemyDir;
     char finishDir;
     int32_t reward;
+    bool cancelResetRequest;
+    bool setReset;
 
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
     void initializeGameObjects();
     void generateMap();
     bool checkCollision();
-    void resetLevel();
     void checkDangerCollision(MovingDanger *movingDanger);
 
     void calculateClosestObstacleDir();
@@ -68,6 +69,7 @@ public:
     void updateBullets();
     void updateDangerMovement();
     void renderGameObjects(sf::RenderTarget &target);
+    void resetLevel();
 
     int getClockTime() const;
     Player *getPlayer() const;
@@ -87,6 +89,10 @@ public:
     void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
+    bool isCancelResetRequest() const;
+    void setCancelResetRequest(bool cancelResetRequest);
+    bool isSetReset() const;
+    void setSetReset(bool setReset);
 };
 
 

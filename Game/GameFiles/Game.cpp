@@ -173,6 +173,10 @@ void Game::update() {
     this -> level -> updateDangerMovement();
     this -> level -> calculateClosestObjectsDir();
 
+    if (this -> level -> isSetReset()) {
+        this -> level -> resetLevel();
+    }
+
     if (this -> level -> isLevelFinished()) {
         int lastLevelNum = this -> level -> getLevelNumber();
         int mapsCount = this -> level -> getMapsCount();
@@ -204,10 +208,16 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestCoinDir()),
                        convertDirFromChar(level -> getClosestEnemyDir()),
                        convertDirFromChar(level -> getFinishDirectionDir()),
-                       level -> getReward());
+                       level -> getReward(),
+                       level -> isCancelResetRequest());
+
+    if (level -> isCancelResetRequest()) {
+        level -> setCancelResetRequest(false);
+    }
 }
 
 void Game::getActionsFromServer(ProtoClient *client) {
     this -> moveAction = client -> getMoveAction();
     this -> shotAction = client -> getShotAction();
+    this -> level -> setSetReset(client -> isSetReset());
 }

@@ -13,6 +13,7 @@ Level::Level(int levelNumber) {
     closestObstacleDir = 'N';
     finishDir = 'N';
     reward = 0;
+    cancelResetRequest = false;
 }
 
 Level::~Level() {
@@ -260,6 +261,7 @@ void Level::resetLevel() {
     }
 
     mapFile.close();
+    cancelResetRequest = true;
 }
 
 void Level::updateBullets() {
@@ -647,5 +649,21 @@ int32_t Level::getReward() {
 
 void Level::setReward(int32_t reward) {
     this -> reward = reward;
+}
+
+bool Level::isCancelResetRequest() const {
+    return cancelResetRequest;
+}
+
+void Level::setCancelResetRequest(bool cancelResetRequest) {
+    Level::cancelResetRequest = cancelResetRequest;
+}
+
+bool Level::isSetReset() const {
+    return setReset;
+}
+
+void Level::setSetReset(bool setReset) {
+    Level::setReset = setReset;
 }
 

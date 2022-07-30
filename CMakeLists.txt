@@ -14,6 +14,9 @@ set(gameGrpcHdrs "Game/ProtoClient/ProtoFiles/game.grpc.pb.h")
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
+# Without this, grpc.pb.h/cc files does not find <grpcpp...>
+include_directories("/home/dkwapisz/.local/include")
+
 add_library(gRPC_Client
         ${gameProtoSrcs}
         ${gameProtoHdrs}

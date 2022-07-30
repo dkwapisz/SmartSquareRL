@@ -44,7 +44,8 @@ public:
                               GameMessage::GameState_ObjectDirection closestCoinDir,
                               GameMessage::GameState_ObjectDirection closestEnemyDir,
                               GameMessage::GameState_ObjectDirection finishDir,
-                              int32_t reward);
+                              int32_t reward,
+                              int32_t clockTime);
 
     void AsyncCompleteRpc();
     char getMoveAction() const;

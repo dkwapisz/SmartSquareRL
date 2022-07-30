@@ -23,7 +23,8 @@ void ProtoClient::Exchange(bool closestObstacleBox,
                            GameMessage::GameState_ObjectDirection closestCoinDir,
                            GameMessage::GameState_ObjectDirection closestEnemyDir,
                            GameMessage::GameState_ObjectDirection finishDir,
-                           int32_t reward) {
+                           int32_t reward,
+                           int32_t clockTime) {
 
     GameState request;
 
@@ -34,6 +35,7 @@ void ProtoClient::Exchange(bool closestObstacleBox,
     request.set_closestenemy(closestEnemyDir);
     request.set_finishdirection(finishDir);
     request.set_reward(reward);
+    request.set_clocktime(clockTime);
 
     auto call = new AsyncClientCall;
 
@@ -50,7 +52,6 @@ void ProtoClient::AsyncCompleteRpc() {
         auto *call = static_cast<AsyncClientCall*>(got_tag);
 
         GPR_ASSERT(ok);
-
         if (call -> status.ok()) {
             setMoveAction(call -> reply.movedirection());
             setShotAction(call -> reply.shotdirection());

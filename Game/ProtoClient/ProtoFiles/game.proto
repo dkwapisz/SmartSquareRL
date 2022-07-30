@@ -27,6 +27,7 @@ message GameState {
   ObjectDirection closestEnemy = 5;
   ObjectDirection finishDirection = 6;
   int32 reward = 7;
+  int32 clockTime = 8;
 }
 
 message Action {

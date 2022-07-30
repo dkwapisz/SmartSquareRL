@@ -36,7 +36,7 @@ def convert_map(map_name):
     image.close()
     map_txt.close()
 
-    print("Map correctly converted from PNG to TXT \n")
+    print("{} correctly converted from PNG to TXT \n".format(map_name))
 
 
 for i in range(1, 7, 1):

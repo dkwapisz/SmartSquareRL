@@ -34,3 +34,4 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 - Touching enemy: -100
 - Collecting the coin: +10
 - Reaching the finish: +100
+- Else: 0

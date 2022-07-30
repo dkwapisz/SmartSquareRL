@@ -205,7 +205,8 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestCoinDir()),
                        convertDirFromChar(level -> getClosestEnemyDir()),
                        convertDirFromChar(level -> getFinishDirectionDir()),
-                       level -> getReward());
+                       level -> getReward(),
+                       level -> getClockTime());
 
 }
 

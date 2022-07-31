@@ -69,18 +69,17 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace GameMessage {
 
 enum GameState_ObjectDirection : int {
-  GameState_ObjectDirection_DEFAULT = 0,
+  GameState_ObjectDirection_NOT_EXIST = 0,
   GameState_ObjectDirection_UP = 1,
   GameState_ObjectDirection_RIGHT = 2,
   GameState_ObjectDirection_DOWN = 3,
   GameState_ObjectDirection_LEFT = 4,
-  GameState_ObjectDirection_NOT_EXIST = 5,
   GameState_ObjectDirection_GameState_ObjectDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   GameState_ObjectDirection_GameState_ObjectDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool GameState_ObjectDirection_IsValid(int value);
-constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MIN = GameState_ObjectDirection_DEFAULT;
-constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MAX = GameState_ObjectDirection_NOT_EXIST;
+constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MIN = GameState_ObjectDirection_NOT_EXIST;
+constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MAX = GameState_ObjectDirection_LEFT;
 constexpr int GameState_ObjectDirection_ObjectDirection_ARRAYSIZE = GameState_ObjectDirection_ObjectDirection_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameState_ObjectDirection_descriptor();
@@ -98,18 +97,17 @@ inline bool GameState_ObjectDirection_Parse(
     GameState_ObjectDirection_descriptor(), name, value);
 }
 enum Action_ActionDirection : int {
-  Action_ActionDirection_DEFAULT = 0,
+  Action_ActionDirection_IDLE = 0,
   Action_ActionDirection_UP = 1,
   Action_ActionDirection_RIGHT = 2,
   Action_ActionDirection_DOWN = 3,
   Action_ActionDirection_LEFT = 4,
-  Action_ActionDirection_IDLE = 5,
   Action_ActionDirection_Action_ActionDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   Action_ActionDirection_Action_ActionDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool Action_ActionDirection_IsValid(int value);
-constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MIN = Action_ActionDirection_DEFAULT;
-constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MAX = Action_ActionDirection_IDLE;
+constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MIN = Action_ActionDirection_IDLE;
+constexpr Action_ActionDirection Action_ActionDirection_ActionDirection_MAX = Action_ActionDirection_LEFT;
 constexpr int Action_ActionDirection_ActionDirection_ARRAYSIZE = Action_ActionDirection_ActionDirection_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Action_ActionDirection_descriptor();
@@ -248,8 +246,8 @@ class GameState final :
   // nested types ----------------------------------------------------
 
   typedef GameState_ObjectDirection ObjectDirection;
-  static constexpr ObjectDirection DEFAULT =
-    GameState_ObjectDirection_DEFAULT;
+  static constexpr ObjectDirection NOT_EXIST =
+    GameState_ObjectDirection_NOT_EXIST;
   static constexpr ObjectDirection UP =
     GameState_ObjectDirection_UP;
   static constexpr ObjectDirection RIGHT =
@@ -258,8 +256,6 @@ class GameState final :
     GameState_ObjectDirection_DOWN;
   static constexpr ObjectDirection LEFT =
     GameState_ObjectDirection_LEFT;
-  static constexpr ObjectDirection NOT_EXIST =
-    GameState_ObjectDirection_NOT_EXIST;
   static inline bool ObjectDirection_IsValid(int value) {
     return GameState_ObjectDirection_IsValid(value);
   }
@@ -288,24 +284,16 @@ class GameState final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kIsClosestObstacleBoxFieldNumber = 1,
     kCoinsNeededFieldNumber = 2,
     kClosestObstacleFieldNumber = 3,
     kClosestCoinFieldNumber = 4,
     kClosestEnemyFieldNumber = 5,
+    kIsClosestObstacleBoxFieldNumber = 1,
+    kGameOverFieldNumber = 9,
     kFinishDirectionFieldNumber = 6,
     kRewardFieldNumber = 7,
     kClockTimeFieldNumber = 8,
   };
-  // bool isClosestObstacleBox = 1;
-  void clear_isclosestobstaclebox();
-  bool isclosestobstaclebox() const;
-  void set_isclosestobstaclebox(bool value);
-  private:
-  bool _internal_isclosestobstaclebox() const;
-  void _internal_set_isclosestobstaclebox(bool value);
-  public:
-
   // int32 coinsNeeded = 2;
   void clear_coinsneeded();
   int32_t coinsneeded() const;
@@ -342,6 +330,24 @@ class GameState final :
   void _internal_set_closestenemy(::GameMessage::GameState_ObjectDirection value);
   public:
 
+  // bool isClosestObstacleBox = 1;
+  void clear_isclosestobstaclebox();
+  bool isclosestobstaclebox() const;
+  void set_isclosestobstaclebox(bool value);
+  private:
+  bool _internal_isclosestobstaclebox() const;
+  void _internal_set_isclosestobstaclebox(bool value);
+  public:
+
+  // bool gameOver = 9;
+  void clear_gameover();
+  bool gameover() const;
+  void set_gameover(bool value);
+  private:
+  bool _internal_gameover() const;
+  void _internal_set_gameover(bool value);
+  public:
+
   // .GameMessage.GameState.ObjectDirection finishDirection = 6;
   void clear_finishdirection();
   ::GameMessage::GameState_ObjectDirection finishdirection() const;
@@ -376,11 +382,12 @@ class GameState final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  bool isclosestobstaclebox_;
   int32_t coinsneeded_;
   int closestobstacle_;
   int closestcoin_;
   int closestenemy_;
+  bool isclosestobstaclebox_;
+  bool gameover_;
   int finishdirection_;
   int32_t reward_;
   int32_t clocktime_;
@@ -509,8 +516,8 @@ class Action final :
   // nested types ----------------------------------------------------
 
   typedef Action_ActionDirection ActionDirection;
-  static constexpr ActionDirection DEFAULT =
-    Action_ActionDirection_DEFAULT;
+  static constexpr ActionDirection IDLE =
+    Action_ActionDirection_IDLE;
   static constexpr ActionDirection UP =
     Action_ActionDirection_UP;
   static constexpr ActionDirection RIGHT =
@@ -519,8 +526,6 @@ class Action final :
     Action_ActionDirection_DOWN;
   static constexpr ActionDirection LEFT =
     Action_ActionDirection_LEFT;
-  static constexpr ActionDirection IDLE =
-    Action_ActionDirection_IDLE;
   static inline bool ActionDirection_IsValid(int value) {
     return Action_ActionDirection_IsValid(value);
   }
@@ -762,6 +767,26 @@ inline void GameState::_internal_set_clocktime(int32_t value) {
 inline void GameState::set_clocktime(int32_t value) {
   _internal_set_clocktime(value);
   // @@protoc_insertion_point(field_set:GameMessage.GameState.clockTime)
+}
+
+// bool gameOver = 9;
+inline void GameState::clear_gameover() {
+  gameover_ = false;
+}
+inline bool GameState::_internal_gameover() const {
+  return gameover_;
+}
+inline bool GameState::gameover() const {
+  // @@protoc_insertion_point(field_get:GameMessage.GameState.gameOver)
+  return _internal_gameover();
+}
+inline void GameState::_internal_set_gameover(bool value) {
+  
+  gameover_ = value;
+}
+inline void GameState::set_gameover(bool value) {
+  _internal_set_gameover(value);
+  // @@protoc_insertion_point(field_set:GameMessage.GameState.gameOver)
 }
 
 // -------------------------------------------------------------------

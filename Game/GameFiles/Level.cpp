@@ -210,6 +210,7 @@ void Level::resetLevel() {
     this -> player -> resetPosition();
     this -> playerCoinsCount = 0;
     this -> clock -> restart();
+    this -> gameOver = true;
 
     for (int i = 0; i < this -> movingDangers.size(); i++) {
         delete this -> movingDangers[i];
@@ -657,5 +658,13 @@ bool Level::isSetReset() const {
 
 void Level::setSetReset(bool setReset) {
     Level::setReset = setReset;
+}
+
+bool Level::isGameOver() const {
+    return this -> gameOver;
+}
+
+void Level::setGameOver(bool gameOver) {
+    this -> gameOver = gameOver;
 }
 

@@ -12,12 +12,11 @@ service ExchangeGameState {
 
 message GameState {
   enum ObjectDirection {
-    DEFAULT = 0;
+    NOT_EXIST = 0;
     UP = 1;
     RIGHT = 2;
     DOWN = 3;
     LEFT = 4;
-    NOT_EXIST = 5;
   }
 
   bool isClosestObstacleBox = 1;
@@ -28,16 +27,16 @@ message GameState {
   ObjectDirection finishDirection = 6;
   int32 reward = 7;
   int32 clockTime = 8;
+  bool gameOver = 9;
 }
 
 message Action {
   enum ActionDirection {
-    DEFAULT = 0;
+    IDLE = 0;
     UP = 1;
     RIGHT = 2;
     DOWN = 3;
     LEFT = 4;
-    IDLE = 5;
   }
 
   ActionDirection moveDirection = 1;

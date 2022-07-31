@@ -24,7 +24,8 @@ void ProtoClient::Exchange(bool closestObstacleBox,
                            GameMessage::GameState_ObjectDirection closestEnemyDir,
                            GameMessage::GameState_ObjectDirection finishDir,
                            int32_t reward,
-                           int32_t clockTime) {
+                           int32_t clockTime,
+                           bool gameOver) {
 
     GameState request;
 
@@ -36,6 +37,7 @@ void ProtoClient::Exchange(bool closestObstacleBox,
     request.set_finishdirection(finishDir);
     request.set_reward(reward);
     request.set_clocktime(clockTime);
+    request.set_gameover(gameOver);
 
     auto call = new AsyncClientCall;
 

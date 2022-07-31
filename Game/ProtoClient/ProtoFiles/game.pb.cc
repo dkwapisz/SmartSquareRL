@@ -19,14 +19,15 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace GameMessage {
 constexpr GameState::GameState(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : isclosestobstaclebox_(false)
-  , coinsneeded_(0)
+  : coinsneeded_(0)
   , closestobstacle_(0)
 
   , closestcoin_(0)
 
   , closestenemy_(0)
 
+  , isclosestobstaclebox_(false)
+  , gameover_(false)
   , finishdirection_(0)
 
   , reward_(0)
@@ -76,6 +77,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::GameMessage::GameState, finishdirection_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::GameState, reward_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::GameState, clocktime_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::GameState, gameover_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::GameMessage::Action, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -88,7 +90,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::GameState)},
-  { 14, -1, -1, sizeof(::GameMessage::Action)},
+  { 15, -1, -1, sizeof(::GameMessage::Action)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -97,7 +99,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\264\003\n\tGameState\022"
+  "\n\ngame.proto\022\013GameMessage\"\271\003\n\tGameState\022"
   "\034\n\024isClosestObstacleBox\030\001 \001(\010\022\023\n\013coinsNe"
   "eded\030\002 \001(\005\022\?\n\017closestObstacle\030\003 \001(\0162&.Ga"
   "meMessage.GameState.ObjectDirection\022;\n\013c"
@@ -106,21 +108,21 @@ const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   ".GameMessage.GameState.ObjectDirection\022\?"
   "\n\017finishDirection\030\006 \001(\0162&.GameMessage.Ga"
   "meState.ObjectDirection\022\016\n\006reward\030\007 \001(\005\022"
-  "\021\n\tclockTime\030\010 \001(\005\"T\n\017ObjectDirection\022\013\n"
-  "\007DEFAULT\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022"
-  "\010\n\004LEFT\020\004\022\r\n\tNOT_EXIST\020\005\"\343\001\n\006Action\022:\n\rm"
-  "oveDirection\030\001 \001(\0162#.GameMessage.Action."
-  "ActionDirection\022:\n\rshotDirection\030\002 \001(\0162#"
-  ".GameMessage.Action.ActionDirection\022\020\n\010s"
-  "etReset\030\003 \001(\010\"O\n\017ActionDirection\022\013\n\007DEFA"
-  "ULT\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LE"
-  "FT\020\004\022\010\n\004IDLE\020\0052N\n\021ExchangeGameState\0229\n\010E"
-  "xchange\022\026.GameMessage.GameState\032\023.GameMe"
-  "ssage.Action\"\000b\006proto3"
+  "\021\n\tclockTime\030\010 \001(\005\022\020\n\010gameOver\030\t \001(\010\"G\n\017"
+  "ObjectDirection\022\r\n\tNOT_EXIST\020\000\022\006\n\002UP\020\001\022\t"
+  "\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020\004\"\326\001\n\006Action"
+  "\022:\n\rmoveDirection\030\001 \001(\0162#.GameMessage.Ac"
+  "tion.ActionDirection\022:\n\rshotDirection\030\002 "
+  "\001(\0162#.GameMessage.Action.ActionDirection"
+  "\022\020\n\010setReset\030\003 \001(\010\"B\n\017ActionDirection\022\010\n"
+  "\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004"
+  "LEFT\020\0042N\n\021ExchangeGameState\0229\n\010Exchange\022"
+  "\026.GameMessage.GameState\032\023.GameMessage.Ac"
+  "tion\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 782, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 774, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 2,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -143,7 +145,6 @@ bool GameState_ObjectDirection_IsValid(int value) {
     case 2:
     case 3:
     case 4:
-    case 5:
       return true;
     default:
       return false;
@@ -151,12 +152,11 @@ bool GameState_ObjectDirection_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr GameState_ObjectDirection GameState::DEFAULT;
+constexpr GameState_ObjectDirection GameState::NOT_EXIST;
 constexpr GameState_ObjectDirection GameState::UP;
 constexpr GameState_ObjectDirection GameState::RIGHT;
 constexpr GameState_ObjectDirection GameState::DOWN;
 constexpr GameState_ObjectDirection GameState::LEFT;
-constexpr GameState_ObjectDirection GameState::NOT_EXIST;
 constexpr GameState_ObjectDirection GameState::ObjectDirection_MIN;
 constexpr GameState_ObjectDirection GameState::ObjectDirection_MAX;
 constexpr int GameState::ObjectDirection_ARRAYSIZE;
@@ -172,7 +172,6 @@ bool Action_ActionDirection_IsValid(int value) {
     case 2:
     case 3:
     case 4:
-    case 5:
       return true;
     default:
       return false;
@@ -180,12 +179,11 @@ bool Action_ActionDirection_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr Action_ActionDirection Action::DEFAULT;
+constexpr Action_ActionDirection Action::IDLE;
 constexpr Action_ActionDirection Action::UP;
 constexpr Action_ActionDirection Action::RIGHT;
 constexpr Action_ActionDirection Action::DOWN;
 constexpr Action_ActionDirection Action::LEFT;
-constexpr Action_ActionDirection Action::IDLE;
 constexpr Action_ActionDirection Action::ActionDirection_MIN;
 constexpr Action_ActionDirection Action::ActionDirection_MAX;
 constexpr int Action::ActionDirection_ARRAYSIZE;
@@ -209,17 +207,17 @@ GameState::GameState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 GameState::GameState(const GameState& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&isclosestobstaclebox_, &from.isclosestobstaclebox_,
+  ::memcpy(&coinsneeded_, &from.coinsneeded_,
     static_cast<size_t>(reinterpret_cast<char*>(&clocktime_) -
-    reinterpret_cast<char*>(&isclosestobstaclebox_)) + sizeof(clocktime_));
+    reinterpret_cast<char*>(&coinsneeded_)) + sizeof(clocktime_));
   // @@protoc_insertion_point(copy_constructor:GameMessage.GameState)
 }
 
 inline void GameState::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&isclosestobstaclebox_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&coinsneeded_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&clocktime_) -
-    reinterpret_cast<char*>(&isclosestobstaclebox_)) + sizeof(clocktime_));
+    reinterpret_cast<char*>(&coinsneeded_)) + sizeof(clocktime_));
 }
 
 GameState::~GameState() {
@@ -249,9 +247,9 @@ void GameState::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&isclosestobstaclebox_, 0, static_cast<size_t>(
+  ::memset(&coinsneeded_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&clocktime_) -
-      reinterpret_cast<char*>(&isclosestobstaclebox_)) + sizeof(clocktime_));
+      reinterpret_cast<char*>(&coinsneeded_)) + sizeof(clocktime_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -325,6 +323,14 @@ const char* GameState::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
           clocktime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool gameOver = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          gameover_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -410,6 +416,12 @@ uint8_t* GameState::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_clocktime(), target);
   }
 
+  // bool gameOver = 9;
+  if (this->_internal_gameover() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(9, this->_internal_gameover(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -425,11 +437,6 @@ size_t GameState::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // bool isClosestObstacleBox = 1;
-  if (this->_internal_isclosestobstaclebox() != 0) {
-    total_size += 1 + 1;
-  }
 
   // int32 coinsNeeded = 2;
   if (this->_internal_coinsneeded() != 0) {
@@ -452,6 +459,16 @@ size_t GameState::ByteSizeLong() const {
   if (this->_internal_closestenemy() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_closestenemy());
+  }
+
+  // bool isClosestObstacleBox = 1;
+  if (this->_internal_isclosestobstaclebox() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool gameOver = 9;
+  if (this->_internal_gameover() != 0) {
+    total_size += 1 + 1;
   }
 
   // .GameMessage.GameState.ObjectDirection finishDirection = 6;
@@ -492,9 +509,6 @@ void GameState::MergeFrom(const GameState& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_isclosestobstaclebox() != 0) {
-    _internal_set_isclosestobstaclebox(from._internal_isclosestobstaclebox());
-  }
   if (from._internal_coinsneeded() != 0) {
     _internal_set_coinsneeded(from._internal_coinsneeded());
   }
@@ -506,6 +520,12 @@ void GameState::MergeFrom(const GameState& from) {
   }
   if (from._internal_closestenemy() != 0) {
     _internal_set_closestenemy(from._internal_closestenemy());
+  }
+  if (from._internal_isclosestobstaclebox() != 0) {
+    _internal_set_isclosestobstaclebox(from._internal_isclosestobstaclebox());
+  }
+  if (from._internal_gameover() != 0) {
+    _internal_set_gameover(from._internal_gameover());
   }
   if (from._internal_finishdirection() != 0) {
     _internal_set_finishdirection(from._internal_finishdirection());
@@ -536,9 +556,9 @@ void GameState::InternalSwap(GameState* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(GameState, clocktime_)
       + sizeof(GameState::clocktime_)
-      - PROTOBUF_FIELD_OFFSET(GameState, isclosestobstaclebox_)>(
-          reinterpret_cast<char*>(&isclosestobstaclebox_),
-          reinterpret_cast<char*>(&other->isclosestobstaclebox_));
+      - PROTOBUF_FIELD_OFFSET(GameState, coinsneeded_)>(
+          reinterpret_cast<char*>(&coinsneeded_),
+          reinterpret_cast<char*>(&other->coinsneeded_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GameState::GetMetadata() const {

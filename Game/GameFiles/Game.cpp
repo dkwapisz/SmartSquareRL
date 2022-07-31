@@ -92,11 +92,8 @@ GameMessage::GameState_ObjectDirection Game::convertDirFromChar(char dir) {
     else if (dir == 'L') {
         return GameMessage::GameState_ObjectDirection_LEFT;
     }
-    else if (dir == 'N') {
-        return GameMessage::GameState_ObjectDirection_NOT_EXIST;
-    }
     else {
-        return GameMessage::GameState_ObjectDirection_DEFAULT;
+        return GameMessage::GameState_ObjectDirection_NOT_EXIST;
     }
 }
 
@@ -106,6 +103,7 @@ void Game::run(ProtoClient* client) {
             this -> sendGameStateToServer(client);
             this -> getActionsFromServer(client);
             this -> level -> setReward(0);
+            this -> level -> setGameOver(false);
             this -> update();
             this -> render();
         } else {
@@ -206,7 +204,8 @@ void Game::sendGameStateToServer(ProtoClient *client) {
                        convertDirFromChar(level -> getClosestEnemyDir()),
                        convertDirFromChar(level -> getFinishDirectionDir()),
                        level -> getReward(),
-                       level -> getClockTime());
+                       level -> getClockTime(),
+                       level -> isGameOver());
 
 }
 

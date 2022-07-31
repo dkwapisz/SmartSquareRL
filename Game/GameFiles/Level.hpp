@@ -44,6 +44,7 @@ private:
     char finishDir;
     int32_t reward;
     bool setReset;
+    bool gameOver;
 
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
@@ -90,6 +91,8 @@ public:
     void calculateClosestObjectsDir();
     bool isSetReset() const;
     void setSetReset(bool setReset);
+    bool isGameOver() const;
+    void setGameOver(bool gameOver);
 };
 
 

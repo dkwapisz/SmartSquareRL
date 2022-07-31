@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xb4\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\x12\x11\n\tclockTime\x18\x08 \x01(\x05\"T\n\x0fObjectDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\r\n\tNOT_EXIST\x10\x05\"\xe3\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12\x10\n\x08setReset\x18\x03 \x01(\x08\"O\n\x0f\x41\x63tionDirection\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x12\x08\n\x04IDLE\x10\x05\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xb9\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\x12\x11\n\tclockTime\x18\x08 \x01(\x05\x12\x10\n\x08gameOver\x18\t \x01(\x08\"G\n\x0fObjectDirection\x12\r\n\tNOT_EXIST\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\xd6\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12\x10\n\x08setReset\x18\x03 \x01(\x08\"B\n\x0f\x41\x63tionDirection\x12\x08\n\x04IDLE\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3'
 )
 
 
@@ -32,7 +32,7 @@ _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   create_key=_descriptor._internal_create_key,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='DEFAULT', index=0, number=0,
+      name='NOT_EXIST', index=0, number=0,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
@@ -56,16 +56,11 @@ _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_EXIST', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=380,
-  serialized_end=464,
+  serialized_start=398,
+  serialized_end=469,
 )
 _sym_db.RegisterEnumDescriptor(_GAMESTATE_OBJECTDIRECTION)
 
@@ -77,7 +72,7 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   create_key=_descriptor._internal_create_key,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='DEFAULT', index=0, number=0,
+      name='IDLE', index=0, number=0,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
@@ -101,16 +96,11 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='IDLE', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=615,
-  serialized_end=694,
+  serialized_start=620,
+  serialized_end=686,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION_ACTIONDIRECTION)
 
@@ -179,6 +169,13 @@ _GAMESTATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='gameOver', full_name='GameMessage.GameState.gameOver', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -193,7 +190,7 @@ _GAMESTATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=28,
-  serialized_end=464,
+  serialized_end=469,
 )
 
 
@@ -239,8 +236,8 @@ _ACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=467,
-  serialized_end=694,
+  serialized_start=472,
+  serialized_end=686,
 )
 
 _GAMESTATE.fields_by_name['closestObstacle'].enum_type = _GAMESTATE_OBJECTDIRECTION
@@ -278,8 +275,8 @@ _EXCHANGEGAMESTATE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=696,
-  serialized_end=774,
+  serialized_start=688,
+  serialized_end=766,
   methods=[
   _descriptor.MethodDescriptor(
     name='Exchange',

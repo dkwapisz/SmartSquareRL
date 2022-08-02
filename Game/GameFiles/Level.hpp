@@ -69,6 +69,7 @@ public:
     void updateDangerMovement();
     void renderGameObjects(sf::RenderTarget &target);
     void resetLevel();
+    void resetClockTime();
 
     int getClockTime() const;
     Player *getPlayer() const;

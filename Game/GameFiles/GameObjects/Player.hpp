@@ -39,7 +39,7 @@ public:
     float getCenterPosX() const;
     float getCenterPosY() const;
     void setPosition(float positionX, float positionY);
-    int getDeathsCount() const;
+    int getIteration() const;
     void increaseDeathCount();
     void render(sf::RenderTarget& target);
 };

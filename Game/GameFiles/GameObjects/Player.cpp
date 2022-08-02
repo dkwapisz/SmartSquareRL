@@ -81,7 +81,7 @@ void Player::setPosition(float positionX, float positionY) {
     this -> playerShape.setPosition(positionX, positionY);
 }
 
-int Player::getDeathsCount() const {
+int Player::getIteration() const {
     return this -> deaths;
 }
 

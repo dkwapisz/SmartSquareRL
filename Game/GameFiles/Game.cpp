@@ -34,29 +34,29 @@ void Game::initializeWindow() {
 
 void Game::initializeLabels() {
     this -> clockLabel = new sf::Text();
-    this -> deathCountLabel = new sf::Text();
+    this -> iterationCountLabel = new sf::Text();
     this -> coinCountLabel = new sf::Text();
 
     clockLabel -> setFont(*font);
-    deathCountLabel -> setFont(*font);
+    iterationCountLabel -> setFont(*font);
     coinCountLabel -> setFont(*font);
 
     clockLabel -> setPosition(10.f, 10.f);
-    deathCountLabel -> setPosition(240.f, 10.f);
+    iterationCountLabel -> setPosition(240.f, 10.f);
     coinCountLabel -> setPosition(480.f, 10.f);
 
     clockLabel -> setFillColor(sf::Color::White);
-    deathCountLabel -> setFillColor(sf::Color::White);
+    iterationCountLabel -> setFillColor(sf::Color::White);
     coinCountLabel -> setFillColor(sf::Color::White);
 
     clockLabel -> setCharacterSize(22);
-    deathCountLabel -> setCharacterSize(22);
+    iterationCountLabel -> setCharacterSize(22);
     coinCountLabel -> setCharacterSize(22);
 }
 
 void Game::deleteLabels() {
     delete this -> clockLabel;
-    delete this -> deathCountLabel;
+    delete this -> iterationCountLabel;
     delete this -> coinCountLabel;
     delete this -> font;
 }
@@ -65,8 +65,8 @@ void Game::updateLabels() {
     std::string time = std::to_string(this -> level -> getClockTime());
     clockLabel -> setString("Time: " + time + " [s]");
 
-    std::string deaths = std::to_string(this -> level -> getPlayer() -> getDeathsCount());
-    deathCountLabel -> setString("Deaths: " + deaths);
+    std::string iteration = std::to_string(this -> level -> getPlayer() -> getIteration());
+    iterationCountLabel -> setString("Iteration: " + iteration);
 
     std::string coinsCollected = std::to_string(this -> level -> getPlayerCoinsCount());
     std::string allCoins = std::to_string(this -> level -> getCoinsCount());
@@ -75,7 +75,7 @@ void Game::updateLabels() {
 
 void Game::renderLabels() {
     this -> window -> draw(*clockLabel);
-    this -> window -> draw(*deathCountLabel);
+    this -> window -> draw(*iterationCountLabel);
     this -> window -> draw(*coinCountLabel);
 }
 
@@ -88,6 +88,10 @@ void Game::run() {
     while (this -> window -> isOpen()) {
         if (!gameFinished) {
             // TODO Refactor
+            if (level -> getReward() > 0) {
+                level -> resetClockTime();
+            }
+
             action = client.StateAction(level -> isClosestObstacleBox(),
                                         level -> areCoinsNeeded(),
                                         convertDirFromChar(level -> getClosestObstacleDir()),
@@ -95,9 +99,10 @@ void Game::run() {
                                         convertDirFromChar(level -> getClosestEnemyDir()),
                                         convertDirFromChar(level -> getFinishDirectionDir()),
                                         level -> getClockTime(),
-                                        level -> getPlayer()-> getDeathsCount());
+                                        level -> getPlayer() -> getIteration());
 
             gameOver = this -> playStep(action[0], action[1]);
+            std::cout << "Move action: " << action[0] << "\n";
             this -> render();
 
             reset = client.StateReset(level -> isClosestObstacleBox(),

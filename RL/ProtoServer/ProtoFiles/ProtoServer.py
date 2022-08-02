@@ -28,7 +28,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
                                             request.finishDirection,
                                             request.reward,
                                             request.gameOver)
-        if self.gameDataHandling.clockTime > 15:
+        if self.gameDataHandling.clockTime > 20:
             self.gameDataHandling.reward = -100
             self.gameDataHandling.gameOver = True
             self.gameDataHandling.resetEnv = True

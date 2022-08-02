@@ -180,7 +180,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
-            reward = 10;
+            reward = 50;
             delete coins[i];
             coins.erase(coins.begin() + i);
             this -> playerCoinsCount++;
@@ -658,5 +658,9 @@ bool Level::isGameOver() const {
 
 void Level::setGameOver(bool gameOver) {
     this -> gameOver = gameOver;
+}
+
+void Level::resetClockTime() {
+    this -> clock -> restart();
 }
 

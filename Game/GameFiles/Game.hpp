@@ -14,7 +14,7 @@ private:
     sf::RenderWindow *window;
     sf::Text *clockLabel;
     sf::Text *coinCountLabel;
-    sf::Text *deathCountLabel;
+    sf::Text *iterationCountLabel;
     sf::Font *font;
 
     Level *level;

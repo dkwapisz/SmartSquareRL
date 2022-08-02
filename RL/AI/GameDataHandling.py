@@ -23,7 +23,7 @@ class GameDataHandling:
         self.newState = []
         self.resetEnv = False
         self.ticks = 0
-        self.agent = Agent(0.001, 0.99, 4, 1, 64, 15)
+        self.agent = Agent(0.001, 0.90, 4, 1, 64, 15)
         self.reward = 0
         self.clockTime = 0
         self.gameOver = False

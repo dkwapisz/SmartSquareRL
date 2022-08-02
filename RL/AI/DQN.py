@@ -43,7 +43,7 @@ def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims):
         keras.layers.Dense(fc1_dims, activation='relu'),
         keras.layers.Dense(fc2_dims, activation='relu'),
         keras.layers.Dense(n_actions, activation=None)])
-    model.compile(optimizer=Adam(learning_rate=lr), loss='mse')
+    model.compile(optimizer="Adam", loss='mse')
 
     return model
 
@@ -60,7 +60,7 @@ class Agent:
         self.batch_size = batch_size
         self.model_file = fname
         self.memory = ReplayBuffer(mem_size, input_dims)
-        self.q_eval = build_dqn(lr, n_actions, input_dims, 128, 128)
+        self.q_eval = build_dqn(lr, n_actions, input_dims, 256, 256)
 
     def store_transition(self, state, action, reward, new_state, done):
         self.memory.store_transition(state, action, reward, new_state, done)

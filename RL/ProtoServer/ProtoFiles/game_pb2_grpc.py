@@ -5,7 +5,7 @@ import grpc
 import game_pb2 as game__pb2
 
 
-class ExchangeGameStateStub(object):
+class StateActionExchangeStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,42 +14,58 @@ class ExchangeGameStateStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Exchange = channel.unary_unary(
-                '/GameMessage.ExchangeGameState/Exchange',
-                request_serializer=game__pb2.GameState.SerializeToString,
+        self.StateAction = channel.unary_unary(
+                '/GameMessage.StateActionExchange/StateAction',
+                request_serializer=game__pb2.State.SerializeToString,
                 response_deserializer=game__pb2.Action.FromString,
+                )
+        self.StateReset = channel.unary_unary(
+                '/GameMessage.StateActionExchange/StateReset',
+                request_serializer=game__pb2.State.SerializeToString,
+                response_deserializer=game__pb2.Reset.FromString,
                 )
 
 
-class ExchangeGameStateServicer(object):
+class StateActionExchangeServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def Exchange(self, request, context):
+    def StateAction(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StateReset(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_ExchangeGameStateServicer_to_server(servicer, server):
+def add_StateActionExchangeServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Exchange': grpc.unary_unary_rpc_method_handler(
-                    servicer.Exchange,
-                    request_deserializer=game__pb2.GameState.FromString,
+            'StateAction': grpc.unary_unary_rpc_method_handler(
+                    servicer.StateAction,
+                    request_deserializer=game__pb2.State.FromString,
                     response_serializer=game__pb2.Action.SerializeToString,
+            ),
+            'StateReset': grpc.unary_unary_rpc_method_handler(
+                    servicer.StateReset,
+                    request_deserializer=game__pb2.State.FromString,
+                    response_serializer=game__pb2.Reset.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'GameMessage.ExchangeGameState', rpc_method_handlers)
+            'GameMessage.StateActionExchange', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class ExchangeGameState(object):
+class StateActionExchange(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Exchange(request,
+    def StateAction(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +75,25 @@ class ExchangeGameState(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GameMessage.ExchangeGameState/Exchange',
-            game__pb2.GameState.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/GameMessage.StateActionExchange/StateAction',
+            game__pb2.State.SerializeToString,
             game__pb2.Action.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StateReset(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/GameMessage.StateActionExchange/StateReset',
+            game__pb2.State.SerializeToString,
+            game__pb2.Reset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

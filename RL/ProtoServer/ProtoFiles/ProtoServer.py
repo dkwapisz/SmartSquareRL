@@ -1,55 +1,54 @@
-import asyncio
 from concurrent import futures
 from AI.GameDataHandling import GameDataHandling
-from grpc import aio
+import grpc
 import game_pb2
 import game_pb2_grpc
-import multiprocessing
 
 
-class ExchangeGameState(game_pb2_grpc.ExchangeGameStateServicer):
+class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
         self.gameDataHandling = GameDataHandling()
-        self.time = 0
 
-    def handle_game_data(self, request):
+    def StateAction(self, request, context):
         self.gameDataHandling.set_state(request.coinsNeeded,
                                         request.closestObstacle,
                                         request.closestCoin,
                                         request.finishDirection,
-                                        request.reward,
-                                        request.clockTime,
-                                        request.gameOver)
+                                        request.clockTime)
 
         moveDir, shotDir = self.gameDataHandling.get_action()
-        resetEnv = self.gameDataHandling.get_reset()
-        self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
+
+        return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir)
+
+    def StateReset(self, request, context):
+        self.gameDataHandling.set_new_state(request.coinsNeeded,
+                                            request.closestObstacle,
+                                            request.closestCoin,
+                                            request.finishDirection,
+                                            request.reward,
+                                            request.gameOver)
+        if self.gameDataHandling.clockTime > 15:
+            self.gameDataHandling.reward = -100
+            self.gameDataHandling.gameOver = True
+            self.gameDataHandling.resetEnv = True
+        self.gameDataHandling.remember()
         self.gameDataHandling.reinforcement()
 
-        return moveDir, shotDir, resetEnv
+        resetEnv = self.gameDataHandling.get_reset()
+        self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
 
-    def Exchange(self, request, context):
-        # isClosestObstacleBox = request.isClosestObstacleBox
-        # closestEnemy = request.closestEnemy,
-
-        moveDir, shotDir, resetEnv = self.handle_game_data(request)
-        # remember
-        # learn
-        # state = get_state
-        # action = choose_action()
-
-        return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir, setReset=resetEnv)
+        return game_pb2.Reset(resetNeeded=resetEnv)
 
 
-async def serve():
-    server = aio.server()
-    game_pb2_grpc.add_ExchangeGameStateServicer_to_server(ExchangeGameState(), server)
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    game_pb2_grpc.add_StateActionExchangeServicer_to_server(StateActionExchange(), server)
     server.add_insecure_port('[::]:50051')
-    await server.start()
+    server.start()
     print("Server is ready")
-    await server.wait_for_termination()
+    server.wait_for_termination()
 
 
 if __name__ == '__main__':
-    asyncio.run(serve())
+    serve()

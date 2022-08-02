@@ -43,7 +43,6 @@ private:
     char closestEnemyDir;
     char finishDir;
     int32_t reward;
-    bool setReset;
     bool gameOver;
 
     void initializeMapPaths();
@@ -63,7 +62,7 @@ public:
     explicit Level(int levelNumber);
     virtual ~Level();
 
-    bool isLevelFinished();
+    bool isLevelFinished() const;
     void movePlayer(float directionX, float directionY);
     void shot(float directionX, float directionY);
     void updateBullets();
@@ -80,7 +79,7 @@ public:
 
     // gRPC message
     bool isClosestObstacleBox();
-    int32_t getCoinsNeeded();
+    bool areCoinsNeeded();
     char getClosestObstacleDir();
     char getClosestCoinDir();
     char getClosestEnemyDir();
@@ -89,8 +88,6 @@ public:
     void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
-    bool isSetReset() const;
-    void setSetReset(bool setReset);
     bool isGameOver() const;
     void setGameOver(bool gameOver);
 };

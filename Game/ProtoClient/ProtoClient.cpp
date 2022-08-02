@@ -1,122 +1,72 @@
-#include <grpc/support/log.h>
-#include <grpcpp/grpcpp.h>
-#include "ProtoFiles/game.grpc.pb.h"
 #include "ProtoClient.hpp"
 
-#include <iostream>
-#include <memory>
-#include <thread>
+using namespace GameMessage;
 
-using grpc::Channel;
-using grpc::ClientAsyncResponseReader;
-using grpc::ClientContext;
-using grpc::CompletionQueue;
-using grpc::Status;
+char* ProtoClient::StateAction(bool isClosestObstacleBox, bool coinsNeeded, State_ObjectDirection closestObstacle,
+                                State_ObjectDirection closestCoin, State_ObjectDirection closestEnemy,
+                                State_ObjectDirection finishDirection, int32_t clockTime, int32_t iteration) {
 
-using GameMessage::ExchangeGameState;
-using GameMessage::GameState;
-using GameMessage::Action;
-
-void ProtoClient::Exchange(bool closestObstacleBox,
-                           int32_t coinsNeeded,
-                           GameMessage::GameState_ObjectDirection closestObstacleDir,
-                           GameMessage::GameState_ObjectDirection closestCoinDir,
-                           GameMessage::GameState_ObjectDirection closestEnemyDir,
-                           GameMessage::GameState_ObjectDirection finishDir,
-                           int32_t reward,
-                           int32_t clockTime,
-                           bool gameOver) {
-
-    GameState request;
-
-    request.set_isclosestobstaclebox(closestObstacleBox);
+    State request;
+    request.set_isclosestobstaclebox(isClosestObstacleBox);
     request.set_coinsneeded(coinsNeeded);
-    request.set_closestobstacle(closestObstacleDir);
-    request.set_closestcoin(closestCoinDir);
-    request.set_closestenemy(closestEnemyDir);
-    request.set_finishdirection(finishDir);
-    request.set_reward(reward);
+    request.set_closestobstacle(closestObstacle);
+    request.set_closestcoin(closestCoin);
+    request.set_closestenemy(closestEnemy);
+    request.set_finishdirection(finishDirection);
     request.set_clocktime(clockTime);
+    request.set_iteration(iteration);
+
+    Action response;
+    ClientContext context;
+    Status status = _stub -> StateAction(&context, request, &response);
+
+    if (status.ok()) {
+        char* actionArray = new char[2];
+        actionArray[0] = convertActionDir(response.movedirection());
+        actionArray[1] = convertActionDir(response.shotdirection());
+        return actionArray;
+    } else {
+        std::cerr << "RPC failed \n";
+    }
+}
+
+
+bool ProtoClient::StateReset(bool isClosestObstacleBox, bool coinsNeeded, State_ObjectDirection closestObstacle,
+                              State_ObjectDirection closestCoin, State_ObjectDirection closestEnemy,
+                              State_ObjectDirection finishDirection, int32_t reward, bool gameOver) {
+
+    State request;
+    request.set_isclosestobstaclebox(isClosestObstacleBox);
+    request.set_coinsneeded(coinsNeeded);
+    request.set_closestobstacle(closestObstacle);
+    request.set_closestcoin(closestCoin);
+    request.set_closestenemy(closestEnemy);
+    request.set_finishdirection(finishDirection);
+    request.set_reward(reward);
     request.set_gameover(gameOver);
 
-    auto call = new AsyncClientCall;
+    Reset response;
+    ClientContext context;
+    Status status = _stub -> StateReset(&context, request, &response);
 
-    call -> response_reader = stub_ -> PrepareAsyncExchange(&call -> context, request, &cq_);
-    call -> response_reader -> StartCall();
-    call -> response_reader -> Finish(&call -> reply, &call -> status, (void*) call);
-}
-
-
-void ProtoClient::AsyncCompleteRpc() {
-    void *got_tag;
-    bool ok = false;
-    while (cq_.Next(&got_tag, &ok)) {
-        auto *call = static_cast<AsyncClientCall*>(got_tag);
-
-        GPR_ASSERT(ok);
-        if (call -> status.ok()) {
-            setMoveAction(call -> reply.movedirection());
-            setShotAction(call -> reply.shotdirection());
-            setSetReset(call -> reply.setreset());
-        }
-        else {
-            std::cout << "RPC failed" << std::endl;
-        }
-
-        delete call;
+    if (status.ok()) {
+        return response.resetneeded();
+    } else {
+        std::cerr << "RPC failed \n";
     }
 }
 
-void ProtoClient::setMoveAction(GameMessage::Action_ActionDirection moveDirection) {
-    switch (moveDirection) {
+char ProtoClient::convertActionDir(GameMessage::Action_ActionDirection actionDirection) {
+    switch (actionDirection) {
         case GameMessage::Action_ActionDirection_UP:
-            this -> moveAction = 'U';
-            break;
+            return 'U';
         case GameMessage::Action_ActionDirection_DOWN:
-            this -> moveAction = 'D';
-            break;
+            return 'D';
         case GameMessage::Action_ActionDirection_RIGHT:
-            this -> moveAction = 'R';
-            break;
+            return 'R';
         case GameMessage::Action_ActionDirection_LEFT:
-            this -> moveAction = 'L';
-            break;
+            return 'L';
         default:
-            this -> moveAction = 'N';
+            return 'N';
     }
-}
-
-void ProtoClient::setShotAction(GameMessage::Action_ActionDirection shotDirection) {
-    switch (shotDirection) {
-        case GameMessage::Action_ActionDirection_UP:
-            this -> shotAction = 'U';
-            break;
-        case GameMessage::Action_ActionDirection_DOWN:
-            this -> shotAction = 'D';
-            break;
-        case GameMessage::Action_ActionDirection_RIGHT:
-            this -> shotAction = 'R';
-            break;
-        case GameMessage::Action_ActionDirection_LEFT:
-            this -> shotAction = 'L';
-            break;
-        default:
-            this -> shotAction = 'N';
-    }
-}
-
-char ProtoClient::getMoveAction() const {
-    return this -> moveAction;
-}
-
-char ProtoClient::getShotAction() const {
-    return this -> shotAction;
-}
-
-bool ProtoClient::isSetReset() const {
-    return setReset;
-}
-
-void ProtoClient::setSetReset(bool setReset) {
-    ProtoClient::setReset = setReset;
 }

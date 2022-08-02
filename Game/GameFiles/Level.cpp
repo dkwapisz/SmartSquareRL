@@ -142,6 +142,8 @@ void Level::movePlayer(float directionX, float directionY) {
 }
 
 bool Level::checkCollision() {
+    reward = 0;
+
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
             reward = -10;
@@ -202,7 +204,7 @@ void Level::shot(float directionX, float directionY) {
     }
 }
 
-bool Level::isLevelFinished() {
+bool Level::isLevelFinished() const {
     return levelFinished;
 }
 
@@ -261,8 +263,6 @@ void Level::resetLevel() {
     }
 
     mapFile.close();
-
-    setReset = false;
 }
 
 void Level::updateBullets() {
@@ -624,8 +624,8 @@ bool Level::isClosestObstacleBox() {
     return closestObstacleBox;
 }
 
-int32_t Level::getCoinsNeeded() {
-    return coinsCount - playerCoinsCount;
+bool Level::areCoinsNeeded() {
+    return (coinsCount - playerCoinsCount == 0);
 }
 
 char Level::getClosestObstacleDir() {
@@ -650,14 +650,6 @@ int32_t Level::getReward() {
 
 void Level::setReward(int32_t reward) {
     this -> reward = reward;
-}
-
-bool Level::isSetReset() const {
-    return setReset;
-}
-
-void Level::setSetReset(bool setReset) {
-    Level::setReset = setReset;
 }
 
 bool Level::isGameOver() const {

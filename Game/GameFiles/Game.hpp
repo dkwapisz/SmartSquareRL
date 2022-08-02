@@ -2,11 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "../ProtoClient/ProtoClient.hpp"
 #include "Level.hpp"
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include "../ProtoClient/ProtoClient.hpp"
 
 class Game {
 
@@ -20,33 +20,29 @@ private:
     Level *level;
     bool gameFinished;
 
-    char moveAction;
-    char shotAction;
-
     void loadFont();
     void initializeWindow();
     void initializeLabels();
 
-    void inputMovement();
-    void inputShooting();
+    void inputMovement(char direction);
+    void inputShooting(char direction);
 
     void deleteLabels();
 
     void updateLabels();
     void updateWindowEvents();
-    void updatePlayerInput();
-    void update();
+    void updatePlayerInput(char moveDirection, char shotDirection);
+    bool playStep(char moveDirection, char shotDirection);
 
     void renderLabels();
     void render();
+    void performResetIfNeeded(bool reset);
 
-    GameMessage::GameState_ObjectDirection convertDirFromChar(char dir);
-    void sendGameStateToServer(ProtoClient *client);
-    void getActionsFromServer(ProtoClient *client);
+    GameMessage::State_ObjectDirection convertDirFromChar(char dir);
 
 public:
     Game();
     virtual ~Game();
-    void run(ProtoClient *client);
+    void run();
 
 };

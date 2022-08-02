@@ -47,7 +47,7 @@ struct TableStruct_game_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -58,43 +58,47 @@ namespace GameMessage {
 class Action;
 struct ActionDefaultTypeInternal;
 extern ActionDefaultTypeInternal _Action_default_instance_;
-class GameState;
-struct GameStateDefaultTypeInternal;
-extern GameStateDefaultTypeInternal _GameState_default_instance_;
+class Reset;
+struct ResetDefaultTypeInternal;
+extern ResetDefaultTypeInternal _Reset_default_instance_;
+class State;
+struct StateDefaultTypeInternal;
+extern StateDefaultTypeInternal _State_default_instance_;
 }  // namespace GameMessage
 PROTOBUF_NAMESPACE_OPEN
 template<> ::GameMessage::Action* Arena::CreateMaybeMessage<::GameMessage::Action>(Arena*);
-template<> ::GameMessage::GameState* Arena::CreateMaybeMessage<::GameMessage::GameState>(Arena*);
+template<> ::GameMessage::Reset* Arena::CreateMaybeMessage<::GameMessage::Reset>(Arena*);
+template<> ::GameMessage::State* Arena::CreateMaybeMessage<::GameMessage::State>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace GameMessage {
 
-enum GameState_ObjectDirection : int {
-  GameState_ObjectDirection_NOT_EXIST = 0,
-  GameState_ObjectDirection_UP = 1,
-  GameState_ObjectDirection_RIGHT = 2,
-  GameState_ObjectDirection_DOWN = 3,
-  GameState_ObjectDirection_LEFT = 4,
-  GameState_ObjectDirection_GameState_ObjectDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  GameState_ObjectDirection_GameState_ObjectDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum State_ObjectDirection : int {
+  State_ObjectDirection_NOT_EXIST = 0,
+  State_ObjectDirection_UP = 1,
+  State_ObjectDirection_RIGHT = 2,
+  State_ObjectDirection_DOWN = 3,
+  State_ObjectDirection_LEFT = 4,
+  State_ObjectDirection_State_ObjectDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  State_ObjectDirection_State_ObjectDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool GameState_ObjectDirection_IsValid(int value);
-constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MIN = GameState_ObjectDirection_NOT_EXIST;
-constexpr GameState_ObjectDirection GameState_ObjectDirection_ObjectDirection_MAX = GameState_ObjectDirection_LEFT;
-constexpr int GameState_ObjectDirection_ObjectDirection_ARRAYSIZE = GameState_ObjectDirection_ObjectDirection_MAX + 1;
+bool State_ObjectDirection_IsValid(int value);
+constexpr State_ObjectDirection State_ObjectDirection_ObjectDirection_MIN = State_ObjectDirection_NOT_EXIST;
+constexpr State_ObjectDirection State_ObjectDirection_ObjectDirection_MAX = State_ObjectDirection_LEFT;
+constexpr int State_ObjectDirection_ObjectDirection_ARRAYSIZE = State_ObjectDirection_ObjectDirection_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameState_ObjectDirection_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* State_ObjectDirection_descriptor();
 template<typename T>
-inline const std::string& GameState_ObjectDirection_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, GameState_ObjectDirection>::value ||
+inline const std::string& State_ObjectDirection_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, State_ObjectDirection>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function GameState_ObjectDirection_Name.");
+    "Incorrect type passed to function State_ObjectDirection_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    GameState_ObjectDirection_descriptor(), enum_t_value);
+    State_ObjectDirection_descriptor(), enum_t_value);
 }
-inline bool GameState_ObjectDirection_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, GameState_ObjectDirection* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GameState_ObjectDirection>(
-    GameState_ObjectDirection_descriptor(), name, value);
+inline bool State_ObjectDirection_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, State_ObjectDirection* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<State_ObjectDirection>(
+    State_ObjectDirection_descriptor(), name, value);
 }
 enum Action_ActionDirection : int {
   Action_ActionDirection_IDLE = 0,
@@ -126,24 +130,24 @@ inline bool Action_ActionDirection_Parse(
 }
 // ===================================================================
 
-class GameState final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.GameState) */ {
+class State final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.State) */ {
  public:
-  inline GameState() : GameState(nullptr) {}
-  ~GameState() override;
-  explicit constexpr GameState(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline State() : State(nullptr) {}
+  ~State() override;
+  explicit constexpr State(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  GameState(const GameState& from);
-  GameState(GameState&& from) noexcept
-    : GameState() {
+  State(const State& from);
+  State(State&& from) noexcept
+    : State() {
     *this = ::std::move(from);
   }
 
-  inline GameState& operator=(const GameState& from) {
+  inline State& operator=(const State& from) {
     CopyFrom(from);
     return *this;
   }
-  inline GameState& operator=(GameState&& from) noexcept {
+  inline State& operator=(State&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -166,20 +170,20 @@ class GameState final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const GameState& default_instance() {
+  static const State& default_instance() {
     return *internal_default_instance();
   }
-  static inline const GameState* internal_default_instance() {
-    return reinterpret_cast<const GameState*>(
-               &_GameState_default_instance_);
+  static inline const State* internal_default_instance() {
+    return reinterpret_cast<const State*>(
+               &_State_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(GameState& a, GameState& b) {
+  friend void swap(State& a, State& b) {
     a.Swap(&b);
   }
-  inline void Swap(GameState* other) {
+  inline void Swap(State* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -192,7 +196,7 @@ class GameState final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(GameState* other) {
+  void UnsafeArenaSwap(State* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -200,13 +204,13 @@ class GameState final :
 
   // implements Message ----------------------------------------------
 
-  GameState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<GameState>(arena);
+  State* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<State>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const GameState& from);
+  void CopyFrom(const State& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const GameState& from);
+  void MergeFrom(const State& from);
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
   public:
@@ -223,15 +227,15 @@ class GameState final :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(GameState* other);
+  void InternalSwap(State* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "GameMessage.GameState";
+    return "GameMessage.State";
   }
   protected:
-  explicit GameState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit State(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   private:
   static void ArenaDtor(void* object);
@@ -245,89 +249,72 @@ class GameState final :
 
   // nested types ----------------------------------------------------
 
-  typedef GameState_ObjectDirection ObjectDirection;
+  typedef State_ObjectDirection ObjectDirection;
   static constexpr ObjectDirection NOT_EXIST =
-    GameState_ObjectDirection_NOT_EXIST;
+    State_ObjectDirection_NOT_EXIST;
   static constexpr ObjectDirection UP =
-    GameState_ObjectDirection_UP;
+    State_ObjectDirection_UP;
   static constexpr ObjectDirection RIGHT =
-    GameState_ObjectDirection_RIGHT;
+    State_ObjectDirection_RIGHT;
   static constexpr ObjectDirection DOWN =
-    GameState_ObjectDirection_DOWN;
+    State_ObjectDirection_DOWN;
   static constexpr ObjectDirection LEFT =
-    GameState_ObjectDirection_LEFT;
+    State_ObjectDirection_LEFT;
   static inline bool ObjectDirection_IsValid(int value) {
-    return GameState_ObjectDirection_IsValid(value);
+    return State_ObjectDirection_IsValid(value);
   }
   static constexpr ObjectDirection ObjectDirection_MIN =
-    GameState_ObjectDirection_ObjectDirection_MIN;
+    State_ObjectDirection_ObjectDirection_MIN;
   static constexpr ObjectDirection ObjectDirection_MAX =
-    GameState_ObjectDirection_ObjectDirection_MAX;
+    State_ObjectDirection_ObjectDirection_MAX;
   static constexpr int ObjectDirection_ARRAYSIZE =
-    GameState_ObjectDirection_ObjectDirection_ARRAYSIZE;
+    State_ObjectDirection_ObjectDirection_ARRAYSIZE;
   static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
   ObjectDirection_descriptor() {
-    return GameState_ObjectDirection_descriptor();
+    return State_ObjectDirection_descriptor();
   }
   template<typename T>
   static inline const std::string& ObjectDirection_Name(T enum_t_value) {
     static_assert(::std::is_same<T, ObjectDirection>::value ||
       ::std::is_integral<T>::value,
       "Incorrect type passed to function ObjectDirection_Name.");
-    return GameState_ObjectDirection_Name(enum_t_value);
+    return State_ObjectDirection_Name(enum_t_value);
   }
   static inline bool ObjectDirection_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
       ObjectDirection* value) {
-    return GameState_ObjectDirection_Parse(name, value);
+    return State_ObjectDirection_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
   enum : int {
-    kCoinsNeededFieldNumber = 2,
     kClosestObstacleFieldNumber = 3,
     kClosestCoinFieldNumber = 4,
-    kClosestEnemyFieldNumber = 5,
     kIsClosestObstacleBoxFieldNumber = 1,
+    kCoinsNeededFieldNumber = 2,
     kGameOverFieldNumber = 9,
+    kClosestEnemyFieldNumber = 5,
     kFinishDirectionFieldNumber = 6,
     kRewardFieldNumber = 7,
     kClockTimeFieldNumber = 8,
+    kIterationFieldNumber = 10,
   };
-  // int32 coinsNeeded = 2;
-  void clear_coinsneeded();
-  int32_t coinsneeded() const;
-  void set_coinsneeded(int32_t value);
-  private:
-  int32_t _internal_coinsneeded() const;
-  void _internal_set_coinsneeded(int32_t value);
-  public:
-
-  // .GameMessage.GameState.ObjectDirection closestObstacle = 3;
+  // .GameMessage.State.ObjectDirection closestObstacle = 3;
   void clear_closestobstacle();
-  ::GameMessage::GameState_ObjectDirection closestobstacle() const;
-  void set_closestobstacle(::GameMessage::GameState_ObjectDirection value);
+  ::GameMessage::State_ObjectDirection closestobstacle() const;
+  void set_closestobstacle(::GameMessage::State_ObjectDirection value);
   private:
-  ::GameMessage::GameState_ObjectDirection _internal_closestobstacle() const;
-  void _internal_set_closestobstacle(::GameMessage::GameState_ObjectDirection value);
+  ::GameMessage::State_ObjectDirection _internal_closestobstacle() const;
+  void _internal_set_closestobstacle(::GameMessage::State_ObjectDirection value);
   public:
 
-  // .GameMessage.GameState.ObjectDirection closestCoin = 4;
+  // .GameMessage.State.ObjectDirection closestCoin = 4;
   void clear_closestcoin();
-  ::GameMessage::GameState_ObjectDirection closestcoin() const;
-  void set_closestcoin(::GameMessage::GameState_ObjectDirection value);
+  ::GameMessage::State_ObjectDirection closestcoin() const;
+  void set_closestcoin(::GameMessage::State_ObjectDirection value);
   private:
-  ::GameMessage::GameState_ObjectDirection _internal_closestcoin() const;
-  void _internal_set_closestcoin(::GameMessage::GameState_ObjectDirection value);
-  public:
-
-  // .GameMessage.GameState.ObjectDirection closestEnemy = 5;
-  void clear_closestenemy();
-  ::GameMessage::GameState_ObjectDirection closestenemy() const;
-  void set_closestenemy(::GameMessage::GameState_ObjectDirection value);
-  private:
-  ::GameMessage::GameState_ObjectDirection _internal_closestenemy() const;
-  void _internal_set_closestenemy(::GameMessage::GameState_ObjectDirection value);
+  ::GameMessage::State_ObjectDirection _internal_closestcoin() const;
+  void _internal_set_closestcoin(::GameMessage::State_ObjectDirection value);
   public:
 
   // bool isClosestObstacleBox = 1;
@@ -339,6 +326,15 @@ class GameState final :
   void _internal_set_isclosestobstaclebox(bool value);
   public:
 
+  // bool coinsNeeded = 2;
+  void clear_coinsneeded();
+  bool coinsneeded() const;
+  void set_coinsneeded(bool value);
+  private:
+  bool _internal_coinsneeded() const;
+  void _internal_set_coinsneeded(bool value);
+  public:
+
   // bool gameOver = 9;
   void clear_gameover();
   bool gameover() const;
@@ -348,13 +344,22 @@ class GameState final :
   void _internal_set_gameover(bool value);
   public:
 
-  // .GameMessage.GameState.ObjectDirection finishDirection = 6;
-  void clear_finishdirection();
-  ::GameMessage::GameState_ObjectDirection finishdirection() const;
-  void set_finishdirection(::GameMessage::GameState_ObjectDirection value);
+  // .GameMessage.State.ObjectDirection closestEnemy = 5;
+  void clear_closestenemy();
+  ::GameMessage::State_ObjectDirection closestenemy() const;
+  void set_closestenemy(::GameMessage::State_ObjectDirection value);
   private:
-  ::GameMessage::GameState_ObjectDirection _internal_finishdirection() const;
-  void _internal_set_finishdirection(::GameMessage::GameState_ObjectDirection value);
+  ::GameMessage::State_ObjectDirection _internal_closestenemy() const;
+  void _internal_set_closestenemy(::GameMessage::State_ObjectDirection value);
+  public:
+
+  // .GameMessage.State.ObjectDirection finishDirection = 6;
+  void clear_finishdirection();
+  ::GameMessage::State_ObjectDirection finishdirection() const;
+  void set_finishdirection(::GameMessage::State_ObjectDirection value);
+  private:
+  ::GameMessage::State_ObjectDirection _internal_finishdirection() const;
+  void _internal_set_finishdirection(::GameMessage::State_ObjectDirection value);
   public:
 
   // int32 reward = 7;
@@ -375,22 +380,32 @@ class GameState final :
   void _internal_set_clocktime(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:GameMessage.GameState)
+  // int32 iteration = 10;
+  void clear_iteration();
+  int32_t iteration() const;
+  void set_iteration(int32_t value);
+  private:
+  int32_t _internal_iteration() const;
+  void _internal_set_iteration(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:GameMessage.State)
  private:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  int32_t coinsneeded_;
   int closestobstacle_;
   int closestcoin_;
-  int closestenemy_;
   bool isclosestobstaclebox_;
+  bool coinsneeded_;
   bool gameover_;
+  int closestenemy_;
   int finishdirection_;
   int32_t reward_;
   int32_t clocktime_;
+  int32_t iteration_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_game_2eproto;
 };
@@ -556,7 +571,6 @@ class Action final :
   enum : int {
     kMoveDirectionFieldNumber = 1,
     kShotDirectionFieldNumber = 2,
-    kSetResetFieldNumber = 3,
   };
   // .GameMessage.Action.ActionDirection moveDirection = 1;
   void clear_movedirection();
@@ -576,15 +590,6 @@ class Action final :
   void _internal_set_shotdirection(::GameMessage::Action_ActionDirection value);
   public:
 
-  // bool setReset = 3;
-  void clear_setreset();
-  bool setreset() const;
-  void set_setreset(bool value);
-  private:
-  bool _internal_setreset() const;
-  void _internal_set_setreset(bool value);
-  public:
-
   // @@protoc_insertion_point(class_scope:GameMessage.Action)
  private:
   class _Internal;
@@ -594,7 +599,152 @@ class Action final :
   typedef void DestructorSkippable_;
   int movedirection_;
   int shotdirection_;
-  bool setreset_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_game_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Reset final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.Reset) */ {
+ public:
+  inline Reset() : Reset(nullptr) {}
+  ~Reset() override;
+  explicit constexpr Reset(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Reset(const Reset& from);
+  Reset(Reset&& from) noexcept
+    : Reset() {
+    *this = ::std::move(from);
+  }
+
+  inline Reset& operator=(const Reset& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Reset& operator=(Reset&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Reset& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Reset* internal_default_instance() {
+    return reinterpret_cast<const Reset*>(
+               &_Reset_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(Reset& a, Reset& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Reset* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Reset* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Reset* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Reset>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Reset& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const Reset& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Reset* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "GameMessage.Reset";
+  }
+  protected:
+  explicit Reset(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kResetNeededFieldNumber = 1,
+  };
+  // bool resetNeeded = 1;
+  void clear_resetneeded();
+  bool resetneeded() const;
+  void set_resetneeded(bool value);
+  private:
+  bool _internal_resetneeded() const;
+  void _internal_set_resetneeded(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:GameMessage.Reset)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool resetneeded_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_game_2eproto;
 };
@@ -607,186 +757,206 @@ class Action final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// GameState
+// State
 
 // bool isClosestObstacleBox = 1;
-inline void GameState::clear_isclosestobstaclebox() {
+inline void State::clear_isclosestobstaclebox() {
   isclosestobstaclebox_ = false;
 }
-inline bool GameState::_internal_isclosestobstaclebox() const {
+inline bool State::_internal_isclosestobstaclebox() const {
   return isclosestobstaclebox_;
 }
-inline bool GameState::isclosestobstaclebox() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.isClosestObstacleBox)
+inline bool State::isclosestobstaclebox() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.isClosestObstacleBox)
   return _internal_isclosestobstaclebox();
 }
-inline void GameState::_internal_set_isclosestobstaclebox(bool value) {
+inline void State::_internal_set_isclosestobstaclebox(bool value) {
   
   isclosestobstaclebox_ = value;
 }
-inline void GameState::set_isclosestobstaclebox(bool value) {
+inline void State::set_isclosestobstaclebox(bool value) {
   _internal_set_isclosestobstaclebox(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.isClosestObstacleBox)
+  // @@protoc_insertion_point(field_set:GameMessage.State.isClosestObstacleBox)
 }
 
-// int32 coinsNeeded = 2;
-inline void GameState::clear_coinsneeded() {
-  coinsneeded_ = 0;
+// bool coinsNeeded = 2;
+inline void State::clear_coinsneeded() {
+  coinsneeded_ = false;
 }
-inline int32_t GameState::_internal_coinsneeded() const {
+inline bool State::_internal_coinsneeded() const {
   return coinsneeded_;
 }
-inline int32_t GameState::coinsneeded() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.coinsNeeded)
+inline bool State::coinsneeded() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.coinsNeeded)
   return _internal_coinsneeded();
 }
-inline void GameState::_internal_set_coinsneeded(int32_t value) {
+inline void State::_internal_set_coinsneeded(bool value) {
   
   coinsneeded_ = value;
 }
-inline void GameState::set_coinsneeded(int32_t value) {
+inline void State::set_coinsneeded(bool value) {
   _internal_set_coinsneeded(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.coinsNeeded)
+  // @@protoc_insertion_point(field_set:GameMessage.State.coinsNeeded)
 }
 
-// .GameMessage.GameState.ObjectDirection closestObstacle = 3;
-inline void GameState::clear_closestobstacle() {
+// .GameMessage.State.ObjectDirection closestObstacle = 3;
+inline void State::clear_closestobstacle() {
   closestobstacle_ = 0;
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestobstacle() const {
-  return static_cast< ::GameMessage::GameState_ObjectDirection >(closestobstacle_);
+inline ::GameMessage::State_ObjectDirection State::_internal_closestobstacle() const {
+  return static_cast< ::GameMessage::State_ObjectDirection >(closestobstacle_);
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::closestobstacle() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestObstacle)
+inline ::GameMessage::State_ObjectDirection State::closestobstacle() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.closestObstacle)
   return _internal_closestobstacle();
 }
-inline void GameState::_internal_set_closestobstacle(::GameMessage::GameState_ObjectDirection value) {
+inline void State::_internal_set_closestobstacle(::GameMessage::State_ObjectDirection value) {
   
   closestobstacle_ = value;
 }
-inline void GameState::set_closestobstacle(::GameMessage::GameState_ObjectDirection value) {
+inline void State::set_closestobstacle(::GameMessage::State_ObjectDirection value) {
   _internal_set_closestobstacle(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestObstacle)
+  // @@protoc_insertion_point(field_set:GameMessage.State.closestObstacle)
 }
 
-// .GameMessage.GameState.ObjectDirection closestCoin = 4;
-inline void GameState::clear_closestcoin() {
+// .GameMessage.State.ObjectDirection closestCoin = 4;
+inline void State::clear_closestcoin() {
   closestcoin_ = 0;
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestcoin() const {
-  return static_cast< ::GameMessage::GameState_ObjectDirection >(closestcoin_);
+inline ::GameMessage::State_ObjectDirection State::_internal_closestcoin() const {
+  return static_cast< ::GameMessage::State_ObjectDirection >(closestcoin_);
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::closestcoin() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestCoin)
+inline ::GameMessage::State_ObjectDirection State::closestcoin() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.closestCoin)
   return _internal_closestcoin();
 }
-inline void GameState::_internal_set_closestcoin(::GameMessage::GameState_ObjectDirection value) {
+inline void State::_internal_set_closestcoin(::GameMessage::State_ObjectDirection value) {
   
   closestcoin_ = value;
 }
-inline void GameState::set_closestcoin(::GameMessage::GameState_ObjectDirection value) {
+inline void State::set_closestcoin(::GameMessage::State_ObjectDirection value) {
   _internal_set_closestcoin(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestCoin)
+  // @@protoc_insertion_point(field_set:GameMessage.State.closestCoin)
 }
 
-// .GameMessage.GameState.ObjectDirection closestEnemy = 5;
-inline void GameState::clear_closestenemy() {
+// .GameMessage.State.ObjectDirection closestEnemy = 5;
+inline void State::clear_closestenemy() {
   closestenemy_ = 0;
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::_internal_closestenemy() const {
-  return static_cast< ::GameMessage::GameState_ObjectDirection >(closestenemy_);
+inline ::GameMessage::State_ObjectDirection State::_internal_closestenemy() const {
+  return static_cast< ::GameMessage::State_ObjectDirection >(closestenemy_);
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::closestenemy() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.closestEnemy)
+inline ::GameMessage::State_ObjectDirection State::closestenemy() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.closestEnemy)
   return _internal_closestenemy();
 }
-inline void GameState::_internal_set_closestenemy(::GameMessage::GameState_ObjectDirection value) {
+inline void State::_internal_set_closestenemy(::GameMessage::State_ObjectDirection value) {
   
   closestenemy_ = value;
 }
-inline void GameState::set_closestenemy(::GameMessage::GameState_ObjectDirection value) {
+inline void State::set_closestenemy(::GameMessage::State_ObjectDirection value) {
   _internal_set_closestenemy(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.closestEnemy)
+  // @@protoc_insertion_point(field_set:GameMessage.State.closestEnemy)
 }
 
-// .GameMessage.GameState.ObjectDirection finishDirection = 6;
-inline void GameState::clear_finishdirection() {
+// .GameMessage.State.ObjectDirection finishDirection = 6;
+inline void State::clear_finishdirection() {
   finishdirection_ = 0;
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::_internal_finishdirection() const {
-  return static_cast< ::GameMessage::GameState_ObjectDirection >(finishdirection_);
+inline ::GameMessage::State_ObjectDirection State::_internal_finishdirection() const {
+  return static_cast< ::GameMessage::State_ObjectDirection >(finishdirection_);
 }
-inline ::GameMessage::GameState_ObjectDirection GameState::finishdirection() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.finishDirection)
+inline ::GameMessage::State_ObjectDirection State::finishdirection() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.finishDirection)
   return _internal_finishdirection();
 }
-inline void GameState::_internal_set_finishdirection(::GameMessage::GameState_ObjectDirection value) {
+inline void State::_internal_set_finishdirection(::GameMessage::State_ObjectDirection value) {
   
   finishdirection_ = value;
 }
-inline void GameState::set_finishdirection(::GameMessage::GameState_ObjectDirection value) {
+inline void State::set_finishdirection(::GameMessage::State_ObjectDirection value) {
   _internal_set_finishdirection(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.finishDirection)
+  // @@protoc_insertion_point(field_set:GameMessage.State.finishDirection)
 }
 
 // int32 reward = 7;
-inline void GameState::clear_reward() {
+inline void State::clear_reward() {
   reward_ = 0;
 }
-inline int32_t GameState::_internal_reward() const {
+inline int32_t State::_internal_reward() const {
   return reward_;
 }
-inline int32_t GameState::reward() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.reward)
+inline int32_t State::reward() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.reward)
   return _internal_reward();
 }
-inline void GameState::_internal_set_reward(int32_t value) {
+inline void State::_internal_set_reward(int32_t value) {
   
   reward_ = value;
 }
-inline void GameState::set_reward(int32_t value) {
+inline void State::set_reward(int32_t value) {
   _internal_set_reward(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.reward)
+  // @@protoc_insertion_point(field_set:GameMessage.State.reward)
 }
 
 // int32 clockTime = 8;
-inline void GameState::clear_clocktime() {
+inline void State::clear_clocktime() {
   clocktime_ = 0;
 }
-inline int32_t GameState::_internal_clocktime() const {
+inline int32_t State::_internal_clocktime() const {
   return clocktime_;
 }
-inline int32_t GameState::clocktime() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.clockTime)
+inline int32_t State::clocktime() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.clockTime)
   return _internal_clocktime();
 }
-inline void GameState::_internal_set_clocktime(int32_t value) {
+inline void State::_internal_set_clocktime(int32_t value) {
   
   clocktime_ = value;
 }
-inline void GameState::set_clocktime(int32_t value) {
+inline void State::set_clocktime(int32_t value) {
   _internal_set_clocktime(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.clockTime)
+  // @@protoc_insertion_point(field_set:GameMessage.State.clockTime)
 }
 
 // bool gameOver = 9;
-inline void GameState::clear_gameover() {
+inline void State::clear_gameover() {
   gameover_ = false;
 }
-inline bool GameState::_internal_gameover() const {
+inline bool State::_internal_gameover() const {
   return gameover_;
 }
-inline bool GameState::gameover() const {
-  // @@protoc_insertion_point(field_get:GameMessage.GameState.gameOver)
+inline bool State::gameover() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.gameOver)
   return _internal_gameover();
 }
-inline void GameState::_internal_set_gameover(bool value) {
+inline void State::_internal_set_gameover(bool value) {
   
   gameover_ = value;
 }
-inline void GameState::set_gameover(bool value) {
+inline void State::set_gameover(bool value) {
   _internal_set_gameover(value);
-  // @@protoc_insertion_point(field_set:GameMessage.GameState.gameOver)
+  // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
+}
+
+// int32 iteration = 10;
+inline void State::clear_iteration() {
+  iteration_ = 0;
+}
+inline int32_t State::_internal_iteration() const {
+  return iteration_;
+}
+inline int32_t State::iteration() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.iteration)
+  return _internal_iteration();
+}
+inline void State::_internal_set_iteration(int32_t value) {
+  
+  iteration_ = value;
+}
+inline void State::set_iteration(int32_t value) {
+  _internal_set_iteration(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.iteration)
 }
 
 // -------------------------------------------------------------------
@@ -833,29 +1003,35 @@ inline void Action::set_shotdirection(::GameMessage::Action_ActionDirection valu
   // @@protoc_insertion_point(field_set:GameMessage.Action.shotDirection)
 }
 
-// bool setReset = 3;
-inline void Action::clear_setreset() {
-  setreset_ = false;
+// -------------------------------------------------------------------
+
+// Reset
+
+// bool resetNeeded = 1;
+inline void Reset::clear_resetneeded() {
+  resetneeded_ = false;
 }
-inline bool Action::_internal_setreset() const {
-  return setreset_;
+inline bool Reset::_internal_resetneeded() const {
+  return resetneeded_;
 }
-inline bool Action::setreset() const {
-  // @@protoc_insertion_point(field_get:GameMessage.Action.setReset)
-  return _internal_setreset();
+inline bool Reset::resetneeded() const {
+  // @@protoc_insertion_point(field_get:GameMessage.Reset.resetNeeded)
+  return _internal_resetneeded();
 }
-inline void Action::_internal_set_setreset(bool value) {
+inline void Reset::_internal_set_resetneeded(bool value) {
   
-  setreset_ = value;
+  resetneeded_ = value;
 }
-inline void Action::set_setreset(bool value) {
-  _internal_set_setreset(value);
-  // @@protoc_insertion_point(field_set:GameMessage.Action.setReset)
+inline void Reset::set_resetneeded(bool value) {
+  _internal_set_resetneeded(value);
+  // @@protoc_insertion_point(field_set:GameMessage.Reset.resetNeeded)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 
@@ -865,10 +1041,10 @@ inline void Action::set_setreset(bool value) {
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::GameMessage::GameState_ObjectDirection> : ::std::true_type {};
+template <> struct is_proto_enum< ::GameMessage::State_ObjectDirection> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::GameState_ObjectDirection>() {
-  return ::GameMessage::GameState_ObjectDirection_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::State_ObjectDirection>() {
+  return ::GameMessage::State_ObjectDirection_descriptor();
 }
 template <> struct is_proto_enum< ::GameMessage::Action_ActionDirection> : ::std::true_type {};
 template <>

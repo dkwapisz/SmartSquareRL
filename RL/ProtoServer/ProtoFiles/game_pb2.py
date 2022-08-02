@@ -19,14 +19,14 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xb9\x03\n\tGameState\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x05\x12?\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12;\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12<\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12?\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32&.GameMessage.GameState.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\x12\x11\n\tclockTime\x18\x08 \x01(\x05\x12\x10\n\x08gameOver\x18\t \x01(\x08\"G\n\x0fObjectDirection\x12\r\n\tNOT_EXIST\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\xd6\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12\x10\n\x08setReset\x18\x03 \x01(\x08\"B\n\x0f\x41\x63tionDirection\x12\x08\n\x04IDLE\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\x32N\n\x11\x45xchangeGameState\x12\x39\n\x08\x45xchange\x12\x16.GameMessage.GameState\x1a\x13.GameMessage.Action\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xb8\x03\n\x05State\x12\x1c\n\x14isClosestObstacleBox\x18\x01 \x01(\x08\x12\x13\n\x0b\x63oinsNeeded\x18\x02 \x01(\x08\x12;\n\x0f\x63losestObstacle\x18\x03 \x01(\x0e\x32\".GameMessage.State.ObjectDirection\x12\x37\n\x0b\x63losestCoin\x18\x04 \x01(\x0e\x32\".GameMessage.State.ObjectDirection\x12\x38\n\x0c\x63losestEnemy\x18\x05 \x01(\x0e\x32\".GameMessage.State.ObjectDirection\x12;\n\x0f\x66inishDirection\x18\x06 \x01(\x0e\x32\".GameMessage.State.ObjectDirection\x12\x0e\n\x06reward\x18\x07 \x01(\x05\x12\x11\n\tclockTime\x18\x08 \x01(\x05\x12\x10\n\x08gameOver\x18\t \x01(\x08\x12\x11\n\titeration\x18\n \x01(\x05\"G\n\x0fObjectDirection\x12\r\n\tNOT_EXIST\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\xc4\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\"B\n\x0f\x41\x63tionDirection\x12\x08\n\x04IDLE\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\x1c\n\x05Reset\x12\x13\n\x0bresetNeeded\x18\x01 \x01(\x08\x32\x87\x01\n\x13StateActionExchange\x12\x38\n\x0bStateAction\x12\x12.GameMessage.State\x1a\x13.GameMessage.Action\"\x00\x12\x36\n\nStateReset\x12\x12.GameMessage.State\x1a\x12.GameMessage.Reset\"\x00\x62\x06proto3'
 )
 
 
 
-_GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
+_STATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   name='ObjectDirection',
-  full_name='GameMessage.GameState.ObjectDirection',
+  full_name='GameMessage.State.ObjectDirection',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -59,10 +59,10 @@ _GAMESTATE_OBJECTDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=398,
-  serialized_end=469,
+  serialized_start=397,
+  serialized_end=468,
 )
-_sym_db.RegisterEnumDescriptor(_GAMESTATE_OBJECTDIRECTION)
+_sym_db.RegisterEnumDescriptor(_STATE_OBJECTDIRECTION)
 
 _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   name='ActionDirection',
@@ -99,80 +99,87 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=620,
-  serialized_end=686,
+  serialized_start=601,
+  serialized_end=667,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION_ACTIONDIRECTION)
 
 
-_GAMESTATE = _descriptor.Descriptor(
-  name='GameState',
-  full_name='GameMessage.GameState',
+_STATE = _descriptor.Descriptor(
+  name='State',
+  full_name='GameMessage.State',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='isClosestObstacleBox', full_name='GameMessage.GameState.isClosestObstacleBox', index=0,
+      name='isClosestObstacleBox', full_name='GameMessage.State.isClosestObstacleBox', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='coinsNeeded', full_name='GameMessage.GameState.coinsNeeded', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='coinsNeeded', full_name='GameMessage.State.coinsNeeded', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='closestObstacle', full_name='GameMessage.GameState.closestObstacle', index=2,
+      name='closestObstacle', full_name='GameMessage.State.closestObstacle', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='closestCoin', full_name='GameMessage.GameState.closestCoin', index=3,
+      name='closestCoin', full_name='GameMessage.State.closestCoin', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='closestEnemy', full_name='GameMessage.GameState.closestEnemy', index=4,
+      name='closestEnemy', full_name='GameMessage.State.closestEnemy', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='finishDirection', full_name='GameMessage.GameState.finishDirection', index=5,
+      name='finishDirection', full_name='GameMessage.State.finishDirection', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='reward', full_name='GameMessage.GameState.reward', index=6,
+      name='reward', full_name='GameMessage.State.reward', index=6,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='clockTime', full_name='GameMessage.GameState.clockTime', index=7,
+      name='clockTime', full_name='GameMessage.State.clockTime', index=7,
       number=8, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='gameOver', full_name='GameMessage.GameState.gameOver', index=8,
+      name='gameOver', full_name='GameMessage.State.gameOver', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='iteration', full_name='GameMessage.State.iteration', index=9,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -181,7 +188,7 @@ _GAMESTATE = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _GAMESTATE_OBJECTDIRECTION,
+    _STATE_OBJECTDIRECTION,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -190,7 +197,7 @@ _GAMESTATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=28,
-  serialized_end=469,
+  serialized_end=468,
 )
 
 
@@ -216,13 +223,6 @@ _ACTION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='setReset', full_name='GameMessage.Action.setReset', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -236,28 +236,61 @@ _ACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=472,
-  serialized_end=686,
+  serialized_start=471,
+  serialized_end=667,
 )
 
-_GAMESTATE.fields_by_name['closestObstacle'].enum_type = _GAMESTATE_OBJECTDIRECTION
-_GAMESTATE.fields_by_name['closestCoin'].enum_type = _GAMESTATE_OBJECTDIRECTION
-_GAMESTATE.fields_by_name['closestEnemy'].enum_type = _GAMESTATE_OBJECTDIRECTION
-_GAMESTATE.fields_by_name['finishDirection'].enum_type = _GAMESTATE_OBJECTDIRECTION
-_GAMESTATE_OBJECTDIRECTION.containing_type = _GAMESTATE
+
+_RESET = _descriptor.Descriptor(
+  name='Reset',
+  full_name='GameMessage.Reset',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='resetNeeded', full_name='GameMessage.Reset.resetNeeded', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=669,
+  serialized_end=697,
+)
+
+_STATE.fields_by_name['closestObstacle'].enum_type = _STATE_OBJECTDIRECTION
+_STATE.fields_by_name['closestCoin'].enum_type = _STATE_OBJECTDIRECTION
+_STATE.fields_by_name['closestEnemy'].enum_type = _STATE_OBJECTDIRECTION
+_STATE.fields_by_name['finishDirection'].enum_type = _STATE_OBJECTDIRECTION
+_STATE_OBJECTDIRECTION.containing_type = _STATE
 _ACTION.fields_by_name['moveDirection'].enum_type = _ACTION_ACTIONDIRECTION
 _ACTION.fields_by_name['shotDirection'].enum_type = _ACTION_ACTIONDIRECTION
 _ACTION_ACTIONDIRECTION.containing_type = _ACTION
-DESCRIPTOR.message_types_by_name['GameState'] = _GAMESTATE
+DESCRIPTOR.message_types_by_name['State'] = _STATE
 DESCRIPTOR.message_types_by_name['Action'] = _ACTION
+DESCRIPTOR.message_types_by_name['Reset'] = _RESET
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-GameState = _reflection.GeneratedProtocolMessageType('GameState', (_message.Message,), {
-  'DESCRIPTOR' : _GAMESTATE,
+State = _reflection.GeneratedProtocolMessageType('State', (_message.Message,), {
+  'DESCRIPTOR' : _STATE,
   '__module__' : 'game_pb2'
-  # @@protoc_insertion_point(class_scope:GameMessage.GameState)
+  # @@protoc_insertion_point(class_scope:GameMessage.State)
   })
-_sym_db.RegisterMessage(GameState)
+_sym_db.RegisterMessage(State)
 
 Action = _reflection.GeneratedProtocolMessageType('Action', (_message.Message,), {
   'DESCRIPTOR' : _ACTION,
@@ -266,31 +299,48 @@ Action = _reflection.GeneratedProtocolMessageType('Action', (_message.Message,),
   })
 _sym_db.RegisterMessage(Action)
 
+Reset = _reflection.GeneratedProtocolMessageType('Reset', (_message.Message,), {
+  'DESCRIPTOR' : _RESET,
+  '__module__' : 'game_pb2'
+  # @@protoc_insertion_point(class_scope:GameMessage.Reset)
+  })
+_sym_db.RegisterMessage(Reset)
 
 
-_EXCHANGEGAMESTATE = _descriptor.ServiceDescriptor(
-  name='ExchangeGameState',
-  full_name='GameMessage.ExchangeGameState',
+
+_STATEACTIONEXCHANGE = _descriptor.ServiceDescriptor(
+  name='StateActionExchange',
+  full_name='GameMessage.StateActionExchange',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=688,
-  serialized_end=766,
+  serialized_start=700,
+  serialized_end=835,
   methods=[
   _descriptor.MethodDescriptor(
-    name='Exchange',
-    full_name='GameMessage.ExchangeGameState.Exchange',
+    name='StateAction',
+    full_name='GameMessage.StateActionExchange.StateAction',
     index=0,
     containing_service=None,
-    input_type=_GAMESTATE,
+    input_type=_STATE,
     output_type=_ACTION,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
+  _descriptor.MethodDescriptor(
+    name='StateReset',
+    full_name='GameMessage.StateActionExchange.StateReset',
+    index=1,
+    containing_service=None,
+    input_type=_STATE,
+    output_type=_RESET,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
 ])
-_sym_db.RegisterServiceDescriptor(_EXCHANGEGAMESTATE)
+_sym_db.RegisterServiceDescriptor(_STATEACTIONEXCHANGE)
 
-DESCRIPTOR.services_by_name['ExchangeGameState'] = _EXCHANGEGAMESTATE
+DESCRIPTOR.services_by_name['StateActionExchange'] = _STATEACTIONEXCHANGE
 
 # @@protoc_insertion_point(module_scope)

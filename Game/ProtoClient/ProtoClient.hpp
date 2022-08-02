@@ -1,7 +1,3 @@
-#ifndef PROTOCLIENT_HPP
-#define PROTOCLIENT_HPP
-
-#include <grpc/support/log.h>
 #include <grpcpp/grpcpp.h>
 #include "ProtoFiles/game.grpc.pb.h"
 
@@ -15,44 +11,25 @@ using grpc::ClientContext;
 using grpc::CompletionQueue;
 using grpc::Status;
 
-using GameMessage::ExchangeGameState;
-using GameMessage::GameState;
-using GameMessage::Action;
+using namespace GameMessage;
 
 class ProtoClient {
 private:
-    struct AsyncClientCall {
-        Action reply;
-        ClientContext context;
-        Status status;
-        std::unique_ptr<ClientAsyncResponseReader<Action>> response_reader;
-    };
-    std::unique_ptr<ExchangeGameState::Stub> stub_;
-    CompletionQueue cq_;
-    char shotAction;
-    char moveAction;
-    bool setReset;
-
-    void setMoveAction(GameMessage::Action_ActionDirection moveDirection);
-    void setShotAction(GameMessage::Action_ActionDirection moveDirection);
+    std::unique_ptr<StateActionExchange::Stub> _stub;
+    char convertActionDir(GameMessage::Action_ActionDirection actionDirection);
 
 public:
-    explicit ProtoClient(std::shared_ptr<Channel> channel) : stub_(ExchangeGameState::NewStub(channel)) {}
-    void Exchange(bool closestObstacleBox,
-                  int32_t coinsNeeded,
-                  GameMessage::GameState_ObjectDirection closestObstacleDir,
-                  GameMessage::GameState_ObjectDirection closestCoinDir,
-                  GameMessage::GameState_ObjectDirection closestEnemyDir,
-                  GameMessage::GameState_ObjectDirection finishDir,
-                  int32_t reward,
-                  int32_t clockTime,
-                  bool gameOver);
+    ProtoClient(std::shared_ptr<Channel> channel) : _stub{StateActionExchange::NewStub(channel)} {}
+    // TODO Wrap State into nested message to easier handling
 
-    void AsyncCompleteRpc();
-    char getMoveAction() const;
-    char getShotAction() const;
-    bool isSetReset() const;
-    void setSetReset(bool setReset);
+    char *StateAction(bool isClosestObstacleBox, bool coinsNeeded,
+                      State_ObjectDirection closestObstacle, State_ObjectDirection closestCoin,
+                      State_ObjectDirection closestEnemy, State_ObjectDirection finishDirection,
+                      int32_t clockTime, int32_t iteration);
+
+    bool StateReset(bool isClosestObstacleBox, bool coinsNeeded,
+                    State_ObjectDirection closestObstacle, State_ObjectDirection closestCoin,
+                    State_ObjectDirection closestEnemy, State_ObjectDirection finishDirection,
+                    int32_t reward, bool gameOver);
 };
 
-#endif //PROTOCLIENT_HPP

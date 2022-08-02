@@ -79,33 +79,37 @@ void Game::renderLabels() {
     this -> window -> draw(*coinCountLabel);
 }
 
-GameMessage::GameState_ObjectDirection Game::convertDirFromChar(char dir) {
-    if (dir == 'U') {
-        return GameMessage::GameState_ObjectDirection_UP;
-    }
-    else if (dir == 'R') {
-        return GameMessage::GameState_ObjectDirection_RIGHT;
-    }
-    else if (dir == 'D') {
-        return GameMessage::GameState_ObjectDirection_DOWN;
-    }
-    else if (dir == 'L') {
-        return GameMessage::GameState_ObjectDirection_LEFT;
-    }
-    else {
-        return GameMessage::GameState_ObjectDirection_NOT_EXIST;
-    }
-}
+void Game::run() {
+    ProtoClient client{grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())};
+    bool gameOver;
+    char* action;
+    bool reset;
 
-void Game::run(ProtoClient* client) {
     while (this -> window -> isOpen()) {
         if (!gameFinished) {
-            this -> sendGameStateToServer(client);
-            this -> getActionsFromServer(client);
-            this -> level -> setReward(0);
-            this -> level -> setGameOver(false);
-            this -> update();
+            // TODO Refactor
+            action = client.StateAction(level -> isClosestObstacleBox(),
+                                        level -> areCoinsNeeded(),
+                                        convertDirFromChar(level -> getClosestObstacleDir()),
+                                        convertDirFromChar(level -> getClosestCoinDir()),
+                                        convertDirFromChar(level -> getClosestEnemyDir()),
+                                        convertDirFromChar(level -> getFinishDirectionDir()),
+                                        level -> getClockTime(),
+                                        level -> getPlayer()-> getDeathsCount());
+
+            gameOver = this -> playStep(action[0], action[1]);
             this -> render();
+
+            reset = client.StateReset(level -> isClosestObstacleBox(),
+                                      level -> areCoinsNeeded(),
+                                      convertDirFromChar(level -> getClosestObstacleDir()),
+                                      convertDirFromChar(level -> getClosestCoinDir()),
+                                      convertDirFromChar(level -> getClosestEnemyDir()),
+                                      convertDirFromChar(level -> getFinishDirectionDir()),
+                                      level -> getReward(),
+                                      level -> isGameOver());
+
+            performResetIfNeeded(gameOver || reset);
         } else {
             this -> window -> close();
             delete this;
@@ -124,55 +128,54 @@ void Game::updateWindowEvents() {
     }
 }
 
-void Game::updatePlayerInput() {
-    inputMovement();
-    inputShooting();
+void Game::updatePlayerInput(char moveDirection, char shotDirection) {
+    inputMovement(moveDirection);
+    inputShooting(shotDirection);
 }
 
-void Game::inputMovement() {
-    if (moveAction == 'L') {
+void Game::inputMovement(char direction) {
+    if (direction == 'L') {
         this -> level -> movePlayer(-1.f, 0.f);
     }
-    if (moveAction == 'R') {
+    if (direction == 'R') {
         this -> level -> movePlayer(1.f, 0.f);
     }
-    if (moveAction == 'U') {
+    if (direction == 'U') {
         this -> level -> movePlayer(0.f, -1.f);
     }
-    if (moveAction == 'D') {
+    if (direction == 'D') {
         this -> level -> movePlayer(0.f, 1.f);
     }
 }
 
-void Game::inputShooting() {
-    if (shotAction == 'L') {
+void Game::inputShooting(char direction) {
+    if (direction == 'L') {
         this -> level -> shot(-1.f, 0.f);
     }
-    if (shotAction == 'R') {
+    if (direction == 'R') {
         this -> level -> shot(1.f, 0.f);
     }
-    if (shotAction == 'U') {
+    if (direction == 'U') {
         this -> level -> shot(0.f, -1.f);
     }
-    if (shotAction == 'D') {
+    if (direction == 'D') {
         this -> level -> shot(0.f, 1.f);
     }
 }
 
-void Game::update() {
+bool Game::playStep(char moveDirection, char shotDirection) {
     this -> updateWindowEvents();
-    this -> updatePlayerInput();
+    this -> updatePlayerInput(moveDirection, shotDirection);
     this -> updateLabels();
 
     this -> level -> updateBullets();
     this -> level -> updateDangerMovement();
     this -> level -> calculateClosestObjectsDir();
 
-    if (this -> level -> isSetReset()) {
-        this -> level -> resetLevel();
-    }
-
     if (this -> level -> isLevelFinished()) {
+        return true;
+
+        // TODO Think what to do with this (probably just reset level)
         int lastLevelNum = this -> level -> getLevelNumber();
         int mapsCount = this -> level -> getMapsCount();
 
@@ -183,8 +186,9 @@ void Game::update() {
             delete this -> level;
             this -> level = new Level(lastLevelNum + 1);
         }
-
     }
+
+    return this -> level -> isGameOver();
 }
 
 void Game::render() {
@@ -196,21 +200,27 @@ void Game::render() {
     this -> window -> display();
 }
 
-void Game::sendGameStateToServer(ProtoClient *client) {
-    client -> Exchange(level -> isClosestObstacleBox(),
-                       level -> getCoinsNeeded(),
-                       convertDirFromChar(level -> getClosestObstacleDir()),
-                       convertDirFromChar(level -> getClosestCoinDir()),
-                       convertDirFromChar(level -> getClosestEnemyDir()),
-                       convertDirFromChar(level -> getFinishDirectionDir()),
-                       level -> getReward(),
-                       level -> getClockTime(),
-                       level -> isGameOver());
-
+void Game::performResetIfNeeded(bool reset) {
+    if (reset) {
+        this -> level -> resetLevel();
+        this -> level -> setGameOver(false);
+    }
 }
 
-void Game::getActionsFromServer(ProtoClient *client) {
-    this -> moveAction = client -> getMoveAction();
-    this -> shotAction = client -> getShotAction();
-    this -> level -> setSetReset(client -> isSetReset());
+GameMessage::State_ObjectDirection Game::convertDirFromChar(char dir) {
+    if (dir == 'U') {
+        return GameMessage::State_ObjectDirection_UP;
+    }
+    else if (dir == 'R') {
+        return GameMessage::State_ObjectDirection_RIGHT;
+    }
+    else if (dir == 'D') {
+        return GameMessage::State_ObjectDirection_DOWN;
+    }
+    else if (dir == 'L') {
+        return GameMessage::State_ObjectDirection_LEFT;
+    }
+    else {
+        return GameMessage::State_ObjectDirection_NOT_EXIST;
+    }
 }

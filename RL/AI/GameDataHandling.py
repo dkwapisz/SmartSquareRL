@@ -17,19 +17,15 @@ class GameDataHandling:
 
     # Actions
     def __init__(self):
-        self.moveDir = 2
+        self.moveDir = 0
         self.shotDir = 0
         self.state = []
         self.newState = []
+        self.gameOver = False
         self.resetEnv = False
-        self.ticks = 0
-        self.agent = Agent(0.001, 0.90, 4, 1, 64, 15)
+        self.agent = Agent(0.001, 0.90, 4, 1, 32, 15)
         self.reward = 0
         self.clockTime = 0
-        self.gameOver = False
-
-    def get_numpy_state(self):
-        return np.asarray(self.state).astype('float32')
 
     def set_state(self, areCoinsNeeded, closestObstacle, closestCoin, finishDirection, clockTime):
         self.state = []
@@ -71,18 +67,16 @@ class GameDataHandling:
         print("Timer: {}, Actual Reward: {}".format(self.clockTime, self.reward))
         try:
             self.agent.learn()
-        except:
+        except Exception:
+            print(traceback.format_exc())
             pass
 
     def remember(self):
         self.agent.store_transition(self.state, self.moveDir, self.reward, self.newState, self.gameOver)
 
-    def get_state(self):
-        return self.state
-
     def get_action(self):
         self.moveDir = self.agent.choose_action(self.state)
-        return self.moveDir, self.shotDir
+        return self.moveDir + 1, self.shotDir
 
     def get_reset(self):
         return self.resetEnv

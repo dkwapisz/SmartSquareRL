@@ -28,10 +28,12 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
                                             request.finishDirection,
                                             request.reward,
                                             request.gameOver)
+
         if self.gameDataHandling.clockTime > 20:
             self.gameDataHandling.reward = -100
             self.gameDataHandling.gameOver = True
             self.gameDataHandling.resetEnv = True
+
         self.gameDataHandling.remember()
         self.gameDataHandling.reinforcement()
 
@@ -42,7 +44,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=50))
     game_pb2_grpc.add_StateActionExchangeServicer_to_server(StateActionExchange(), server)
     server.add_insecure_port('[::]:50051')
     server.start()

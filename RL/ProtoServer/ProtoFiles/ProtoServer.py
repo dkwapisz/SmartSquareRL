@@ -11,34 +11,44 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.gameDataHandling = GameDataHandling()
 
     def StateAction(self, request, context):
-        self.gameDataHandling.set_state(request.coinsNeeded,
-                                        request.closestObstacle,
-                                        request.closestCoin,
-                                        request.finishDirection,
-                                        request.clockTime)
+        # self.gameDataHandling.set_state(request.coinsNeeded,
+        #                                 request.closestObstacle,
+        #                                 request.closestCoin,
+        #                                 request.finishDirection,
+        #                                 request.clockTime)
+        #
+        # moveDir, shotDir = self.gameDataHandling.get_action()
 
-        moveDir, shotDir = self.gameDataHandling.get_action()
+        print("UP: {}, DOWN: {}, RIGHT: {}, LEFT: {}".format(request.closestCoin.up,
+                                                             request.closestCoin.down,
+                                                             request.closestCoin.right,
+                                                             request.closestCoin.left))
+
+        moveDir = 1
+        shotDir = 0
 
         return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir)
 
     def StateReset(self, request, context):
-        self.gameDataHandling.set_new_state(request.coinsNeeded,
-                                            request.closestObstacle,
-                                            request.closestCoin,
-                                            request.finishDirection,
-                                            request.reward,
-                                            request.gameOver)
+        # self.gameDataHandling.set_new_state(request.coinsNeeded,
+        #                                     request.closestObstacle,
+        #                                     request.closestCoin,
+        #                                     request.finishDirection,
+        #                                     request.reward,
+        #                                     request.gameOver)
+        #
+        # if self.gameDataHandling.clockTime > 20:
+        #     self.gameDataHandling.reward = -100
+        #     self.gameDataHandling.gameOver = True
+        #     self.gameDataHandling.resetEnv = True
+        #
+        # self.gameDataHandling.remember()
+        # self.gameDataHandling.reinforcement()
+        #
+        # resetEnv = self.gameDataHandling.get_reset()
+        # self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
 
-        if self.gameDataHandling.clockTime > 20:
-            self.gameDataHandling.reward = -100
-            self.gameDataHandling.gameOver = True
-            self.gameDataHandling.resetEnv = True
-
-        self.gameDataHandling.remember()
-        self.gameDataHandling.reinforcement()
-
-        resetEnv = self.gameDataHandling.get_reset()
-        self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
+        resetEnv = False
 
         return game_pb2.Reset(resetNeeded=resetEnv)
 

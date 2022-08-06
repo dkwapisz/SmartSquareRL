@@ -47,7 +47,7 @@ struct TableStruct_game_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -64,42 +64,18 @@ extern ResetDefaultTypeInternal _Reset_default_instance_;
 class State;
 struct StateDefaultTypeInternal;
 extern StateDefaultTypeInternal _State_default_instance_;
+class State_Direction;
+struct State_DirectionDefaultTypeInternal;
+extern State_DirectionDefaultTypeInternal _State_Direction_default_instance_;
 }  // namespace GameMessage
 PROTOBUF_NAMESPACE_OPEN
 template<> ::GameMessage::Action* Arena::CreateMaybeMessage<::GameMessage::Action>(Arena*);
 template<> ::GameMessage::Reset* Arena::CreateMaybeMessage<::GameMessage::Reset>(Arena*);
 template<> ::GameMessage::State* Arena::CreateMaybeMessage<::GameMessage::State>(Arena*);
+template<> ::GameMessage::State_Direction* Arena::CreateMaybeMessage<::GameMessage::State_Direction>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace GameMessage {
 
-enum State_ObjectDirection : int {
-  State_ObjectDirection_NOT_EXIST = 0,
-  State_ObjectDirection_UP = 1,
-  State_ObjectDirection_RIGHT = 2,
-  State_ObjectDirection_DOWN = 3,
-  State_ObjectDirection_LEFT = 4,
-  State_ObjectDirection_State_ObjectDirection_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  State_ObjectDirection_State_ObjectDirection_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
-};
-bool State_ObjectDirection_IsValid(int value);
-constexpr State_ObjectDirection State_ObjectDirection_ObjectDirection_MIN = State_ObjectDirection_NOT_EXIST;
-constexpr State_ObjectDirection State_ObjectDirection_ObjectDirection_MAX = State_ObjectDirection_LEFT;
-constexpr int State_ObjectDirection_ObjectDirection_ARRAYSIZE = State_ObjectDirection_ObjectDirection_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* State_ObjectDirection_descriptor();
-template<typename T>
-inline const std::string& State_ObjectDirection_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, State_ObjectDirection>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function State_ObjectDirection_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    State_ObjectDirection_descriptor(), enum_t_value);
-}
-inline bool State_ObjectDirection_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, State_ObjectDirection* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<State_ObjectDirection>(
-    State_ObjectDirection_descriptor(), name, value);
-}
 enum Action_ActionDirection : int {
   Action_ActionDirection_IDLE = 0,
   Action_ActionDirection_UP = 1,
@@ -129,6 +105,185 @@ inline bool Action_ActionDirection_Parse(
     Action_ActionDirection_descriptor(), name, value);
 }
 // ===================================================================
+
+class State_Direction final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.State.Direction) */ {
+ public:
+  inline State_Direction() : State_Direction(nullptr) {}
+  ~State_Direction() override;
+  explicit constexpr State_Direction(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  State_Direction(const State_Direction& from);
+  State_Direction(State_Direction&& from) noexcept
+    : State_Direction() {
+    *this = ::std::move(from);
+  }
+
+  inline State_Direction& operator=(const State_Direction& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline State_Direction& operator=(State_Direction&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const State_Direction& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const State_Direction* internal_default_instance() {
+    return reinterpret_cast<const State_Direction*>(
+               &_State_Direction_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(State_Direction& a, State_Direction& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(State_Direction* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(State_Direction* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  State_Direction* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<State_Direction>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const State_Direction& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const State_Direction& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(State_Direction* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "GameMessage.State.Direction";
+  }
+  protected:
+  explicit State_Direction(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUpFieldNumber = 1,
+    kRightFieldNumber = 2,
+    kDownFieldNumber = 3,
+    kLeftFieldNumber = 4,
+  };
+  // bool up = 1;
+  void clear_up();
+  bool up() const;
+  void set_up(bool value);
+  private:
+  bool _internal_up() const;
+  void _internal_set_up(bool value);
+  public:
+
+  // bool right = 2;
+  void clear_right();
+  bool right() const;
+  void set_right(bool value);
+  private:
+  bool _internal_right() const;
+  void _internal_set_right(bool value);
+  public:
+
+  // bool down = 3;
+  void clear_down();
+  bool down() const;
+  void set_down(bool value);
+  private:
+  bool _internal_down() const;
+  void _internal_set_down(bool value);
+  public:
+
+  // bool left = 4;
+  void clear_left();
+  bool left() const;
+  void set_left(bool value);
+  private:
+  bool _internal_left() const;
+  void _internal_set_left(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:GameMessage.State.Direction)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool up_;
+  bool right_;
+  bool down_;
+  bool left_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_game_2eproto;
+};
+// -------------------------------------------------------------------
 
 class State final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:GameMessage.State) */ {
@@ -178,7 +333,7 @@ class State final :
                &_State_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   friend void swap(State& a, State& b) {
     a.Swap(&b);
@@ -249,90 +404,110 @@ class State final :
 
   // nested types ----------------------------------------------------
 
-  typedef State_ObjectDirection ObjectDirection;
-  static constexpr ObjectDirection NOT_EXIST =
-    State_ObjectDirection_NOT_EXIST;
-  static constexpr ObjectDirection UP =
-    State_ObjectDirection_UP;
-  static constexpr ObjectDirection RIGHT =
-    State_ObjectDirection_RIGHT;
-  static constexpr ObjectDirection DOWN =
-    State_ObjectDirection_DOWN;
-  static constexpr ObjectDirection LEFT =
-    State_ObjectDirection_LEFT;
-  static inline bool ObjectDirection_IsValid(int value) {
-    return State_ObjectDirection_IsValid(value);
-  }
-  static constexpr ObjectDirection ObjectDirection_MIN =
-    State_ObjectDirection_ObjectDirection_MIN;
-  static constexpr ObjectDirection ObjectDirection_MAX =
-    State_ObjectDirection_ObjectDirection_MAX;
-  static constexpr int ObjectDirection_ARRAYSIZE =
-    State_ObjectDirection_ObjectDirection_ARRAYSIZE;
-  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
-  ObjectDirection_descriptor() {
-    return State_ObjectDirection_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& ObjectDirection_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, ObjectDirection>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function ObjectDirection_Name.");
-    return State_ObjectDirection_Name(enum_t_value);
-  }
-  static inline bool ObjectDirection_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
-      ObjectDirection* value) {
-    return State_ObjectDirection_Parse(name, value);
-  }
+  typedef State_Direction Direction;
 
   // accessors -------------------------------------------------------
 
   enum : int {
     kClosestObstacleFieldNumber = 3,
     kClosestCoinFieldNumber = 4,
-    kIsClosestObstacleBoxFieldNumber = 1,
-    kCoinsNeededFieldNumber = 2,
-    kGameOverFieldNumber = 9,
     kClosestEnemyFieldNumber = 5,
     kFinishDirectionFieldNumber = 6,
+    kClosestObstacleIsBoxFieldNumber = 1,
+    kAllCoinsCollectedFieldNumber = 2,
+    kGameOverFieldNumber = 9,
     kRewardFieldNumber = 7,
     kClockTimeFieldNumber = 8,
     kIterationFieldNumber = 10,
   };
-  // .GameMessage.State.ObjectDirection closestObstacle = 3;
+  // .GameMessage.State.Direction closestObstacle = 3;
+  bool has_closestobstacle() const;
+  private:
+  bool _internal_has_closestobstacle() const;
+  public:
   void clear_closestobstacle();
-  ::GameMessage::State_ObjectDirection closestobstacle() const;
-  void set_closestobstacle(::GameMessage::State_ObjectDirection value);
+  const ::GameMessage::State_Direction& closestobstacle() const;
+  PROTOBUF_NODISCARD ::GameMessage::State_Direction* release_closestobstacle();
+  ::GameMessage::State_Direction* mutable_closestobstacle();
+  void set_allocated_closestobstacle(::GameMessage::State_Direction* closestobstacle);
   private:
-  ::GameMessage::State_ObjectDirection _internal_closestobstacle() const;
-  void _internal_set_closestobstacle(::GameMessage::State_ObjectDirection value);
+  const ::GameMessage::State_Direction& _internal_closestobstacle() const;
+  ::GameMessage::State_Direction* _internal_mutable_closestobstacle();
   public:
+  void unsafe_arena_set_allocated_closestobstacle(
+      ::GameMessage::State_Direction* closestobstacle);
+  ::GameMessage::State_Direction* unsafe_arena_release_closestobstacle();
 
-  // .GameMessage.State.ObjectDirection closestCoin = 4;
+  // .GameMessage.State.Direction closestCoin = 4;
+  bool has_closestcoin() const;
+  private:
+  bool _internal_has_closestcoin() const;
+  public:
   void clear_closestcoin();
-  ::GameMessage::State_ObjectDirection closestcoin() const;
-  void set_closestcoin(::GameMessage::State_ObjectDirection value);
+  const ::GameMessage::State_Direction& closestcoin() const;
+  PROTOBUF_NODISCARD ::GameMessage::State_Direction* release_closestcoin();
+  ::GameMessage::State_Direction* mutable_closestcoin();
+  void set_allocated_closestcoin(::GameMessage::State_Direction* closestcoin);
   private:
-  ::GameMessage::State_ObjectDirection _internal_closestcoin() const;
-  void _internal_set_closestcoin(::GameMessage::State_ObjectDirection value);
+  const ::GameMessage::State_Direction& _internal_closestcoin() const;
+  ::GameMessage::State_Direction* _internal_mutable_closestcoin();
+  public:
+  void unsafe_arena_set_allocated_closestcoin(
+      ::GameMessage::State_Direction* closestcoin);
+  ::GameMessage::State_Direction* unsafe_arena_release_closestcoin();
+
+  // .GameMessage.State.Direction closestEnemy = 5;
+  bool has_closestenemy() const;
+  private:
+  bool _internal_has_closestenemy() const;
+  public:
+  void clear_closestenemy();
+  const ::GameMessage::State_Direction& closestenemy() const;
+  PROTOBUF_NODISCARD ::GameMessage::State_Direction* release_closestenemy();
+  ::GameMessage::State_Direction* mutable_closestenemy();
+  void set_allocated_closestenemy(::GameMessage::State_Direction* closestenemy);
+  private:
+  const ::GameMessage::State_Direction& _internal_closestenemy() const;
+  ::GameMessage::State_Direction* _internal_mutable_closestenemy();
+  public:
+  void unsafe_arena_set_allocated_closestenemy(
+      ::GameMessage::State_Direction* closestenemy);
+  ::GameMessage::State_Direction* unsafe_arena_release_closestenemy();
+
+  // .GameMessage.State.Direction finishDirection = 6;
+  bool has_finishdirection() const;
+  private:
+  bool _internal_has_finishdirection() const;
+  public:
+  void clear_finishdirection();
+  const ::GameMessage::State_Direction& finishdirection() const;
+  PROTOBUF_NODISCARD ::GameMessage::State_Direction* release_finishdirection();
+  ::GameMessage::State_Direction* mutable_finishdirection();
+  void set_allocated_finishdirection(::GameMessage::State_Direction* finishdirection);
+  private:
+  const ::GameMessage::State_Direction& _internal_finishdirection() const;
+  ::GameMessage::State_Direction* _internal_mutable_finishdirection();
+  public:
+  void unsafe_arena_set_allocated_finishdirection(
+      ::GameMessage::State_Direction* finishdirection);
+  ::GameMessage::State_Direction* unsafe_arena_release_finishdirection();
+
+  // bool closestObstacleIsBox = 1;
+  void clear_closestobstacleisbox();
+  bool closestobstacleisbox() const;
+  void set_closestobstacleisbox(bool value);
+  private:
+  bool _internal_closestobstacleisbox() const;
+  void _internal_set_closestobstacleisbox(bool value);
   public:
 
-  // bool isClosestObstacleBox = 1;
-  void clear_isclosestobstaclebox();
-  bool isclosestobstaclebox() const;
-  void set_isclosestobstaclebox(bool value);
+  // bool allCoinsCollected = 2;
+  void clear_allcoinscollected();
+  bool allcoinscollected() const;
+  void set_allcoinscollected(bool value);
   private:
-  bool _internal_isclosestobstaclebox() const;
-  void _internal_set_isclosestobstaclebox(bool value);
-  public:
-
-  // bool coinsNeeded = 2;
-  void clear_coinsneeded();
-  bool coinsneeded() const;
-  void set_coinsneeded(bool value);
-  private:
-  bool _internal_coinsneeded() const;
-  void _internal_set_coinsneeded(bool value);
+  bool _internal_allcoinscollected() const;
+  void _internal_set_allcoinscollected(bool value);
   public:
 
   // bool gameOver = 9;
@@ -342,24 +517,6 @@ class State final :
   private:
   bool _internal_gameover() const;
   void _internal_set_gameover(bool value);
-  public:
-
-  // .GameMessage.State.ObjectDirection closestEnemy = 5;
-  void clear_closestenemy();
-  ::GameMessage::State_ObjectDirection closestenemy() const;
-  void set_closestenemy(::GameMessage::State_ObjectDirection value);
-  private:
-  ::GameMessage::State_ObjectDirection _internal_closestenemy() const;
-  void _internal_set_closestenemy(::GameMessage::State_ObjectDirection value);
-  public:
-
-  // .GameMessage.State.ObjectDirection finishDirection = 6;
-  void clear_finishdirection();
-  ::GameMessage::State_ObjectDirection finishdirection() const;
-  void set_finishdirection(::GameMessage::State_ObjectDirection value);
-  private:
-  ::GameMessage::State_ObjectDirection _internal_finishdirection() const;
-  void _internal_set_finishdirection(::GameMessage::State_ObjectDirection value);
   public:
 
   // int32 reward = 7;
@@ -396,13 +553,13 @@ class State final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  int closestobstacle_;
-  int closestcoin_;
-  bool isclosestobstaclebox_;
-  bool coinsneeded_;
+  ::GameMessage::State_Direction* closestobstacle_;
+  ::GameMessage::State_Direction* closestcoin_;
+  ::GameMessage::State_Direction* closestenemy_;
+  ::GameMessage::State_Direction* finishdirection_;
+  bool closestobstacleisbox_;
+  bool allcoinscollected_;
   bool gameover_;
-  int closestenemy_;
-  int finishdirection_;
   int32_t reward_;
   int32_t clocktime_;
   int32_t iteration_;
@@ -459,7 +616,7 @@ class Action final :
                &_Action_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(Action& a, Action& b) {
     a.Swap(&b);
@@ -652,7 +809,7 @@ class Reset final :
                &_Reset_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(Reset& a, Reset& b) {
     a.Swap(&b);
@@ -757,126 +914,490 @@ class Reset final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// State_Direction
+
+// bool up = 1;
+inline void State_Direction::clear_up() {
+  up_ = false;
+}
+inline bool State_Direction::_internal_up() const {
+  return up_;
+}
+inline bool State_Direction::up() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.Direction.up)
+  return _internal_up();
+}
+inline void State_Direction::_internal_set_up(bool value) {
+  
+  up_ = value;
+}
+inline void State_Direction::set_up(bool value) {
+  _internal_set_up(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.Direction.up)
+}
+
+// bool right = 2;
+inline void State_Direction::clear_right() {
+  right_ = false;
+}
+inline bool State_Direction::_internal_right() const {
+  return right_;
+}
+inline bool State_Direction::right() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.Direction.right)
+  return _internal_right();
+}
+inline void State_Direction::_internal_set_right(bool value) {
+  
+  right_ = value;
+}
+inline void State_Direction::set_right(bool value) {
+  _internal_set_right(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.Direction.right)
+}
+
+// bool down = 3;
+inline void State_Direction::clear_down() {
+  down_ = false;
+}
+inline bool State_Direction::_internal_down() const {
+  return down_;
+}
+inline bool State_Direction::down() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.Direction.down)
+  return _internal_down();
+}
+inline void State_Direction::_internal_set_down(bool value) {
+  
+  down_ = value;
+}
+inline void State_Direction::set_down(bool value) {
+  _internal_set_down(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.Direction.down)
+}
+
+// bool left = 4;
+inline void State_Direction::clear_left() {
+  left_ = false;
+}
+inline bool State_Direction::_internal_left() const {
+  return left_;
+}
+inline bool State_Direction::left() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.Direction.left)
+  return _internal_left();
+}
+inline void State_Direction::_internal_set_left(bool value) {
+  
+  left_ = value;
+}
+inline void State_Direction::set_left(bool value) {
+  _internal_set_left(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.Direction.left)
+}
+
+// -------------------------------------------------------------------
+
 // State
 
-// bool isClosestObstacleBox = 1;
-inline void State::clear_isclosestobstaclebox() {
-  isclosestobstaclebox_ = false;
+// bool closestObstacleIsBox = 1;
+inline void State::clear_closestobstacleisbox() {
+  closestobstacleisbox_ = false;
 }
-inline bool State::_internal_isclosestobstaclebox() const {
-  return isclosestobstaclebox_;
+inline bool State::_internal_closestobstacleisbox() const {
+  return closestobstacleisbox_;
 }
-inline bool State::isclosestobstaclebox() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.isClosestObstacleBox)
-  return _internal_isclosestobstaclebox();
+inline bool State::closestobstacleisbox() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.closestObstacleIsBox)
+  return _internal_closestobstacleisbox();
 }
-inline void State::_internal_set_isclosestobstaclebox(bool value) {
+inline void State::_internal_set_closestobstacleisbox(bool value) {
   
-  isclosestobstaclebox_ = value;
+  closestobstacleisbox_ = value;
 }
-inline void State::set_isclosestobstaclebox(bool value) {
-  _internal_set_isclosestobstaclebox(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.isClosestObstacleBox)
+inline void State::set_closestobstacleisbox(bool value) {
+  _internal_set_closestobstacleisbox(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.closestObstacleIsBox)
 }
 
-// bool coinsNeeded = 2;
-inline void State::clear_coinsneeded() {
-  coinsneeded_ = false;
+// bool allCoinsCollected = 2;
+inline void State::clear_allcoinscollected() {
+  allcoinscollected_ = false;
 }
-inline bool State::_internal_coinsneeded() const {
-  return coinsneeded_;
+inline bool State::_internal_allcoinscollected() const {
+  return allcoinscollected_;
 }
-inline bool State::coinsneeded() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.coinsNeeded)
-  return _internal_coinsneeded();
+inline bool State::allcoinscollected() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.allCoinsCollected)
+  return _internal_allcoinscollected();
 }
-inline void State::_internal_set_coinsneeded(bool value) {
+inline void State::_internal_set_allcoinscollected(bool value) {
   
-  coinsneeded_ = value;
+  allcoinscollected_ = value;
 }
-inline void State::set_coinsneeded(bool value) {
-  _internal_set_coinsneeded(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.coinsNeeded)
+inline void State::set_allcoinscollected(bool value) {
+  _internal_set_allcoinscollected(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.allCoinsCollected)
 }
 
-// .GameMessage.State.ObjectDirection closestObstacle = 3;
+// .GameMessage.State.Direction closestObstacle = 3;
+inline bool State::_internal_has_closestobstacle() const {
+  return this != internal_default_instance() && closestobstacle_ != nullptr;
+}
+inline bool State::has_closestobstacle() const {
+  return _internal_has_closestobstacle();
+}
 inline void State::clear_closestobstacle() {
-  closestobstacle_ = 0;
+  if (GetArenaForAllocation() == nullptr && closestobstacle_ != nullptr) {
+    delete closestobstacle_;
+  }
+  closestobstacle_ = nullptr;
 }
-inline ::GameMessage::State_ObjectDirection State::_internal_closestobstacle() const {
-  return static_cast< ::GameMessage::State_ObjectDirection >(closestobstacle_);
+inline const ::GameMessage::State_Direction& State::_internal_closestobstacle() const {
+  const ::GameMessage::State_Direction* p = closestobstacle_;
+  return p != nullptr ? *p : reinterpret_cast<const ::GameMessage::State_Direction&>(
+      ::GameMessage::_State_Direction_default_instance_);
 }
-inline ::GameMessage::State_ObjectDirection State::closestobstacle() const {
+inline const ::GameMessage::State_Direction& State::closestobstacle() const {
   // @@protoc_insertion_point(field_get:GameMessage.State.closestObstacle)
   return _internal_closestobstacle();
 }
-inline void State::_internal_set_closestobstacle(::GameMessage::State_ObjectDirection value) {
-  
-  closestobstacle_ = value;
+inline void State::unsafe_arena_set_allocated_closestobstacle(
+    ::GameMessage::State_Direction* closestobstacle) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(closestobstacle_);
+  }
+  closestobstacle_ = closestobstacle;
+  if (closestobstacle) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:GameMessage.State.closestObstacle)
 }
-inline void State::set_closestobstacle(::GameMessage::State_ObjectDirection value) {
-  _internal_set_closestobstacle(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestObstacle)
+inline ::GameMessage::State_Direction* State::release_closestobstacle() {
+  
+  ::GameMessage::State_Direction* temp = closestobstacle_;
+  closestobstacle_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::unsafe_arena_release_closestobstacle() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.closestObstacle)
+  
+  ::GameMessage::State_Direction* temp = closestobstacle_;
+  closestobstacle_ = nullptr;
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::_internal_mutable_closestobstacle() {
+  
+  if (closestobstacle_ == nullptr) {
+    auto* p = CreateMaybeMessage<::GameMessage::State_Direction>(GetArenaForAllocation());
+    closestobstacle_ = p;
+  }
+  return closestobstacle_;
+}
+inline ::GameMessage::State_Direction* State::mutable_closestobstacle() {
+  ::GameMessage::State_Direction* _msg = _internal_mutable_closestobstacle();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.closestObstacle)
+  return _msg;
+}
+inline void State::set_allocated_closestobstacle(::GameMessage::State_Direction* closestobstacle) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete closestobstacle_;
+  }
+  if (closestobstacle) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::GameMessage::State_Direction>::GetOwningArena(closestobstacle);
+    if (message_arena != submessage_arena) {
+      closestobstacle = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, closestobstacle, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  closestobstacle_ = closestobstacle;
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestObstacle)
 }
 
-// .GameMessage.State.ObjectDirection closestCoin = 4;
+// .GameMessage.State.Direction closestCoin = 4;
+inline bool State::_internal_has_closestcoin() const {
+  return this != internal_default_instance() && closestcoin_ != nullptr;
+}
+inline bool State::has_closestcoin() const {
+  return _internal_has_closestcoin();
+}
 inline void State::clear_closestcoin() {
-  closestcoin_ = 0;
+  if (GetArenaForAllocation() == nullptr && closestcoin_ != nullptr) {
+    delete closestcoin_;
+  }
+  closestcoin_ = nullptr;
 }
-inline ::GameMessage::State_ObjectDirection State::_internal_closestcoin() const {
-  return static_cast< ::GameMessage::State_ObjectDirection >(closestcoin_);
+inline const ::GameMessage::State_Direction& State::_internal_closestcoin() const {
+  const ::GameMessage::State_Direction* p = closestcoin_;
+  return p != nullptr ? *p : reinterpret_cast<const ::GameMessage::State_Direction&>(
+      ::GameMessage::_State_Direction_default_instance_);
 }
-inline ::GameMessage::State_ObjectDirection State::closestcoin() const {
+inline const ::GameMessage::State_Direction& State::closestcoin() const {
   // @@protoc_insertion_point(field_get:GameMessage.State.closestCoin)
   return _internal_closestcoin();
 }
-inline void State::_internal_set_closestcoin(::GameMessage::State_ObjectDirection value) {
-  
-  closestcoin_ = value;
+inline void State::unsafe_arena_set_allocated_closestcoin(
+    ::GameMessage::State_Direction* closestcoin) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(closestcoin_);
+  }
+  closestcoin_ = closestcoin;
+  if (closestcoin) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:GameMessage.State.closestCoin)
 }
-inline void State::set_closestcoin(::GameMessage::State_ObjectDirection value) {
-  _internal_set_closestcoin(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestCoin)
+inline ::GameMessage::State_Direction* State::release_closestcoin() {
+  
+  ::GameMessage::State_Direction* temp = closestcoin_;
+  closestcoin_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::unsafe_arena_release_closestcoin() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.closestCoin)
+  
+  ::GameMessage::State_Direction* temp = closestcoin_;
+  closestcoin_ = nullptr;
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::_internal_mutable_closestcoin() {
+  
+  if (closestcoin_ == nullptr) {
+    auto* p = CreateMaybeMessage<::GameMessage::State_Direction>(GetArenaForAllocation());
+    closestcoin_ = p;
+  }
+  return closestcoin_;
+}
+inline ::GameMessage::State_Direction* State::mutable_closestcoin() {
+  ::GameMessage::State_Direction* _msg = _internal_mutable_closestcoin();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.closestCoin)
+  return _msg;
+}
+inline void State::set_allocated_closestcoin(::GameMessage::State_Direction* closestcoin) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete closestcoin_;
+  }
+  if (closestcoin) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::GameMessage::State_Direction>::GetOwningArena(closestcoin);
+    if (message_arena != submessage_arena) {
+      closestcoin = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, closestcoin, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  closestcoin_ = closestcoin;
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestCoin)
 }
 
-// .GameMessage.State.ObjectDirection closestEnemy = 5;
+// .GameMessage.State.Direction closestEnemy = 5;
+inline bool State::_internal_has_closestenemy() const {
+  return this != internal_default_instance() && closestenemy_ != nullptr;
+}
+inline bool State::has_closestenemy() const {
+  return _internal_has_closestenemy();
+}
 inline void State::clear_closestenemy() {
-  closestenemy_ = 0;
+  if (GetArenaForAllocation() == nullptr && closestenemy_ != nullptr) {
+    delete closestenemy_;
+  }
+  closestenemy_ = nullptr;
 }
-inline ::GameMessage::State_ObjectDirection State::_internal_closestenemy() const {
-  return static_cast< ::GameMessage::State_ObjectDirection >(closestenemy_);
+inline const ::GameMessage::State_Direction& State::_internal_closestenemy() const {
+  const ::GameMessage::State_Direction* p = closestenemy_;
+  return p != nullptr ? *p : reinterpret_cast<const ::GameMessage::State_Direction&>(
+      ::GameMessage::_State_Direction_default_instance_);
 }
-inline ::GameMessage::State_ObjectDirection State::closestenemy() const {
+inline const ::GameMessage::State_Direction& State::closestenemy() const {
   // @@protoc_insertion_point(field_get:GameMessage.State.closestEnemy)
   return _internal_closestenemy();
 }
-inline void State::_internal_set_closestenemy(::GameMessage::State_ObjectDirection value) {
-  
-  closestenemy_ = value;
+inline void State::unsafe_arena_set_allocated_closestenemy(
+    ::GameMessage::State_Direction* closestenemy) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(closestenemy_);
+  }
+  closestenemy_ = closestenemy;
+  if (closestenemy) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:GameMessage.State.closestEnemy)
 }
-inline void State::set_closestenemy(::GameMessage::State_ObjectDirection value) {
-  _internal_set_closestenemy(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestEnemy)
+inline ::GameMessage::State_Direction* State::release_closestenemy() {
+  
+  ::GameMessage::State_Direction* temp = closestenemy_;
+  closestenemy_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::unsafe_arena_release_closestenemy() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.closestEnemy)
+  
+  ::GameMessage::State_Direction* temp = closestenemy_;
+  closestenemy_ = nullptr;
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::_internal_mutable_closestenemy() {
+  
+  if (closestenemy_ == nullptr) {
+    auto* p = CreateMaybeMessage<::GameMessage::State_Direction>(GetArenaForAllocation());
+    closestenemy_ = p;
+  }
+  return closestenemy_;
+}
+inline ::GameMessage::State_Direction* State::mutable_closestenemy() {
+  ::GameMessage::State_Direction* _msg = _internal_mutable_closestenemy();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.closestEnemy)
+  return _msg;
+}
+inline void State::set_allocated_closestenemy(::GameMessage::State_Direction* closestenemy) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete closestenemy_;
+  }
+  if (closestenemy) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::GameMessage::State_Direction>::GetOwningArena(closestenemy);
+    if (message_arena != submessage_arena) {
+      closestenemy = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, closestenemy, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  closestenemy_ = closestenemy;
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestEnemy)
 }
 
-// .GameMessage.State.ObjectDirection finishDirection = 6;
+// .GameMessage.State.Direction finishDirection = 6;
+inline bool State::_internal_has_finishdirection() const {
+  return this != internal_default_instance() && finishdirection_ != nullptr;
+}
+inline bool State::has_finishdirection() const {
+  return _internal_has_finishdirection();
+}
 inline void State::clear_finishdirection() {
-  finishdirection_ = 0;
+  if (GetArenaForAllocation() == nullptr && finishdirection_ != nullptr) {
+    delete finishdirection_;
+  }
+  finishdirection_ = nullptr;
 }
-inline ::GameMessage::State_ObjectDirection State::_internal_finishdirection() const {
-  return static_cast< ::GameMessage::State_ObjectDirection >(finishdirection_);
+inline const ::GameMessage::State_Direction& State::_internal_finishdirection() const {
+  const ::GameMessage::State_Direction* p = finishdirection_;
+  return p != nullptr ? *p : reinterpret_cast<const ::GameMessage::State_Direction&>(
+      ::GameMessage::_State_Direction_default_instance_);
 }
-inline ::GameMessage::State_ObjectDirection State::finishdirection() const {
+inline const ::GameMessage::State_Direction& State::finishdirection() const {
   // @@protoc_insertion_point(field_get:GameMessage.State.finishDirection)
   return _internal_finishdirection();
 }
-inline void State::_internal_set_finishdirection(::GameMessage::State_ObjectDirection value) {
-  
-  finishdirection_ = value;
+inline void State::unsafe_arena_set_allocated_finishdirection(
+    ::GameMessage::State_Direction* finishdirection) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(finishdirection_);
+  }
+  finishdirection_ = finishdirection;
+  if (finishdirection) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:GameMessage.State.finishDirection)
 }
-inline void State::set_finishdirection(::GameMessage::State_ObjectDirection value) {
-  _internal_set_finishdirection(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.finishDirection)
+inline ::GameMessage::State_Direction* State::release_finishdirection() {
+  
+  ::GameMessage::State_Direction* temp = finishdirection_;
+  finishdirection_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::unsafe_arena_release_finishdirection() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.finishDirection)
+  
+  ::GameMessage::State_Direction* temp = finishdirection_;
+  finishdirection_ = nullptr;
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::_internal_mutable_finishdirection() {
+  
+  if (finishdirection_ == nullptr) {
+    auto* p = CreateMaybeMessage<::GameMessage::State_Direction>(GetArenaForAllocation());
+    finishdirection_ = p;
+  }
+  return finishdirection_;
+}
+inline ::GameMessage::State_Direction* State::mutable_finishdirection() {
+  ::GameMessage::State_Direction* _msg = _internal_mutable_finishdirection();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.finishDirection)
+  return _msg;
+}
+inline void State::set_allocated_finishdirection(::GameMessage::State_Direction* finishdirection) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete finishdirection_;
+  }
+  if (finishdirection) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::GameMessage::State_Direction>::GetOwningArena(finishdirection);
+    if (message_arena != submessage_arena) {
+      finishdirection = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, finishdirection, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  finishdirection_ = finishdirection;
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.finishDirection)
 }
 
 // int32 reward = 7;
@@ -1034,6 +1555,8 @@ inline void Reset::set_resetneeded(bool value) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -1041,11 +1564,6 @@ inline void Reset::set_resetneeded(bool value) {
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::GameMessage::State_ObjectDirection> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::State_ObjectDirection>() {
-  return ::GameMessage::State_ObjectDirection_descriptor();
-}
 template <> struct is_proto_enum< ::GameMessage::Action_ActionDirection> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::GameMessage::Action_ActionDirection>() {

@@ -88,16 +88,8 @@ void Game::run() {
     while (this -> window -> isOpen()) {
         if (!gameFinished) {
             // TODO Refactor
-            if (level -> getReward() > 0) {
-                level -> resetClockTime();
-            }
 
-            action = client.StateAction(level -> isClosestObstacleBox(),
-                                        level -> areCoinsNeeded(),
-                                        convertDirFromChar(level -> getClosestObstacleDir()),
-                                        convertDirFromChar(level -> getClosestCoinDir()),
-                                        convertDirFromChar(level -> getClosestEnemyDir()),
-                                        convertDirFromChar(level -> getFinishDirectionDir()),
+            action = client.StateAction(level -> gameStateHandling,
                                         level -> getClockTime(),
                                         level -> getPlayer() -> getIteration());
 
@@ -105,14 +97,7 @@ void Game::run() {
             std::cout << "Move action: " << action[0] << "\n";
             this -> render();
 
-            reset = client.StateReset(level -> isClosestObstacleBox(),
-                                      level -> areCoinsNeeded(),
-                                      convertDirFromChar(level -> getClosestObstacleDir()),
-                                      convertDirFromChar(level -> getClosestCoinDir()),
-                                      convertDirFromChar(level -> getClosestEnemyDir()),
-                                      convertDirFromChar(level -> getFinishDirectionDir()),
-                                      level -> getReward(),
-                                      level -> isGameOver());
+            reset = client.StateReset(level -> gameStateHandling);
 
             performResetIfNeeded(gameOver || reset);
         } else {
@@ -193,7 +178,7 @@ bool Game::playStep(char moveDirection, char shotDirection) {
         }
     }
 
-    return this -> level -> isGameOver();
+    return this -> level -> gameStateHandling -> gameOver;
 }
 
 void Game::render() {
@@ -208,24 +193,6 @@ void Game::render() {
 void Game::performResetIfNeeded(bool reset) {
     if (reset) {
         this -> level -> resetLevel();
-        this -> level -> setGameOver(false);
-    }
-}
-
-GameMessage::State_ObjectDirection Game::convertDirFromChar(char dir) {
-    if (dir == 'U') {
-        return GameMessage::State_ObjectDirection_UP;
-    }
-    else if (dir == 'R') {
-        return GameMessage::State_ObjectDirection_RIGHT;
-    }
-    else if (dir == 'D') {
-        return GameMessage::State_ObjectDirection_DOWN;
-    }
-    else if (dir == 'L') {
-        return GameMessage::State_ObjectDirection_LEFT;
-    }
-    else {
-        return GameMessage::State_ObjectDirection_NOT_EXIST;
+        this -> level -> gameStateHandling -> gameOver = false;
     }
 }

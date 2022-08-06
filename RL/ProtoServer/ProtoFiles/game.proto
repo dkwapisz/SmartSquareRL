@@ -13,20 +13,19 @@ service StateActionExchange {
 }
 
 message State {
-  enum ObjectDirection {
-    NOT_EXIST = 0;
-    UP = 1;
-    RIGHT = 2;
-    DOWN = 3;
-    LEFT = 4;
+  message Direction {
+    bool up = 1;
+    bool right = 2;
+    bool down = 3;
+    bool left = 4;
   }
 
-  bool isClosestObstacleBox = 1;
-  bool coinsNeeded = 2;
-  ObjectDirection closestObstacle = 3;
-  ObjectDirection closestCoin = 4;
-  ObjectDirection closestEnemy = 5;
-  ObjectDirection finishDirection = 6;
+  bool closestObstacleIsBox = 1;
+  bool allCoinsCollected = 2;
+  Direction closestObstacle = 3;
+  Direction closestCoin = 4;
+  Direction closestEnemy = 5;
+  Direction finishDirection = 6;
   int32 reward = 7;
   int32 clockTime = 8;
   bool gameOver = 9;

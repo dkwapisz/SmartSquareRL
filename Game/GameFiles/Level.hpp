@@ -10,6 +10,7 @@
 #include "GameObjects/MovingDanger.hpp"
 #include "GameObjects/Finish.hpp"
 #include "GameObjects/PlayerFoV.hpp"
+#include "GameStateHandling.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <fstream>
@@ -39,14 +40,6 @@ private:
     int levelNumber;
     bool levelFinished;
 
-    bool closestObstacleBox;
-    char closestObstacleDir;
-    char closestCoinDir;
-    char closestEnemyDir;
-    char finishDir;
-    int32_t reward;
-    bool gameOver;
-
     void initializeMapPaths();
     void initializeLevelAttributes(int levelNr);
     void initializeGameObjects();
@@ -54,15 +47,12 @@ private:
     bool checkCollision();
     void checkDangerCollision(MovingDanger *movingDanger);
 
-    void calculateClosestObstacleDir();
-    void calculateClosestEnemyDir();
-    void calculateClosestCoinDir();
-    void calculateFinishDirectionDir();
-
 public:
     Level();
     explicit Level(int levelNumber);
     virtual ~Level();
+
+    GameStateHandling *gameStateHandling;
 
     bool isLevelFinished() const;
     void movePlayer(float directionX, float directionY);
@@ -81,18 +71,8 @@ public:
     int getMapsCount() const;
 
     // gRPC message
-    bool isClosestObstacleBox() const;
-    bool areCoinsNeeded() const;
-    char getClosestObstacleDir() const;
-    char getClosestCoinDir() const;
-    char getClosestEnemyDir() const;
-    char getFinishDirectionDir() const;
-    int32_t getReward() const;
-    void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
-    bool isGameOver() const;
-    void setGameOver(bool gameOver);
     PlayerFoV* getPlayerFoV();
 };
 

@@ -2,19 +2,35 @@
 
 using namespace GameMessage;
 
-char* ProtoClient::StateAction(bool isClosestObstacleBox, bool coinsNeeded, State_ObjectDirection closestObstacle,
-                                State_ObjectDirection closestCoin, State_ObjectDirection closestEnemy,
-                                State_ObjectDirection finishDirection, int32_t clockTime, int32_t iteration) {
+char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clockTime, int32_t iteration) {
 
     State request;
-    request.set_isclosestobstaclebox(isClosestObstacleBox);
-    request.set_coinsneeded(coinsNeeded);
-    request.set_closestobstacle(closestObstacle);
-    request.set_closestcoin(closestCoin);
-    request.set_closestenemy(closestEnemy);
-    request.set_finishdirection(finishDirection);
+
     request.set_clocktime(clockTime);
     request.set_iteration(iteration);
+
+    request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
+    request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
+
+    request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
+    request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);
+    request.mutable_closestobstacle()->set_down(gameStateHandling->obstacleDirection.DOWN);
+    request.mutable_closestobstacle()->set_left(gameStateHandling->obstacleDirection.LEFT);
+
+    request.mutable_closestcoin()->set_up(gameStateHandling->coinDirection.UP);
+    request.mutable_closestcoin()->set_right(gameStateHandling->coinDirection.RIGHT);
+    request.mutable_closestcoin()->set_down(gameStateHandling->coinDirection.DOWN);
+    request.mutable_closestcoin()->set_left(gameStateHandling->coinDirection.LEFT);
+
+    request.mutable_closestenemy()->set_up(gameStateHandling->enemyDirection.UP);
+    request.mutable_closestenemy()->set_right(gameStateHandling->enemyDirection.RIGHT);
+    request.mutable_closestenemy()->set_down(gameStateHandling->enemyDirection.DOWN);
+    request.mutable_closestenemy()->set_left(gameStateHandling->enemyDirection.LEFT);
+
+    request.mutable_finishdirection()->set_up(gameStateHandling->finishDirection.UP);
+    request.mutable_finishdirection()->set_right(gameStateHandling->finishDirection.RIGHT);
+    request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
+    request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
 
     Action response;
     ClientContext context;
@@ -31,19 +47,35 @@ char* ProtoClient::StateAction(bool isClosestObstacleBox, bool coinsNeeded, Stat
 }
 
 
-bool ProtoClient::StateReset(bool isClosestObstacleBox, bool coinsNeeded, State_ObjectDirection closestObstacle,
-                              State_ObjectDirection closestCoin, State_ObjectDirection closestEnemy,
-                              State_ObjectDirection finishDirection, int32_t reward, bool gameOver) {
+bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
 
     State request;
-    request.set_isclosestobstaclebox(isClosestObstacleBox);
-    request.set_coinsneeded(coinsNeeded);
-    request.set_closestobstacle(closestObstacle);
-    request.set_closestcoin(closestCoin);
-    request.set_closestenemy(closestEnemy);
-    request.set_finishdirection(finishDirection);
-    request.set_reward(reward);
-    request.set_gameover(gameOver);
+
+    request.set_reward(gameStateHandling->reward);
+    request.set_gameover(gameStateHandling->gameOver);
+
+    request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
+    request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
+
+    request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
+    request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);
+    request.mutable_closestobstacle()->set_down(gameStateHandling->obstacleDirection.DOWN);
+    request.mutable_closestobstacle()->set_left(gameStateHandling->obstacleDirection.LEFT);
+
+    request.mutable_closestcoin()->set_up(gameStateHandling->coinDirection.UP);
+    request.mutable_closestcoin()->set_right(gameStateHandling->coinDirection.RIGHT);
+    request.mutable_closestcoin()->set_down(gameStateHandling->coinDirection.DOWN);
+    request.mutable_closestcoin()->set_left(gameStateHandling->coinDirection.LEFT);
+
+    request.mutable_closestenemy()->set_up(gameStateHandling->enemyDirection.UP);
+    request.mutable_closestenemy()->set_right(gameStateHandling->enemyDirection.RIGHT);
+    request.mutable_closestenemy()->set_down(gameStateHandling->enemyDirection.DOWN);
+    request.mutable_closestenemy()->set_left(gameStateHandling->enemyDirection.LEFT);
+
+    request.mutable_finishdirection()->set_up(gameStateHandling->finishDirection.UP);
+    request.mutable_finishdirection()->set_right(gameStateHandling->finishDirection.RIGHT);
+    request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
+    request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
 
     Reset response;
     ClientContext context;

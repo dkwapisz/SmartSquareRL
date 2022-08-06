@@ -3,18 +3,13 @@
 Level::Level() = default;
 
 Level::Level(int levelNumber) {
-    this -> initializeMapPaths();
-    this -> initializeLevelAttributes(levelNumber);
-    this -> initializeGameObjects();
-    this -> generateMap();
+    initializeMapPaths();
+    initializeLevelAttributes(levelNumber);
+    initializeGameObjects();
+    generateMap();
 
-    this -> playerFoV = new PlayerFoV(90, false);
-
-    closestCoinDir = 'N';
-    closestEnemyDir = 'N';
-    closestObstacleDir = 'N';
-    finishDir = 'N';
-    reward = 0;
+    gameStateHandling = new GameStateHandling();
+    playerFoV = new PlayerFoV(90, false);
 }
 
 Level::~Level() {
@@ -145,31 +140,29 @@ void Level::movePlayer(float directionX, float directionY) {
 }
 
 bool Level::checkCollision() {
-    reward = 0;
+    gameStateHandling -> reward = 0;
 
     this -> playerFoV -> setCoinInView(false);
     this -> playerFoV -> calculateRays(&walls, &boxes, &coins,
                                        player->getCenterPosX(), player->getCenterPosY());
 
-    std::cout << playerFoV->isCoinInView();
-
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
-            reward = -10;
+            gameStateHandling -> reward = -10;
             return true;
         }
     }
 
     for (const auto& box : boxes) {
         if (box -> getBounds().intersects(this -> player -> getBounds())) {
-            reward = -10;
+            gameStateHandling -> reward = -10;
             return true;
         }
     }
 
     for (const auto& staticDanger : staticDangers) {
         if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
-            reward = -100;
+            gameStateHandling -> reward = -100;
             this -> resetLevel();
             return false;
         }
@@ -179,7 +172,7 @@ bool Level::checkCollision() {
         if (finish -> getBounds().intersects(this -> player -> getBounds())) {
 
             if (this -> coinsCount == this -> playerCoinsCount) {
-                reward = 100;
+                gameStateHandling -> reward = 100;
                 levelFinished = true;
             }
 
@@ -189,7 +182,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
-            reward = 50;
+            gameStateHandling -> reward = 50;
             delete coins[i];
             coins.erase(coins.begin() + i);
             this -> playerCoinsCount++;
@@ -221,7 +214,7 @@ void Level::resetLevel() {
     this -> player -> resetPosition();
     this -> playerCoinsCount = 0;
     this -> clock -> restart();
-    this -> gameOver = true;
+    this -> gameStateHandling -> gameOver = true;
 
     for (int i = 0; i < this -> movingDangers.size(); i++) {
         delete this -> movingDangers[i];
@@ -379,6 +372,14 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
     }
 }
 
+void Level::calculateClosestObjectsDir() {
+    gameStateHandling -> calculateClosestObstacleDir(&walls, &boxes, player);
+    gameStateHandling -> calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
+    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView());
+    gameStateHandling -> calculateFinishDirectionDir(&finishes, player);
+    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
+}
+
 int Level::getClockTime() const {
     return (int) this -> clock -> getElapsedTime().asSeconds();
 }
@@ -401,276 +402,6 @@ int Level::getLevelNumber() const {
 
 int Level::getMapsCount() const {
     return (int) mapPath.size();
-}
-
-void Level::calculateClosestObjectsDir() {
-    calculateClosestObstacleDir();
-    calculateClosestEnemyDir();
-    calculateClosestCoinDir();
-    calculateFinishDirectionDir();
-}
-
-void Level::calculateClosestObstacleDir() {
-    float playerDistanceToWall = 99999999.f;
-    float tempDistanceWall;
-    float playerDistanceToBox = 99999999.f;
-    float tempDistanceBox;
-
-    Wall closestWall;
-    Box closestBox;
-
-    for (Wall *wall : walls) {
-        tempDistanceWall = std::sqrt(
-                powf((player -> getCenterPosX() - wall -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - wall -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToWall > tempDistanceWall) {
-            playerDistanceToWall = tempDistanceWall;
-            closestWall = *wall;
-        }
-    }
-
-    if (!boxes.empty()) {
-        for (Box *box : boxes) {
-            tempDistanceBox = std::sqrt(
-                    powf((player -> getCenterPosX() - box -> getCenterPosX()), 2.f) +
-                    powf((player -> getCenterPosY() - box -> getCenterPosY()), 2.f));
-
-            if (playerDistanceToBox > tempDistanceBox) {
-                playerDistanceToBox = tempDistanceBox;
-                closestBox = *box;
-            }
-        }
-    } else {
-        playerDistanceToBox = 99999999.f;
-    }
-
-    float dirVecX;
-    float dirVecY;
-
-    if (playerDistanceToBox <= playerDistanceToWall) {
-        closestObstacleBox = true;
-
-        dirVecX = closestBox.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestBox.getCenterPosY() - player -> getCenterPosY();
-
-        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-            if (dirVecY >= 0) {
-                closestObstacleDir = 'D';
-            } else {
-                closestObstacleDir = 'U';
-            }
-        } else {
-            if (dirVecX >= 0) {
-                closestObstacleDir = 'R';
-            } else {
-                closestObstacleDir = 'L';
-            }
-        }
-    } else {
-        closestObstacleBox = false;
-
-        dirVecX = closestWall.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestWall.getCenterPosY() - player -> getCenterPosY();
-
-        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-            if (dirVecY >= 0) {
-                closestObstacleDir = 'D';
-            } else {
-                closestObstacleDir = 'U';
-            }
-        } else {
-            if (dirVecX >= 0) {
-                closestObstacleDir = 'R';
-            } else {
-                closestObstacleDir = 'L';
-            }
-        }
-    }
-}
-
-void Level::calculateClosestEnemyDir() {
-    float playerDistanceToStaticDanger = 99999999.f;
-    float tempDistanceStaticDanger;
-    float playerDistanceToMovingDanger = 99999999.f;
-    float tempDistanceMovingDanger;
-
-    StaticDanger closestStaticDanger;
-    MovingDanger closestMovingDanger;
-
-    for (StaticDanger *staticDanger : staticDangers) {
-        tempDistanceStaticDanger = std::sqrt(
-                powf((player -> getCenterPosX() - staticDanger -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - staticDanger -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToStaticDanger > tempDistanceStaticDanger) {
-            playerDistanceToStaticDanger = tempDistanceStaticDanger;
-            closestStaticDanger = *staticDanger;
-        }
-    }
-
-    for (MovingDanger *movingDanger : movingDangers) {
-        tempDistanceMovingDanger = std::sqrt(
-                powf((player -> getCenterPosX() - movingDanger -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - movingDanger -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToMovingDanger > tempDistanceMovingDanger) {
-            playerDistanceToMovingDanger = tempDistanceMovingDanger;
-            closestMovingDanger = *movingDanger;
-        }
-    }
-
-    float dirVecX;
-    float dirVecY;
-
-    if (playerDistanceToStaticDanger <= playerDistanceToMovingDanger) {
-        dirVecX = closestStaticDanger.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestStaticDanger.getCenterPosY() - player -> getCenterPosY();
-
-        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-            if (dirVecY >= 0) {
-                closestEnemyDir = 'D';
-            } else {
-                closestEnemyDir = 'U';
-            }
-        } else {
-            if (dirVecX >= 0) {
-                closestEnemyDir = 'R';
-            } else {
-                closestEnemyDir = 'L';
-            }
-        }
-    } else {
-        dirVecX = closestMovingDanger.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestMovingDanger.getCenterPosY() - player -> getCenterPosY();
-
-        if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-            if (dirVecY >= 0) {
-                closestEnemyDir = 'D';
-            } else {
-                closestEnemyDir = 'U';
-            }
-        } else {
-            if (dirVecX >= 0) {
-                closestEnemyDir = 'R';
-            } else {
-                closestEnemyDir = 'L';
-            }
-        }
-    }
-}
-
-void Level::calculateClosestCoinDir() {
-    float playerDistanceToCoin = 99999999.f;
-    float tempDistanceCoin;
-
-    Coin closestCoin;
-
-    if (coins.empty()) {
-        closestCoinDir = 'N';
-        return;
-    }
-
-    for (Coin *coin : coins) {
-        tempDistanceCoin = std::sqrt(
-                powf((player -> getCenterPosX() - coin -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - coin -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToCoin > tempDistanceCoin) {
-            playerDistanceToCoin = tempDistanceCoin;
-            closestCoin = *coin;
-        }
-    }
-
-    float dirVecX = closestCoin.getCenterPosX() - player -> getCenterPosX();
-    float dirVecY = closestCoin.getCenterPosY() - player -> getCenterPosY();
-    if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-        if (dirVecY >= 0) {
-            closestCoinDir = 'D';
-        } else {
-            closestCoinDir = 'U';
-        }
-    } else {
-        if (dirVecX >= 0) {
-            closestCoinDir = 'R';
-        } else {
-            closestCoinDir = 'L';
-        }
-    }
-}
-
-void Level::calculateFinishDirectionDir() {
-    float playerDistanceToFinish = 99999999.f;
-    float tempDistanceFinish;
-
-    Finish closestFinish;
-
-    for (Finish *finish : finishes) {
-        tempDistanceFinish = std::sqrt(
-                powf((player -> getCenterPosX() - finish -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - finish -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToFinish > tempDistanceFinish) {
-            playerDistanceToFinish = tempDistanceFinish;
-            closestFinish = *finish;
-        }
-    }
-
-    float dirVecX = closestFinish.getCenterPosX() - player -> getCenterPosX();
-    float dirVecY = closestFinish.getCenterPosY() - player -> getCenterPosY();
-    if (std::abs(dirVecX) <= std::abs(dirVecY)) {
-        if (dirVecY >= 0) {
-            finishDir = 'D';
-        } else {
-            finishDir = 'U';
-        }
-    } else {
-        if (dirVecX >= 0) {
-            finishDir = 'R';
-        } else {
-            finishDir = 'L';
-        }
-    }
-}
-
-bool Level::isClosestObstacleBox() const {
-    return closestObstacleBox;
-}
-
-bool Level::areCoinsNeeded() const {
-    return (coinsCount - playerCoinsCount == 0);
-}
-
-char Level::getClosestObstacleDir() const {
-    return closestObstacleDir;
-}
-
-char Level::getClosestCoinDir() const {
-    return closestCoinDir;
-}
-
-char Level::getClosestEnemyDir() const {
-    return closestEnemyDir;
-}
-
-char Level::getFinishDirectionDir() const {
-    return finishDir;
-}
-
-int32_t Level::getReward() const {
-    return reward;
-}
-
-void Level::setReward(int32_t reward) {
-    this -> reward = reward;
-}
-
-bool Level::isGameOver() const {
-    return this -> gameOver;
-}
-
-void Level::setGameOver(bool gameOver) {
-    this -> gameOver = gameOver;
 }
 
 void Level::resetClockTime() {

@@ -38,8 +38,6 @@ private:
     void render();
     void performResetIfNeeded(bool reset);
 
-    GameMessage::State_ObjectDirection convertDirFromChar(char dir);
-
 public:
     Game();
     virtual ~Game();

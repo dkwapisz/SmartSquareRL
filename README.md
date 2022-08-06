@@ -29,10 +29,4 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 
 ### Rewards:
 #### Map 1
-- Touching the wall: -10
-- Touching the box: -10
-- Touching enemy: -100
-- Out of time (20s): -100
-- Collecting the coin: +50 (time is reset)
-- Reaching the finish: +100
-- Else: 0
+TBD

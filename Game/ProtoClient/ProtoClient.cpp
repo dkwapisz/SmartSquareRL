@@ -43,6 +43,7 @@ char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
         return actionArray;
     } else {
         std::cerr << "RPC failed \n";
+        std::cerr << status.error_message() << "\n";
     }
 }
 
@@ -85,6 +86,7 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
         return response.resetneeded();
     } else {
         std::cerr << "RPC failed \n";
+        std::cerr << status.error_message() << "\n";
     }
 }
 

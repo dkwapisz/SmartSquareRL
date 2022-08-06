@@ -163,34 +163,20 @@ void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *st
     }
 }
 
-void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player, bool coinInFoV) {
-    float playerDistanceToCoin = 99999999.f;
-    float tempDistanceCoin;
+void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
+                                                bool coinInFoV, Coin *closestCoin) {
 
     coinDirection.UP = false;
     coinDirection.RIGHT = false;
     coinDirection.DOWN = false;
     coinDirection.LEFT = false;
 
-    if (coins -> empty()) {
+    if (coins -> empty() || closestCoin == nullptr) {
         return;
     }
 
-    Coin closestCoin;
-
-    for (const auto& coin : *coins) {
-        tempDistanceCoin = std::sqrt(
-                powf((player -> getCenterPosX() - coin -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - coin -> getCenterPosY()), 2.f));
-
-        if (playerDistanceToCoin > tempDistanceCoin) {
-            playerDistanceToCoin = tempDistanceCoin;
-            closestCoin = *coin;
-        }
-    }
-
-    float dirVecX = closestCoin.getCenterPosX() - player -> getCenterPosX();
-    float dirVecY = closestCoin.getCenterPosY() - player -> getCenterPosY();
+    float dirVecX = closestCoin -> getCenterPosX() - player -> getCenterPosX();
+    float dirVecY = closestCoin -> getCenterPosY() - player -> getCenterPosY();
 
     if (dirVecY >= 0) {
         coinDirection.DOWN = true;

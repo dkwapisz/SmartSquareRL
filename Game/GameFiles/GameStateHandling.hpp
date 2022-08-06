@@ -49,7 +49,7 @@ public:
     void calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player);
     void calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
                                          std::vector<MovingDanger *> *movingDangers, Player *player);
-    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player, bool coinInFoV);
+    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player, bool coinInFoV, Coin *closestCoin);
     void calculateFinishDirectionDir(std::vector<Finish *> *finishes, Player *player);
 };
 

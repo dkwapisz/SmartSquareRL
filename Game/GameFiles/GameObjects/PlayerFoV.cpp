@@ -7,6 +7,7 @@ PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
     // Element n -> x, n+1 -> y
     this -> rayVertexes = new float[numberOfRays * 2];
     this -> coinInView = false;
+    this -> closestCoin = nullptr;
 }
 
 void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
@@ -14,6 +15,8 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
     float dirX, dirY, vertexX, vertexY;
     int arrayIterator = 0;
     int fullAngle = 360;
+
+    std::map<Coin*, float> coinDistances;
 
     for (int i = 0; i < fullAngle; i += fullAngle / numberOfRays) {
         float angleRad = getRadians((float) i);
@@ -72,6 +75,9 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
             for (const auto& coin : *coins) {
                 if (coin -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     coinInView = true;
+                    coinDistances[coin] = std::sqrt(
+                            powf((playerX - coin -> getCenterPosX()), 2.f) +
+                            powf((playerY - coin -> getCenterPosY()), 2.f));
                     break;
                 }
             }
@@ -91,6 +97,8 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
 
         arrayIterator += 2;
     }
+
+    setClosestCoin(&coinDistances);
 }
 
 void PlayerFoV::render(sf::RenderTarget &target, float playerX, float playerY) {
@@ -119,4 +127,23 @@ void PlayerFoV::setCoinInView(bool coinInView) {
 
 bool PlayerFoV::isDrawRaysSet() const {
     return drawRays;
+}
+
+void PlayerFoV::setClosestCoin(std::map<Coin*, float> *coinDistances) {
+    float closestDist = 9999999.f;
+    if (coinDistances -> empty()) {
+        this -> closestCoin = nullptr;
+        return;
+    }
+
+    for (auto const& [coin, dist]: *coinDistances) {
+        if (dist < closestDist) {
+            closestDist = dist;
+            this -> closestCoin = coin;
+        }
+    }
+}
+
+Coin *PlayerFoV::getClosestCoin() {
+    return closestCoin;
 }

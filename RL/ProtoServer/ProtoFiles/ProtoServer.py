@@ -20,7 +20,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         return game_pb2.Action(moveDirection=moveDir, shotDirection=shotDir)
 
     def StateReset(self, request, context):
-        self.gameDataHandling.set_new_state(request.coinsNeeded)
+        self.gameDataHandling.set_new_state(request)
 
         if self.gameDataHandling.clockTime > 20:
             self.gameDataHandling.reward = -100

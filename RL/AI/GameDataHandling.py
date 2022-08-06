@@ -1,10 +1,5 @@
-import numpy as np
 from AI.DQN import Agent
-import logging
 import traceback
-
-
-
 
 
 class GameDataHandling:
@@ -17,7 +12,7 @@ class GameDataHandling:
         self.newState = []
         self.gameOver = False
         self.resetEnv = False
-        self.agent = Agent(0.001, 0.90, 4, 1, 64, 14)
+        self.agent = Agent(0.001, 0.90, 4, 1, 64, 13)
         self.reward = 0
         self.clockTime = 0
 
@@ -44,32 +39,30 @@ class GameDataHandling:
         self.state += self.__get_array_from_bool(request.finishDirection.down)
         self.state += self.__get_array_from_bool(request.finishDirection.left)
 
-        print(self.state)
-
         self.clockTime = request.clockTime
 
     def set_new_state(self, request):
         self.newState = []
 
         if request.allCoinsCollected:
-            self.state += [0]
+            self.newState += [0]
         else:
-            self.state += [1]
+            self.newState += [1]
 
-        self.state += self.__get_array_from_bool(request.closestObstacle.up)
-        self.state += self.__get_array_from_bool(request.closestObstacle.right)
-        self.state += self.__get_array_from_bool(request.closestObstacle.down)
-        self.state += self.__get_array_from_bool(request.closestObstacle.left)
+        self.newState += self.__get_array_from_bool(request.closestObstacle.up)
+        self.newState += self.__get_array_from_bool(request.closestObstacle.right)
+        self.newState += self.__get_array_from_bool(request.closestObstacle.down)
+        self.newState += self.__get_array_from_bool(request.closestObstacle.left)
 
-        self.state += self.__get_array_from_bool(request.closestCoin.up)
-        self.state += self.__get_array_from_bool(request.closestCoin.right)
-        self.state += self.__get_array_from_bool(request.closestCoin.down)
-        self.state += self.__get_array_from_bool(request.closestCoin.left)
+        self.newState += self.__get_array_from_bool(request.closestCoin.up)
+        self.newState += self.__get_array_from_bool(request.closestCoin.right)
+        self.newState += self.__get_array_from_bool(request.closestCoin.down)
+        self.newState += self.__get_array_from_bool(request.closestCoin.left)
 
-        self.state += self.__get_array_from_bool(request.finishDirection.up)
-        self.state += self.__get_array_from_bool(request.finishDirection.right)
-        self.state += self.__get_array_from_bool(request.finishDirection.down)
-        self.state += self.__get_array_from_bool(request.finishDirection.left)
+        self.newState += self.__get_array_from_bool(request.finishDirection.up)
+        self.newState += self.__get_array_from_bool(request.finishDirection.right)
+        self.newState += self.__get_array_from_bool(request.finishDirection.down)
+        self.newState += self.__get_array_from_bool(request.finishDirection.left)
 
         self.reward = request.reward
         self.gameOver = request.gameOver

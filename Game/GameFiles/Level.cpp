@@ -8,8 +8,8 @@ Level::Level(int levelNumber) {
     initializeGameObjects();
     generateMap();
 
-    gameStateHandling = new GameStateHandling();
-    playerFoV = new PlayerFoV(90, false);
+    this -> gameStateHandling = new GameStateHandling();
+    this -> playerFoV = new PlayerFoV(90, false);
 }
 
 Level::~Level() {
@@ -375,9 +375,9 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
 void Level::calculateClosestObjectsDir() {
     gameStateHandling -> calculateClosestObstacleDir(&walls, &boxes, player);
     gameStateHandling -> calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
-    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView());
+    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView(), playerFoV -> getClosestCoin());
     gameStateHandling -> calculateFinishDirectionDir(&finishes, player);
-    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
+    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) != 0);
 }
 
 int Level::getClockTime() const {

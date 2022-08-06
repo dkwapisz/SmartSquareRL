@@ -9,6 +9,7 @@ private:
     bool coinInView;
     float *rayVertexes;
     float getRadians(float degree);
+    Coin *closestCoin;
 
 public:
     PlayerFoV(int numberOfRays, bool drawRays);
@@ -19,5 +20,6 @@ public:
     bool isCoinInView() const;
     void setCoinInView(bool coinInView);
     bool isDrawRaysSet() const;
-
+    void setClosestCoin(std::map<Coin*, float> *coinDistances);
+    Coin* getClosestCoin();
 };

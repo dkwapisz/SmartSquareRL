@@ -21,7 +21,6 @@ private:
 
 public:
     ProtoClient(std::shared_ptr<Channel> channel) : _stub{StateActionExchange::NewStub(channel)} {}
-    // TODO Wrap State into nested message to easier handling
 
     char *StateAction(GameStateHandling *gameStateHandling, int32_t clockTime, int32_t iteration);
 

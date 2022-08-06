@@ -121,6 +121,10 @@ void Game::updateWindowEvents() {
 void Game::updatePlayerInput(char moveDirection, char shotDirection) {
     inputMovement(moveDirection);
     inputShooting(shotDirection);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
+        this -> level -> getPlayerFoV() -> setDrawRays(!this -> level -> getPlayerFoV() -> isDrawRaysSet());
+    }
 }
 
 void Game::inputMovement(char direction) {

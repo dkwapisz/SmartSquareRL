@@ -22,4 +22,5 @@ public:
     bool isDrawRaysSet() const;
     void setClosestCoin(std::map<Coin*, float> *coinDistances);
     Coin* getClosestCoin();
+    void setDrawRays(bool setDrawRays);
 };

@@ -12,7 +12,7 @@ class GameDataHandling:
         self.newState = []
         self.gameOver = False
         self.resetEnv = False
-        self.agent = Agent(0.001, 0.90, 4, 1, 64, 13)
+        self.agent = Agent(lr=0.001, gamma=0.85, n_actions=4, epsilon=0.8, batch_size=64, input_dims=13)
         self.reward = 0
         self.clockTime = 0
 
@@ -91,6 +91,6 @@ class GameDataHandling:
 
     def __get_array_from_bool(self, bool_state):
         if bool_state:
-            return [0]
-        else:
             return [1]
+        else:
+            return [0]

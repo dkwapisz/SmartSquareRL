@@ -183,10 +183,10 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
             powf((player->getCenterPosX() - closestCoin->getCenterPosX()), 2.f) +
             powf((player->getCenterPosX() - closestCoin->getCenterPosY()), 2.f));
 
-    if (lastDistToCoin < coinDist) {
-        reward += 10;
+    if (lastDistToCoin > coinDist) {
+        reward = 0;
     } else {
-        reward -= 10;
+        reward -= 50;
     }
     lastDistToCoin = coinDist;
 

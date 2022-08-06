@@ -144,6 +144,10 @@ void PlayerFoV::setClosestCoin(std::map<Coin*, float> *coinDistances) {
     }
 }
 
-Coin *PlayerFoV::getClosestCoin() {
+Coin* PlayerFoV::getClosestCoin() {
     return closestCoin;
+}
+
+void PlayerFoV::setDrawRays(bool setDrawRays) {
+    this -> drawRays = setDrawRays;
 }

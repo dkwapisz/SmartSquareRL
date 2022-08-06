@@ -4,13 +4,7 @@ import logging
 import traceback
 
 
-def create_one_hot_encoding(state, length):
-    one_hot = []
-    for _ in range(length - 1):
-        one_hot.append(0)
-    one_hot.insert(state - 1, 1)
 
-    return one_hot
 
 
 class GameDataHandling:
@@ -23,45 +17,62 @@ class GameDataHandling:
         self.newState = []
         self.gameOver = False
         self.resetEnv = False
-        self.agent = Agent(0.001, 0.90, 4, 1, 32, 15)
+        self.agent = Agent(0.001, 0.90, 4, 1, 64, 14)
         self.reward = 0
         self.clockTime = 0
 
-    def set_state(self, areCoinsNeeded, closestObstacle, closestCoin, finishDirection, clockTime):
+    def set_state(self, request):
         self.state = []
-        # testing reset
-        # self.ticks += 1
-        # print(self.ticks)
-        # if self.ticks > 500:
-        #     self.resetEnv = True
-        #     self.ticks = 0
-        # testing reset
 
-        if areCoinsNeeded:
-            self.state += [0, 1]
+        if request.allCoinsCollected:
+            self.state += [0]
         else:
-            self.state += [1, 0]
+            self.state += [1]
 
-        self.state += create_one_hot_encoding(closestObstacle, 4)
-        self.state += create_one_hot_encoding(closestCoin, 5)
-        self.state += create_one_hot_encoding(finishDirection, 4)
+        self.state += self.__get_array_from_bool(request.closestObstacle.up)
+        self.state += self.__get_array_from_bool(request.closestObstacle.right)
+        self.state += self.__get_array_from_bool(request.closestObstacle.down)
+        self.state += self.__get_array_from_bool(request.closestObstacle.left)
 
-        self.clockTime = clockTime
+        self.state += self.__get_array_from_bool(request.closestCoin.up)
+        self.state += self.__get_array_from_bool(request.closestCoin.right)
+        self.state += self.__get_array_from_bool(request.closestCoin.down)
+        self.state += self.__get_array_from_bool(request.closestCoin.left)
 
-    def set_new_state(self, areCoinsNeeded, closestObstacle, closestCoin, finishDirection, reward, gameOver):
+        self.state += self.__get_array_from_bool(request.finishDirection.up)
+        self.state += self.__get_array_from_bool(request.finishDirection.right)
+        self.state += self.__get_array_from_bool(request.finishDirection.down)
+        self.state += self.__get_array_from_bool(request.finishDirection.left)
+
+        print(self.state)
+
+        self.clockTime = request.clockTime
+
+    def set_new_state(self, request):
         self.newState = []
 
-        if areCoinsNeeded:
-            self.newState += [0, 1]
+        if request.allCoinsCollected:
+            self.state += [0]
         else:
-            self.newState += [1, 0]
+            self.state += [1]
 
-        self.newState += create_one_hot_encoding(closestObstacle, 4)
-        self.newState += create_one_hot_encoding(closestCoin, 5)
-        self.newState += create_one_hot_encoding(finishDirection, 4)
+        self.state += self.__get_array_from_bool(request.closestObstacle.up)
+        self.state += self.__get_array_from_bool(request.closestObstacle.right)
+        self.state += self.__get_array_from_bool(request.closestObstacle.down)
+        self.state += self.__get_array_from_bool(request.closestObstacle.left)
 
-        self.reward = reward
-        self.gameOver = gameOver
+        self.state += self.__get_array_from_bool(request.closestCoin.up)
+        self.state += self.__get_array_from_bool(request.closestCoin.right)
+        self.state += self.__get_array_from_bool(request.closestCoin.down)
+        self.state += self.__get_array_from_bool(request.closestCoin.left)
+
+        self.state += self.__get_array_from_bool(request.finishDirection.up)
+        self.state += self.__get_array_from_bool(request.finishDirection.right)
+        self.state += self.__get_array_from_bool(request.finishDirection.down)
+        self.state += self.__get_array_from_bool(request.finishDirection.left)
+
+        self.reward = request.reward
+        self.gameOver = request.gameOver
 
     def reinforcement(self):
         print("Timer: {}, Actual Reward: {}".format(self.clockTime, self.reward))
@@ -84,3 +95,9 @@ class GameDataHandling:
     def set_reset(self, resetEnv, gameOver):
         self.gameOver = gameOver
         self.resetEnv = resetEnv
+
+    def __get_array_from_bool(self, bool_state):
+        if bool_state:
+            return [0]
+        else:
+            return [1]

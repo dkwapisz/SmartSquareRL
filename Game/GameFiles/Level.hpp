@@ -9,6 +9,7 @@
 #include "GameObjects/Coin.hpp"
 #include "GameObjects/MovingDanger.hpp"
 #include "GameObjects/Finish.hpp"
+#include "GameObjects/PlayerFoV.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <fstream>
@@ -30,6 +31,7 @@ private:
     std::map<int, std::string> mapPath;
 
     Player *player;
+    PlayerFoV *playerFoV;
     sf::Clock *clock;
 
     int coinsCount;
@@ -79,18 +81,19 @@ public:
     int getMapsCount() const;
 
     // gRPC message
-    bool isClosestObstacleBox();
-    bool areCoinsNeeded();
-    char getClosestObstacleDir();
-    char getClosestCoinDir();
-    char getClosestEnemyDir();
-    char getFinishDirectionDir();
-    int32_t getReward();
+    bool isClosestObstacleBox() const;
+    bool areCoinsNeeded() const;
+    char getClosestObstacleDir() const;
+    char getClosestCoinDir() const;
+    char getClosestEnemyDir() const;
+    char getFinishDirectionDir() const;
+    int32_t getReward() const;
     void setReward(int32_t reward);
     // --------
     void calculateClosestObjectsDir();
     bool isGameOver() const;
     void setGameOver(bool gameOver);
+    PlayerFoV* getPlayerFoV();
 };
 
 

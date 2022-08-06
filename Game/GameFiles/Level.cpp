@@ -8,6 +8,8 @@ Level::Level(int levelNumber) {
     this -> initializeGameObjects();
     this -> generateMap();
 
+    this -> playerFoV = new PlayerFoV(90, false);
+
     closestCoinDir = 'N';
     closestEnemyDir = 'N';
     closestObstacleDir = 'N';
@@ -18,6 +20,7 @@ Level::Level(int levelNumber) {
 Level::~Level() {
     delete this -> player;
     delete this -> clock;
+    delete this -> playerFoV;
 
     for (auto &gameObject : this -> squareShapes) {
         delete gameObject.second;
@@ -143,6 +146,12 @@ void Level::movePlayer(float directionX, float directionY) {
 
 bool Level::checkCollision() {
     reward = 0;
+
+    this -> playerFoV -> setCoinInView(false);
+    this -> playerFoV -> calculateRays(&walls, &boxes, &coins,
+                                       player->getCenterPosX(), player->getCenterPosY());
+
+    std::cout << playerFoV->isCoinInView();
 
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
@@ -340,6 +349,10 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
     }
 
     this -> player -> render(target);
+
+    if (this -> playerFoV -> isDrawRaysSet()) {
+        this -> playerFoV -> render(target, player -> getCenterPosX(), player -> getCenterPosY());
+    }
 
     for (auto *bullet : this -> bullets) {
         bullet -> render(target);
@@ -620,31 +633,31 @@ void Level::calculateFinishDirectionDir() {
     }
 }
 
-bool Level::isClosestObstacleBox() {
+bool Level::isClosestObstacleBox() const {
     return closestObstacleBox;
 }
 
-bool Level::areCoinsNeeded() {
+bool Level::areCoinsNeeded() const {
     return (coinsCount - playerCoinsCount == 0);
 }
 
-char Level::getClosestObstacleDir() {
+char Level::getClosestObstacleDir() const {
     return closestObstacleDir;
 }
 
-char Level::getClosestCoinDir() {
+char Level::getClosestCoinDir() const {
     return closestCoinDir;
 }
 
-char Level::getClosestEnemyDir() {
+char Level::getClosestEnemyDir() const {
     return closestEnemyDir;
 }
 
-char Level::getFinishDirectionDir() {
+char Level::getFinishDirectionDir() const {
     return finishDir;
 }
 
-int32_t Level::getReward() {
+int32_t Level::getReward() const {
     return reward;
 }
 
@@ -664,3 +677,6 @@ void Level::resetClockTime() {
     this -> clock -> restart();
 }
 
+PlayerFoV* Level::getPlayerFoV() {
+    return this -> playerFoV;
+}

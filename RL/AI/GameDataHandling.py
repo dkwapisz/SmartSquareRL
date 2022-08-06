@@ -76,7 +76,7 @@ class GameDataHandling:
 
     def get_action(self):
         self.moveDir = self.agent.choose_action(self.state)
-        return self.moveDir + 1, self.shotDir
+        return self.moveDir + 1, 0
 
     def get_reset(self):
         return self.resetEnv

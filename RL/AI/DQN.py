@@ -1,7 +1,5 @@
 import numpy as np
-import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 
 
@@ -9,7 +7,7 @@ class ReplayBuffer:
     def __init__(self, max_size, input_dims):
         self.mem_size = max_size
         self.mem_cntr = 0
-        #tf.config.threading.set_inter_op_parallelism_threads(10)
+
         self.state_memory = np.zeros((self.mem_size, *[input_dims]), dtype=np.float32)
         self.new_state_memory = np.zeros((self.mem_size, *[input_dims]), dtype=np.float32)
         self.action_memory = np.zeros(self.mem_size, dtype=np.int32)

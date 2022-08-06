@@ -19,6 +19,7 @@ public:
     bool allCoinsCollected;
     bool gameOver;
     int32_t reward;
+    float lastDistToCoin;
 
     struct {
         bool UP;

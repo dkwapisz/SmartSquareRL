@@ -68,7 +68,7 @@ class GameDataHandling:
         self.gameOver = request.gameOver
 
     def reinforcement(self):
-        print("Timer: {}, Actual Reward: {}".format(self.clockTime, self.reward))
+        print("Timer: {}, Actual Reward: {}, State: {}".format(self.clockTime, self.reward, self.newState))
         try:
             self.agent.learn()
         except Exception:

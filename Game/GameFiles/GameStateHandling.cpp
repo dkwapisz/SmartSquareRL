@@ -7,6 +7,7 @@ GameStateHandling::GameStateHandling() {
     allCoinsCollected = false;
     gameOver = false;
     reward = 0;
+    lastDistToCoin = 9999999.f;
 }
 
 void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player) {
@@ -177,6 +178,17 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 
     float dirVecX = closestCoin -> getCenterPosX() - player -> getCenterPosX();
     float dirVecY = closestCoin -> getCenterPosY() - player -> getCenterPosY();
+
+    float coinDist = std::sqrt(
+            powf((player->getCenterPosX() - closestCoin->getCenterPosX()), 2.f) +
+            powf((player->getCenterPosX() - closestCoin->getCenterPosY()), 2.f));
+
+    if (lastDistToCoin < coinDist) {
+        reward += 10;
+    } else {
+        reward -= 10;
+    }
+    lastDistToCoin = coinDist;
 
     if (dirVecY >= 0) {
         coinDirection.DOWN = true;

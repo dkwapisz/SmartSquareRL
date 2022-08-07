@@ -82,19 +82,21 @@ void Game::renderLabels() {
 void Game::run() {
     ProtoClient client{grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())};
     bool gameOver;
-    char* action;
+    char* actions;
     bool reset;
 
     while (this -> window -> isOpen()) {
         if (!gameFinished) {
             // TODO Refactor
+            this -> level -> gameStateHandling -> reward = 0;
 
-            action = client.StateAction(level -> gameStateHandling,
+            actions = client.StateAction(level -> gameStateHandling,
                                         level -> getClockTime(),
                                         level -> getPlayer() -> getIteration());
 
-            gameOver = this -> playStep(action[0], action[1]);
-            std::cout << "Move action: " << action[0] << "\n";
+            gameOver = this -> playStep(actions[0], actions[1]);
+
+            std::cout << "Move action: " << actions[0] << "\n";
             this -> render();
 
             reset = client.StateReset(level -> gameStateHandling);
@@ -102,6 +104,7 @@ void Game::run() {
             performResetIfNeeded(gameOver || reset);
         } else {
             this -> window -> close();
+            delete actions;
             delete this;
             return;
         }

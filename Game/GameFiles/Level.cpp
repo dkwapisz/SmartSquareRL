@@ -9,7 +9,7 @@ Level::Level(int levelNumber) {
     generateMap();
 
     this -> gameStateHandling = new GameStateHandling();
-    this -> playerFoV = new PlayerFoV(90, false);
+    this -> playerFoV = new PlayerFoV(180, false);
 }
 
 Level::~Level() {
@@ -140,7 +140,6 @@ void Level::movePlayer(float directionX, float directionY) {
 }
 
 bool Level::checkCollision() {
-    gameStateHandling -> reward = 0;
 
     this -> playerFoV -> setCoinInView(false);
     this -> playerFoV -> calculateRays(&walls, &boxes, &coins,
@@ -148,21 +147,21 @@ bool Level::checkCollision() {
 
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward = -10;
+            gameStateHandling -> reward += -10;
             return true;
         }
     }
 
     for (const auto& box : boxes) {
         if (box -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward = -10;
+            gameStateHandling -> reward += -10;
             return true;
         }
     }
 
     for (const auto& staticDanger : staticDangers) {
         if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward = -100;
+            gameStateHandling -> reward += -100;
             this -> resetLevel();
             return false;
         }
@@ -172,7 +171,7 @@ bool Level::checkCollision() {
         if (finish -> getBounds().intersects(this -> player -> getBounds())) {
 
             if (this -> coinsCount == this -> playerCoinsCount) {
-                gameStateHandling -> reward = 100;
+                gameStateHandling -> reward += 100;
                 levelFinished = true;
             }
 
@@ -182,7 +181,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward = 50;
+            gameStateHandling -> reward += 50;
             this -> resetClockTime();
             delete coins[i];
             coins.erase(coins.begin() + i);

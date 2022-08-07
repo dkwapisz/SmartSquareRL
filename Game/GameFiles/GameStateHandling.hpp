@@ -17,6 +17,7 @@ private:
 public:
     bool closestObstacleIsBox;
     bool allCoinsCollected;
+    bool coinInFoV;
     bool gameOver;
     int32_t reward;
     float lastDistToCoin;

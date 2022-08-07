@@ -22,14 +22,15 @@ message State {
 
   bool closestObstacleIsBox = 1;
   bool allCoinsCollected = 2;
-  Direction closestObstacle = 3;
-  Direction closestCoin = 4;
-  Direction closestEnemy = 5;
-  Direction finishDirection = 6;
-  int32 reward = 7;
-  int32 clockTime = 8;
-  bool gameOver = 9;
-  int32 iteration = 10;
+  bool coinInFoV = 3;
+  Direction closestObstacle = 4;
+  Direction closestCoin = 5;
+  Direction closestEnemy = 6;
+  Direction finishDirection = 7;
+  int32 reward = 8;
+  int32 clockTime = 9;
+  bool gameOver = 10;
+  int32 iteration = 11;
 }
 
 message Action {

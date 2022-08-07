@@ -40,6 +40,7 @@ constexpr State::State(
   , finishdirection_(nullptr)
   , closestobstacleisbox_(false)
   , allcoinscollected_(false)
+  , coininfov_(false)
   , gameover_(false)
   , reward_(0)
   , clocktime_(0)
@@ -104,6 +105,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacleisbox_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacle_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestcoin_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemy_),
@@ -131,8 +133,8 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::State_Direction)},
   { 10, -1, -1, sizeof(::GameMessage::State)},
-  { 26, -1, -1, sizeof(::GameMessage::Action)},
-  { 34, -1, -1, sizeof(::GameMessage::Reset)},
+  { 27, -1, -1, sizeof(::GameMessage::Action)},
+  { 35, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -143,31 +145,31 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\241\003\n\005State\022\034\n\024c"
+  "\n\ngame.proto\022\013GameMessage\"\264\003\n\005State\022\034\n\024c"
   "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
-  "lected\030\002 \001(\010\0225\n\017closestObstacle\030\003 \001(\0132\034."
-  "GameMessage.State.Direction\0221\n\013closestCo"
-  "in\030\004 \001(\0132\034.GameMessage.State.Direction\0222"
-  "\n\014closestEnemy\030\005 \001(\0132\034.GameMessage.State"
-  ".Direction\0225\n\017finishDirection\030\006 \001(\0132\034.Ga"
-  "meMessage.State.Direction\022\016\n\006reward\030\007 \001("
-  "\005\022\021\n\tclockTime\030\010 \001(\005\022\020\n\010gameOver\030\t \001(\010\022\021"
-  "\n\titeration\030\n \001(\005\032B\n\tDirection\022\n\n\002up\030\001 \001"
-  "(\010\022\r\n\005right\030\002 \001(\010\022\014\n\004down\030\003 \001(\010\022\014\n\004left\030"
-  "\004 \001(\010\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162"
-  "#.GameMessage.Action.ActionDirection\022:\n\r"
-  "shotDirection\030\002 \001(\0162#.GameMessage.Action"
-  ".ActionDirection\"B\n\017ActionDirection\022\010\n\004I"
-  "DLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LE"
-  "FT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023S"
-  "tateActionExchange\0228\n\013StateAction\022\022.Game"
-  "Message.State\032\023.GameMessage.Action\"\000\0226\n\n"
-  "StateReset\022\022.GameMessage.State\032\022.GameMes"
-  "sage.Reset\"\000b\006proto3"
+  "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\0225\n\017close"
+  "stObstacle\030\004 \001(\0132\034.GameMessage.State.Dir"
+  "ection\0221\n\013closestCoin\030\005 \001(\0132\034.GameMessag"
+  "e.State.Direction\0222\n\014closestEnemy\030\006 \001(\0132"
+  "\034.GameMessage.State.Direction\0225\n\017finishD"
+  "irection\030\007 \001(\0132\034.GameMessage.State.Direc"
+  "tion\022\016\n\006reward\030\010 \001(\005\022\021\n\tclockTime\030\t \001(\005\022"
+  "\020\n\010gameOver\030\n \001(\010\022\021\n\titeration\030\013 \001(\005\032B\n\t"
+  "Direction\022\n\n\002up\030\001 \001(\010\022\r\n\005right\030\002 \001(\010\022\014\n\004"
+  "down\030\003 \001(\010\022\014\n\004left\030\004 \001(\010\"\304\001\n\006Action\022:\n\rm"
+  "oveDirection\030\001 \001(\0162#.GameMessage.Action."
+  "ActionDirection\022:\n\rshotDirection\030\002 \001(\0162#"
+  ".GameMessage.Action.ActionDirection\"B\n\017A"
+  "ctionDirection\022\010\n\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGH"
+  "T\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020\004\"\034\n\005Reset\022\023\n\013rese"
+  "tNeeded\030\001 \001(\0102\207\001\n\023StateActionExchange\0228\n"
+  "\013StateAction\022\022.GameMessage.State\032\023.GameM"
+  "essage.Action\"\000\0226\n\nStateReset\022\022.GameMess"
+  "age.State\032\022.GameMessage.Reset\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 820, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 839, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 4,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -609,65 +611,73 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // .GameMessage.State.Direction closestObstacle = 3;
+      // bool coinInFoV = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          coininfov_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .GameMessage.State.Direction closestObstacle = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_closestobstacle(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .GameMessage.State.Direction closestCoin = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+      // .GameMessage.State.Direction closestCoin = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr = ctx->ParseMessage(_internal_mutable_closestcoin(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .GameMessage.State.Direction closestEnemy = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+      // .GameMessage.State.Direction closestEnemy = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_closestenemy(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .GameMessage.State.Direction finishDirection = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+      // .GameMessage.State.Direction finishDirection = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr = ctx->ParseMessage(_internal_mutable_finishdirection(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 reward = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+      // int32 reward = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
           reward_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 clockTime = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+      // int32 clockTime = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
           clocktime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // bool gameOver = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+      // bool gameOver = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
           gameover_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 iteration = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+      // int32 iteration = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
           iteration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -714,60 +724,66 @@ uint8_t* State::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_allcoinscollected(), target);
   }
 
-  // .GameMessage.State.Direction closestObstacle = 3;
+  // bool coinInFoV = 3;
+  if (this->_internal_coininfov() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_coininfov(), target);
+  }
+
+  // .GameMessage.State.Direction closestObstacle = 4;
   if (this->_internal_has_closestobstacle()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::closestobstacle(this), target, stream);
+        4, _Internal::closestobstacle(this), target, stream);
   }
 
-  // .GameMessage.State.Direction closestCoin = 4;
+  // .GameMessage.State.Direction closestCoin = 5;
   if (this->_internal_has_closestcoin()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        4, _Internal::closestcoin(this), target, stream);
+        5, _Internal::closestcoin(this), target, stream);
   }
 
-  // .GameMessage.State.Direction closestEnemy = 5;
+  // .GameMessage.State.Direction closestEnemy = 6;
   if (this->_internal_has_closestenemy()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        5, _Internal::closestenemy(this), target, stream);
+        6, _Internal::closestenemy(this), target, stream);
   }
 
-  // .GameMessage.State.Direction finishDirection = 6;
+  // .GameMessage.State.Direction finishDirection = 7;
   if (this->_internal_has_finishdirection()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        6, _Internal::finishdirection(this), target, stream);
+        7, _Internal::finishdirection(this), target, stream);
   }
 
-  // int32 reward = 7;
+  // int32 reward = 8;
   if (this->_internal_reward() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_reward(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_reward(), target);
   }
 
-  // int32 clockTime = 8;
+  // int32 clockTime = 9;
   if (this->_internal_clocktime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_clocktime(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_clocktime(), target);
   }
 
-  // bool gameOver = 9;
+  // bool gameOver = 10;
   if (this->_internal_gameover() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(9, this->_internal_gameover(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(10, this->_internal_gameover(), target);
   }
 
-  // int32 iteration = 10;
+  // int32 iteration = 11;
   if (this->_internal_iteration() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_iteration(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(11, this->_internal_iteration(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -786,28 +802,28 @@ size_t State::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .GameMessage.State.Direction closestObstacle = 3;
+  // .GameMessage.State.Direction closestObstacle = 4;
   if (this->_internal_has_closestobstacle()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *closestobstacle_);
   }
 
-  // .GameMessage.State.Direction closestCoin = 4;
+  // .GameMessage.State.Direction closestCoin = 5;
   if (this->_internal_has_closestcoin()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *closestcoin_);
   }
 
-  // .GameMessage.State.Direction closestEnemy = 5;
+  // .GameMessage.State.Direction closestEnemy = 6;
   if (this->_internal_has_closestenemy()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *closestenemy_);
   }
 
-  // .GameMessage.State.Direction finishDirection = 6;
+  // .GameMessage.State.Direction finishDirection = 7;
   if (this->_internal_has_finishdirection()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -824,22 +840,27 @@ size_t State::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  // bool gameOver = 9;
+  // bool coinInFoV = 3;
+  if (this->_internal_coininfov() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // bool gameOver = 10;
   if (this->_internal_gameover() != 0) {
     total_size += 1 + 1;
   }
 
-  // int32 reward = 7;
+  // int32 reward = 8;
   if (this->_internal_reward() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
   }
 
-  // int32 clockTime = 8;
+  // int32 clockTime = 9;
   if (this->_internal_clocktime() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_clocktime());
   }
 
-  // int32 iteration = 10;
+  // int32 iteration = 11;
   if (this->_internal_iteration() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_iteration());
   }
@@ -883,6 +904,9 @@ void State::MergeFrom(const State& from) {
   }
   if (from._internal_allcoinscollected() != 0) {
     _internal_set_allcoinscollected(from._internal_allcoinscollected());
+  }
+  if (from._internal_coininfov() != 0) {
+    _internal_set_coininfov(from._internal_coininfov());
   }
   if (from._internal_gameover() != 0) {
     _internal_set_gameover(from._internal_gameover());

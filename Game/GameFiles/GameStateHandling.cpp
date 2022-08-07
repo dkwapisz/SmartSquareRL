@@ -5,6 +5,7 @@ GameStateHandling::GameStateHandling() {
     initializeStructures();
     closestObstacleIsBox = false;
     allCoinsCollected = false;
+    coinInFoV = false;
     gameOver = false;
     reward = 0;
     lastDistToCoin = 9999999.f;
@@ -171,17 +172,43 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
     coinDirection.RIGHT = false;
     coinDirection.DOWN = false;
     coinDirection.LEFT = false;
+    this -> coinInFoV = coinInFoV;
 
-    if (coins -> empty() || closestCoin == nullptr) {
+    // Test
+    if (!coinInFoV) {
         return;
+    }
+
+    if (coins -> empty()) {
+        return;
+    }
+    if (closestCoin == nullptr && coinInFoV) {
+        std::cerr << "Error in calculating closest coin" << "\n";
+        return;
+    }
+
+    if (!this -> coinInFoV) {
+        float playerDistanceToCoin = 99999999.f;
+        float tempDistanceCoin;
+        std::cout << "coin is not in fov" << "\n";
+        for (const auto& coin : *coins) {
+            tempDistanceCoin = std::sqrt(
+                    powf((player -> getCenterPosX() - coin -> getCenterPosX()), 2.f) +
+                    powf((player -> getCenterPosY() - coin -> getCenterPosY()), 2.f));
+
+            if (playerDistanceToCoin > tempDistanceCoin) {
+                playerDistanceToCoin = tempDistanceCoin;
+                closestCoin = coin;
+            }
+        }
     }
 
     float dirVecX = closestCoin -> getCenterPosX() - player -> getCenterPosX();
     float dirVecY = closestCoin -> getCenterPosY() - player -> getCenterPosY();
 
     float coinDist = std::sqrt(
-            powf((player->getCenterPosX() - closestCoin->getCenterPosX()), 2.f) +
-            powf((player->getCenterPosX() - closestCoin->getCenterPosY()), 2.f));
+            powf((player -> getCenterPosX() - closestCoin -> getCenterPosX()), 2.f) +
+            powf((player -> getCenterPosY() - closestCoin -> getCenterPosY()), 2.f));
 
     if (lastDistToCoin > coinDist) {
         reward = 0;
@@ -190,6 +217,23 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
     }
     lastDistToCoin = coinDist;
 
+    if (player->getCenterPosX() > closestCoin->getCenterPosX() - closestCoin->getBounds().width/2
+    && player->getCenterPosX() < closestCoin->getCenterPosX() + closestCoin->getBounds().width/2) {
+        if (dirVecY >= 0) {
+            coinDirection.DOWN = true;
+        } else {
+            coinDirection.UP = true;
+        }
+        return;
+    } else if (player->getCenterPosY() > closestCoin->getCenterPosY() - closestCoin->getBounds().width/2
+               && player->getCenterPosY() < closestCoin->getCenterPosY() + closestCoin->getBounds().width/2) {
+        if (dirVecX >= 0) {
+            coinDirection.RIGHT = true;
+        } else {
+            coinDirection.LEFT = true;
+        }
+        return;
+    }
     if (dirVecY >= 0) {
         coinDirection.DOWN = true;
     } else {

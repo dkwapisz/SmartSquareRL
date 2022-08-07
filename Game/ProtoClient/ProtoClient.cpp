@@ -11,6 +11,7 @@ char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
 
     request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
+    request.set_coininfov(gameStateHandling->coinInFoV);
 
     request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
     request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);
@@ -57,6 +58,7 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
 
     request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
+    request.set_coininfov(gameStateHandling->coinInFoV);
 
     request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
     request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);

@@ -183,6 +183,7 @@ bool Level::checkCollision() {
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
             gameStateHandling -> reward = 50;
+            this -> resetClockTime();
             delete coins[i];
             coins.erase(coins.begin() + i);
             this -> playerCoinsCount++;

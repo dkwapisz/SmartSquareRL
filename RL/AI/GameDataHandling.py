@@ -12,17 +12,15 @@ class GameDataHandling:
         self.newState = []
         self.gameOver = False
         self.resetEnv = False
-        self.agent = Agent(lr=0.001, gamma=0.85, n_actions=4, epsilon=0.8, batch_size=64, input_dims=13)
+        self.agent = Agent(lr=0.001, gamma=0.85, n_actions=4, epsilon=0.8, batch_size=64, input_dims=14)
         self.reward = 0
         self.clockTime = 0
 
     def set_state(self, request):
         self.state = []
 
-        if request.allCoinsCollected:
-            self.state += [0]
-        else:
-            self.state += [1]
+        self.state += self.__get_array_from_bool(request.allCoinsCollected)
+        self.state += self.__get_array_from_bool(request.coinInFoV)
 
         self.state += self.__get_array_from_bool(request.closestObstacle.up)
         self.state += self.__get_array_from_bool(request.closestObstacle.right)
@@ -44,10 +42,8 @@ class GameDataHandling:
     def set_new_state(self, request):
         self.newState = []
 
-        if request.allCoinsCollected:
-            self.newState += [0]
-        else:
-            self.newState += [1]
+        self.newState += self.__get_array_from_bool(request.allCoinsCollected)
+        self.newState += self.__get_array_from_bool(request.coinInFoV)
 
         self.newState += self.__get_array_from_bool(request.closestObstacle.up)
         self.newState += self.__get_array_from_bool(request.closestObstacle.right)
@@ -68,7 +64,8 @@ class GameDataHandling:
         self.gameOver = request.gameOver
 
     def reinforcement(self):
-        print("Timer: {}, Actual Reward: {}, State: {}".format(self.clockTime, self.reward, self.newState))
+        #print("Timer: {}, Actual Reward: {}, State: {}".format(self.clockTime, self.reward, self.newState))
+        print("Timer: {}, Actual Reward: {}, Coin state: {}".format(self.clockTime, self.reward, self.newState[6:10]))
         try:
             self.agent.learn()
         except Exception:

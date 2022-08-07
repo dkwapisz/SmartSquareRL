@@ -28,7 +28,7 @@ void Game::initializeWindow() {
     this -> window = new sf::RenderWindow(sf::VideoMode(600, 650),
                                           "SmartSquareRL",
                                           sf::Style::Close | sf::Style::Titlebar);
-    this -> window -> setFramerateLimit(75);
+    this -> window -> setFramerateLimit(200);
     this -> window -> setVerticalSyncEnabled(false);
 }
 

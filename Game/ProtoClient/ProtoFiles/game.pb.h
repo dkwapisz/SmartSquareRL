@@ -409,18 +409,19 @@ class State final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kClosestObstacleFieldNumber = 3,
-    kClosestCoinFieldNumber = 4,
-    kClosestEnemyFieldNumber = 5,
-    kFinishDirectionFieldNumber = 6,
+    kClosestObstacleFieldNumber = 4,
+    kClosestCoinFieldNumber = 5,
+    kClosestEnemyFieldNumber = 6,
+    kFinishDirectionFieldNumber = 7,
     kClosestObstacleIsBoxFieldNumber = 1,
     kAllCoinsCollectedFieldNumber = 2,
-    kGameOverFieldNumber = 9,
-    kRewardFieldNumber = 7,
-    kClockTimeFieldNumber = 8,
-    kIterationFieldNumber = 10,
+    kCoinInFoVFieldNumber = 3,
+    kGameOverFieldNumber = 10,
+    kRewardFieldNumber = 8,
+    kClockTimeFieldNumber = 9,
+    kIterationFieldNumber = 11,
   };
-  // .GameMessage.State.Direction closestObstacle = 3;
+  // .GameMessage.State.Direction closestObstacle = 4;
   bool has_closestobstacle() const;
   private:
   bool _internal_has_closestobstacle() const;
@@ -438,7 +439,7 @@ class State final :
       ::GameMessage::State_Direction* closestobstacle);
   ::GameMessage::State_Direction* unsafe_arena_release_closestobstacle();
 
-  // .GameMessage.State.Direction closestCoin = 4;
+  // .GameMessage.State.Direction closestCoin = 5;
   bool has_closestcoin() const;
   private:
   bool _internal_has_closestcoin() const;
@@ -456,7 +457,7 @@ class State final :
       ::GameMessage::State_Direction* closestcoin);
   ::GameMessage::State_Direction* unsafe_arena_release_closestcoin();
 
-  // .GameMessage.State.Direction closestEnemy = 5;
+  // .GameMessage.State.Direction closestEnemy = 6;
   bool has_closestenemy() const;
   private:
   bool _internal_has_closestenemy() const;
@@ -474,7 +475,7 @@ class State final :
       ::GameMessage::State_Direction* closestenemy);
   ::GameMessage::State_Direction* unsafe_arena_release_closestenemy();
 
-  // .GameMessage.State.Direction finishDirection = 6;
+  // .GameMessage.State.Direction finishDirection = 7;
   bool has_finishdirection() const;
   private:
   bool _internal_has_finishdirection() const;
@@ -510,7 +511,16 @@ class State final :
   void _internal_set_allcoinscollected(bool value);
   public:
 
-  // bool gameOver = 9;
+  // bool coinInFoV = 3;
+  void clear_coininfov();
+  bool coininfov() const;
+  void set_coininfov(bool value);
+  private:
+  bool _internal_coininfov() const;
+  void _internal_set_coininfov(bool value);
+  public:
+
+  // bool gameOver = 10;
   void clear_gameover();
   bool gameover() const;
   void set_gameover(bool value);
@@ -519,7 +529,7 @@ class State final :
   void _internal_set_gameover(bool value);
   public:
 
-  // int32 reward = 7;
+  // int32 reward = 8;
   void clear_reward();
   int32_t reward() const;
   void set_reward(int32_t value);
@@ -528,7 +538,7 @@ class State final :
   void _internal_set_reward(int32_t value);
   public:
 
-  // int32 clockTime = 8;
+  // int32 clockTime = 9;
   void clear_clocktime();
   int32_t clocktime() const;
   void set_clocktime(int32_t value);
@@ -537,7 +547,7 @@ class State final :
   void _internal_set_clocktime(int32_t value);
   public:
 
-  // int32 iteration = 10;
+  // int32 iteration = 11;
   void clear_iteration();
   int32_t iteration() const;
   void set_iteration(int32_t value);
@@ -559,6 +569,7 @@ class State final :
   ::GameMessage::State_Direction* finishdirection_;
   bool closestobstacleisbox_;
   bool allcoinscollected_;
+  bool coininfov_;
   bool gameover_;
   int32_t reward_;
   int32_t clocktime_;
@@ -1040,7 +1051,27 @@ inline void State::set_allcoinscollected(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.allCoinsCollected)
 }
 
-// .GameMessage.State.Direction closestObstacle = 3;
+// bool coinInFoV = 3;
+inline void State::clear_coininfov() {
+  coininfov_ = false;
+}
+inline bool State::_internal_coininfov() const {
+  return coininfov_;
+}
+inline bool State::coininfov() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.coinInFoV)
+  return _internal_coininfov();
+}
+inline void State::_internal_set_coininfov(bool value) {
+  
+  coininfov_ = value;
+}
+inline void State::set_coininfov(bool value) {
+  _internal_set_coininfov(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.coinInFoV)
+}
+
+// .GameMessage.State.Direction closestObstacle = 4;
 inline bool State::_internal_has_closestobstacle() const {
   return this != internal_default_instance() && closestobstacle_ != nullptr;
 }
@@ -1130,7 +1161,7 @@ inline void State::set_allocated_closestobstacle(::GameMessage::State_Direction*
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestObstacle)
 }
 
-// .GameMessage.State.Direction closestCoin = 4;
+// .GameMessage.State.Direction closestCoin = 5;
 inline bool State::_internal_has_closestcoin() const {
   return this != internal_default_instance() && closestcoin_ != nullptr;
 }
@@ -1220,7 +1251,7 @@ inline void State::set_allocated_closestcoin(::GameMessage::State_Direction* clo
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestCoin)
 }
 
-// .GameMessage.State.Direction closestEnemy = 5;
+// .GameMessage.State.Direction closestEnemy = 6;
 inline bool State::_internal_has_closestenemy() const {
   return this != internal_default_instance() && closestenemy_ != nullptr;
 }
@@ -1310,7 +1341,7 @@ inline void State::set_allocated_closestenemy(::GameMessage::State_Direction* cl
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.closestEnemy)
 }
 
-// .GameMessage.State.Direction finishDirection = 6;
+// .GameMessage.State.Direction finishDirection = 7;
 inline bool State::_internal_has_finishdirection() const {
   return this != internal_default_instance() && finishdirection_ != nullptr;
 }
@@ -1400,7 +1431,7 @@ inline void State::set_allocated_finishdirection(::GameMessage::State_Direction*
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.finishDirection)
 }
 
-// int32 reward = 7;
+// int32 reward = 8;
 inline void State::clear_reward() {
   reward_ = 0;
 }
@@ -1420,7 +1451,7 @@ inline void State::set_reward(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.reward)
 }
 
-// int32 clockTime = 8;
+// int32 clockTime = 9;
 inline void State::clear_clocktime() {
   clocktime_ = 0;
 }
@@ -1440,7 +1471,7 @@ inline void State::set_clocktime(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.clockTime)
 }
 
-// bool gameOver = 9;
+// bool gameOver = 10;
 inline void State::clear_gameover() {
   gameover_ = false;
 }
@@ -1460,7 +1491,7 @@ inline void State::set_gameover(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
 }
 
-// int32 iteration = 10;
+// int32 iteration = 11;
 inline void State::clear_iteration() {
   iteration_ = 0;
 }

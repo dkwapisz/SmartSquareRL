@@ -41,7 +41,9 @@ def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims):
         keras.layers.Dense(fc1_dims, activation='relu'),
         keras.layers.Dense(fc2_dims, activation='relu'),
         keras.layers.Dense(n_actions, activation=None)])
-    model.compile(optimizer="Adam", loss='mse')
+
+    opt = keras.optimizers.Adam(learning_rate=lr)
+    model.compile(optimizer=opt, loss='mse')
 
     return model
 
@@ -58,7 +60,7 @@ class Agent:
         self.batch_size = batch_size
         self.model_file = fname
         self.memory = ReplayBuffer(mem_size, input_dims)
-        self.q_eval = build_dqn(lr, n_actions, input_dims, 80, 80)
+        self.q_eval = build_dqn(lr, n_actions, input_dims, 100, 100)
 
     def store_transition(self, state, action, reward, new_state, done):
         self.memory.store_transition(state, action, reward, new_state, done)
@@ -68,7 +70,7 @@ class Agent:
             action = np.random.choice(self.action_space)
         else:
             state = np.array([observation])
-            actions = self.q_eval.predict(state)
+            actions = self.q_eval.predict(state, workers=10)
 
             action = np.argmax(actions)
 
@@ -80,8 +82,8 @@ class Agent:
 
         states, actions, rewards, states_, dones = self.memory.sample_buffer(self.batch_size)
 
-        q_eval = self.q_eval.predict(states)
-        q_next = self.q_eval.predict(states_)
+        q_eval = self.q_eval.predict(states, workers=10)
+        q_next = self.q_eval.predict(states_, workers=10)
 
         q_target = np.copy(q_eval)
         batch_index = np.arange(self.batch_size, dtype=np.int32)

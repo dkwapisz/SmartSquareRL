@@ -1,5 +1,6 @@
 #include "PlayerFoV.hpp"
 
+
 PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
     this -> drawRays = drawRays;
     this -> numberOfRays = numberOfRays;
@@ -7,11 +8,13 @@ PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
     // Element n -> x, n+1 -> y
     this -> rayVertexes = new float[numberOfRays * 2];
     this -> coinInView = false;
+    this -> finishInView = false;
     this -> closestCoin = nullptr;
 }
 
 void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
-                              float playerX, float playerY) {
+                              std::vector<Finish *> *finishes, float playerX, float playerY,
+                              GameStateHandling *gameStateHandling) {
     float dirX, dirY, vertexX, vertexY;
     int arrayIterator = 0;
     int fullAngle = 360;
@@ -69,6 +72,13 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
             for (const auto& box : *boxes) {
                 if (box -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     hit = 1;
+                }
+            }
+
+            for (const auto& finish : *finishes) {
+                if (finish -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
+                    finishInView = true;
+                    break;
                 }
             }
 
@@ -150,4 +160,12 @@ Coin* PlayerFoV::getClosestCoin() {
 
 void PlayerFoV::setDrawRays(bool setDrawRays) {
     this -> drawRays = setDrawRays;
+}
+
+bool PlayerFoV::isFinishInView() const {
+    return finishInView;
+}
+
+void PlayerFoV::setFinishInView(bool finishInView) {
+    PlayerFoV::finishInView = finishInView;
 }

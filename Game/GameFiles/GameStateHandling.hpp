@@ -14,13 +14,16 @@ class GameStateHandling {
 
 private:
     void initializeStructures();
+    int lastCoinsCount;
 public:
     bool closestObstacleIsBox;
     bool allCoinsCollected;
     bool coinInFoV;
+    bool finishInFoV;
     bool gameOver;
     int32_t reward;
     float lastDistToCoin;
+    float lastFinishDist;
 
     struct {
         bool UP;
@@ -51,8 +54,9 @@ public:
     void calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player);
     void calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
                                          std::vector<MovingDanger *> *movingDangers, Player *player);
-    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player, bool coinInFoV, Coin *closestCoin);
-    void calculateFinishDirectionDir(std::vector<Finish *> *finishes, Player *player);
+    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
+                                 bool coinInFoV, Coin *closestCoin, int playerCoinsCount);
+    void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV, Player *player);
 };
 
 #endif

@@ -142,8 +142,8 @@ void Level::movePlayer(float directionX, float directionY) {
 bool Level::checkCollision() {
 
     this -> playerFoV -> setCoinInView(false);
-    this -> playerFoV -> calculateRays(&walls, &boxes, &coins,
-                                       player->getCenterPosX(), player->getCenterPosY());
+    this -> playerFoV -> calculateRays(&walls, &boxes, &coins, &finishes,
+                                       player->getCenterPosX(), player->getCenterPosY(), gameStateHandling);
 
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
@@ -375,8 +375,9 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
 void Level::calculateClosestObjectsDir() {
     gameStateHandling -> calculateClosestObstacleDir(&walls, &boxes, player);
     gameStateHandling -> calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
-    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView(), playerFoV -> getClosestCoin());
-    gameStateHandling -> calculateFinishDirectionDir(&finishes, player);
+    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView(),
+                                                 playerFoV -> getClosestCoin(), playerCoinsCount);
+    gameStateHandling -> calculateFinishDirectionDir(&finishes, playerFoV -> isFinishInView(), player);
     gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) != 0);
 }
 

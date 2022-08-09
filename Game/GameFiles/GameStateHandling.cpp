@@ -6,9 +6,12 @@ GameStateHandling::GameStateHandling() {
     closestObstacleIsBox = false;
     allCoinsCollected = false;
     coinInFoV = false;
+    finishInFoV = false;
     gameOver = false;
     reward = 0;
     lastDistToCoin = 9999999.f;
+    lastCoinsCount = 0;
+    lastFinishDist = 0;
 }
 
 void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player) {
@@ -166,18 +169,24 @@ void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *st
 }
 
 void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
-                                                bool coinInFoV, Coin *closestCoin) {
+                                                bool coinInFoV, Coin *closestCoin, int playerCoinsCount) {
 
     coinDirection.UP = false;
     coinDirection.RIGHT = false;
     coinDirection.DOWN = false;
     coinDirection.LEFT = false;
-    this -> coinInFoV = coinInFoV;
 
-//    // Test
-//    if (!coinInFoV) {
-//        return;
-//    }
+    if (playerCoinsCount != 0 && coinInFoV && coinInFoV != this -> coinInFoV) {
+        reward += 30;
+    }
+
+
+    if (lastCoinsCount == playerCoinsCount && !coinInFoV && coinInFoV != this -> coinInFoV) {
+        reward -= 50;
+    }
+
+    this -> coinInFoV = coinInFoV;
+    this -> lastCoinsCount = playerCoinsCount;
 
     if (coins -> empty()) {
         return;
@@ -249,7 +258,7 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 
 }
 
-void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finishes, Player *player) {
+void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV, Player *player) {
     float playerDistanceToFinish = 99999999.f;
     float tempDistanceFinish;
 
@@ -259,6 +268,7 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
     finishDirection.LEFT = false;
 
     Finish closestFinish;
+    this -> finishInFoV = finishInFoV;
 
     for (const auto& finish : *finishes) {
         tempDistanceFinish = std::sqrt(
@@ -268,6 +278,21 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
         if (playerDistanceToFinish > tempDistanceFinish) {
             playerDistanceToFinish = tempDistanceFinish;
             closestFinish = *finish;
+        }
+    }
+
+    if (allCoinsCollected) {
+        float finishDist = std::sqrt(
+                powf((player -> getCenterPosX() - closestFinish.getCenterPosX()), 2.f) +
+                powf((player -> getCenterPosY() - closestFinish.getCenterPosY()), 2.f));
+
+        if (this -> finishInFoV) {
+            if (lastDistToCoin > finishDist) {
+                reward += 1;
+            } else {
+                reward -= 10;
+            }
+            lastDistToCoin = finishDist;
         }
     }
 

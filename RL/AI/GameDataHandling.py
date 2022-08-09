@@ -12,7 +12,7 @@ class GameDataHandling:
         self.newState = []
         self.gameOver = False
         self.resetEnv = False
-        self.agent = Agent(lr=0.001, gamma=0.85, n_actions=4, epsilon=0.8, batch_size=64, input_dims=14)
+        self.agent = Agent(lr=0.003, gamma=0.85, n_actions=4, epsilon=0.90, batch_size=128, input_dims=14)
         self.reward = 0
         self.clockTime = 0
 
@@ -77,7 +77,7 @@ class GameDataHandling:
 
     def get_action(self):
         self.moveDir = self.agent.choose_action(self.state)
-        return self.moveDir + 1, 0
+        return self.moveDir, -1
 
     def get_reset(self):
         return self.resetEnv
@@ -85,6 +85,8 @@ class GameDataHandling:
     def set_reset(self, resetEnv, gameOver):
         self.gameOver = gameOver
         self.resetEnv = resetEnv
+
+
 
     def __get_array_from_bool(self, bool_state):
         if bool_state:

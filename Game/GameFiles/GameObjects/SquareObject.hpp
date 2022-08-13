@@ -15,6 +15,8 @@ public:
     sf::FloatRect getBounds() const;
     void render(sf::RenderTarget &target);
 
+    sf::RectangleShape &getObjectShape();
+
     float getCenterPosX() const;
     float getCenterPosY() const;
 };

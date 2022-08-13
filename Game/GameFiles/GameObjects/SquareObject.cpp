@@ -22,3 +22,7 @@ float SquareObject::getCenterPosX() const {
 float SquareObject::getCenterPosY() const {
     return this -> objectShape.getPosition().y + objectShape.getSize().y / 2;
 }
+
+sf::RectangleShape &SquareObject::getObjectShape() {
+    return objectShape;
+}

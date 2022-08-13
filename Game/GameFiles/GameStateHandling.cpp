@@ -2,16 +2,7 @@
 
 
 GameStateHandling::GameStateHandling() {
-    initializeStructures();
-    closestObstacleIsBox = false;
-    allCoinsCollected = false;
-    coinInFoV = false;
-    finishInFoV = false;
-    gameOver = false;
-    reward = 0;
-    lastDistToCoin = 9999999.f;
-    lastCoinsCount = 0;
-    lastFinishDist = 0;
+    resetAllStates();
 }
 
 void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player) {
@@ -28,10 +19,10 @@ void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, 
     Wall closestWall;
     Box closestBox;
 
-    for (const auto& wall : *walls) {
+    for (const auto &wall: *walls) {
         tempDistanceWall = std::sqrt(
-                powf((player -> getCenterPosX() - wall -> getCenterPosX()), 2.f) +
-                powf((player -> getCenterPosY() - wall -> getCenterPosY()), 2.f));
+                powf((player->getCenterPosX() - wall->getCenterPosX()), 2.f) +
+                powf((player->getCenterPosY() - wall->getCenterPosY()), 2.f));
 
         if (playerDistanceToWall > tempDistanceWall) {
             playerDistanceToWall = tempDistanceWall;
@@ -39,11 +30,11 @@ void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, 
         }
     }
 
-    if (!boxes -> empty()) {
-        for (const auto& box : *boxes) {
+    if (!boxes->empty()) {
+        for (const auto &box: *boxes) {
             tempDistanceBox = std::sqrt(
-                    powf((player -> getCenterPosX() - box -> getCenterPosX()), 2.f) +
-                    powf((player -> getCenterPosY() - box -> getCenterPosY()), 2.f));
+                    powf((player->getCenterPosX() - box->getCenterPosX()), 2.f) +
+                    powf((player->getCenterPosY() - box->getCenterPosY()), 2.f));
 
             if (playerDistanceToBox > tempDistanceBox) {
                 playerDistanceToBox = tempDistanceBox;
@@ -56,42 +47,33 @@ void GameStateHandling::calculateClosestObstacleDir(std::vector<Wall *> *walls, 
 
     float dirVecX;
     float dirVecY;
+    SquareObject *closestObstacle;
 
     if (playerDistanceToBox <= playerDistanceToWall) {
         closestObstacleIsBox = true;
-
-        dirVecX = closestBox.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestBox.getCenterPosY() - player -> getCenterPosY();
-
-        if (dirVecY >= 0) {
-            obstacleDirection.DOWN = true;
-        } else {
-            obstacleDirection.UP = true;
-        }
-        if (dirVecX >= 0) {
-            obstacleDirection.RIGHT = true;
-        } else {
-            obstacleDirection.LEFT = true;
-        }
-
+        closestObstacle = &closestBox;
     } else {
         closestObstacleIsBox = false;
+        closestObstacle = &closestWall;
+    }
 
-        dirVecX = closestWall.getCenterPosX() - player -> getCenterPosX();
-        dirVecY = closestWall.getCenterPosY() - player -> getCenterPosY();
+    dirVecX = closestObstacle->getCenterPosX() - player -> getCenterPosX();
+    dirVecY = closestObstacle->getCenterPosY() - player -> getCenterPosY();
 
+    if (std::abs(dirVecY) >= std::abs(dirVecX)) {
         if (dirVecY >= 0) {
             obstacleDirection.DOWN = true;
         } else {
             obstacleDirection.UP = true;
         }
+    } else {
         if (dirVecX >= 0) {
             obstacleDirection.RIGHT = true;
         } else {
             obstacleDirection.LEFT = true;
         }
-
     }
+
 }
 
 void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
@@ -287,12 +269,12 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
                 powf((player -> getCenterPosY() - closestFinish.getCenterPosY()), 2.f));
 
         if (this -> finishInFoV) {
-            if (lastDistToCoin > finishDist) {
+            if (lastFinishDist > finishDist) {
                 reward += 1;
             } else {
                 reward -= 10;
             }
-            lastDistToCoin = finishDist;
+            lastFinishDist = finishDist;
         }
     }
 
@@ -309,8 +291,56 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
     } else {
         finishDirection.LEFT = true;
     }
+}
+
+void GameStateHandling::calculateLastDiscoveredWallDir(Wall *wall, Player *player) {
+
+    lastDiscoveredWall.UP = false;
+    lastDiscoveredWall.RIGHT = false;
+    lastDiscoveredWall.DOWN = false;
+    lastDiscoveredWall.LEFT = false;
+
+    float dirVecX = wall->getCenterPosX() - player -> getCenterPosX();
+    float dirVecY = wall->getCenterPosY() - player -> getCenterPosY();
+
+//    float discoveredWallDist = std::sqrt(
+//            powf((player -> getCenterPosX() - wall -> getCenterPosX()), 2.f) +
+//            powf((player -> getCenterPosY() - wall -> getCenterPosY()), 2.f));
+
+    if (!coinInFoV) {
+        if (std::abs(dirVecX) > std::abs(dirVecY)) {
+            if (std::abs(dirVecX) < std::abs(lastDiscoveredWallDirX)) {
+                reward += 1;
+            } else {
+                reward -= 10;
+            }
+        } else {
+            if (std::abs(dirVecY) < std::abs(lastDiscoveredWallDirY)) {
+                reward += 1;
+            } else {
+                reward -= 10;
+            }
+        }
+        lastDiscoveredWallDirX = dirVecX;
+        lastDiscoveredWallDirY = dirVecY;
+    }
+
+    if (std::abs(dirVecY) >= std::abs(dirVecX)) {
+        if (dirVecY >= 0) {
+            lastDiscoveredWall.DOWN = true;
+        } else {
+            lastDiscoveredWall.UP = true;
+        }
+    } else {
+        if (dirVecX >= 0) {
+            lastDiscoveredWall.RIGHT = true;
+        } else {
+            lastDiscoveredWall.LEFT = true;
+        }
+    }
 
 }
+
 
 void GameStateHandling::initializeStructures() {
     obstacleDirection.UP = false;
@@ -329,4 +359,23 @@ void GameStateHandling::initializeStructures() {
     finishDirection.RIGHT = false;
     finishDirection.DOWN = false;
     finishDirection.LEFT = false;
+    lastDiscoveredWall.UP = false;
+    lastDiscoveredWall.RIGHT = false;
+    lastDiscoveredWall.DOWN = false;
+    lastDiscoveredWall.LEFT = false;
+}
+
+void GameStateHandling::resetAllStates() {
+    initializeStructures();
+    closestObstacleIsBox = false;
+    allCoinsCollected = false;
+    coinInFoV = false;
+    finishInFoV = false;
+    gameOver = false;
+    reward = 0;
+    lastDistToCoin = 9999999.f;
+    lastCoinsCount = 0;
+    lastFinishDist = 9999999.f;
+    float lastDiscoveredWallDirX = 0;
+    float lastDiscoveredWallDirY = 0;
 }

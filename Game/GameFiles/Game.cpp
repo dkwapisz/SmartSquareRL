@@ -170,19 +170,8 @@ bool Game::playStep(char moveDirection, char shotDirection) {
     this -> level -> calculateClosestObjectsDir();
 
     if (this -> level -> isLevelFinished()) {
+        level -> setLevelFinished(false);
         return true;
-
-        // TODO Think what to do with this (probably just reset level)
-        int lastLevelNum = this -> level -> getLevelNumber();
-        int mapsCount = this -> level -> getMapsCount();
-
-        if (lastLevelNum + 1 > mapsCount) {
-            std::cout << "Player wins \n";
-            gameFinished = true;
-        } else {
-            delete this -> level;
-            this -> level = new Level(lastLevelNum + 1);
-        }
     }
 
     return this -> level -> gameStateHandling -> gameOver;

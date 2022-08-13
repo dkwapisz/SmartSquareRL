@@ -55,6 +55,9 @@ public:
     GameStateHandling *gameStateHandling;
 
     bool isLevelFinished() const;
+
+    void setLevelFinished(bool levelFinished);
+
     void movePlayer(float directionX, float directionY);
     void shot(float directionX, float directionY);
     void updateBullets();

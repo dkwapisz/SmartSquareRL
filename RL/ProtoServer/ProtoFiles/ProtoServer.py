@@ -22,13 +22,13 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
 
-        if self.gameDataHandling.clockTime > 30:
+        if self.gameDataHandling.clock_time > 30:
             self.gameDataHandling.reward = -100
-            self.gameDataHandling.gameOver = True
-            self.gameDataHandling.resetEnv = True
+            self.gameDataHandling.game_over = True
+            self.gameDataHandling.reset_env = True
 
         self.gameDataHandling.remember()
-        self.gameDataHandling.reinforcement()
+        self.gameDataHandling.learn()
 
         resetEnv = self.gameDataHandling.get_reset()
         self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)

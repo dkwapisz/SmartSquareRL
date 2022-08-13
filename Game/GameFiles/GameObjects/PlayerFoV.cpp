@@ -66,6 +66,15 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
             for (const auto& wall : *walls) {
                 if (wall -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     hit = 1;
+                    if (!wall->discovered) {
+                        wall->discovered = true;
+                        lastDiscoveredWall = wall;
+                    }
+                }
+                if (!wall->discovered) {
+                    wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
+                } else {
+                    wall->getObjectShape().setFillColor(sf::Color(200, 100, 100));
                 }
             }
 
@@ -168,4 +177,8 @@ bool PlayerFoV::isFinishInView() const {
 
 void PlayerFoV::setFinishInView(bool finishInView) {
     PlayerFoV::finishInView = finishInView;
+}
+
+Wall *PlayerFoV::getLastDiscoveredWall() const {
+    return lastDiscoveredWall;
 }

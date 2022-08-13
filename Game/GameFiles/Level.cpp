@@ -214,7 +214,12 @@ void Level::resetLevel() {
     this -> player -> resetPosition();
     this -> playerCoinsCount = 0;
     this -> clock -> restart();
+    this -> gameStateHandling -> resetAllStates();
     this -> gameStateHandling -> gameOver = true;
+
+    for (auto *wall : this -> walls) {
+        wall->discovered = false;
+    }
 
     for (int i = 0; i < this -> movingDangers.size(); i++) {
         delete this -> movingDangers[i];
@@ -379,6 +384,7 @@ void Level::calculateClosestObjectsDir() {
                                                  playerFoV -> getClosestCoin(), playerCoinsCount);
     gameStateHandling -> calculateFinishDirectionDir(&finishes, playerFoV -> isFinishInView(), player);
     gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) != 0);
+    gameStateHandling -> calculateLastDiscoveredWallDir(playerFoV->getLastDiscoveredWall(), player);
 }
 
 int Level::getClockTime() const {
@@ -411,4 +417,8 @@ void Level::resetClockTime() {
 
 PlayerFoV* Level::getPlayerFoV() {
     return this -> playerFoV;
+}
+
+void Level::setLevelFinished(bool levelFinished) {
+    Level::levelFinished = levelFinished;
 }

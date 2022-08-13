@@ -24,6 +24,8 @@ public:
     int32_t reward;
     float lastDistToCoin;
     float lastFinishDist;
+    float lastDiscoveredWallDirX;
+    float lastDiscoveredWallDirY;
 
     struct {
         bool UP;
@@ -42,13 +44,19 @@ public:
         bool RIGHT;
         bool DOWN;
         bool LEFT;
-    } enemyDirection ;
+    } enemyDirection;
     struct {
         bool UP;
         bool RIGHT;
         bool DOWN;
         bool LEFT;
-    } finishDirection ;
+    } finishDirection;
+    struct {
+        bool UP;
+        bool RIGHT;
+        bool DOWN;
+        bool LEFT;
+    } lastDiscoveredWall;
 
     GameStateHandling();
     void calculateClosestObstacleDir(std::vector<Wall *> *walls, std::vector<Box *> *boxes, Player *player);
@@ -57,6 +65,8 @@ public:
     void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
                                  bool coinInFoV, Coin *closestCoin, int playerCoinsCount);
     void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV, Player *player);
+    void calculateLastDiscoveredWallDir(Wall *wall, Player *player);
+    void resetAllStates();
 };
 
 #endif

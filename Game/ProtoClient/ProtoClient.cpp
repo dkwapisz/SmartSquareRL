@@ -33,6 +33,11 @@ char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
     request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
     request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
 
+    request.mutable_lastdiscoveredwall()->set_up(gameStateHandling->lastDiscoveredWall.UP);
+    request.mutable_lastdiscoveredwall()->set_right(gameStateHandling->lastDiscoveredWall.RIGHT);
+    request.mutable_lastdiscoveredwall()->set_down(gameStateHandling->lastDiscoveredWall.DOWN);
+    request.mutable_lastdiscoveredwall()->set_left(gameStateHandling->lastDiscoveredWall.LEFT);
+
     Action response;
     ClientContext context;
     Status status = _stub -> StateAction(&context, request, &response);
@@ -79,6 +84,11 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
     request.mutable_finishdirection()->set_right(gameStateHandling->finishDirection.RIGHT);
     request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
     request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
+
+    request.mutable_lastdiscoveredwall()->set_up(gameStateHandling->lastDiscoveredWall.UP);
+    request.mutable_lastdiscoveredwall()->set_right(gameStateHandling->lastDiscoveredWall.RIGHT);
+    request.mutable_lastdiscoveredwall()->set_down(gameStateHandling->lastDiscoveredWall.DOWN);
+    request.mutable_lastdiscoveredwall()->set_left(gameStateHandling->lastDiscoveredWall.LEFT);
 
     Reset response;
     ClientContext context;

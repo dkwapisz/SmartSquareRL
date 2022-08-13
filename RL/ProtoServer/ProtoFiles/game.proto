@@ -27,10 +27,11 @@ message State {
   Direction closestCoin = 5;
   Direction closestEnemy = 6;
   Direction finishDirection = 7;
-  int32 reward = 8;
-  int32 clockTime = 9;
-  bool gameOver = 10;
-  int32 iteration = 11;
+  Direction lastDiscoveredWall = 8;
+  int32 reward = 9;
+  int32 clockTime = 10;
+  bool gameOver = 11;
+  int32 iteration = 12;
 }
 
 message Action {

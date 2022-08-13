@@ -413,13 +413,14 @@ class State final :
     kClosestCoinFieldNumber = 5,
     kClosestEnemyFieldNumber = 6,
     kFinishDirectionFieldNumber = 7,
+    kLastDiscoveredWallFieldNumber = 8,
     kClosestObstacleIsBoxFieldNumber = 1,
     kAllCoinsCollectedFieldNumber = 2,
     kCoinInFoVFieldNumber = 3,
-    kGameOverFieldNumber = 10,
-    kRewardFieldNumber = 8,
-    kClockTimeFieldNumber = 9,
-    kIterationFieldNumber = 11,
+    kGameOverFieldNumber = 11,
+    kRewardFieldNumber = 9,
+    kClockTimeFieldNumber = 10,
+    kIterationFieldNumber = 12,
   };
   // .GameMessage.State.Direction closestObstacle = 4;
   bool has_closestobstacle() const;
@@ -493,6 +494,24 @@ class State final :
       ::GameMessage::State_Direction* finishdirection);
   ::GameMessage::State_Direction* unsafe_arena_release_finishdirection();
 
+  // .GameMessage.State.Direction lastDiscoveredWall = 8;
+  bool has_lastdiscoveredwall() const;
+  private:
+  bool _internal_has_lastdiscoveredwall() const;
+  public:
+  void clear_lastdiscoveredwall();
+  const ::GameMessage::State_Direction& lastdiscoveredwall() const;
+  PROTOBUF_NODISCARD ::GameMessage::State_Direction* release_lastdiscoveredwall();
+  ::GameMessage::State_Direction* mutable_lastdiscoveredwall();
+  void set_allocated_lastdiscoveredwall(::GameMessage::State_Direction* lastdiscoveredwall);
+  private:
+  const ::GameMessage::State_Direction& _internal_lastdiscoveredwall() const;
+  ::GameMessage::State_Direction* _internal_mutable_lastdiscoveredwall();
+  public:
+  void unsafe_arena_set_allocated_lastdiscoveredwall(
+      ::GameMessage::State_Direction* lastdiscoveredwall);
+  ::GameMessage::State_Direction* unsafe_arena_release_lastdiscoveredwall();
+
   // bool closestObstacleIsBox = 1;
   void clear_closestobstacleisbox();
   bool closestobstacleisbox() const;
@@ -520,7 +539,7 @@ class State final :
   void _internal_set_coininfov(bool value);
   public:
 
-  // bool gameOver = 10;
+  // bool gameOver = 11;
   void clear_gameover();
   bool gameover() const;
   void set_gameover(bool value);
@@ -529,7 +548,7 @@ class State final :
   void _internal_set_gameover(bool value);
   public:
 
-  // int32 reward = 8;
+  // int32 reward = 9;
   void clear_reward();
   int32_t reward() const;
   void set_reward(int32_t value);
@@ -538,7 +557,7 @@ class State final :
   void _internal_set_reward(int32_t value);
   public:
 
-  // int32 clockTime = 9;
+  // int32 clockTime = 10;
   void clear_clocktime();
   int32_t clocktime() const;
   void set_clocktime(int32_t value);
@@ -547,7 +566,7 @@ class State final :
   void _internal_set_clocktime(int32_t value);
   public:
 
-  // int32 iteration = 11;
+  // int32 iteration = 12;
   void clear_iteration();
   int32_t iteration() const;
   void set_iteration(int32_t value);
@@ -567,6 +586,7 @@ class State final :
   ::GameMessage::State_Direction* closestcoin_;
   ::GameMessage::State_Direction* closestenemy_;
   ::GameMessage::State_Direction* finishdirection_;
+  ::GameMessage::State_Direction* lastdiscoveredwall_;
   bool closestobstacleisbox_;
   bool allcoinscollected_;
   bool coininfov_;
@@ -1431,7 +1451,97 @@ inline void State::set_allocated_finishdirection(::GameMessage::State_Direction*
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.finishDirection)
 }
 
-// int32 reward = 8;
+// .GameMessage.State.Direction lastDiscoveredWall = 8;
+inline bool State::_internal_has_lastdiscoveredwall() const {
+  return this != internal_default_instance() && lastdiscoveredwall_ != nullptr;
+}
+inline bool State::has_lastdiscoveredwall() const {
+  return _internal_has_lastdiscoveredwall();
+}
+inline void State::clear_lastdiscoveredwall() {
+  if (GetArenaForAllocation() == nullptr && lastdiscoveredwall_ != nullptr) {
+    delete lastdiscoveredwall_;
+  }
+  lastdiscoveredwall_ = nullptr;
+}
+inline const ::GameMessage::State_Direction& State::_internal_lastdiscoveredwall() const {
+  const ::GameMessage::State_Direction* p = lastdiscoveredwall_;
+  return p != nullptr ? *p : reinterpret_cast<const ::GameMessage::State_Direction&>(
+      ::GameMessage::_State_Direction_default_instance_);
+}
+inline const ::GameMessage::State_Direction& State::lastdiscoveredwall() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.lastDiscoveredWall)
+  return _internal_lastdiscoveredwall();
+}
+inline void State::unsafe_arena_set_allocated_lastdiscoveredwall(
+    ::GameMessage::State_Direction* lastdiscoveredwall) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(lastdiscoveredwall_);
+  }
+  lastdiscoveredwall_ = lastdiscoveredwall;
+  if (lastdiscoveredwall) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:GameMessage.State.lastDiscoveredWall)
+}
+inline ::GameMessage::State_Direction* State::release_lastdiscoveredwall() {
+  
+  ::GameMessage::State_Direction* temp = lastdiscoveredwall_;
+  lastdiscoveredwall_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::unsafe_arena_release_lastdiscoveredwall() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.lastDiscoveredWall)
+  
+  ::GameMessage::State_Direction* temp = lastdiscoveredwall_;
+  lastdiscoveredwall_ = nullptr;
+  return temp;
+}
+inline ::GameMessage::State_Direction* State::_internal_mutable_lastdiscoveredwall() {
+  
+  if (lastdiscoveredwall_ == nullptr) {
+    auto* p = CreateMaybeMessage<::GameMessage::State_Direction>(GetArenaForAllocation());
+    lastdiscoveredwall_ = p;
+  }
+  return lastdiscoveredwall_;
+}
+inline ::GameMessage::State_Direction* State::mutable_lastdiscoveredwall() {
+  ::GameMessage::State_Direction* _msg = _internal_mutable_lastdiscoveredwall();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.lastDiscoveredWall)
+  return _msg;
+}
+inline void State::set_allocated_lastdiscoveredwall(::GameMessage::State_Direction* lastdiscoveredwall) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete lastdiscoveredwall_;
+  }
+  if (lastdiscoveredwall) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::GameMessage::State_Direction>::GetOwningArena(lastdiscoveredwall);
+    if (message_arena != submessage_arena) {
+      lastdiscoveredwall = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, lastdiscoveredwall, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  lastdiscoveredwall_ = lastdiscoveredwall;
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.lastDiscoveredWall)
+}
+
+// int32 reward = 9;
 inline void State::clear_reward() {
   reward_ = 0;
 }
@@ -1451,7 +1561,7 @@ inline void State::set_reward(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.reward)
 }
 
-// int32 clockTime = 9;
+// int32 clockTime = 10;
 inline void State::clear_clocktime() {
   clocktime_ = 0;
 }
@@ -1471,7 +1581,7 @@ inline void State::set_clocktime(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.clockTime)
 }
 
-// bool gameOver = 10;
+// bool gameOver = 11;
 inline void State::clear_gameover() {
   gameover_ = false;
 }
@@ -1491,7 +1601,7 @@ inline void State::set_gameover(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
 }
 
-// int32 iteration = 11;
+// int32 iteration = 12;
 inline void State::clear_iteration() {
   iteration_ = 0;
 }

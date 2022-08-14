@@ -9,7 +9,7 @@ Level::Level(int levelNumber) {
     generateMap();
 
     this -> gameStateHandling = new GameStateHandling();
-    this -> playerFoV = new PlayerFoV(180, false);
+    this -> playerFoV = new PlayerFoV(32, false);
 }
 
 Level::~Level() {
@@ -140,11 +140,6 @@ void Level::movePlayer(float directionX, float directionY) {
 }
 
 bool Level::checkCollision() {
-
-    this -> playerFoV -> setCoinInView(false);
-    this -> playerFoV -> calculateRays(&walls, &boxes, &coins, &finishes,
-                                       player->getCenterPosX(), player->getCenterPosY(), gameStateHandling);
-
     for (const auto& wall : walls) {
         if (wall -> getBounds().intersects(this -> player -> getBounds())) {
             gameStateHandling -> reward += -10;
@@ -188,6 +183,10 @@ bool Level::checkCollision() {
             this -> playerCoinsCount++;
         }
     }
+
+    this -> playerFoV -> setCoinInView(false);
+    this -> playerFoV -> calculateRays(&walls, &boxes, &coins, &finishes,
+                                       player->getCenterPosX(), player->getCenterPosY());
 
     return false;
 }
@@ -383,7 +382,7 @@ void Level::calculateClosestObjectsDir() {
     gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView(),
                                                  playerFoV -> getClosestCoin(), playerCoinsCount);
     gameStateHandling -> calculateFinishDirectionDir(&finishes, playerFoV -> isFinishInView(), player);
-    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) != 0);
+    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
     gameStateHandling -> calculateLastDiscoveredWallDir(playerFoV->getLastDiscoveredWall(), player);
 }
 

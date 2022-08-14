@@ -63,8 +63,8 @@ public:
     void calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
                                          std::vector<MovingDanger *> *movingDangers, Player *player);
     void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
-                                 bool coinInFoV, Coin *closestCoin, int playerCoinsCount);
-    void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV, Player *player);
+                                 bool coinInFoV_, Coin *closestCoin, int playerCoinsCount);
+    void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player);
     void calculateLastDiscoveredWallDir(Wall *wall, Player *player);
     void resetAllStates();
 };

@@ -17,8 +17,7 @@ private:
 public:
     PlayerFoV(int numberOfRays, bool drawRays);
     void calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
-                       std::vector<Finish *> *finishes, float playerX, float playerY,
-                       GameStateHandling *gameStateHandling);
+                       std::vector<Finish *> *finishes, float playerX, float playerY);
     void render(sf::RenderTarget &target, float playerX, float playerY);
 
     bool isCoinInView() const;

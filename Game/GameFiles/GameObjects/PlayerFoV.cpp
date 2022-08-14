@@ -13,8 +13,7 @@ PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
 }
 
 void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
-                              std::vector<Finish *> *finishes, float playerX, float playerY,
-                              GameStateHandling *gameStateHandling) {
+                              std::vector<Finish *> *finishes, float playerX, float playerY) {
     float dirX, dirY, vertexX, vertexY;
     int arrayIterator = 0;
     int fullAngle = 360;
@@ -71,10 +70,16 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                         lastDiscoveredWall = wall;
                     }
                 }
-                if (!wall->discovered) {
-                    wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
+                if (drawRays) {
+                    if (!wall->discovered) {
+                        wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
+                    } else {
+                        wall->getObjectShape().setFillColor(sf::Color(200, 100, 100));
+                    }
                 } else {
-                    wall->getObjectShape().setFillColor(sf::Color(200, 100, 100));
+                    if (wall->getObjectShape().getFillColor() != sf::Color(100, 100, 100)) {
+                        wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
+                    }
                 }
             }
 

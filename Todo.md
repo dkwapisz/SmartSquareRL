@@ -18,16 +18,16 @@
 - Touching box: -10
 - Collecting coin: +50
 - Touching enemy: -100
-- Getting closer to coin **IF** coin is in FoV: +1
-- Moving away from coin **IF** coin is in FoV: -10
+- Getting closer to coin **IF** coin is in FoV: +3
+- Moving away from coin **IF** coin is in FoV: -5
 - Reaching finish if all coins were collected: +100
 - Out of time (20s): -100 -> time is reset after collecting coin
 - Getting coin in FoV **IF** already collected 1 coin: +30
 - Losing coin from FoV (not apply to coin that have just been collected): -50
-- Getting closer to finish **AFTER** collecting every coin **IF** finish is in FoV: +1
-- Moving away from finish **AFTER** collecting every coin **IF** finish is in FoV: -10
-- Getting closer to lastDiscoveredWall **IF** coin not in FoV: +1
-- Moving away from lastDiscoveredWall **IF** coin not in FoV: -10
+- Getting closer to finish **AFTER** collecting every coin **IF** finish is in FoV: +5
+- Moving away from finish **AFTER** collecting every coin **IF** finish is in FoV: -5
+- Getting closer to lastDiscoveredWall **IF** coin not in FoV: +3
+- Moving away from lastDiscoveredWall **IF** coin not in FoV: -5
 - Else: 0
 
 ### New State:

@@ -9,7 +9,7 @@ Level::Level(int levelNumber) {
     generateMap();
 
     this -> gameStateHandling = new GameStateHandling();
-    this -> playerFoV = new PlayerFoV(32, false);
+    this -> playerFoV = new PlayerFoV(90, false);
 }
 
 Level::~Level() {

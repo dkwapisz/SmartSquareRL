@@ -12,7 +12,7 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=18, eps=0.90)
+        self.agent = DoubleDQN(lr=0.001, gamma=0.7, action_dims=4, input_dims=18, eps=0.95)
         self.reward = 0
         self.clock_time = 0
 
@@ -73,11 +73,11 @@ class GameDataHandling:
         self.reward = request.reward
         self.game_over = request.gameOver
 
+        # if request.iteration == 20:
+        #     self.agent.save_neural_network()
+
     def learn(self):
-        #print("_____________________________________________________________________")
-        print("Timer: {}, Actual Reward: {}".format(self.clock_time, self.reward))
-        #print("State: {}".format(self.new_state))
-        #print("---------------------------------------------------------------------")
+        print("Timer: {}, Actual Reward: {}, Action: {}, {}".format(self.clock_time, self.reward, self.get_action()[0]+1, self.new_state[14:]))
         self.agent.learn()
 
     def remember(self):

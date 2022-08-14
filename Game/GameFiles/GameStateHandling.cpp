@@ -162,9 +162,9 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
         reward += 30;
     }
 
-    if (lastCoinsCount == playerCoinsCount && !coinInFoV_ && coinInFoV_ != this -> coinInFoV) {
-        reward -= 50;
-    }
+//    if (lastCoinsCount == playerCoinsCount && !coinInFoV_ && coinInFoV_ != this -> coinInFoV) {
+//        reward -= 50;
+//    }
 
     this -> coinInFoV = coinInFoV_;
     this -> lastCoinsCount = playerCoinsCount;
@@ -202,9 +202,9 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 
     if (coinInFoV_) {
         if (lastDistToCoin > coinDist) {
-            reward += 1;
+            reward += 3;
         } else {
-            reward -= 10;
+            reward -= 5;
         }
         lastDistToCoin = coinDist;
     }
@@ -267,9 +267,9 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
 
         if (this -> finishInFoV) {
             if (lastFinishDist > finishDist) {
-                reward += 1;
+                reward += 5;
             } else {
-                reward -= 10;
+                reward -= 5;
             }
             lastFinishDist = finishDist;
         }
@@ -304,18 +304,18 @@ void GameStateHandling::calculateLastDiscoveredWallDir(Wall *wall, Player *playe
 //            powf((player -> getCenterPosX() - wall -> getCenterPosX()), 2.f) +
 //            powf((player -> getCenterPosY() - wall -> getCenterPosY()), 2.f));
 
-    if (!coinInFoV) {
+    if (!coinInFoV && !allCoinsCollected) {
         if (std::abs(dirVecX) > std::abs(dirVecY)) {
             if (std::abs(dirVecX) < std::abs(lastDiscoveredWallDirX)) {
-                reward += 1;
+                reward += 3;
             } else {
-                reward -= 10;
+                reward -= 5;
             }
         } else {
             if (std::abs(dirVecY) < std::abs(lastDiscoveredWallDirY)) {
-                reward += 1;
+                reward += 3;
             } else {
-                reward -= 10;
+                reward -= 5;
             }
         }
         lastDiscoveredWallDirX = dirVecX;

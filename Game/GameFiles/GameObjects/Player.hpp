@@ -24,22 +24,36 @@ private:
 
 public:
     Player();
+
     Player(float positionX, float positionY);
 
     const sf::Vector2f *getCenterPosition() const;
 
     float getShotSpeed() const;
+
     sf::FloatRect getBounds() const;
+
     bool isShotPossible();
+
     void incrementCooldown();
+
     void movePlayer(float directionX, float directionY);
+
     void resetPosition();
+
     float getPosX() const;
+
     float getPosY() const;
+
     float getCenterPosX() const;
+
     float getCenterPosY() const;
+
     void setPosition(float positionX, float positionY);
+
     int getIteration() const;
+
     void increaseDeathCount();
-    void render(sf::RenderTarget& target);
+
+    void render(sf::RenderTarget &target);
 };

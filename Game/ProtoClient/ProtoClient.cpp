@@ -2,7 +2,7 @@
 
 using namespace GameMessage;
 
-char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clockTime, int32_t iteration) {
+char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clockTime, int32_t iteration) {
 
     State request;
 
@@ -40,10 +40,10 @@ char* ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
 
     Action response;
     ClientContext context;
-    Status status = _stub -> StateAction(&context, request, &response);
+    Status status = _stub->StateAction(&context, request, &response);
 
     if (status.ok()) {
-        char* actionArray = new char[2];
+        char *actionArray = new char[2];
         actionArray[0] = convertActionDir(response.movedirection());
         actionArray[1] = convertActionDir(response.shotdirection());
         return actionArray;
@@ -92,7 +92,7 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
 
     Reset response;
     ClientContext context;
-    Status status = _stub -> StateReset(&context, request, &response);
+    Status status = _stub->StateReset(&context, request, &response);
 
     if (status.ok()) {
         return response.resetneeded();

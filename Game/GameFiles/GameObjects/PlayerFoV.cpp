@@ -2,14 +2,14 @@
 
 
 PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
-    this -> drawRays = drawRays;
-    this -> numberOfRays = numberOfRays;
+    this->drawRays = drawRays;
+    this->numberOfRays = numberOfRays;
 
     // Element n -> x, n+1 -> y
-    this -> rayVertexes = new float[numberOfRays * 2];
-    this -> coinInView = false;
-    this -> finishInView = false;
-    this -> closestCoin = nullptr;
+    this->rayVertexes = new float[numberOfRays * 2];
+    this->coinInView = false;
+    this->finishInView = false;
+    this->closestCoin = nullptr;
 }
 
 void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
@@ -18,7 +18,7 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
     int arrayIterator = 0;
     int fullAngle = 360;
 
-    std::map<Coin*, float> coinDistances;
+    std::map<Coin *, float> coinDistances;
 
     for (int i = 0; i < fullAngle; i += fullAngle / numberOfRays) {
         float angleRad = getRadians((float) i);
@@ -56,14 +56,13 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                 sideDistX += deltaDistX;
                 mapX += stepX;
                 side = 0;
-            }
-            else {
+            } else {
                 sideDistY += deltaDistY;
                 mapY += stepY;
                 side = 1;
             }
-            for (const auto& wall : *walls) {
-                if (wall -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
+            for (const auto &wall: *walls) {
+                if (wall->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     hit = 1;
                     if (!wall->discovered) {
                         wall->discovered = true;
@@ -83,25 +82,25 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                 }
             }
 
-            for (const auto& box : *boxes) {
-                if (box -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
+            for (const auto &box: *boxes) {
+                if (box->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     hit = 1;
                 }
             }
 
-            for (const auto& finish : *finishes) {
-                if (finish -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
+            for (const auto &finish: *finishes) {
+                if (finish->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     finishInView = true;
                     break;
                 }
             }
 
-            for (const auto& coin : *coins) {
-                if (coin -> getBounds().contains(sf::Vector2f(mapX, mapY))) {
+            for (const auto &coin: *coins) {
+                if (coin->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     coinInView = true;
                     coinDistances[coin] = std::sqrt(
-                            powf((playerX - coin -> getCenterPosX()), 2.f) +
-                            powf((playerY - coin -> getCenterPosY()), 2.f));
+                            powf((playerX - coin->getCenterPosX()), 2.f) +
+                            powf((playerY - coin->getCenterPosY()), 2.f));
                     break;
                 }
             }
@@ -153,27 +152,27 @@ bool PlayerFoV::isDrawRaysSet() const {
     return drawRays;
 }
 
-void PlayerFoV::setClosestCoin(std::map<Coin*, float> *coinDistances) {
+void PlayerFoV::setClosestCoin(std::map<Coin *, float> *coinDistances) {
     float closestDist = 9999999.f;
-    if (coinDistances -> empty()) {
-        this -> closestCoin = nullptr;
+    if (coinDistances->empty()) {
+        this->closestCoin = nullptr;
         return;
     }
 
-    for (auto const& [coin, dist]: *coinDistances) {
+    for (auto const &[coin, dist]: *coinDistances) {
         if (dist < closestDist) {
             closestDist = dist;
-            this -> closestCoin = coin;
+            this->closestCoin = coin;
         }
     }
 }
 
-Coin* PlayerFoV::getClosestCoin() {
+Coin *PlayerFoV::getClosestCoin() {
     return closestCoin;
 }
 
 void PlayerFoV::setDrawRays(bool setDrawRays) {
-    this -> drawRays = setDrawRays;
+    this->drawRays = setDrawRays;
 }
 
 bool PlayerFoV::isFinishInView() const {

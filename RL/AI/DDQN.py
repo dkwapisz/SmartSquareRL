@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 
 MEM_SIZE = 100_000
-BATCH_SIZE = 64
+BATCH_SIZE = 128
 
 
 class Memory:
@@ -48,10 +48,10 @@ class Memory:
 
 def build_dqn(lr, action_dims):
     model = Sequential()
-    model.add(Dense(100, activation='relu'))
-    model.add(Dense(100, activation='relu'))
+    model.add(Dense(64, activation='relu'))
+    model.add(Dense(64, activation='relu'))
     model.add(Dense(action_dims))
-    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.0))
+    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.35))
 
     return model
 

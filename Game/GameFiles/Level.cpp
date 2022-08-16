@@ -8,80 +8,81 @@ Level::Level(int levelNumber) {
     initializeGameObjects();
     generateMap();
 
-    this -> gameStateHandling = new GameStateHandling();
-    this -> playerFoV = new PlayerFoV(90, false);
+    this->gameStateHandling = new GameStateHandling();
+    this->playerFoV = new PlayerFoV(90, false);
 }
 
 Level::~Level() {
-    delete this -> player;
-    delete this -> clock;
-    delete this -> playerFoV;
+    delete this->player;
+    delete this->clock;
+    delete this->playerFoV;
 
-    for (auto &gameObject : this -> squareShapes) {
+    for (auto &gameObject: this->squareShapes) {
         delete gameObject.second;
     }
 
-    for (auto &gameObject : this -> circleShapes) {
+    for (auto &gameObject: this->circleShapes) {
         delete gameObject.second;
     }
 
-    for (auto *bullet : this -> bullets) {
+    for (auto *bullet: this->bullets) {
         delete bullet;
     }
 
-    for (auto *wall : this -> walls) {
+    for (auto *wall: this->walls) {
         delete wall;
     }
 
-    for (auto *box : this -> boxes) {
+    for (auto *box: this->boxes) {
         delete box;
     }
 
-    for (auto *staticDanger : this -> staticDangers) {
+    for (auto *staticDanger: this->staticDangers) {
         delete staticDanger;
     }
 
-    for (auto *coin : this -> coins) {
+    for (auto *coin: this->coins) {
         delete coin;
     }
 
-    for (auto *movingDanger : this -> movingDangers) {
+    for (auto *movingDanger: this->movingDangers) {
         delete movingDanger;
     }
 
-    for (auto *finish : this -> finishes) {
+    for (auto *finish: this->finishes) {
         delete finish;
     }
 }
 
 void Level::initializeMapPaths() {
-    this -> mapPath[1] = R"(../Game/GameFiles/Maps/map1.txt)";
-    this -> mapPath[2] = R"(../Game/GameFiles/Maps/map2.txt)";
-    this -> mapPath[3] = R"(../Game/GameFiles/Maps/map3.txt)";
+    this->mapPath[0] = R"(../Game/GameFiles/Maps/map0.txt)";
+    this->mapPath[1] = R"(../Game/GameFiles/Maps/map1.txt)";
+    this->mapPath[2] = R"(../Game/GameFiles/Maps/map2.txt)";
+    this->mapPath[3] = R"(../Game/GameFiles/Maps/map3.txt)";
 }
 
 void Level::initializeLevelAttributes(int levelNr) {
-    this -> coinsCount = 0;
-    this -> playerCoinsCount = 0;
-    this -> levelFinished = false;
-    this -> levelNumber = levelNr;
-    this -> clock = new sf::Clock();
+    this->coinsCount = 0;
+    this->playerCoinsCount = 0;
+    this->levelFinished = false;
+    this->levelNumber = levelNr;
+    this->clock = new sf::Clock();
 }
 
 void Level::initializeGameObjects() {
-    this -> squareShapes["Bullet"] = new sf::RectangleShape();
-    this -> squareShapes["Wall"] = new sf::RectangleShape();
-    this -> squareShapes["Box"] = new sf::RectangleShape();
-    this -> squareShapes["StaticDanger"] = new sf::RectangleShape();
-    this -> squareShapes["Finish"] = new sf::RectangleShape();
-    this -> circleShapes["Coin"] = new sf::CircleShape();
-    this -> circleShapes["MovingDanger"] = new sf::CircleShape();
+    this->squareShapes["Bullet"] = new sf::RectangleShape();
+    this->squareShapes["Wall"] = new sf::RectangleShape();
+    this->squareShapes["Box"] = new sf::RectangleShape();
+    this->squareShapes["StaticDanger"] = new sf::RectangleShape();
+    this->squareShapes["Finish"] = new sf::RectangleShape();
+    this->circleShapes["Coin"] = new sf::CircleShape();
+    this->circleShapes["MovingDanger"] = new sf::CircleShape();
 }
 
 void Level::generateMap() {
 
     std::fstream mapFile;
-    mapFile.open(mapPath[this -> levelNumber]);
+    mapFile.open(mapPath[this->levelNumber]);
     int mapSizeX = 20;
     int mapSizeY = 20;
     int number = 0;
@@ -95,29 +96,29 @@ void Level::generateMap() {
                 float posY = (30.f * (float) y) + 50;
 
                 if (number == 1) {
-                    this -> walls.push_back(new Wall(this -> squareShapes["Wall"],
-                                                     posX, posY));
+                    this->walls.push_back(new Wall(this->squareShapes["Wall"],
+                                                   posX, posY));
                 } else if (number == 2) {
-                    this -> boxes.push_back(new Box(this -> squareShapes["Box"],
-                                                    posX, posY));
+                    this->boxes.push_back(new Box(this->squareShapes["Box"],
+                                                  posX, posY));
                 } else if (number == 3) {
-                    this -> staticDangers.push_back(new StaticDanger(this -> squareShapes["StaticDanger"],
-                                                                     posX, posY));
+                    this->staticDangers.push_back(new StaticDanger(this->squareShapes["StaticDanger"],
+                                                                   posX, posY));
                 } else if (number == 4) {
-                    this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
-                                                     posX, posY));
+                    this->coins.push_back(new Coin(this->circleShapes["Coin"],
+                                                   posX, posY));
                     coinsCount++;
                 } else if (number == 5) {
-                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                                     posX, posY, true));
+                    this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
+                                                                   posX, posY, true));
                 } else if (number == 6) {
-                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                                     posX, posY, false));
+                    this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
+                                                                   posX, posY, false));
                 } else if (number == 7) {
-                    this -> finishes.push_back(new Finish(this -> squareShapes["Finish"],
-                                                          posX, posY));
+                    this->finishes.push_back(new Finish(this->squareShapes["Finish"],
+                                                        posX, posY));
                 } else if (number == 8) {
-                    this -> player = new Player(posX, posY);
+                    this->player = new Player(posX, posY);
                 }
             }
         }
@@ -129,44 +130,44 @@ void Level::generateMap() {
 }
 
 void Level::movePlayer(float directionX, float directionY) {
-    float startPosX = player -> getPosX();
-    float startPosY = player -> getPosY();
+    float startPosX = player->getPosX();
+    float startPosY = player->getPosY();
 
-    this -> player -> movePlayer(directionX, directionY);
+    this->player->movePlayer(directionX, directionY);
 
     if (checkCollision()) {
-        this -> player -> setPosition(startPosX, startPosY);
+        this->player->setPosition(startPosX, startPosY);
     }
 }
 
 bool Level::checkCollision() {
-    for (const auto& wall : walls) {
-        if (wall -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward += -10;
+    for (const auto &wall: walls) {
+        if (wall->getBounds().intersects(this->player->getBounds())) {
+            gameStateHandling->reward += -10;
             return true;
         }
     }
 
-    for (const auto& box : boxes) {
-        if (box -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward += -10;
+    for (const auto &box: boxes) {
+        if (box->getBounds().intersects(this->player->getBounds())) {
+            gameStateHandling->reward += -10;
             return true;
         }
     }
 
-    for (const auto& staticDanger : staticDangers) {
-        if (staticDanger -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward += -100;
-            this -> resetLevel();
+    for (const auto &staticDanger: staticDangers) {
+        if (staticDanger->getBounds().intersects(this->player->getBounds())) {
+            gameStateHandling->reward += -100;
+            this->resetLevel();
             return false;
         }
     }
 
-    for (const auto& finish : finishes) {
-        if (finish -> getBounds().intersects(this -> player -> getBounds())) {
+    for (const auto &finish: finishes) {
+        if (finish->getBounds().intersects(this->player->getBounds())) {
 
-            if (this -> coinsCount == this -> playerCoinsCount) {
-                gameStateHandling -> reward += 100;
+            if (this->coinsCount == this->playerCoinsCount) {
+                gameStateHandling->reward += 100;
                 levelFinished = true;
             }
 
@@ -175,33 +176,33 @@ bool Level::checkCollision() {
     }
 
     for (int i = 0; i < coins.size(); i++) {
-        if (coins[i] -> getBounds().intersects(this -> player -> getBounds())) {
-            gameStateHandling -> reward += 50;
-            this -> resetClockTime();
+        if (coins[i]->getBounds().intersects(this->player->getBounds())) {
+            gameStateHandling->reward += 50;
+            this->resetClockTime();
             delete coins[i];
             coins.erase(coins.begin() + i);
-            this -> playerCoinsCount++;
+            this->playerCoinsCount++;
         }
     }
 
-    this -> playerFoV -> setCoinInView(false);
-    this -> playerFoV -> calculateRays(&walls, &boxes, &coins, &finishes,
-                                       player->getCenterPosX(), player->getCenterPosY());
+    this->playerFoV->setCoinInView(false);
+    this->playerFoV->calculateRays(&walls, &boxes, &coins, &finishes,
+                                   player->getCenterPosX(), player->getCenterPosY());
 
     return false;
 }
 
 void Level::shot(float directionX, float directionY) {
-    if (player -> isShotPossible()) {
-        float positionX = this -> player -> getCenterPosition() -> x - squareShapes["Bullet"] -> getSize().x / 2;
-        float positionY = this -> player -> getCenterPosition() -> y - squareShapes["Bullet"] -> getSize().y / 2;
+    if (player->isShotPossible()) {
+        float positionX = this->player->getCenterPosition()->x - squareShapes["Bullet"]->getSize().x / 2;
+        float positionY = this->player->getCenterPosition()->y - squareShapes["Bullet"]->getSize().y / 2;
 
-        this -> bullets.push_back(new Bullet(this -> squareShapes["Bullet"],
-                                             positionX, positionY,
-                                             directionX, directionY,
-                                             this -> player -> getShotSpeed()));
+        this->bullets.push_back(new Bullet(this->squareShapes["Bullet"],
+                                           positionX, positionY,
+                                           directionX, directionY,
+                                           this->player->getShotSpeed()));
     } else {
-        player -> incrementCooldown();
+        player->incrementCooldown();
     }
 }
 
@@ -210,33 +211,33 @@ bool Level::isLevelFinished() const {
 }
 
 void Level::resetLevel() {
-    this -> player -> resetPosition();
-    this -> playerCoinsCount = 0;
-    this -> clock -> restart();
-    this -> gameStateHandling -> resetAllStates();
-    this -> gameStateHandling -> gameOver = true;
+    this->player->resetPosition();
+    this->playerCoinsCount = 0;
+    this->clock->restart();
+    this->gameStateHandling->resetAllStates();
+    this->gameStateHandling->gameOver = true;
 
-    for (auto *wall : this -> walls) {
+    for (auto *wall: this->walls) {
         wall->discovered = false;
     }
 
-    for (int i = 0; i < this -> movingDangers.size(); i++) {
-        delete this -> movingDangers[i];
-        this -> movingDangers.clear();
+    for (int i = 0; i < this->movingDangers.size(); i++) {
+        delete this->movingDangers[i];
+        this->movingDangers.clear();
     }
 
-    for (int i = 0; i < this -> boxes.size(); i++) {
-        delete this -> boxes[i];
-        this -> boxes.clear();
+    for (int i = 0; i < this->boxes.size(); i++) {
+        delete this->boxes[i];
+        this->boxes.clear();
     }
 
-    for (int i = 0; i < this -> coins.size(); i++) {
-        delete this -> coins[i];
-        this -> coins.clear();
+    for (int i = 0; i < this->coins.size(); i++) {
+        delete this->coins[i];
+        this->coins.clear();
     }
 
     std::fstream mapFile;
-    mapFile.open(mapPath[this -> levelNumber]);
+    mapFile.open(mapPath[this->levelNumber]);
     int mapSizeX = 20;
     int mapSizeY = 20;
     int number = 0;
@@ -250,17 +251,17 @@ void Level::resetLevel() {
                 float posY = (30.f * (float) y) + 50;
 
                 if (number == 2) {
-                    this -> boxes.push_back(new Box(this -> squareShapes["Box"],
-                                                    posX, posY));
+                    this->boxes.push_back(new Box(this->squareShapes["Box"],
+                                                  posX, posY));
                 } else if (number == 4) {
-                    this -> coins.push_back(new Coin(this -> circleShapes["Coin"],
-                                                     posX, posY));
+                    this->coins.push_back(new Coin(this->circleShapes["Coin"],
+                                                   posX, posY));
                 } else if (number == 5) {
-                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                                     posX, posY, true));
+                    this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
+                                                                   posX, posY, true));
                 } else if (number == 6) {
-                    this -> movingDangers.push_back(new MovingDanger(this -> circleShapes["MovingDanger"],
-                                                                     posX, posY, false));
+                    this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
+                                                                   posX, posY, false));
                 }
             }
         }
@@ -272,41 +273,41 @@ void Level::resetLevel() {
 }
 
 void Level::updateBullets() {
-    for (int i = 0; i < this -> bullets.size(); i++) {
-        bullets[i] -> update();
+    for (int i = 0; i < this->bullets.size(); i++) {
+        bullets[i]->update();
 
         bool bullet_deleted = false;
         bool box_deleted = false;
 
-        for (int j = 0; j < this -> walls.size() && !bullet_deleted; j++) {
-            if (bullets[i] -> getBounds().intersects(walls[j] -> getBounds())) {
+        for (int j = 0; j < this->walls.size() && !bullet_deleted; j++) {
+            if (bullets[i]->getBounds().intersects(walls[j]->getBounds())) {
 
-                delete this -> bullets[i];
-                this -> bullets.erase(this -> bullets.begin() + i);
+                delete this->bullets[i];
+                this->bullets.erase(this->bullets.begin() + i);
 
                 bullet_deleted = true;
             }
         }
 
-        for (int j = 0; j < this -> boxes.size() && !bullet_deleted && !box_deleted; j++) {
-            if (bullets[i] -> getBounds().intersects(boxes[j] -> getBounds())) {
+        for (int j = 0; j < this->boxes.size() && !bullet_deleted && !box_deleted; j++) {
+            if (bullets[i]->getBounds().intersects(boxes[j]->getBounds())) {
 
-                delete this -> bullets[i];
-                this -> bullets.erase(this -> bullets.begin() + i);
+                delete this->bullets[i];
+                this->bullets.erase(this->bullets.begin() + i);
 
                 bullet_deleted = true;
 
-                delete this -> boxes[j];
-                this -> boxes.erase(this -> boxes.begin() + j);
+                delete this->boxes[j];
+                this->boxes.erase(this->boxes.begin() + j);
 
                 box_deleted = true;
             }
         }
 
         for (int j = 0; j < staticDangers.size() && !bullet_deleted; j++) {
-            if (bullets[i] -> getBounds().intersects(staticDangers[j] -> getBounds())) {
-                delete this -> bullets[i];
-                this -> bullets.erase(this -> bullets.begin() + i);
+            if (bullets[i]->getBounds().intersects(staticDangers[j]->getBounds())) {
+                delete this->bullets[i];
+                this->bullets.erase(this->bullets.begin() + i);
 
                 bullet_deleted = true;
             }
@@ -316,94 +317,94 @@ void Level::updateBullets() {
 }
 
 void Level::updateDangerMovement() {
-    for (auto *movingDanger : this -> movingDangers) {
+    for (auto *movingDanger: this->movingDangers) {
         checkDangerCollision(movingDanger);
-        movingDanger -> move();
+        movingDanger->move();
     }
 }
 
 void Level::checkDangerCollision(MovingDanger *movingDanger) {
-    if (movingDanger -> getBounds().intersects(this -> player -> getBounds())) {
-        this -> resetLevel();
+    if (movingDanger->getBounds().intersects(this->player->getBounds())) {
+        this->resetLevel();
     }
 
-    for (auto *wall : this -> walls) {
-        if (movingDanger -> getBounds().intersects(wall -> getBounds())) {
-            movingDanger -> reverseDirection();
+    for (auto *wall: this->walls) {
+        if (movingDanger->getBounds().intersects(wall->getBounds())) {
+            movingDanger->reverseDirection();
         }
     }
 
-    for (auto *box : this -> boxes) {
-        if (movingDanger -> getBounds().intersects(box -> getBounds())) {
-            movingDanger -> reverseDirection();
+    for (auto *box: this->boxes) {
+        if (movingDanger->getBounds().intersects(box->getBounds())) {
+            movingDanger->reverseDirection();
         }
     }
 }
 
 void Level::renderGameObjects(sf::RenderTarget &target) {
-    for (auto *finish : this -> finishes) {
-        finish -> render(target);
+    for (auto *finish: this->finishes) {
+        finish->render(target);
     }
 
-    this -> player -> render(target);
+    this->player->render(target);
 
-    if (this -> playerFoV -> isDrawRaysSet()) {
-        this -> playerFoV -> render(target, player -> getCenterPosX(), player -> getCenterPosY());
+    if (this->playerFoV->isDrawRaysSet()) {
+        this->playerFoV->render(target, player->getCenterPosX(), player->getCenterPosY());
     }
 
-    for (auto *bullet : this -> bullets) {
-        bullet -> render(target);
+    for (auto *bullet: this->bullets) {
+        bullet->render(target);
     }
 
-    for (auto *wall : this -> walls) {
-        wall -> render(target);
+    for (auto *wall: this->walls) {
+        wall->render(target);
     }
 
-    for (auto *box : this -> boxes) {
-        box -> render(target);
+    for (auto *box: this->boxes) {
+        box->render(target);
     }
 
-    for (auto *staticDanger : this -> staticDangers) {
-        staticDanger -> render(target);
+    for (auto *staticDanger: this->staticDangers) {
+        staticDanger->render(target);
     }
 
-    for (auto *coin : this -> coins) {
-        coin -> render(target);
+    for (auto *coin: this->coins) {
+        coin->render(target);
     }
 
-    for (auto *movingDanger : this -> movingDangers) {
-        movingDanger -> render(target);
+    for (auto *movingDanger: this->movingDangers) {
+        movingDanger->render(target);
     }
 }
 
 void Level::calculateClosestObjectsDir() {
-    gameStateHandling -> calculateClosestObstacleDir(&walls, &boxes, player);
-    gameStateHandling -> calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
-    gameStateHandling -> calculateClosestCoinDir(&coins, player, playerFoV -> isCoinInView(),
-                                                 playerFoV -> getClosestCoin(), playerCoinsCount);
-    gameStateHandling -> calculateFinishDirectionDir(&finishes, playerFoV -> isFinishInView(), player);
-    gameStateHandling -> allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
-    gameStateHandling -> calculateLastDiscoveredWallDir(playerFoV->getLastDiscoveredWall(), player);
+    gameStateHandling->calculateClosestObstacleDir(&walls, &boxes, player);
+    gameStateHandling->calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
+    gameStateHandling->calculateClosestCoinDir(&coins, player, playerFoV->isCoinInView(),
+                                               playerFoV->getClosestCoin(), playerCoinsCount);
+    gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
+    gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
+    gameStateHandling->calculateLastDiscoveredWallDir(playerFoV->getLastDiscoveredWall(), player);
 }
 
 int Level::getClockTime() const {
-    return (int) this -> clock -> getElapsedTime().asSeconds();
+    return (int) this->clock->getElapsedTime().asSeconds();
 }
 
 Player *Level::getPlayer() const {
-    return this -> player;
+    return this->player;
 }
 
 int Level::getCoinsCount() const {
-    return this -> coinsCount;
+    return this->coinsCount;
 }
 
 int Level::getPlayerCoinsCount() const {
-    return this -> playerCoinsCount;
+    return this->playerCoinsCount;
 }
 
 int Level::getLevelNumber() const {
-    return this -> levelNumber;
+    return this->levelNumber;
 }
 
 int Level::getMapsCount() const {
@@ -411,11 +412,11 @@ int Level::getMapsCount() const {
 }
 
 void Level::resetClockTime() {
-    this -> clock -> restart();
+    this->clock->restart();
 }
 
-PlayerFoV* Level::getPlayerFoV() {
-    return this -> playerFoV;
+PlayerFoV *Level::getPlayerFoV() {
+    return this->playerFoV;
 }
 
 void Level::setLevelFinished(bool levelFinished) {

@@ -17,6 +17,7 @@ using namespace GameMessage;
 class ProtoClient {
 private:
     std::unique_ptr<StateActionExchange::Stub> _stub;
+
     char convertActionDir(GameMessage::Action_ActionDirection actionDirection);
 
 public:

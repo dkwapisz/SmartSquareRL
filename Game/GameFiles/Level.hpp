@@ -41,15 +41,22 @@ private:
     bool levelFinished;
 
     void initializeMapPaths();
+
     void initializeLevelAttributes(int levelNr);
+
     void initializeGameObjects();
+
     void generateMap();
+
     bool checkCollision();
+
     void checkDangerCollision(MovingDanger *movingDanger);
 
 public:
     Level();
+
     explicit Level(int levelNumber);
+
     virtual ~Level();
 
     GameStateHandling *gameStateHandling;
@@ -59,24 +66,36 @@ public:
     void setLevelFinished(bool levelFinished);
 
     void movePlayer(float directionX, float directionY);
+
     void shot(float directionX, float directionY);
+
     void updateBullets();
+
     void updateDangerMovement();
+
     void renderGameObjects(sf::RenderTarget &target);
+
     void resetLevel();
+
     void resetClockTime();
 
     int getClockTime() const;
+
     Player *getPlayer() const;
+
     int getCoinsCount() const;
+
     int getPlayerCoinsCount() const;
+
     int getLevelNumber() const;
+
     int getMapsCount() const;
 
     // gRPC message
     // --------
     void calculateClosestObjectsDir();
-    PlayerFoV* getPlayerFoV();
+
+    PlayerFoV *getPlayerFoV();
 };
 
 

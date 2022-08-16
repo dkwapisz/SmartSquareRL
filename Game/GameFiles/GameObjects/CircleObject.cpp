@@ -3,24 +3,24 @@
 CircleObject::CircleObject() = default;
 
 CircleObject::CircleObject(sf::CircleShape *objectShape, float positionX, float positionY) {
-    this -> objectShape = *objectShape;
-    this -> objectShape.setRadius(10.f);
-    this -> objectShape.setPosition(positionX + this -> objectShape.getRadius() / 2,
-                                    positionY + this -> objectShape.getRadius() / 2);
+    this->objectShape = *objectShape;
+    this->objectShape.setRadius(10.f);
+    this->objectShape.setPosition(positionX + this->objectShape.getRadius() / 2,
+                                  positionY + this->objectShape.getRadius() / 2);
 }
 
 sf::FloatRect CircleObject::getBounds() const {
-    return this -> objectShape.getGlobalBounds();
+    return this->objectShape.getGlobalBounds();
 }
 
 void CircleObject::render(sf::RenderTarget &target) {
-    target.draw(this -> objectShape);
+    target.draw(this->objectShape);
 }
 
 float CircleObject::getCenterPosX() const {
-    return this -> objectShape.getPosition().x + objectShape.getRadius();
+    return this->objectShape.getPosition().x + objectShape.getRadius();
 }
 
 float CircleObject::getCenterPosY() const {
-    return this -> objectShape.getPosition().y + objectShape.getRadius();
+    return this->objectShape.getPosition().y + objectShape.getRadius();
 }

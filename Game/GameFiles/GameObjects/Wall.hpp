@@ -7,6 +7,7 @@ class Wall : public SquareObject {
 
 public:
     Wall();
+
     Wall(sf::RectangleShape *wallShape, float positionX, float positionY);
 
     bool discovered;

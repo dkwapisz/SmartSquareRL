@@ -2,14 +2,14 @@
 
 MovingDanger::MovingDanger() = default;
 
-MovingDanger::MovingDanger(sf::CircleShape *movingDangerShape, float positionX, float positionY, bool isHorizontal):
-CircleObject(movingDangerShape, positionX, positionY) {
+MovingDanger::MovingDanger(sf::CircleShape *movingDangerShape, float positionX, float positionY, bool isHorizontal) :
+        CircleObject(movingDangerShape, positionX, positionY) {
 
-    this -> moveSpeed = 2.f;
-    this -> isHorizontal = isHorizontal;
-    this -> isReverseDirection = false;
+    this->moveSpeed = 2.f;
+    this->isHorizontal = isHorizontal;
+    this->isReverseDirection = false;
 
-    this -> objectShape.setFillColor(sf::Color(255, 0, 0));
+    this->objectShape.setFillColor(sf::Color(255, 0, 0));
 }
 
 void MovingDanger::move() {
@@ -22,9 +22,9 @@ void MovingDanger::move() {
     }
 
     if (isHorizontal) {
-        this -> objectShape.move(sf::Vector2f(this -> moveSpeed * direction, 0));
+        this->objectShape.move(sf::Vector2f(this->moveSpeed * direction, 0));
     } else {
-        this -> objectShape.move(sf::Vector2f(0, this -> moveSpeed * direction));
+        this->objectShape.move(sf::Vector2f(0, this->moveSpeed * direction));
     }
 }
 

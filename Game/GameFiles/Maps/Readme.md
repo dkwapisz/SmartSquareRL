@@ -1,6 +1,6 @@
 ## Map Configuration
 
-There is a [Python script](ConvertMap.py) here that converts a map in png format, to a map in txt format based on pixel
+There is a [Python script](TrainingMaps/ConvertMap.py) here that converts a map in png format, to a map in txt format based on pixel
 colors. Each color used in the map is assigned a value. Then, these values are used in the [Level.cpp](../Level.cpp)
 file when creating the map.
 

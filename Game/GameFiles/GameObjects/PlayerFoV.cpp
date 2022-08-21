@@ -130,6 +130,9 @@ void PlayerFoV::render(sf::RenderTarget &target, float playerX, float playerY) {
     for (int i = 0; i < numberOfRays; i++) {
         line[0] = sf::Vertex(sf::Vector2f(playerX, playerY));
         line[1] = sf::Vertex(sf::Vector2f(rayVertexes[arrayIterator], rayVertexes[arrayIterator + 1]));
+        if (i % 6 == 0) {
+            line->color = sf::Color::Red;
+        }
         target.draw(line, 2, sf::Lines);
         arrayIterator += 2;
     }
@@ -185,4 +188,12 @@ void PlayerFoV::setFinishInView(bool finishInView) {
 
 Wall *PlayerFoV::getLastDiscoveredWall() const {
     return lastDiscoveredWall;
+}
+
+float *PlayerFoV::getRayVertexes() const {
+    return rayVertexes;
+}
+
+int PlayerFoV::getNumberOfRays() const {
+    return numberOfRays;
 }

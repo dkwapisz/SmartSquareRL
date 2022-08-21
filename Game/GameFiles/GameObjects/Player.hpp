@@ -15,7 +15,7 @@ private:
 
     int shotCooldown;
     int shotCooldownMax;
-    int deaths;
+    int iteration;
     float shotSpeed;
     float moveSpeed;
 
@@ -53,7 +53,7 @@ public:
 
     int getIteration() const;
 
-    void increaseDeathCount();
+    void setIteration(int iteration);
 
     void render(sf::RenderTarget &target);
 };

@@ -7,7 +7,7 @@ Player::Player(float positionX, float positionY) {
     this->shotCooldown = 10;
     this->shotCooldownMax = 10;
     this->shotSpeed = 4.f;
-    this->deaths = 0;
+    this->iteration = 0;
 
     this->respawnPosX = positionX;
     this->respawnPosY = positionY;
@@ -23,7 +23,7 @@ void Player::render(sf::RenderTarget &target) {
 
 void Player::resetPosition() {
     this->playerShape.setPosition(respawnPosX, respawnPosY);
-    deaths++;
+    iteration++;
 }
 
 void Player::movePlayer(float directionX, float directionY) {
@@ -82,9 +82,9 @@ void Player::setPosition(float positionX, float positionY) {
 }
 
 int Player::getIteration() const {
-    return this->deaths;
+    return this->iteration;
 }
 
-void Player::increaseDeathCount() {
-    this->deaths++;
+void Player::setIteration(int iteration) {
+    this->iteration = iteration;
 }

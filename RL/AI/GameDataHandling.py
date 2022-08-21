@@ -1,5 +1,8 @@
+import math
+
 from AI.DDQN import DoubleDQN
-import traceback
+from sklearn import preprocessing
+import numpy as np
 
 
 class GameDataHandling:
@@ -12,7 +15,7 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=4, eps=0.99)
+        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=22, eps=0.99)
         self.reward = 0
         self.clock_time = 0
 
@@ -22,26 +25,10 @@ class GameDataHandling:
         # self.state += self.__get_array_from_bool(request.allCoinsCollected)
         # self.state += self.__get_array_from_bool(request.coinInFoV)
 
-        # self.state += self.__get_array_from_bool(request.closestObstacle.up)
-        # self.state += self.__get_array_from_bool(request.closestObstacle.right)
-        # self.state += self.__get_array_from_bool(request.closestObstacle.down)
-        # self.state += self.__get_array_from_bool(request.closestObstacle.left)
-
-        if request.coinInFoV:
-            self.state += self.__get_array_from_bool(request.closestCoin.up)
-            self.state += self.__get_array_from_bool(request.closestCoin.right)
-            self.state += self.__get_array_from_bool(request.closestCoin.down)
-            self.state += self.__get_array_from_bool(request.closestCoin.left)
-        elif not request.allCoinsCollected:
-            self.state += self.__get_array_from_bool(request.lastDiscoveredWall.up)
-            self.state += self.__get_array_from_bool(request.lastDiscoveredWall.right)
-            self.state += self.__get_array_from_bool(request.lastDiscoveredWall.down)
-            self.state += self.__get_array_from_bool(request.lastDiscoveredWall.left)
-        else:
-            self.state += self.__get_array_from_bool(request.finishDirection.up)
-            self.state += self.__get_array_from_bool(request.finishDirection.right)
-            self.state += self.__get_array_from_bool(request.finishDirection.down)
-            self.state += self.__get_array_from_bool(request.finishDirection.left)
+        self.state += GameDataHandling.__reformat_ray_distances_state(request.rayDistances)
+        self.state = GameDataHandling.__normalize(self.state)
+        self.state += GameDataHandling.__get_unit_vector(request.closestDestinationDistX,
+                                                             request.closestDestinationDistY)
 
         self.clock_time = request.clockTime
 
@@ -51,28 +38,10 @@ class GameDataHandling:
         # self.new_state += self.__get_array_from_bool(request.allCoinsCollected)
         # self.new_state += self.__get_array_from_bool(request.coinInFoV)
 
-        # self.new_state += self.__get_array_from_bool(request.closestObstacle.up)
-        # self.new_state += self.__get_array_from_bool(request.closestObstacle.right)
-        # self.new_state += self.__get_array_from_bool(request.closestObstacle.down)
-        # self.new_state += self.__get_array_from_bool(request.closestObstacle.left)
-
-        if request.coinInFoV:
-            self.new_state += self.__get_array_from_bool(request.closestCoin.up)
-            self.new_state += self.__get_array_from_bool(request.closestCoin.right)
-            self.new_state += self.__get_array_from_bool(request.closestCoin.down)
-            self.new_state += self.__get_array_from_bool(request.closestCoin.left)
-        elif not request.allCoinsCollected:
-            self.new_state += self.__get_array_from_bool(request.lastDiscoveredWall.up)
-            self.new_state += self.__get_array_from_bool(request.lastDiscoveredWall.right)
-            self.new_state += self.__get_array_from_bool(request.lastDiscoveredWall.down)
-            self.new_state += self.__get_array_from_bool(request.lastDiscoveredWall.left)
-            print("no coin")
-        else:
-            self.new_state += self.__get_array_from_bool(request.finishDirection.up)
-            self.new_state += self.__get_array_from_bool(request.finishDirection.right)
-            self.new_state += self.__get_array_from_bool(request.finishDirection.down)
-            self.new_state += self.__get_array_from_bool(request.finishDirection.left)
-            print("finish")
+        self.new_state += GameDataHandling.__reformat_ray_distances_state(request.rayDistances)
+        self.new_state = GameDataHandling.__normalize(self.new_state)
+        self.new_state += GameDataHandling.__get_unit_vector(request.closestDestinationDistX,
+                                                             request.closestDestinationDistY)
 
         self.reward = request.reward
         self.game_over = request.gameOver
@@ -81,7 +50,7 @@ class GameDataHandling:
         #     self.agent.save_neural_network()
 
     def learn(self):
-        print("Timer: {}, Actual Reward: {}, State: {}".format(self.clock_time, self.reward, self.new_state))
+        print("Timer: {}, Actual Reward: {}, State: {}".format(self.clock_time, self.reward, self.new_state[20:22]))
         self.agent.learn()
 
     def remember(self):
@@ -102,8 +71,22 @@ class GameDataHandling:
         self.agent.save_neural_network()
 
     @staticmethod
-    def __get_array_from_bool(bool_state):
-        if bool_state:
-            return [1]
+    def __reformat_ray_distances_state(input_state: str):
+        input_list = []
+        if len(input_state) != 0:
+            for dist in input_state.split("#"):
+                input_list += [float(dist)]
         else:
-            return [0]
+            # dirty fix
+            input_list = [0.1 for _ in range(0, 20)]
+
+        return input_list
+
+    @staticmethod
+    def __normalize(values):
+        return (lambda the_max, the_min: [(float(i)-the_min)/(the_max-(the_min+0.000001)) for i in values])(max(values), min(values))
+
+    @staticmethod
+    def __get_unit_vector(dirX, dirY):
+        vector_len = math.hypot(dirX, dirY)
+        return [dirX/vector_len, dirY/vector_len]

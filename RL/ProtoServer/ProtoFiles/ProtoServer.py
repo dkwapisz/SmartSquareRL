@@ -51,6 +51,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         else:
             return self.lastActions[0] == self.lastActions[2] == self.lastActions[4] and \
                    self.lastActions[1] == self.lastActions[3] == self.lastActions[5] and \
+                   self.lastActions[0] % 2 == self.lastActions[1] % 2 and \
                    self.lastActions[0] != self.lastActions[1]
 
 

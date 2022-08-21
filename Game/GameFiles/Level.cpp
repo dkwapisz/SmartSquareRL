@@ -9,7 +9,7 @@ Level::Level(int levelNumber) {
     generateMap();
 
     this->gameStateHandling = new GameStateHandling();
-    this->playerFoV = new PlayerFoV(90, false);
+    this->playerFoV = new PlayerFoV(120, false);
 }
 
 Level::~Level() {
@@ -55,10 +55,12 @@ Level::~Level() {
 }
 
 void Level::initializeMapPaths() {
-    this->mapPath[0] = R"(../Game/GameFiles/Maps/map0.txt)";
-    this->mapPath[1] = R"(../Game/GameFiles/Maps/map1.txt)";
-    this->mapPath[2] = R"(../Game/GameFiles/Maps/map2.txt)";
-    this->mapPath[3] = R"(../Game/GameFiles/Maps/map3.txt)";
+    for (int i = 0; i < 24; i++) {
+        this->mapPath[i] = R"(../Game/GameFiles/Maps/TrainingMaps/map)" + std::to_string(i) + ".txt";
+    }
+//    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
+//    this->mapPath[2] = R"(../Game/GameFiles/Maps/TrainingMaps/map2.txt)";
+//    std::cout << mapPath[0];
 }
 
 void Level::initializeLevelAttributes(int levelNr) {
@@ -143,14 +145,14 @@ void Level::movePlayer(float directionX, float directionY) {
 bool Level::checkCollision() {
     for (const auto &wall: walls) {
         if (wall->getBounds().intersects(this->player->getBounds())) {
-            gameStateHandling->reward += -10;
+            gameStateHandling->reward += -20;
             return true;
         }
     }
 
     for (const auto &box: boxes) {
         if (box->getBounds().intersects(this->player->getBounds())) {
-            gameStateHandling->reward += -10;
+            gameStateHandling->reward += -20;
             return true;
         }
     }
@@ -167,7 +169,7 @@ bool Level::checkCollision() {
         if (finish->getBounds().intersects(this->player->getBounds())) {
 
             if (this->coinsCount == this->playerCoinsCount) {
-                gameStateHandling->reward += 100;
+                gameStateHandling->reward += 300;
                 levelFinished = true;
             }
 
@@ -177,7 +179,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i]->getBounds().intersects(this->player->getBounds())) {
-            gameStateHandling->reward += 50;
+            gameStateHandling->reward += 100;
             this->resetClockTime();
             delete coins[i];
             coins.erase(coins.begin() + i);
@@ -378,13 +380,14 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
 }
 
 void Level::calculateClosestObjectsDir() {
-    gameStateHandling->calculateClosestObstacleDir(&walls, &boxes, player);
     gameStateHandling->calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
     gameStateHandling->calculateClosestCoinDir(&coins, player, playerFoV->isCoinInView(),
                                                playerFoV->getClosestCoin(), playerCoinsCount);
     gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
     gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
-    gameStateHandling->calculateLastDiscoveredWallDir(playerFoV->getLastDiscoveredWall(), player);
+    gameStateHandling->calculateRayDistances(player->getCenterPosX(), player->getCenterPosY(),
+                                             playerFoV->getRayVertexes(),
+                                             playerFoV->getNumberOfRays());
 }
 
 int Level::getClockTime() const {

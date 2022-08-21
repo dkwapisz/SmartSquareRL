@@ -13,30 +13,12 @@ char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
     request.set_coininfov(gameStateHandling->coinInFoV);
 
-    request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
-    request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);
-    request.mutable_closestobstacle()->set_down(gameStateHandling->obstacleDirection.DOWN);
-    request.mutable_closestobstacle()->set_left(gameStateHandling->obstacleDirection.LEFT);
+    request.set_raydistances(gameStateHandling->rayDistances);
+    request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
+    request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
+    request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);
+    request.set_closestenemydisty(gameStateHandling->closestEnemyDirY);
 
-    request.mutable_closestcoin()->set_up(gameStateHandling->coinDirection.UP);
-    request.mutable_closestcoin()->set_right(gameStateHandling->coinDirection.RIGHT);
-    request.mutable_closestcoin()->set_down(gameStateHandling->coinDirection.DOWN);
-    request.mutable_closestcoin()->set_left(gameStateHandling->coinDirection.LEFT);
-
-    request.mutable_closestenemy()->set_up(gameStateHandling->enemyDirection.UP);
-    request.mutable_closestenemy()->set_right(gameStateHandling->enemyDirection.RIGHT);
-    request.mutable_closestenemy()->set_down(gameStateHandling->enemyDirection.DOWN);
-    request.mutable_closestenemy()->set_left(gameStateHandling->enemyDirection.LEFT);
-
-    request.mutable_finishdirection()->set_up(gameStateHandling->finishDirection.UP);
-    request.mutable_finishdirection()->set_right(gameStateHandling->finishDirection.RIGHT);
-    request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
-    request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
-
-    request.mutable_lastdiscoveredwall()->set_up(gameStateHandling->lastDiscoveredWall.UP);
-    request.mutable_lastdiscoveredwall()->set_right(gameStateHandling->lastDiscoveredWall.RIGHT);
-    request.mutable_lastdiscoveredwall()->set_down(gameStateHandling->lastDiscoveredWall.DOWN);
-    request.mutable_lastdiscoveredwall()->set_left(gameStateHandling->lastDiscoveredWall.LEFT);
 
     Action response;
     ClientContext context;
@@ -65,30 +47,11 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
     request.set_coininfov(gameStateHandling->coinInFoV);
 
-    request.mutable_closestobstacle()->set_up(gameStateHandling->obstacleDirection.UP);
-    request.mutable_closestobstacle()->set_right(gameStateHandling->obstacleDirection.RIGHT);
-    request.mutable_closestobstacle()->set_down(gameStateHandling->obstacleDirection.DOWN);
-    request.mutable_closestobstacle()->set_left(gameStateHandling->obstacleDirection.LEFT);
-
-    request.mutable_closestcoin()->set_up(gameStateHandling->coinDirection.UP);
-    request.mutable_closestcoin()->set_right(gameStateHandling->coinDirection.RIGHT);
-    request.mutable_closestcoin()->set_down(gameStateHandling->coinDirection.DOWN);
-    request.mutable_closestcoin()->set_left(gameStateHandling->coinDirection.LEFT);
-
-    request.mutable_closestenemy()->set_up(gameStateHandling->enemyDirection.UP);
-    request.mutable_closestenemy()->set_right(gameStateHandling->enemyDirection.RIGHT);
-    request.mutable_closestenemy()->set_down(gameStateHandling->enemyDirection.DOWN);
-    request.mutable_closestenemy()->set_left(gameStateHandling->enemyDirection.LEFT);
-
-    request.mutable_finishdirection()->set_up(gameStateHandling->finishDirection.UP);
-    request.mutable_finishdirection()->set_right(gameStateHandling->finishDirection.RIGHT);
-    request.mutable_finishdirection()->set_down(gameStateHandling->finishDirection.DOWN);
-    request.mutable_finishdirection()->set_left(gameStateHandling->finishDirection.LEFT);
-
-    request.mutable_lastdiscoveredwall()->set_up(gameStateHandling->lastDiscoveredWall.UP);
-    request.mutable_lastdiscoveredwall()->set_right(gameStateHandling->lastDiscoveredWall.RIGHT);
-    request.mutable_lastdiscoveredwall()->set_down(gameStateHandling->lastDiscoveredWall.DOWN);
-    request.mutable_lastdiscoveredwall()->set_left(gameStateHandling->lastDiscoveredWall.LEFT);
+    request.set_raydistances(gameStateHandling->rayDistances);
+    request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
+    request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
+    request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);
+    request.set_closestenemydisty(gameStateHandling->closestEnemyDirY);
 
     Reset response;
     ClientContext context;

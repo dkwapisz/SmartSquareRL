@@ -41,4 +41,8 @@ public:
     void setDrawRays(bool setDrawRays);
 
     Wall *getLastDiscoveredWall() const;
+
+    float *getRayVertexes() const;
+
+    int getNumberOfRays() const;
 };

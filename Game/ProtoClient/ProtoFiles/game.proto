@@ -13,21 +13,14 @@ service StateActionExchange {
 }
 
 message State {
-  message Direction {
-    bool up = 1;
-    bool right = 2;
-    bool down = 3;
-    bool left = 4;
-  }
-
   bool closestObstacleIsBox = 1;
   bool allCoinsCollected = 2;
   bool coinInFoV = 3;
-  Direction closestObstacle = 4;
-  Direction closestCoin = 5;
-  Direction closestEnemy = 6;
-  Direction finishDirection = 7;
-  Direction lastDiscoveredWall = 8;
+  string rayDistances = 4;
+  float closestEnemyDistX = 5;
+  float closestEnemyDistY = 6;
+  float closestDestinationDistX = 7;
+  float closestDestinationDistY = 8;
   int32 reward = 9;
   int32 clockTime = 10;
   bool gameOver = 11;

@@ -1,4 +1,14 @@
-## TODO LIST:
+## TODO LIST
+#### New states:
+* Distances to walls around player (120 rays -> 1 in 6 will be sent as state -> 20 distances)
+* DistanceX, DistanceY (unit vectors) to destination (coin/finish depends on that if player collect all coins or not)
+* 6 maps, each rotated (0, 90, 180, 270) -> 24 maps, selected randomly after gameOver
+* 
+#### Bugs: 
+[ ] - repair iteration counter
+[ ] - add score to create graph of learning
+
+## TODO LIST 2 [DEPRECATED]:
 - [x] Set new reward system for coins: 
   - **if coin is IN FoV** and:
     - player getting closer to closer coin -> +10

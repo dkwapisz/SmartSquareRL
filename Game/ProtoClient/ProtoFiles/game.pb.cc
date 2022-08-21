@@ -17,1463 +17,1087 @@
 
 PROTOBUF_PRAGMA_INIT_SEG
 namespace GameMessage {
-    constexpr State_Direction::State_Direction(
-            ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-            : up_(false), right_(false), down_(false), left_(false) {}
+constexpr State::State(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : raydistances_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , closestobstacleisbox_(false)
+  , allcoinscollected_(false)
+  , coininfov_(false)
+  , gameover_(false)
+  , closestenemydistx_(0)
+  , closestenemydisty_(0)
+  , closestdestinationdistx_(0)
+  , closestdestinationdisty_(0)
+  , reward_(0)
+  , clocktime_(0)
+  , iteration_(0){}
+struct StateDefaultTypeInternal {
+  constexpr StateDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~StateDefaultTypeInternal() {}
+  union {
+    State _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StateDefaultTypeInternal _State_default_instance_;
+constexpr Action::Action(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : movedirection_(0)
 
-    struct State_DirectionDefaultTypeInternal {
-        constexpr State_DirectionDefaultTypeInternal()
-                : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-
-        ~State_DirectionDefaultTypeInternal() {}
-
-        union {
-            State_Direction _instance;
-        };
-    };
-
-    PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT State_DirectionDefaultTypeInternal _State_Direction_default_instance_;
-
-    constexpr State::State(
-            ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-            : closestobstacle_(nullptr), closestcoin_(nullptr), closestenemy_(nullptr), finishdirection_(nullptr),
-              lastdiscoveredwall_(nullptr), closestobstacleisbox_(false), allcoinscollected_(false), coininfov_(false),
-              gameover_(false), reward_(0), clocktime_(0), iteration_(0) {}
-
-    struct StateDefaultTypeInternal {
-        constexpr StateDefaultTypeInternal()
-                : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-
-        ~StateDefaultTypeInternal() {}
-
-        union {
-            State _instance;
-        };
-    };
-
-    PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT StateDefaultTypeInternal _State_default_instance_;
-
-    constexpr Action::Action(
-            ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-            : movedirection_(0), shotdirection_(0) {}
-
-    struct ActionDefaultTypeInternal {
-        constexpr ActionDefaultTypeInternal()
-                : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-
-        ~ActionDefaultTypeInternal() {}
-
-        union {
-            Action _instance;
-        };
-    };
-
-    PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ActionDefaultTypeInternal _Action_default_instance_;
-
-    constexpr Reset::Reset(
-            ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-            : resetneeded_(false) {}
-
-    struct ResetDefaultTypeInternal {
-        constexpr ResetDefaultTypeInternal()
-                : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
-
-        ~ResetDefaultTypeInternal() {}
-
-        union {
-            Reset _instance;
-        };
-    };
-
-    PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ResetDefaultTypeInternal _Reset_default_instance_;
+  , shotdirection_(0)
+{}
+struct ActionDefaultTypeInternal {
+  constexpr ActionDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~ActionDefaultTypeInternal() {}
+  union {
+    Action _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ActionDefaultTypeInternal _Action_default_instance_;
+constexpr Reset::Reset(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : resetneeded_(false){}
+struct ResetDefaultTypeInternal {
+  constexpr ResetDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~ResetDefaultTypeInternal() {}
+  union {
+    Reset _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ResetDefaultTypeInternal _Reset_default_instance_;
 }  // namespace GameMessage
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_game_2eproto[4];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor *file_level_enum_descriptors_game_2eproto[1];
-static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const **file_level_service_descriptors_game_2eproto = nullptr;
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_game_2eproto[3];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_game_2eproto[1];
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_game_2eproto = nullptr;
 
 const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State_Direction, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State_Direction, up_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State_Direction, right_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State_Direction, down_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State_Direction, left_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacleisbox_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacle_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestcoin_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemy_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, finishdirection_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, lastdiscoveredwall_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, clocktime_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, gameover_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::State, iteration_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::Action, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::Action, movedirection_),
-        PROTOBUF_FIELD_OFFSET(::GameMessage::Action, shotdirection_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::Reset, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        PROTOBUF_FIELD_OFFSET(::GameMessage::Reset, resetneeded_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacleisbox_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, raydistances_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydistx_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydisty_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestdestinationdistx_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestdestinationdisty_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, clocktime_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, gameover_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, iteration_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::Action, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::Action, movedirection_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::Action, shotdirection_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::Reset, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::GameMessage::Reset, resetneeded_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-        {0,  -1, -1, sizeof(::GameMessage::State_Direction)},
-        {10, -1, -1, sizeof(::GameMessage::State)},
-        {28, -1, -1, sizeof(::GameMessage::Action)},
-        {36, -1, -1, sizeof(::GameMessage::Reset)},
+  { 0, -1, -1, sizeof(::GameMessage::State)},
+  { 18, -1, -1, sizeof(::GameMessage::Action)},
+  { 26, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
-static ::PROTOBUF_NAMESPACE_ID::Message const *const file_default_instances[] = {
-        reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message *>(&::GameMessage::_State_Direction_default_instance_),
-        reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message *>(&::GameMessage::_State_default_instance_),
-        reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message *>(&::GameMessage::_Action_default_instance_),
-        reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message *>(&::GameMessage::_Reset_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::GameMessage::_State_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::GameMessage::_Action_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::GameMessage::_Reset_default_instance_),
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-        "\n\ngame.proto\022\013GameMessage\"\356\003\n\005State\022\034\n\024c"
-        "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
-        "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\0225\n\017close"
-        "stObstacle\030\004 \001(\0132\034.GameMessage.State.Dir"
-        "ection\0221\n\013closestCoin\030\005 \001(\0132\034.GameMessag"
-        "e.State.Direction\0222\n\014closestEnemy\030\006 \001(\0132"
-        "\034.GameMessage.State.Direction\0225\n\017finishD"
-        "irection\030\007 \001(\0132\034.GameMessage.State.Direc"
-        "tion\0228\n\022lastDiscoveredWall\030\010 \001(\0132\034.GameM"
-        "essage.State.Direction\022\016\n\006reward\030\t \001(\005\022\021"
-        "\n\tclockTime\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\021\n\ti"
-        "teration\030\014 \001(\005\032B\n\tDirection\022\n\n\002up\030\001 \001(\010\022"
-        "\r\n\005right\030\002 \001(\010\022\014\n\004down\030\003 \001(\010\022\014\n\004left\030\004 \001"
-        "(\010\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162#.G"
-        "ameMessage.Action.ActionDirection\022:\n\rsho"
-        "tDirection\030\002 \001(\0162#.GameMessage.Action.Ac"
-        "tionDirection\"B\n\017ActionDirection\022\010\n\004IDLE"
-        "\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020"
-        "\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023Stat"
-        "eActionExchange\0228\n\013StateAction\022\022.GameMes"
-        "sage.State\032\023.GameMessage.Action\"\000\0226\n\nSta"
-        "teReset\022\022.GameMessage.State\032\022.GameMessag"
-        "e.Reset\"\000b\006proto3";
+  "\n\ngame.proto\022\013GameMessage\"\251\002\n\005State\022\034\n\024c"
+  "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
+  "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\022\024\n\014rayDi"
+  "stances\030\004 \001(\t\022\031\n\021closestEnemyDistX\030\005 \001(\002"
+  "\022\031\n\021closestEnemyDistY\030\006 \001(\002\022\037\n\027closestDe"
+  "stinationDistX\030\007 \001(\002\022\037\n\027closestDestinati"
+  "onDistY\030\010 \001(\002\022\016\n\006reward\030\t \001(\005\022\021\n\tclockTi"
+  "me\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\021\n\titeration\030"
+  "\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162"
+  "#.GameMessage.Action.ActionDirection\022:\n\r"
+  "shotDirection\030\002 \001(\0162#.GameMessage.Action"
+  ".ActionDirection\"B\n\017ActionDirection\022\010\n\004I"
+  "DLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LE"
+  "FT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023S"
+  "tateActionExchange\0228\n\013StateAction\022\022.Game"
+  "Message.State\032\023.GameMessage.Action\"\000\0226\n\n"
+  "StateReset\022\022.GameMessage.State\032\022.GameMes"
+  "sage.Reset\"\000b\006proto3"
+  ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-        false, false, 897, descriptor_table_protodef_game_2eproto, "game.proto",
-        &descriptor_table_game_2eproto_once, nullptr, 0, 4,
-        schemas, file_default_instances, TableStruct_game_2eproto::offsets,
-        file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto,
-        file_level_service_descriptors_game_2eproto,
+  false, false, 700, descriptor_table_protodef_game_2eproto, "game.proto", 
+  &descriptor_table_game_2eproto_once, nullptr, 0, 3,
+  schemas, file_default_instances, TableStruct_game_2eproto::offsets,
+  file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable *
-descriptor_table_game_2eproto_getter() {
-    return &descriptor_table_game_2eproto;
+PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable* descriptor_table_game_2eproto_getter() {
+  return &descriptor_table_game_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_game_2eproto(
-        &descriptor_table_game_2eproto);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_game_2eproto(&descriptor_table_game_2eproto);
 namespace GameMessage {
-    const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor *Action_ActionDirection_descriptor() {
-        ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_game_2eproto);
-        return file_level_enum_descriptors_game_2eproto[0];
-    }
-
-    bool Action_ActionDirection_IsValid(int value) {
-        switch (value) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                return true;
-            default:
-                return false;
-        }
-    }
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Action_ActionDirection_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_game_2eproto);
+  return file_level_enum_descriptors_game_2eproto[0];
+}
+bool Action_ActionDirection_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-    constexpr Action_ActionDirection Action::IDLE;
-    constexpr Action_ActionDirection Action::UP;
-    constexpr Action_ActionDirection Action::RIGHT;
-    constexpr Action_ActionDirection Action::DOWN;
-    constexpr Action_ActionDirection Action::LEFT;
-    constexpr Action_ActionDirection Action::ActionDirection_MIN;
-    constexpr Action_ActionDirection Action::ActionDirection_MAX;
-    constexpr int Action::ActionDirection_ARRAYSIZE;
+constexpr Action_ActionDirection Action::IDLE;
+constexpr Action_ActionDirection Action::UP;
+constexpr Action_ActionDirection Action::RIGHT;
+constexpr Action_ActionDirection Action::DOWN;
+constexpr Action_ActionDirection Action::LEFT;
+constexpr Action_ActionDirection Action::ActionDirection_MIN;
+constexpr Action_ActionDirection Action::ActionDirection_MAX;
+constexpr int Action::ActionDirection_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 
 // ===================================================================
 
-    class State_Direction::_Internal {
-    public:
-    };
+class State::_Internal {
+ public:
+};
 
-    State_Direction::State_Direction(::PROTOBUF_NAMESPACE_ID::Arena *arena,
-                                     bool is_message_owned)
-            : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-        SharedCtor();
-        if (!is_message_owned) {
-            RegisterArenaDtor(arena);
-        }
-        // @@protoc_insertion_point(arena_constructor:GameMessage.State.Direction)
-    }
+State::State(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:GameMessage.State)
+}
+State::State(const State& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  raydistances_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    raydistances_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_raydistances().empty()) {
+    raydistances_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_raydistances(), 
+      GetArenaForAllocation());
+  }
+  ::memcpy(&closestobstacleisbox_, &from.closestobstacleisbox_,
+    static_cast<size_t>(reinterpret_cast<char*>(&iteration_) -
+    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+  // @@protoc_insertion_point(copy_constructor:GameMessage.State)
+}
 
-    State_Direction::State_Direction(const State_Direction &from)
-            : ::PROTOBUF_NAMESPACE_ID::Message() {
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-        ::memcpy(&up_, &from.up_,
-                 static_cast<size_t>(reinterpret_cast<char *>(&left_) -
-                                     reinterpret_cast<char *>(&up_)) + sizeof(left_));
-        // @@protoc_insertion_point(copy_constructor:GameMessage.State.Direction)
-    }
+inline void State::SharedCtor() {
+raydistances_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  raydistances_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&closestobstacleisbox_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&iteration_) -
+    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+}
 
-    inline void State_Direction::SharedCtor() {
-        ::memset(reinterpret_cast<char *>(this) + static_cast<size_t>(
-                         reinterpret_cast<char *>(&up_) - reinterpret_cast<char *>(this)),
-                 0, static_cast<size_t>(reinterpret_cast<char *>(&left_) -
-                                        reinterpret_cast<char *>(&up_)) + sizeof(left_));
-    }
+State::~State() {
+  // @@protoc_insertion_point(destructor:GameMessage.State)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    State_Direction::~State_Direction() {
-        // @@protoc_insertion_point(destructor:GameMessage.State.Direction)
-        if (GetArenaForAllocation() != nullptr) return;
-        SharedDtor();
-        _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+inline void State::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  raydistances_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
 
-    inline void State_Direction::SharedDtor() {
-        GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-    }
+void State::ArenaDtor(void* object) {
+  State* _this = reinterpret_cast< State* >(object);
+  (void)_this;
+}
+void State::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void State::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
 
-    void State_Direction::ArenaDtor(void *object) {
-        State_Direction *_this = reinterpret_cast< State_Direction * >(object);
-        (void) _this;
-    }
-
-    void State_Direction::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena *) {
-    }
-
-    void State_Direction::SetCachedSize(int size) const {
-        _cached_size_.Set(size);
-    }
-
-    void State_Direction::Clear() {
-// @@protoc_insertion_point(message_clear_start:GameMessage.State.Direction)
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
-
-        ::memset(&up_, 0, static_cast<size_t>(
-                                  reinterpret_cast<char *>(&left_) -
-                                  reinterpret_cast<char *>(&up_)) + sizeof(left_));
-        _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
-
-    const char *State_Direction::_InternalParse(const char *ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext *ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-        while (!ctx->Done(&ptr)) {
-            uint32_t tag;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-            switch (tag >> 3) {
-                // bool up = 1;
-                case 1:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-                        up_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool right = 2;
-                case 2:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-                        right_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool down = 3;
-                case 3:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-                        down_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool left = 4;
-                case 4:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-                        left_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                default:
-                    goto handle_unusual;
-            }  // switch
-            handle_unusual:
-            if ((tag == 0) || ((tag & 7) == 4)) {
-                CHK_(ptr);
-                ctx->SetLastTag(tag);
-                goto message_done;
-            }
-            ptr = UnknownFieldParse(
-                    tag,
-                    _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-                    ptr, ctx);
-            CHK_(ptr != nullptr);
-        }  // while
-        message_done:
-        return ptr;
-        failure:
-        ptr = nullptr;
-        goto message_done;
-#undef CHK_
-    }
-
-    uint8_t *State_Direction::_InternalSerialize(
-            uint8_t *target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream *stream) const {
-        // @@protoc_insertion_point(serialize_to_array_start:GameMessage.State.Direction)
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
-
-        // bool up = 1;
-        if (this->_internal_up() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_up(),
-                                                                                         target);
-        }
-
-        // bool right = 2;
-        if (this->_internal_right() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_right(),
-                                                                                         target);
-        }
-
-        // bool down = 3;
-        if (this->_internal_down() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_down(),
-                                                                                         target);
-        }
-
-        // bool left = 4;
-        if (this->_internal_left() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->_internal_left(),
-                                                                                         target);
-        }
-
-        if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                            ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-        }
-        // @@protoc_insertion_point(serialize_to_array_end:GameMessage.State.Direction)
-        return target;
-    }
-
-    size_t State_Direction::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:GameMessage.State.Direction)
-        size_t total_size = 0;
-
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
-
-        // bool up = 1;
-        if (this->_internal_up() != 0) {
-            total_size += 1 + 1;
-        }
-
-        // bool right = 2;
-        if (this->_internal_right() != 0) {
-            total_size += 1 + 1;
-        }
-
-        // bool down = 3;
-        if (this->_internal_down() != 0) {
-            total_size += 1 + 1;
-        }
-
-        // bool left = 4;
-        if (this->_internal_left() != 0) {
-            total_size += 1 + 1;
-        }
-
-        return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
-    }
-
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData State_Direction::_class_data_ = {
-            ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-            State_Direction::MergeImpl
-    };
-
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData *State_Direction::GetClassData() const { return &_class_data_; }
-
-    void State_Direction::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message *to,
-                                    const ::PROTOBUF_NAMESPACE_ID::Message &from) {
-        static_cast<State_Direction *>(to)->MergeFrom(
-                static_cast<const State_Direction &>(from));
-    }
-
-
-    void State_Direction::MergeFrom(const State_Direction &from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:GameMessage.State.Direction)
-        GOOGLE_DCHECK_NE(&from, this);
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
-
-        if (from._internal_up() != 0) {
-            _internal_set_up(from._internal_up());
-        }
-        if (from._internal_right() != 0) {
-            _internal_set_right(from._internal_right());
-        }
-        if (from._internal_down() != 0) {
-            _internal_set_down(from._internal_down());
-        }
-        if (from._internal_left() != 0) {
-            _internal_set_left(from._internal_left());
-        }
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-    }
-
-    void State_Direction::CopyFrom(const State_Direction &from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:GameMessage.State.Direction)
-        if (&from == this) return;
-        Clear();
-        MergeFrom(from);
-    }
-
-    bool State_Direction::IsInitialized() const {
-        return true;
-    }
-
-    void State_Direction::InternalSwap(State_Direction *other) {
-        using std::swap;
-        _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-                PROTOBUF_FIELD_OFFSET(State_Direction, left_)
-                + sizeof(State_Direction::left_)
-                - PROTOBUF_FIELD_OFFSET(State_Direction, up_)>(
-                reinterpret_cast<char *>(&up_),
-                reinterpret_cast<char *>(&other->up_));
-    }
-
-    ::PROTOBUF_NAMESPACE_ID::Metadata State_Direction::GetMetadata() const {
-        return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
-                &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-                file_level_metadata_game_2eproto[0]);
-    }
-
-// ===================================================================
-
-    class State::_Internal {
-    public:
-        static const ::GameMessage::State_Direction &closestobstacle(const State *msg);
-
-        static const ::GameMessage::State_Direction &closestcoin(const State *msg);
-
-        static const ::GameMessage::State_Direction &closestenemy(const State *msg);
-
-        static const ::GameMessage::State_Direction &finishdirection(const State *msg);
-
-        static const ::GameMessage::State_Direction &lastdiscoveredwall(const State *msg);
-    };
-
-    const ::GameMessage::State_Direction &
-    State::_Internal::closestobstacle(const State *msg) {
-        return *msg->closestobstacle_;
-    }
-
-    const ::GameMessage::State_Direction &
-    State::_Internal::closestcoin(const State *msg) {
-        return *msg->closestcoin_;
-    }
-
-    const ::GameMessage::State_Direction &
-    State::_Internal::closestenemy(const State *msg) {
-        return *msg->closestenemy_;
-    }
-
-    const ::GameMessage::State_Direction &
-    State::_Internal::finishdirection(const State *msg) {
-        return *msg->finishdirection_;
-    }
-
-    const ::GameMessage::State_Direction &
-    State::_Internal::lastdiscoveredwall(const State *msg) {
-        return *msg->lastdiscoveredwall_;
-    }
-
-    State::State(::PROTOBUF_NAMESPACE_ID::Arena *arena,
-                 bool is_message_owned)
-            : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-        SharedCtor();
-        if (!is_message_owned) {
-            RegisterArenaDtor(arena);
-        }
-        // @@protoc_insertion_point(arena_constructor:GameMessage.State)
-    }
-
-    State::State(const State &from)
-            : ::PROTOBUF_NAMESPACE_ID::Message() {
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-        if (from._internal_has_closestobstacle()) {
-            closestobstacle_ = new ::GameMessage::State_Direction(*from.closestobstacle_);
-        } else {
-            closestobstacle_ = nullptr;
-        }
-        if (from._internal_has_closestcoin()) {
-            closestcoin_ = new ::GameMessage::State_Direction(*from.closestcoin_);
-        } else {
-            closestcoin_ = nullptr;
-        }
-        if (from._internal_has_closestenemy()) {
-            closestenemy_ = new ::GameMessage::State_Direction(*from.closestenemy_);
-        } else {
-            closestenemy_ = nullptr;
-        }
-        if (from._internal_has_finishdirection()) {
-            finishdirection_ = new ::GameMessage::State_Direction(*from.finishdirection_);
-        } else {
-            finishdirection_ = nullptr;
-        }
-        if (from._internal_has_lastdiscoveredwall()) {
-            lastdiscoveredwall_ = new ::GameMessage::State_Direction(*from.lastdiscoveredwall_);
-        } else {
-            lastdiscoveredwall_ = nullptr;
-        }
-        ::memcpy(&closestobstacleisbox_, &from.closestobstacleisbox_,
-                 static_cast<size_t>(reinterpret_cast<char *>(&iteration_) -
-                                     reinterpret_cast<char *>(&closestobstacleisbox_)) + sizeof(iteration_));
-        // @@protoc_insertion_point(copy_constructor:GameMessage.State)
-    }
-
-    inline void State::SharedCtor() {
-        ::memset(reinterpret_cast<char *>(this) + static_cast<size_t>(
-                         reinterpret_cast<char *>(&closestobstacle_) - reinterpret_cast<char *>(this)),
-                 0, static_cast<size_t>(reinterpret_cast<char *>(&iteration_) -
-                                        reinterpret_cast<char *>(&closestobstacle_)) + sizeof(iteration_));
-    }
-
-    State::~State() {
-        // @@protoc_insertion_point(destructor:GameMessage.State)
-        if (GetArenaForAllocation() != nullptr) return;
-        SharedDtor();
-        _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
-
-    inline void State::SharedDtor() {
-        GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-        if (this != internal_default_instance()) delete closestobstacle_;
-        if (this != internal_default_instance()) delete closestcoin_;
-        if (this != internal_default_instance()) delete closestenemy_;
-        if (this != internal_default_instance()) delete finishdirection_;
-        if (this != internal_default_instance()) delete lastdiscoveredwall_;
-    }
-
-    void State::ArenaDtor(void *object) {
-        State *_this = reinterpret_cast< State * >(object);
-        (void) _this;
-    }
-
-    void State::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena *) {
-    }
-
-    void State::SetCachedSize(int size) const {
-        _cached_size_.Set(size);
-    }
-
-    void State::Clear() {
+void State::Clear() {
 // @@protoc_insertion_point(message_clear_start:GameMessage.State)
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        if (GetArenaForAllocation() == nullptr && closestobstacle_ != nullptr) {
-            delete closestobstacle_;
-        }
-        closestobstacle_ = nullptr;
-        if (GetArenaForAllocation() == nullptr && closestcoin_ != nullptr) {
-            delete closestcoin_;
-        }
-        closestcoin_ = nullptr;
-        if (GetArenaForAllocation() == nullptr && closestenemy_ != nullptr) {
-            delete closestenemy_;
-        }
-        closestenemy_ = nullptr;
-        if (GetArenaForAllocation() == nullptr && finishdirection_ != nullptr) {
-            delete finishdirection_;
-        }
-        finishdirection_ = nullptr;
-        if (GetArenaForAllocation() == nullptr && lastdiscoveredwall_ != nullptr) {
-            delete lastdiscoveredwall_;
-        }
-        lastdiscoveredwall_ = nullptr;
-        ::memset(&closestobstacleisbox_, 0, static_cast<size_t>(
-                                                    reinterpret_cast<char *>(&iteration_) -
-                                                    reinterpret_cast<char *>(&closestobstacleisbox_)) +
-                                            sizeof(iteration_));
-        _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+  raydistances_.ClearToEmpty();
+  ::memset(&closestobstacleisbox_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&iteration_) -
+      reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    const char *State::_InternalParse(const char *ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext *ctx) {
+const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-        while (!ctx->Done(&ptr)) {
-            uint32_t tag;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-            switch (tag >> 3) {
-                // bool closestObstacleIsBox = 1;
-                case 1:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-                        closestobstacleisbox_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool allCoinsCollected = 2;
-                case 2:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-                        allcoinscollected_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool coinInFoV = 3;
-                case 3:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-                        coininfov_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.State.Direction closestObstacle = 4;
-                case 4:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-                        ptr = ctx->ParseMessage(_internal_mutable_closestobstacle(), ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.State.Direction closestCoin = 5;
-                case 5:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-                        ptr = ctx->ParseMessage(_internal_mutable_closestcoin(), ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.State.Direction closestEnemy = 6;
-                case 6:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
-                        ptr = ctx->ParseMessage(_internal_mutable_closestenemy(), ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.State.Direction finishDirection = 7;
-                case 7:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-                        ptr = ctx->ParseMessage(_internal_mutable_finishdirection(), ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.State.Direction lastDiscoveredWall = 8;
-                case 8:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
-                        ptr = ctx->ParseMessage(_internal_mutable_lastdiscoveredwall(), ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // int32 reward = 9;
-                case 9:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
-                        reward_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // int32 clockTime = 10;
-                case 10:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
-                        clocktime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // bool gameOver = 11;
-                case 11:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
-                        gameover_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // int32 iteration = 12;
-                case 12:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
-                        iteration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                default:
-                    goto handle_unusual;
-            }  // switch
-            handle_unusual:
-            if ((tag == 0) || ((tag & 7) == 4)) {
-                CHK_(ptr);
-                ctx->SetLastTag(tag);
-                goto message_done;
-            }
-            ptr = UnknownFieldParse(
-                    tag,
-                    _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-                    ptr, ctx);
-            CHK_(ptr != nullptr);
-        }  // while
-        message_done:
-        return ptr;
-        failure:
-        ptr = nullptr;
-        goto message_done;
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool closestObstacleIsBox = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          closestobstacleisbox_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool allCoinsCollected = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          allcoinscollected_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool coinInFoV = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          coininfov_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string rayDistances = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_raydistances();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "GameMessage.State.rayDistances"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // float closestEnemyDistX = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
+          closestenemydistx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float closestEnemyDistY = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
+          closestenemydisty_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float closestDestinationDistX = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
+          closestdestinationdistx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float closestDestinationDistY = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 69)) {
+          closestdestinationdisty_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 reward = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          reward_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 clockTime = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+          clocktime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool gameOver = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+          gameover_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 iteration = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
+          iteration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
 #undef CHK_
-    }
+}
 
-    uint8_t *State::_InternalSerialize(
-            uint8_t *target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream *stream) const {
-        // @@protoc_insertion_point(serialize_to_array_start:GameMessage.State)
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+uint8_t* State::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:GameMessage.State)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        // bool closestObstacleIsBox = 1;
-        if (this->_internal_closestobstacleisbox() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1,
-                                                                                         this->_internal_closestobstacleisbox(),
-                                                                                         target);
-        }
+  // bool closestObstacleIsBox = 1;
+  if (this->_internal_closestobstacleisbox() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_closestobstacleisbox(), target);
+  }
 
-        // bool allCoinsCollected = 2;
-        if (this->_internal_allcoinscollected() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2,
-                                                                                         this->_internal_allcoinscollected(),
-                                                                                         target);
-        }
+  // bool allCoinsCollected = 2;
+  if (this->_internal_allcoinscollected() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_allcoinscollected(), target);
+  }
 
-        // bool coinInFoV = 3;
-        if (this->_internal_coininfov() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_coininfov(),
-                                                                                         target);
-        }
+  // bool coinInFoV = 3;
+  if (this->_internal_coininfov() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_coininfov(), target);
+  }
 
-        // .GameMessage.State.Direction closestObstacle = 4;
-        if (this->_internal_has_closestobstacle()) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-            InternalWriteMessage(
-                    4, _Internal::closestobstacle(this), target, stream);
-        }
+  // string rayDistances = 4;
+  if (!this->_internal_raydistances().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_raydistances().data(), static_cast<int>(this->_internal_raydistances().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "GameMessage.State.rayDistances");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_raydistances(), target);
+  }
 
-        // .GameMessage.State.Direction closestCoin = 5;
-        if (this->_internal_has_closestcoin()) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-            InternalWriteMessage(
-                    5, _Internal::closestcoin(this), target, stream);
-        }
+  // float closestEnemyDistX = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydistx = this->_internal_closestenemydistx();
+  uint32_t raw_closestenemydistx;
+  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
+  if (raw_closestenemydistx != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_closestenemydistx(), target);
+  }
 
-        // .GameMessage.State.Direction closestEnemy = 6;
-        if (this->_internal_has_closestenemy()) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-            InternalWriteMessage(
-                    6, _Internal::closestenemy(this), target, stream);
-        }
+  // float closestEnemyDistY = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydisty = this->_internal_closestenemydisty();
+  uint32_t raw_closestenemydisty;
+  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
+  if (raw_closestenemydisty != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_closestenemydisty(), target);
+  }
 
-        // .GameMessage.State.Direction finishDirection = 7;
-        if (this->_internal_has_finishdirection()) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-            InternalWriteMessage(
-                    7, _Internal::finishdirection(this), target, stream);
-        }
+  // float closestDestinationDistX = 7;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdistx = this->_internal_closestdestinationdistx();
+  uint32_t raw_closestdestinationdistx;
+  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
+  if (raw_closestdestinationdistx != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->_internal_closestdestinationdistx(), target);
+  }
 
-        // .GameMessage.State.Direction lastDiscoveredWall = 8;
-        if (this->_internal_has_lastdiscoveredwall()) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-            InternalWriteMessage(
-                    8, _Internal::lastdiscoveredwall(this), target, stream);
-        }
+  // float closestDestinationDistY = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdisty = this->_internal_closestdestinationdisty();
+  uint32_t raw_closestdestinationdisty;
+  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
+  if (raw_closestdestinationdisty != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(8, this->_internal_closestdestinationdisty(), target);
+  }
 
-        // int32 reward = 9;
-        if (this->_internal_reward() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_reward(),
-                                                                                          target);
-        }
+  // int32 reward = 9;
+  if (this->_internal_reward() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_reward(), target);
+  }
 
-        // int32 clockTime = 10;
-        if (this->_internal_clocktime() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10,
-                                                                                          this->_internal_clocktime(),
-                                                                                          target);
-        }
+  // int32 clockTime = 10;
+  if (this->_internal_clocktime() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_clocktime(), target);
+  }
 
-        // bool gameOver = 11;
-        if (this->_internal_gameover() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_gameover(),
-                                                                                         target);
-        }
+  // bool gameOver = 11;
+  if (this->_internal_gameover() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_gameover(), target);
+  }
 
-        // int32 iteration = 12;
-        if (this->_internal_iteration() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(12,
-                                                                                          this->_internal_iteration(),
-                                                                                          target);
-        }
+  // int32 iteration = 12;
+  if (this->_internal_iteration() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(12, this->_internal_iteration(), target);
+  }
 
-        if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                            ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-        }
-        // @@protoc_insertion_point(serialize_to_array_end:GameMessage.State)
-        return target;
-    }
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:GameMessage.State)
+  return target;
+}
 
-    size_t State::ByteSizeLong() const {
+size_t State::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:GameMessage.State)
-        size_t total_size = 0;
+  size_t total_size = 0;
 
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        // .GameMessage.State.Direction closestObstacle = 4;
-        if (this->_internal_has_closestobstacle()) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                                  *closestobstacle_);
-        }
+  // string rayDistances = 4;
+  if (!this->_internal_raydistances().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_raydistances());
+  }
 
-        // .GameMessage.State.Direction closestCoin = 5;
-        if (this->_internal_has_closestcoin()) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                                  *closestcoin_);
-        }
+  // bool closestObstacleIsBox = 1;
+  if (this->_internal_closestobstacleisbox() != 0) {
+    total_size += 1 + 1;
+  }
 
-        // .GameMessage.State.Direction closestEnemy = 6;
-        if (this->_internal_has_closestenemy()) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                                  *closestenemy_);
-        }
+  // bool allCoinsCollected = 2;
+  if (this->_internal_allcoinscollected() != 0) {
+    total_size += 1 + 1;
+  }
 
-        // .GameMessage.State.Direction finishDirection = 7;
-        if (this->_internal_has_finishdirection()) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                                  *finishdirection_);
-        }
+  // bool coinInFoV = 3;
+  if (this->_internal_coininfov() != 0) {
+    total_size += 1 + 1;
+  }
 
-        // .GameMessage.State.Direction lastDiscoveredWall = 8;
-        if (this->_internal_has_lastdiscoveredwall()) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                                  *lastdiscoveredwall_);
-        }
+  // bool gameOver = 11;
+  if (this->_internal_gameover() != 0) {
+    total_size += 1 + 1;
+  }
 
-        // bool closestObstacleIsBox = 1;
-        if (this->_internal_closestobstacleisbox() != 0) {
-            total_size += 1 + 1;
-        }
+  // float closestEnemyDistX = 5;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydistx = this->_internal_closestenemydistx();
+  uint32_t raw_closestenemydistx;
+  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
+  if (raw_closestenemydistx != 0) {
+    total_size += 1 + 4;
+  }
 
-        // bool allCoinsCollected = 2;
-        if (this->_internal_allcoinscollected() != 0) {
-            total_size += 1 + 1;
-        }
+  // float closestEnemyDistY = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydisty = this->_internal_closestenemydisty();
+  uint32_t raw_closestenemydisty;
+  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
+  if (raw_closestenemydisty != 0) {
+    total_size += 1 + 4;
+  }
 
-        // bool coinInFoV = 3;
-        if (this->_internal_coininfov() != 0) {
-            total_size += 1 + 1;
-        }
+  // float closestDestinationDistX = 7;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdistx = this->_internal_closestdestinationdistx();
+  uint32_t raw_closestdestinationdistx;
+  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
+  if (raw_closestdestinationdistx != 0) {
+    total_size += 1 + 4;
+  }
 
-        // bool gameOver = 11;
-        if (this->_internal_gameover() != 0) {
-            total_size += 1 + 1;
-        }
+  // float closestDestinationDistY = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdisty = this->_internal_closestdestinationdisty();
+  uint32_t raw_closestdestinationdisty;
+  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
+  if (raw_closestdestinationdisty != 0) {
+    total_size += 1 + 4;
+  }
 
-        // int32 reward = 9;
-        if (this->_internal_reward() != 0) {
-            total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
-        }
+  // int32 reward = 9;
+  if (this->_internal_reward() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
+  }
 
-        // int32 clockTime = 10;
-        if (this->_internal_clocktime() != 0) {
-            total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(
-                    this->_internal_clocktime());
-        }
+  // int32 clockTime = 10;
+  if (this->_internal_clocktime() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_clocktime());
+  }
 
-        // int32 iteration = 12;
-        if (this->_internal_iteration() != 0) {
-            total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(
-                    this->_internal_iteration());
-        }
+  // int32 iteration = 12;
+  if (this->_internal_iteration() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_iteration());
+  }
 
-        return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
-    }
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData State::_class_data_ = {
-            ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-            State::MergeImpl
-    };
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData State::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    State::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*State::GetClassData() const { return &_class_data_; }
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData *State::GetClassData() const { return &_class_data_; }
-
-    void State::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message *to,
-                          const ::PROTOBUF_NAMESPACE_ID::Message &from) {
-        static_cast<State *>(to)->MergeFrom(
-                static_cast<const State &>(from));
-    }
+void State::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<State *>(to)->MergeFrom(
+      static_cast<const State &>(from));
+}
 
 
-    void State::MergeFrom(const State &from) {
+void State::MergeFrom(const State& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:GameMessage.State)
-        GOOGLE_DCHECK_NE(&from, this);
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        if (from._internal_has_closestobstacle()) {
-            _internal_mutable_closestobstacle()->::GameMessage::State_Direction::MergeFrom(
-                    from._internal_closestobstacle());
-        }
-        if (from._internal_has_closestcoin()) {
-            _internal_mutable_closestcoin()->::GameMessage::State_Direction::MergeFrom(from._internal_closestcoin());
-        }
-        if (from._internal_has_closestenemy()) {
-            _internal_mutable_closestenemy()->::GameMessage::State_Direction::MergeFrom(from._internal_closestenemy());
-        }
-        if (from._internal_has_finishdirection()) {
-            _internal_mutable_finishdirection()->::GameMessage::State_Direction::MergeFrom(
-                    from._internal_finishdirection());
-        }
-        if (from._internal_has_lastdiscoveredwall()) {
-            _internal_mutable_lastdiscoveredwall()->::GameMessage::State_Direction::MergeFrom(
-                    from._internal_lastdiscoveredwall());
-        }
-        if (from._internal_closestobstacleisbox() != 0) {
-            _internal_set_closestobstacleisbox(from._internal_closestobstacleisbox());
-        }
-        if (from._internal_allcoinscollected() != 0) {
-            _internal_set_allcoinscollected(from._internal_allcoinscollected());
-        }
-        if (from._internal_coininfov() != 0) {
-            _internal_set_coininfov(from._internal_coininfov());
-        }
-        if (from._internal_gameover() != 0) {
-            _internal_set_gameover(from._internal_gameover());
-        }
-        if (from._internal_reward() != 0) {
-            _internal_set_reward(from._internal_reward());
-        }
-        if (from._internal_clocktime() != 0) {
-            _internal_set_clocktime(from._internal_clocktime());
-        }
-        if (from._internal_iteration() != 0) {
-            _internal_set_iteration(from._internal_iteration());
-        }
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-    }
+  if (!from._internal_raydistances().empty()) {
+    _internal_set_raydistances(from._internal_raydistances());
+  }
+  if (from._internal_closestobstacleisbox() != 0) {
+    _internal_set_closestobstacleisbox(from._internal_closestobstacleisbox());
+  }
+  if (from._internal_allcoinscollected() != 0) {
+    _internal_set_allcoinscollected(from._internal_allcoinscollected());
+  }
+  if (from._internal_coininfov() != 0) {
+    _internal_set_coininfov(from._internal_coininfov());
+  }
+  if (from._internal_gameover() != 0) {
+    _internal_set_gameover(from._internal_gameover());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydistx = from._internal_closestenemydistx();
+  uint32_t raw_closestenemydistx;
+  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
+  if (raw_closestenemydistx != 0) {
+    _internal_set_closestenemydistx(from._internal_closestenemydistx());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestenemydisty = from._internal_closestenemydisty();
+  uint32_t raw_closestenemydisty;
+  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
+  if (raw_closestenemydisty != 0) {
+    _internal_set_closestenemydisty(from._internal_closestenemydisty());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdistx = from._internal_closestdestinationdistx();
+  uint32_t raw_closestdestinationdistx;
+  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
+  if (raw_closestdestinationdistx != 0) {
+    _internal_set_closestdestinationdistx(from._internal_closestdestinationdistx());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_closestdestinationdisty = from._internal_closestdestinationdisty();
+  uint32_t raw_closestdestinationdisty;
+  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
+  if (raw_closestdestinationdisty != 0) {
+    _internal_set_closestdestinationdisty(from._internal_closestdestinationdisty());
+  }
+  if (from._internal_reward() != 0) {
+    _internal_set_reward(from._internal_reward());
+  }
+  if (from._internal_clocktime() != 0) {
+    _internal_set_clocktime(from._internal_clocktime());
+  }
+  if (from._internal_iteration() != 0) {
+    _internal_set_iteration(from._internal_iteration());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
-    void State::CopyFrom(const State &from) {
+void State::CopyFrom(const State& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:GameMessage.State)
-        if (&from == this) return;
-        Clear();
-        MergeFrom(from);
-    }
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
-    bool State::IsInitialized() const {
-        return true;
-    }
+bool State::IsInitialized() const {
+  return true;
+}
 
-    void State::InternalSwap(State *other) {
-        using std::swap;
-        _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-                PROTOBUF_FIELD_OFFSET(State, iteration_)
-                + sizeof(State::iteration_)
-                - PROTOBUF_FIELD_OFFSET(State, closestobstacle_)>(
-                reinterpret_cast<char *>(&closestobstacle_),
-                reinterpret_cast<char *>(&other->closestobstacle_));
-    }
+void State::InternalSwap(State* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &raydistances_, lhs_arena,
+      &other->raydistances_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(State, iteration_)
+      + sizeof(State::iteration_)
+      - PROTOBUF_FIELD_OFFSET(State, closestobstacleisbox_)>(
+          reinterpret_cast<char*>(&closestobstacleisbox_),
+          reinterpret_cast<char*>(&other->closestobstacleisbox_));
+}
 
-    ::PROTOBUF_NAMESPACE_ID::Metadata State::GetMetadata() const {
-        return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
-                &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-                file_level_metadata_game_2eproto[1]);
-    }
+::PROTOBUF_NAMESPACE_ID::Metadata State::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
+      file_level_metadata_game_2eproto[0]);
+}
 
 // ===================================================================
 
-    class Action::_Internal {
-    public:
-    };
+class Action::_Internal {
+ public:
+};
 
-    Action::Action(::PROTOBUF_NAMESPACE_ID::Arena *arena,
-                   bool is_message_owned)
-            : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-        SharedCtor();
-        if (!is_message_owned) {
-            RegisterArenaDtor(arena);
-        }
-        // @@protoc_insertion_point(arena_constructor:GameMessage.Action)
-    }
+Action::Action(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:GameMessage.Action)
+}
+Action::Action(const Action& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&movedirection_, &from.movedirection_,
+    static_cast<size_t>(reinterpret_cast<char*>(&shotdirection_) -
+    reinterpret_cast<char*>(&movedirection_)) + sizeof(shotdirection_));
+  // @@protoc_insertion_point(copy_constructor:GameMessage.Action)
+}
 
-    Action::Action(const Action &from)
-            : ::PROTOBUF_NAMESPACE_ID::Message() {
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-        ::memcpy(&movedirection_, &from.movedirection_,
-                 static_cast<size_t>(reinterpret_cast<char *>(&shotdirection_) -
-                                     reinterpret_cast<char *>(&movedirection_)) + sizeof(shotdirection_));
-        // @@protoc_insertion_point(copy_constructor:GameMessage.Action)
-    }
+inline void Action::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&movedirection_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&shotdirection_) -
+    reinterpret_cast<char*>(&movedirection_)) + sizeof(shotdirection_));
+}
 
-    inline void Action::SharedCtor() {
-        ::memset(reinterpret_cast<char *>(this) + static_cast<size_t>(
-                         reinterpret_cast<char *>(&movedirection_) - reinterpret_cast<char *>(this)),
-                 0, static_cast<size_t>(reinterpret_cast<char *>(&shotdirection_) -
-                                        reinterpret_cast<char *>(&movedirection_)) + sizeof(shotdirection_));
-    }
+Action::~Action() {
+  // @@protoc_insertion_point(destructor:GameMessage.Action)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    Action::~Action() {
-        // @@protoc_insertion_point(destructor:GameMessage.Action)
-        if (GetArenaForAllocation() != nullptr) return;
-        SharedDtor();
-        _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+inline void Action::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
 
-    inline void Action::SharedDtor() {
-        GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-    }
+void Action::ArenaDtor(void* object) {
+  Action* _this = reinterpret_cast< Action* >(object);
+  (void)_this;
+}
+void Action::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Action::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
 
-    void Action::ArenaDtor(void *object) {
-        Action *_this = reinterpret_cast< Action * >(object);
-        (void) _this;
-    }
-
-    void Action::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena *) {
-    }
-
-    void Action::SetCachedSize(int size) const {
-        _cached_size_.Set(size);
-    }
-
-    void Action::Clear() {
+void Action::Clear() {
 // @@protoc_insertion_point(message_clear_start:GameMessage.Action)
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        ::memset(&movedirection_, 0, static_cast<size_t>(
-                                             reinterpret_cast<char *>(&shotdirection_) -
-                                             reinterpret_cast<char *>(&movedirection_)) + sizeof(shotdirection_));
-        _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+  ::memset(&movedirection_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&shotdirection_) -
+      reinterpret_cast<char*>(&movedirection_)) + sizeof(shotdirection_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    const char *Action::_InternalParse(const char *ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext *ctx) {
+const char* Action::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-        while (!ctx->Done(&ptr)) {
-            uint32_t tag;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-            switch (tag >> 3) {
-                // .GameMessage.Action.ActionDirection moveDirection = 1;
-                case 1:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-                        uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                        _internal_set_movedirection(static_cast<::GameMessage::Action_ActionDirection>(val));
-                    } else
-                        goto handle_unusual;
-                    continue;
-                    // .GameMessage.Action.ActionDirection shotDirection = 2;
-                case 2:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-                        uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                        _internal_set_shotdirection(static_cast<::GameMessage::Action_ActionDirection>(val));
-                    } else
-                        goto handle_unusual;
-                    continue;
-                default:
-                    goto handle_unusual;
-            }  // switch
-            handle_unusual:
-            if ((tag == 0) || ((tag & 7) == 4)) {
-                CHK_(ptr);
-                ctx->SetLastTag(tag);
-                goto message_done;
-            }
-            ptr = UnknownFieldParse(
-                    tag,
-                    _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-                    ptr, ctx);
-            CHK_(ptr != nullptr);
-        }  // while
-        message_done:
-        return ptr;
-        failure:
-        ptr = nullptr;
-        goto message_done;
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .GameMessage.Action.ActionDirection moveDirection = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_movedirection(static_cast<::GameMessage::Action_ActionDirection>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .GameMessage.Action.ActionDirection shotDirection = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_shotdirection(static_cast<::GameMessage::Action_ActionDirection>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
 #undef CHK_
-    }
+}
 
-    uint8_t *Action::_InternalSerialize(
-            uint8_t *target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream *stream) const {
-        // @@protoc_insertion_point(serialize_to_array_start:GameMessage.Action)
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+uint8_t* Action::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:GameMessage.Action)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        // .GameMessage.Action.ActionDirection moveDirection = 1;
-        if (this->_internal_movedirection() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-                    1, this->_internal_movedirection(), target);
-        }
+  // .GameMessage.Action.ActionDirection moveDirection = 1;
+  if (this->_internal_movedirection() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_movedirection(), target);
+  }
 
-        // .GameMessage.Action.ActionDirection shotDirection = 2;
-        if (this->_internal_shotdirection() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-                    2, this->_internal_shotdirection(), target);
-        }
+  // .GameMessage.Action.ActionDirection shotDirection = 2;
+  if (this->_internal_shotdirection() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      2, this->_internal_shotdirection(), target);
+  }
 
-        if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                            ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-        }
-        // @@protoc_insertion_point(serialize_to_array_end:GameMessage.Action)
-        return target;
-    }
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:GameMessage.Action)
+  return target;
+}
 
-    size_t Action::ByteSizeLong() const {
+size_t Action::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:GameMessage.Action)
-        size_t total_size = 0;
+  size_t total_size = 0;
 
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        // .GameMessage.Action.ActionDirection moveDirection = 1;
-        if (this->_internal_movedirection() != 0) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_movedirection());
-        }
+  // .GameMessage.Action.ActionDirection moveDirection = 1;
+  if (this->_internal_movedirection() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_movedirection());
+  }
 
-        // .GameMessage.Action.ActionDirection shotDirection = 2;
-        if (this->_internal_shotdirection() != 0) {
-            total_size += 1 +
-                          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_shotdirection());
-        }
+  // .GameMessage.Action.ActionDirection shotDirection = 2;
+  if (this->_internal_shotdirection() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_shotdirection());
+  }
 
-        return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
-    }
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Action::_class_data_ = {
-            ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-            Action::MergeImpl
-    };
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Action::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Action::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Action::GetClassData() const { return &_class_data_; }
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData *Action::GetClassData() const { return &_class_data_; }
-
-    void Action::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message *to,
-                           const ::PROTOBUF_NAMESPACE_ID::Message &from) {
-        static_cast<Action *>(to)->MergeFrom(
-                static_cast<const Action &>(from));
-    }
+void Action::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Action *>(to)->MergeFrom(
+      static_cast<const Action &>(from));
+}
 
 
-    void Action::MergeFrom(const Action &from) {
+void Action::MergeFrom(const Action& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:GameMessage.Action)
-        GOOGLE_DCHECK_NE(&from, this);
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        if (from._internal_movedirection() != 0) {
-            _internal_set_movedirection(from._internal_movedirection());
-        }
-        if (from._internal_shotdirection() != 0) {
-            _internal_set_shotdirection(from._internal_shotdirection());
-        }
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-    }
+  if (from._internal_movedirection() != 0) {
+    _internal_set_movedirection(from._internal_movedirection());
+  }
+  if (from._internal_shotdirection() != 0) {
+    _internal_set_shotdirection(from._internal_shotdirection());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
-    void Action::CopyFrom(const Action &from) {
+void Action::CopyFrom(const Action& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:GameMessage.Action)
-        if (&from == this) return;
-        Clear();
-        MergeFrom(from);
-    }
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
-    bool Action::IsInitialized() const {
-        return true;
-    }
+bool Action::IsInitialized() const {
+  return true;
+}
 
-    void Action::InternalSwap(Action *other) {
-        using std::swap;
-        _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-                PROTOBUF_FIELD_OFFSET(Action, shotdirection_)
-                + sizeof(Action::shotdirection_)
-                - PROTOBUF_FIELD_OFFSET(Action, movedirection_)>(
-                reinterpret_cast<char *>(&movedirection_),
-                reinterpret_cast<char *>(&other->movedirection_));
-    }
+void Action::InternalSwap(Action* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Action, shotdirection_)
+      + sizeof(Action::shotdirection_)
+      - PROTOBUF_FIELD_OFFSET(Action, movedirection_)>(
+          reinterpret_cast<char*>(&movedirection_),
+          reinterpret_cast<char*>(&other->movedirection_));
+}
 
-    ::PROTOBUF_NAMESPACE_ID::Metadata Action::GetMetadata() const {
-        return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
-                &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-                file_level_metadata_game_2eproto[2]);
-    }
+::PROTOBUF_NAMESPACE_ID::Metadata Action::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
+      file_level_metadata_game_2eproto[1]);
+}
 
 // ===================================================================
 
-    class Reset::_Internal {
-    public:
-    };
+class Reset::_Internal {
+ public:
+};
 
-    Reset::Reset(::PROTOBUF_NAMESPACE_ID::Arena *arena,
-                 bool is_message_owned)
-            : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-        SharedCtor();
-        if (!is_message_owned) {
-            RegisterArenaDtor(arena);
-        }
-        // @@protoc_insertion_point(arena_constructor:GameMessage.Reset)
-    }
+Reset::Reset(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:GameMessage.Reset)
+}
+Reset::Reset(const Reset& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  resetneeded_ = from.resetneeded_;
+  // @@protoc_insertion_point(copy_constructor:GameMessage.Reset)
+}
 
-    Reset::Reset(const Reset &from)
-            : ::PROTOBUF_NAMESPACE_ID::Message() {
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-        resetneeded_ = from.resetneeded_;
-        // @@protoc_insertion_point(copy_constructor:GameMessage.Reset)
-    }
+inline void Reset::SharedCtor() {
+resetneeded_ = false;
+}
 
-    inline void Reset::SharedCtor() {
-        resetneeded_ = false;
-    }
+Reset::~Reset() {
+  // @@protoc_insertion_point(destructor:GameMessage.Reset)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    Reset::~Reset() {
-        // @@protoc_insertion_point(destructor:GameMessage.Reset)
-        if (GetArenaForAllocation() != nullptr) return;
-        SharedDtor();
-        _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+inline void Reset::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
 
-    inline void Reset::SharedDtor() {
-        GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-    }
+void Reset::ArenaDtor(void* object) {
+  Reset* _this = reinterpret_cast< Reset* >(object);
+  (void)_this;
+}
+void Reset::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Reset::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
 
-    void Reset::ArenaDtor(void *object) {
-        Reset *_this = reinterpret_cast< Reset * >(object);
-        (void) _this;
-    }
-
-    void Reset::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena *) {
-    }
-
-    void Reset::SetCachedSize(int size) const {
-        _cached_size_.Set(size);
-    }
-
-    void Reset::Clear() {
+void Reset::Clear() {
 // @@protoc_insertion_point(message_clear_start:GameMessage.Reset)
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        resetneeded_ = false;
-        _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-    }
+  resetneeded_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
 
-    const char *Reset::_InternalParse(const char *ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext *ctx) {
+const char* Reset::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-        while (!ctx->Done(&ptr)) {
-            uint32_t tag;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-            switch (tag >> 3) {
-                // bool resetNeeded = 1;
-                case 1:
-                    if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-                        resetneeded_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                        CHK_(ptr);
-                    } else
-                        goto handle_unusual;
-                    continue;
-                default:
-                    goto handle_unusual;
-            }  // switch
-            handle_unusual:
-            if ((tag == 0) || ((tag & 7) == 4)) {
-                CHK_(ptr);
-                ctx->SetLastTag(tag);
-                goto message_done;
-            }
-            ptr = UnknownFieldParse(
-                    tag,
-                    _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-                    ptr, ctx);
-            CHK_(ptr != nullptr);
-        }  // while
-        message_done:
-        return ptr;
-        failure:
-        ptr = nullptr;
-        goto message_done;
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // bool resetNeeded = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          resetneeded_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
 #undef CHK_
-    }
+}
 
-    uint8_t *Reset::_InternalSerialize(
-            uint8_t *target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream *stream) const {
-        // @@protoc_insertion_point(serialize_to_array_start:GameMessage.Reset)
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+uint8_t* Reset::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:GameMessage.Reset)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        // bool resetNeeded = 1;
-        if (this->_internal_resetneeded() != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1,
-                                                                                         this->_internal_resetneeded(),
-                                                                                         target);
-        }
+  // bool resetNeeded = 1;
+  if (this->_internal_resetneeded() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_resetneeded(), target);
+  }
 
-        if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-            target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                            ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-        }
-        // @@protoc_insertion_point(serialize_to_array_end:GameMessage.Reset)
-        return target;
-    }
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:GameMessage.Reset)
+  return target;
+}
 
-    size_t Reset::ByteSizeLong() const {
+size_t Reset::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:GameMessage.Reset)
-        size_t total_size = 0;
+  size_t total_size = 0;
 
-        uint32_t cached_has_bits = 0;
-        // Prevent compiler warnings about cached_has_bits being unused
-        (void) cached_has_bits;
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
 
-        // bool resetNeeded = 1;
-        if (this->_internal_resetneeded() != 0) {
-            total_size += 1 + 1;
-        }
+  // bool resetNeeded = 1;
+  if (this->_internal_resetneeded() != 0) {
+    total_size += 1 + 1;
+  }
 
-        return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
-    }
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Reset::_class_data_ = {
-            ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
-            Reset::MergeImpl
-    };
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Reset::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Reset::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Reset::GetClassData() const { return &_class_data_; }
 
-    const ::PROTOBUF_NAMESPACE_ID::Message::ClassData *Reset::GetClassData() const { return &_class_data_; }
-
-    void Reset::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message *to,
-                          const ::PROTOBUF_NAMESPACE_ID::Message &from) {
-        static_cast<Reset *>(to)->MergeFrom(
-                static_cast<const Reset &>(from));
-    }
+void Reset::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Reset *>(to)->MergeFrom(
+      static_cast<const Reset &>(from));
+}
 
 
-    void Reset::MergeFrom(const Reset &from) {
+void Reset::MergeFrom(const Reset& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:GameMessage.Reset)
-        GOOGLE_DCHECK_NE(&from, this);
-        uint32_t cached_has_bits = 0;
-        (void) cached_has_bits;
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
 
-        if (from._internal_resetneeded() != 0) {
-            _internal_set_resetneeded(from._internal_resetneeded());
-        }
-        _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-    }
+  if (from._internal_resetneeded() != 0) {
+    _internal_set_resetneeded(from._internal_resetneeded());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
 
-    void Reset::CopyFrom(const Reset &from) {
+void Reset::CopyFrom(const Reset& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:GameMessage.Reset)
-        if (&from == this) return;
-        Clear();
-        MergeFrom(from);
-    }
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
-    bool Reset::IsInitialized() const {
-        return true;
-    }
+bool Reset::IsInitialized() const {
+  return true;
+}
 
-    void Reset::InternalSwap(Reset *other) {
-        using std::swap;
-        _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(resetneeded_, other->resetneeded_);
-    }
+void Reset::InternalSwap(Reset* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(resetneeded_, other->resetneeded_);
+}
 
-    ::PROTOBUF_NAMESPACE_ID::Metadata Reset::GetMetadata() const {
-        return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
-                &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
-                file_level_metadata_game_2eproto[3]);
-    }
+::PROTOBUF_NAMESPACE_ID::Metadata Reset::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_game_2eproto_getter, &descriptor_table_game_2eproto_once,
+      file_level_metadata_game_2eproto[2]);
+}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace GameMessage
 PROTOBUF_NAMESPACE_OPEN
-        template<>
-        PROTOBUF_NOINLINE ::GameMessage::State_Direction *
-        Arena::CreateMaybeMessage<::GameMessage::State_Direction>(Arena *arena) {
-            return Arena::CreateMessageInternal<::GameMessage::State_Direction>(arena);
-        }
-
-        template<>
-        PROTOBUF_NOINLINE ::GameMessage::State *Arena::CreateMaybeMessage<::GameMessage::State>(Arena *arena) {
-            return Arena::CreateMessageInternal<::GameMessage::State>(arena);
-        }
-
-        template<>
-        PROTOBUF_NOINLINE ::GameMessage::Action *Arena::CreateMaybeMessage<::GameMessage::Action>(Arena *arena) {
-            return Arena::CreateMessageInternal<::GameMessage::Action>(arena);
-        }
-
-        template<>
-        PROTOBUF_NOINLINE ::GameMessage::Reset *Arena::CreateMaybeMessage<::GameMessage::Reset>(Arena *arena) {
-            return Arena::CreateMessageInternal<::GameMessage::Reset>(arena);
-        }
+template<> PROTOBUF_NOINLINE ::GameMessage::State* Arena::CreateMaybeMessage< ::GameMessage::State >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::GameMessage::State >(arena);
+}
+template<> PROTOBUF_NOINLINE ::GameMessage::Action* Arena::CreateMaybeMessage< ::GameMessage::Action >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::GameMessage::Action >(arena);
+}
+template<> PROTOBUF_NOINLINE ::GameMessage::Reset* Arena::CreateMaybeMessage< ::GameMessage::Reset >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::GameMessage::Reset >(arena);
+}
 PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

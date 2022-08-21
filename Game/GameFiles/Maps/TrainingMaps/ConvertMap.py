@@ -1,10 +1,8 @@
 from PIL import Image
 
 
-def convert_map(map_name):
-    image = Image.open(map_name + ".png")
-    image_out = image.convert("RGB")
-
+def convert_map(map_name, input_image):
+    image_out = input_image.convert("RGB")
     map_txt = open(map_name + ".txt", "a")
 
     # Clear file before writing
@@ -39,5 +37,25 @@ def convert_map(map_name):
     print("{} correctly converted from PNG to TXT \n".format(map_name))
 
 
-for i in range(0, 7, 1):
-    convert_map("map" + str(i))
+map_count = 6
+
+# not rotated
+for i in range(0, map_count, 1):
+    image = Image.open("map" + str(i) + ".png")
+    convert_map("map" + str(i), image)
+
+# rotated
+for i in range(map_count, map_count*2, 1):
+    image = Image.open("map" + str(i-6) + ".png")
+    image = image.rotate(90)
+    convert_map("map" + str(i), image)
+
+for i in range(map_count*2, map_count*3, 1):
+    image = Image.open("map" + str(i-12) + ".png")
+    image = image.rotate(180)
+    convert_map("map" + str(i), image)
+
+for i in range(map_count*3, map_count*4, 1):
+    image = Image.open("map" + str(i-18) + ".png")
+    image = image.rotate(270)
+    convert_map("map" + str(i), image)

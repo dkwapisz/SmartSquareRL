@@ -162,6 +162,9 @@ void GameStateHandling::calculateRayDistances(float playerX, float playerY, floa
     for (int i = 0; i < arrayLen; i++) {
         if (i % multiplicity == 0) {
             len = std::hypot((playerX - rayVertexes[arrayIterator]), (playerY - rayVertexes[arrayIterator + 1]));
+            if (len == 0) {
+                len = 0.0000000001f;
+            }
             lenString.append(std::to_string(len));
             if (i != arrayLen - multiplicity) {
                 lenString.append("#");

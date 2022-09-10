@@ -48,8 +48,8 @@ class Memory:
 
 def build_dqn(lr, action_dims):
     model = Sequential()
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(128, activation='relu'))
+    model.add(Dense(256, activation='relu'))
+    model.add(Dense(256, activation='relu'))
     model.add(Dense(action_dims))
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.35))
 
@@ -57,7 +57,7 @@ def build_dqn(lr, action_dims):
 
 
 class DoubleDQN:
-    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=1e-4, eps_min=0.01, replace_target=100):
+    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=5e-4, eps_min=0.05, replace_target=100):
         self.action_space = [i for i in range(action_dims)]
         self.gamma = gamma
         self.epsilon = eps
@@ -113,9 +113,11 @@ class DoubleDQN:
             _ = self.neural_network_eval.fit(state, q_target, verbose=0)
 
             if self.epsilon > self.epsilon_min:
-                self.epsilon = self.epsilon*self.epsilon_decay
+                self.epsilon -= self.epsilon_decay
             else:
                 self.epsilon = self.epsilon_min
+
+            print("Epsilon: {}".format(self.epsilon))
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.update_target_network()

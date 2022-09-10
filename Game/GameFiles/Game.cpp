@@ -191,7 +191,8 @@ void Game::performResetIfNeeded(bool reset) {
         int iteration_count = this->level->getPlayer()->getIteration() + 1;
         delete this->level;
         // TODO rand() will be replaced in future
-        this->level = new Level(rand() % 24);
+        //this->level = new Level(rand() % 24);
+        this->level = new Level(1);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
         this->level->getPlayer()->setIteration(iteration_count);

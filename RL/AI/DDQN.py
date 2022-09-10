@@ -68,16 +68,13 @@ class DoubleDQN:
         self.neural_network_eval = build_dqn(lr, action_dims)
         self.neural_network_target = build_dqn(lr, action_dims)
 
-    def update_target_network(self):
-        self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
-
     def save_neural_network(self):
         self.neural_network_eval.save("Double_DQN_1.h5")
 
     def load_neural_network(self):
         self.neural_network_eval = load_model("Double_DQN_1.h5")
         if self.epsilon == 0.0:
-            self.update_target_network()
+            self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
 
     def write_to_memory(self, state, action, reward, new_state, done):
         self.memory.write_to_memory(state, action, reward, new_state, done)
@@ -120,5 +117,5 @@ class DoubleDQN:
             print("Epsilon: {}".format(self.epsilon))
 
             if self.memory.memory_index % self.replace_target == 0:
-                self.update_target_network()
+                self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
 

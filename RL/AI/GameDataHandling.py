@@ -28,7 +28,7 @@ class GameDataHandling:
         self.state += GameDataHandling.__reformat_ray_distances_state(request.rayDistances)
         self.state = GameDataHandling.__normalize(self.state)
         self.state += GameDataHandling.__get_unit_vector(request.closestDestinationDistX,
-                                                             request.closestDestinationDistY)
+                                                         request.closestDestinationDistY)
 
         self.clock_time = request.clockTime
 

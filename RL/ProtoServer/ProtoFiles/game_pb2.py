@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xa9\x02\n\x05State\x12\x1c\n\x14\x63losestObstacleIsBox\x18\x01 \x01(\x08\x12\x19\n\x11\x61llCoinsCollected\x18\x02 \x01(\x08\x12\x11\n\tcoinInFoV\x18\x03 \x01(\x08\x12\x14\n\x0crayDistances\x18\x04 \x01(\t\x12\x19\n\x11\x63losestEnemyDistX\x18\x05 \x01(\x02\x12\x19\n\x11\x63losestEnemyDistY\x18\x06 \x01(\x02\x12\x1f\n\x17\x63losestDestinationDistX\x18\x07 \x01(\x02\x12\x1f\n\x17\x63losestDestinationDistY\x18\x08 \x01(\x02\x12\x0e\n\x06reward\x18\t \x01(\x05\x12\x11\n\tclockTime\x18\n \x01(\x05\x12\x10\n\x08gameOver\x18\x0b \x01(\x08\x12\x11\n\titeration\x18\x0c \x01(\x05\"\xc4\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\"B\n\x0f\x41\x63tionDirection\x12\x08\n\x04IDLE\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\x1c\n\x05Reset\x12\x13\n\x0bresetNeeded\x18\x01 \x01(\x08\x32\x87\x01\n\x13StateActionExchange\x12\x38\n\x0bStateAction\x12\x12.GameMessage.State\x1a\x13.GameMessage.Action\"\x00\x12\x36\n\nStateReset\x12\x12.GameMessage.State\x1a\x12.GameMessage.Reset\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\ngame.proto\x12\x0bGameMessage\"\xa6\x02\n\x05State\x12\x1c\n\x14\x63losestObstacleIsBox\x18\x01 \x01(\x08\x12\x19\n\x11\x61llCoinsCollected\x18\x02 \x01(\x08\x12\x11\n\tcoinInFoV\x18\x03 \x01(\x08\x12\x11\n\tmapMatrix\x18\x04 \x01(\t\x12\x19\n\x11\x63losestEnemyDistX\x18\x05 \x01(\x02\x12\x19\n\x11\x63losestEnemyDistY\x18\x06 \x01(\x02\x12\x1f\n\x17\x63losestDestinationDistX\x18\x07 \x01(\x02\x12\x1f\n\x17\x63losestDestinationDistY\x18\x08 \x01(\x02\x12\x0e\n\x06reward\x18\t \x01(\x05\x12\x11\n\tclockTime\x18\n \x01(\x05\x12\x10\n\x08gameOver\x18\x0b \x01(\x08\x12\x11\n\titeration\x18\x0c \x01(\x05\"\xc4\x01\n\x06\x41\x63tion\x12:\n\rmoveDirection\x18\x01 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\x12:\n\rshotDirection\x18\x02 \x01(\x0e\x32#.GameMessage.Action.ActionDirection\"B\n\x0f\x41\x63tionDirection\x12\x08\n\x04IDLE\x10\x00\x12\x06\n\x02UP\x10\x01\x12\t\n\x05RIGHT\x10\x02\x12\x08\n\x04\x44OWN\x10\x03\x12\x08\n\x04LEFT\x10\x04\"\x1c\n\x05Reset\x12\x13\n\x0bresetNeeded\x18\x01 \x01(\x08\x32\x87\x01\n\x13StateActionExchange\x12\x38\n\x0bStateAction\x12\x12.GameMessage.State\x1a\x13.GameMessage.Action\"\x00\x12\x36\n\nStateReset\x12\x12.GameMessage.State\x1a\x12.GameMessage.Reset\"\x00\x62\x06proto3'
 )
 
 
@@ -59,8 +59,8 @@ _ACTION_ACTIONDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=458,
-  serialized_end=524,
+  serialized_start=455,
+  serialized_end=521,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION_ACTIONDIRECTION)
 
@@ -95,7 +95,7 @@ _STATE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='rayDistances', full_name='GameMessage.State.rayDistances', index=3,
+      name='mapMatrix', full_name='GameMessage.State.mapMatrix', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -170,7 +170,7 @@ _STATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=28,
-  serialized_end=325,
+  serialized_end=322,
 )
 
 
@@ -209,8 +209,8 @@ _ACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=328,
-  serialized_end=524,
+  serialized_start=325,
+  serialized_end=521,
 )
 
 
@@ -241,8 +241,8 @@ _RESET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=526,
-  serialized_end=554,
+  serialized_start=523,
+  serialized_end=551,
 )
 
 _ACTION.fields_by_name['moveDirection'].enum_type = _ACTION_ACTIONDIRECTION
@@ -283,8 +283,8 @@ _STATEACTIONEXCHANGE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=557,
-  serialized_end=692,
+  serialized_start=554,
+  serialized_end=689,
   methods=[
   _descriptor.MethodDescriptor(
     name='StateAction',

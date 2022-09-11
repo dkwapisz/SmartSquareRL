@@ -6,9 +6,9 @@ Level::Level(int levelNumber) {
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
     initializeGameObjects();
-    generateMap();
-
     this->gameStateHandling = new GameStateHandling();
+
+    generateMap();
     this->playerFoV = new PlayerFoV(120, false);
 }
 
@@ -96,6 +96,7 @@ void Level::generateMap() {
 
                 float posX = 30.f * (float) x;
                 float posY = (30.f * (float) y) + 50;
+                this->gameStateHandling->mapMatrix[x + y * 20] = number;
 
                 if (number == 1) {
                     this->walls.push_back(new Wall(this->squareShapes["Wall"],
@@ -127,6 +128,8 @@ void Level::generateMap() {
     } else {
         std::cerr << "Could not open map file" << "\n";
     }
+
+
 
     mapFile.close();
 }
@@ -385,9 +388,10 @@ void Level::calculateClosestObjectsDir() {
                                                playerFoV->getClosestCoin(), playerCoinsCount);
     gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
     gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
-    gameStateHandling->calculateRayDistances(player->getCenterPosX(), player->getCenterPosY(),
-                                             playerFoV->getRayVertexes(),
-                                             playerFoV->getNumberOfRays());
+//    gameStateHandling->calculateRayDistances(player->getCenterPosX(), player->getCenterPosY(),
+//                                             playerFoV->getRayVertexes(),
+//                                             playerFoV->getNumberOfRays());
+    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY());
 }
 
 int Level::getClockTime() const {

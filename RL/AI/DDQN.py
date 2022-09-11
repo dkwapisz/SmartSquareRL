@@ -48,8 +48,8 @@ class Memory:
 
 def build_dqn(lr, action_dims):
     model = Sequential()
-    model.add(Dense(256, activation='relu'))
-    model.add(Dense(256, activation='relu'))
+    model.add(Dense(1024, activation='relu'))
+    model.add(Dense(1024, activation='relu'))
     model.add(Dense(action_dims))
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.35))
 

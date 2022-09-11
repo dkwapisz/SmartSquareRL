@@ -13,7 +13,7 @@ char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clo
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
     request.set_coininfov(gameStateHandling->coinInFoV);
 
-    request.set_raydistances(gameStateHandling->rayDistances);
+    request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
     request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
     request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
     request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);
@@ -47,7 +47,7 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
     request.set_coininfov(gameStateHandling->coinInFoV);
 
-    request.set_raydistances(gameStateHandling->rayDistances);
+    request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
     request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
     request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
     request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);

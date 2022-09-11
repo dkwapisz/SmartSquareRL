@@ -16,7 +16,7 @@ message State {
   bool closestObstacleIsBox = 1;
   bool allCoinsCollected = 2;
   bool coinInFoV = 3;
-  string rayDistances = 4;
+  string mapMatrix = 4;
   float closestEnemyDistX = 5;
   float closestEnemyDistY = 6;
   float closestDestinationDistX = 7;

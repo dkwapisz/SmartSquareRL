@@ -6,7 +6,7 @@ Game::Game() {
     this->initializeLabels();
 
     this->gameFinished = false;
-    this->level = new Level(1);
+    this->level = new Level(2);
 }
 
 Game::~Game() {
@@ -192,7 +192,7 @@ void Game::performResetIfNeeded(bool reset) {
         delete this->level;
         // TODO rand() will be replaced in future
         //this->level = new Level(rand() % 24);
-        this->level = new Level(1);
+        this->level = new Level(2);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
         this->level->getPlayer()->setIteration(iteration_count);

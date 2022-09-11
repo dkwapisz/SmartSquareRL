@@ -3,6 +3,12 @@
 
 GameStateHandling::GameStateHandling() {
     resetAllStates();
+    mapMatrix = new int[20 * 20];
+    mapMatrixAsString = "";
+    for (int i = 0; i < 400; i++) {
+        mapMatrix[i] = 0;
+        mapMatrixAsString.push_back('0');
+    }
 }
 
 void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
@@ -154,24 +160,47 @@ void GameStateHandling::resetAllStates() {
     lastFinishDist = 9999999.f;
 }
 
-void GameStateHandling::calculateRayDistances(float playerX, float playerY, float *rayVertexes, int arrayLen) {
-    int arrayIterator = 0;
-    int multiplicity = 6;
-    float len;
-    std::string lenString;
-    for (int i = 0; i < arrayLen; i++) {
-        if (i % multiplicity == 0) {
-            len = std::hypot((playerX - rayVertexes[arrayIterator]), (playerY - rayVertexes[arrayIterator + 1]));
-            if (len == 0) {
-                len = 0.0000000001f;
+//void GameStateHandling::calculateRayDistances(float playerX, float playerY, float *rayVertexes, int arrayLen) {
+//    int arrayIterator = 0;
+//    int multiplicity = 6;
+//    float len;
+//    std::string lenString;
+//    for (int i = 0; i < arrayLen; i++) {
+//        if (i % multiplicity == 0) {
+//            len = std::hypot((playerX - rayVertexes[arrayIterator]), (playerY - rayVertexes[arrayIterator + 1]));
+//            if (len == 0) {
+//                len = 0.0000000001f;
+//            }
+//            lenString.append(std::to_string(len));
+//            if (i != arrayLen - multiplicity) {
+//                lenString.append("#");
+//            }
+//            arrayIterator += 2;
+//        }
+//    }
+//    //std::cout << (lenString) << "\n";
+//    rayDistances = lenString;
+//}
+
+void GameStateHandling::calculateMapMatrix(float playerX, float playerY) {
+    int playerMapPosX = (int) playerX / 30;
+    int playerMapPosY = (int) (playerY - 50) / 30;
+
+    for (int y = 0; y < 20; y++) {
+        for (int x = 0; x < 20; x++) {
+            if (mapMatrix[x + y * 20] == 8) {
+                mapMatrix[x + y * 20] = 0;
             }
-            lenString.append(std::to_string(len));
-            if (i != arrayLen - multiplicity) {
-                lenString.append("#");
-            }
-            arrayIterator += 2;
         }
     }
-    //std::cout << (lenString) << "\n";
-    rayDistances = lenString;
+
+    mapMatrix[playerMapPosX + playerMapPosY * 20] = 8;
+    mapMatrixAsString = "";
+
+    for (int y = 0; y < 20; y++) {
+        for (int x = 0; x < 20; x++) {
+            mapMatrixAsString.append(std::to_string(mapMatrix[x + y * 20]));
+        }
+        mapMatrixAsString.append("#");
+    }
 }

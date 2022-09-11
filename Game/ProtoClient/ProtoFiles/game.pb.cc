@@ -19,7 +19,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace GameMessage {
 constexpr State::State(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : raydistances_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  : mapmatrix_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , closestobstacleisbox_(false)
   , allcoinscollected_(false)
   , coininfov_(false)
@@ -82,7 +82,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacleisbox_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, raydistances_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, mapmatrix_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydistx_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydisty_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestdestinationdistx_),
@@ -120,28 +120,28 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\251\002\n\005State\022\034\n\024c"
+  "\n\ngame.proto\022\013GameMessage\"\246\002\n\005State\022\034\n\024c"
   "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
-  "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\022\024\n\014rayDi"
-  "stances\030\004 \001(\t\022\031\n\021closestEnemyDistX\030\005 \001(\002"
-  "\022\031\n\021closestEnemyDistY\030\006 \001(\002\022\037\n\027closestDe"
-  "stinationDistX\030\007 \001(\002\022\037\n\027closestDestinati"
-  "onDistY\030\010 \001(\002\022\016\n\006reward\030\t \001(\005\022\021\n\tclockTi"
-  "me\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\021\n\titeration\030"
-  "\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162"
-  "#.GameMessage.Action.ActionDirection\022:\n\r"
-  "shotDirection\030\002 \001(\0162#.GameMessage.Action"
-  ".ActionDirection\"B\n\017ActionDirection\022\010\n\004I"
-  "DLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LE"
-  "FT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023S"
-  "tateActionExchange\0228\n\013StateAction\022\022.Game"
-  "Message.State\032\023.GameMessage.Action\"\000\0226\n\n"
-  "StateReset\022\022.GameMessage.State\032\022.GameMes"
-  "sage.Reset\"\000b\006proto3"
+  "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\022\021\n\tmapMa"
+  "trix\030\004 \001(\t\022\031\n\021closestEnemyDistX\030\005 \001(\002\022\031\n"
+  "\021closestEnemyDistY\030\006 \001(\002\022\037\n\027closestDesti"
+  "nationDistX\030\007 \001(\002\022\037\n\027closestDestinationD"
+  "istY\030\010 \001(\002\022\016\n\006reward\030\t \001(\005\022\021\n\tclockTime\030"
+  "\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\021\n\titeration\030\014 \001"
+  "(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162#.G"
+  "ameMessage.Action.ActionDirection\022:\n\rsho"
+  "tDirection\030\002 \001(\0162#.GameMessage.Action.Ac"
+  "tionDirection\"B\n\017ActionDirection\022\010\n\004IDLE"
+  "\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020"
+  "\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023Stat"
+  "eActionExchange\0228\n\013StateAction\022\022.GameMes"
+  "sage.State\032\023.GameMessage.Action\"\000\0226\n\nSta"
+  "teReset\022\022.GameMessage.State\032\022.GameMessag"
+  "e.Reset\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 700, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 697, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -199,12 +199,12 @@ State::State(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 State::State(const State& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  raydistances_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  mapmatrix_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    raydistances_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+    mapmatrix_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_raydistances().empty()) {
-    raydistances_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_raydistances(), 
+  if (!from._internal_mapmatrix().empty()) {
+    mapmatrix_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_mapmatrix(), 
       GetArenaForAllocation());
   }
   ::memcpy(&closestobstacleisbox_, &from.closestobstacleisbox_,
@@ -214,9 +214,9 @@ State::State(const State& from)
 }
 
 inline void State::SharedCtor() {
-raydistances_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+mapmatrix_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  raydistances_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  mapmatrix_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&closestobstacleisbox_) - reinterpret_cast<char*>(this)),
@@ -233,7 +233,7 @@ State::~State() {
 
 inline void State::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  raydistances_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  mapmatrix_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void State::ArenaDtor(void* object) {
@@ -252,7 +252,7 @@ void State::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  raydistances_.ClearToEmpty();
+  mapmatrix_.ClearToEmpty();
   ::memset(&closestobstacleisbox_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&iteration_) -
       reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
@@ -289,12 +289,12 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // string rayDistances = 4;
+      // string mapMatrix = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          auto str = _internal_mutable_raydistances();
+          auto str = _internal_mutable_mapmatrix();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "GameMessage.State.rayDistances"));
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "GameMessage.State.mapMatrix"));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -410,14 +410,14 @@ uint8_t* State::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_coininfov(), target);
   }
 
-  // string rayDistances = 4;
-  if (!this->_internal_raydistances().empty()) {
+  // string mapMatrix = 4;
+  if (!this->_internal_mapmatrix().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_raydistances().data(), static_cast<int>(this->_internal_raydistances().length()),
+      this->_internal_mapmatrix().data(), static_cast<int>(this->_internal_mapmatrix().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "GameMessage.State.rayDistances");
+      "GameMessage.State.mapMatrix");
     target = stream->WriteStringMaybeAliased(
-        4, this->_internal_raydistances(), target);
+        4, this->_internal_mapmatrix(), target);
   }
 
   // float closestEnemyDistX = 5;
@@ -500,11 +500,11 @@ size_t State::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string rayDistances = 4;
-  if (!this->_internal_raydistances().empty()) {
+  // string mapMatrix = 4;
+  if (!this->_internal_mapmatrix().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_raydistances());
+        this->_internal_mapmatrix());
   }
 
   // bool closestObstacleIsBox = 1;
@@ -600,8 +600,8 @@ void State::MergeFrom(const State& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_raydistances().empty()) {
-    _internal_set_raydistances(from._internal_raydistances());
+  if (!from._internal_mapmatrix().empty()) {
+    _internal_set_mapmatrix(from._internal_mapmatrix());
   }
   if (from._internal_closestobstacleisbox() != 0) {
     _internal_set_closestobstacleisbox(from._internal_closestobstacleisbox());
@@ -673,8 +673,8 @@ void State::InternalSwap(State* other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      &raydistances_, lhs_arena,
-      &other->raydistances_, rhs_arena
+      &mapmatrix_, lhs_arena,
+      &other->mapmatrix_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(State, iteration_)

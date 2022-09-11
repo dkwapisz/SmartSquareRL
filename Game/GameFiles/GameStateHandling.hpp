@@ -30,6 +30,8 @@ public:
     float closestDestinationDirY;
     float closestEnemyDirX;
     float closestEnemyDirY;
+    int* mapMatrix;
+    std::string mapMatrixAsString;
 
     GameStateHandling();
 
@@ -41,9 +43,11 @@ public:
 
     void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player);
 
-    void calculateRayDistances(float playerX, float playerY, float *rayVertexes, int arrayLen);
+//    void calculateRayDistances(float playerX, float playerY, float *rayVertexes, int arrayLen);
 
     void resetAllStates();
+
+    void calculateMapMatrix(float playerX, float playerY);
 };
 
 #endif

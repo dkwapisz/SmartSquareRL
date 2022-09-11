@@ -224,7 +224,7 @@ class State final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRayDistancesFieldNumber = 4,
+    kMapMatrixFieldNumber = 4,
     kClosestObstacleIsBoxFieldNumber = 1,
     kAllCoinsCollectedFieldNumber = 2,
     kCoinInFoVFieldNumber = 3,
@@ -237,18 +237,18 @@ class State final :
     kClockTimeFieldNumber = 10,
     kIterationFieldNumber = 12,
   };
-  // string rayDistances = 4;
-  void clear_raydistances();
-  const std::string& raydistances() const;
+  // string mapMatrix = 4;
+  void clear_mapmatrix();
+  const std::string& mapmatrix() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_raydistances(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_raydistances();
-  PROTOBUF_NODISCARD std::string* release_raydistances();
-  void set_allocated_raydistances(std::string* raydistances);
+  void set_mapmatrix(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_mapmatrix();
+  PROTOBUF_NODISCARD std::string* release_mapmatrix();
+  void set_allocated_mapmatrix(std::string* mapmatrix);
   private:
-  const std::string& _internal_raydistances() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_raydistances(const std::string& value);
-  std::string* _internal_mutable_raydistances();
+  const std::string& _internal_mapmatrix() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_mapmatrix(const std::string& value);
+  std::string* _internal_mutable_mapmatrix();
   public:
 
   // bool closestObstacleIsBox = 1;
@@ -357,7 +357,7 @@ class State final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr raydistances_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr mapmatrix_;
   bool closestobstacleisbox_;
   bool allcoinscollected_;
   bool coininfov_;
@@ -782,55 +782,55 @@ inline void State::set_coininfov(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.coinInFoV)
 }
 
-// string rayDistances = 4;
-inline void State::clear_raydistances() {
-  raydistances_.ClearToEmpty();
+// string mapMatrix = 4;
+inline void State::clear_mapmatrix() {
+  mapmatrix_.ClearToEmpty();
 }
-inline const std::string& State::raydistances() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.rayDistances)
-  return _internal_raydistances();
+inline const std::string& State::mapmatrix() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.mapMatrix)
+  return _internal_mapmatrix();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void State::set_raydistances(ArgT0&& arg0, ArgT... args) {
+void State::set_mapmatrix(ArgT0&& arg0, ArgT... args) {
  
- raydistances_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:GameMessage.State.rayDistances)
+ mapmatrix_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:GameMessage.State.mapMatrix)
 }
-inline std::string* State::mutable_raydistances() {
-  std::string* _s = _internal_mutable_raydistances();
-  // @@protoc_insertion_point(field_mutable:GameMessage.State.rayDistances)
+inline std::string* State::mutable_mapmatrix() {
+  std::string* _s = _internal_mutable_mapmatrix();
+  // @@protoc_insertion_point(field_mutable:GameMessage.State.mapMatrix)
   return _s;
 }
-inline const std::string& State::_internal_raydistances() const {
-  return raydistances_.Get();
+inline const std::string& State::_internal_mapmatrix() const {
+  return mapmatrix_.Get();
 }
-inline void State::_internal_set_raydistances(const std::string& value) {
+inline void State::_internal_set_mapmatrix(const std::string& value) {
   
-  raydistances_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  mapmatrix_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
-inline std::string* State::_internal_mutable_raydistances() {
+inline std::string* State::_internal_mutable_mapmatrix() {
   
-  return raydistances_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+  return mapmatrix_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
-inline std::string* State::release_raydistances() {
-  // @@protoc_insertion_point(field_release:GameMessage.State.rayDistances)
-  return raydistances_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+inline std::string* State::release_mapmatrix() {
+  // @@protoc_insertion_point(field_release:GameMessage.State.mapMatrix)
+  return mapmatrix_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
-inline void State::set_allocated_raydistances(std::string* raydistances) {
-  if (raydistances != nullptr) {
+inline void State::set_allocated_mapmatrix(std::string* mapmatrix) {
+  if (mapmatrix != nullptr) {
     
   } else {
     
   }
-  raydistances_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), raydistances,
+  mapmatrix_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), mapmatrix,
       GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (raydistances_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
-    raydistances_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  if (mapmatrix_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    mapmatrix_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.rayDistances)
+  // @@protoc_insertion_point(field_set_allocated:GameMessage.State.mapMatrix)
 }
 
 // float closestEnemyDistX = 5;

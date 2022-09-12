@@ -14,7 +14,6 @@ Level::Level(int levelNumber) {
 
 Level::~Level() {
     delete this->player;
-    delete this->clock;
     delete this->playerFoV;
 
     for (auto &gameObject: this->squareShapes) {
@@ -68,7 +67,6 @@ void Level::initializeLevelAttributes(int levelNr) {
     this->playerCoinsCount = 0;
     this->levelFinished = false;
     this->levelNumber = levelNr;
-    this->clock = new sf::Clock();
 }
 
 void Level::initializeGameObjects() {
@@ -183,7 +181,6 @@ bool Level::checkCollision() {
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i]->getBounds().intersects(this->player->getBounds())) {
             gameStateHandling->reward += 100;
-            this->resetClockTime();
             delete coins[i];
             coins.erase(coins.begin() + i);
             this->playerCoinsCount++;
@@ -218,7 +215,6 @@ bool Level::isLevelFinished() const {
 void Level::resetLevel() {
     this->player->resetPosition();
     this->playerCoinsCount = 0;
-    this->clock->restart();
     this->gameStateHandling->resetAllStates();
     this->gameStateHandling->gameOver = true;
 
@@ -394,10 +390,6 @@ void Level::calculateClosestObjectsDir() {
     gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY());
 }
 
-int Level::getClockTime() const {
-    return (int) this->clock->getElapsedTime().asSeconds();
-}
-
 Player *Level::getPlayer() const {
     return this->player;
 }
@@ -416,10 +408,6 @@ int Level::getLevelNumber() const {
 
 int Level::getMapsCount() const {
     return (int) mapPath.size();
-}
-
-void Level::resetClockTime() {
-    this->clock->restart();
 }
 
 PlayerFoV *Level::getPlayerFoV() {

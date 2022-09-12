@@ -24,7 +24,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
 
-        if self.gameDataHandling.clock_time > 30 or self.check_action_duplicates():
+        if self.gameDataHandling.steps_count > 256 or self.check_action_duplicates():
             self.lastActions = []
             self.gameDataHandling.reward = -200
             self.gameDataHandling.game_over = True

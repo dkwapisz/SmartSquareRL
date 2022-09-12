@@ -4,6 +4,13 @@ from AI.DDQN import DoubleDQN
 from sklearn import preprocessing
 import numpy as np
 
+blocks_mapping = {
+    0: [0, 0, 0, 1],  # floor
+    1: [0, 0, 1, 0],  # wall
+    7: [0, 1, 0, 0],  # finish
+    8: [1, 0, 0, 0]   # player
+}
+
 
 class GameDataHandling:
 
@@ -14,42 +21,21 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=400, eps=0.99)
+        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=1600, eps=0.10)
         self.reward = 0
-        self.clock_time = 0
+        self.steps_count = 0
 
     def set_state(self, request):
-        # self.state = []
-
-        # self.state += self.__get_array_from_bool(request.allCoinsCollected)
-        # self.state += self.__get_array_from_bool(request.coinInFoV)
-
         self.state = GameDataHandling.__reformat_map_matrix_state(request.mapMatrix)
-        # self.state = GameDataHandling.__normalize(self.state)
-        # self.state += GameDataHandling.__get_unit_vector(request.closestDestinationDistX,
-        #                                                  request.closestDestinationDistY)
-
-        self.clock_time = request.clockTime
+        self.steps_count = request.stepsCount
 
     def set_new_state(self, request):
-        # self.new_state = []
-
-        # self.new_state += self.__get_array_from_bool(request.allCoinsCollected)
-        # self.new_state += self.__get_array_from_bool(request.coinInFoV)
-
         self.new_state = GameDataHandling.__reformat_map_matrix_state(request.mapMatrix)
-        # self.new_state = GameDataHandling.__normalize(self.new_state)
-        # self.new_state += GameDataHandling.__get_unit_vector(request.closestDestinationDistX,
-        #                                                      request.closestDestinationDistY)
-
         self.reward = request.reward
         self.game_over = request.gameOver
 
-        # if request.iteration == 20:
-        #     self.agent.save_neural_network()
-
     def learn(self):
-        print("Timer: {}, Actual Reward: {}".format(self.clock_time, self.reward, self.new_state[20:22]))
+        print("Step: {}, Actual Reward: {}".format(self.steps_count, self.reward))
         self.agent.learn()
 
     def remember(self):
@@ -75,15 +61,6 @@ class GameDataHandling:
         if len(input_state) != 0:
             for sequence in input_state.split("#"):
                 for num in sequence:
-                    input_list += [int(num)]
+                    input_list += blocks_mapping[int(num)]
 
         return input_list
-
-    # @staticmethod
-    # def __normalize(values):
-    #     return (lambda the_max, the_min: [(float(i)-the_min)/(the_max-(the_min+0.000001)) for i in values])(max(values), min(values))
-    #
-    # @staticmethod
-    # def __get_unit_vector(dirX, dirY):
-    #     vector_len = math.hypot(dirX, dirY)
-    #     return [dirX/vector_len, dirY/vector_len]

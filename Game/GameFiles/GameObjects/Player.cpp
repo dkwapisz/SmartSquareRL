@@ -81,10 +81,10 @@ void Player::setPosition(float positionX, float positionY) {
     this->playerShape.setPosition(positionX, positionY);
 }
 
-int Player::getIteration() const {
+int Player::getEpisodeNumber() const {
     return this->iteration;
 }
 
-void Player::setIteration(int iteration) {
+void Player::setEpisodes(int iteration) {
     this->iteration = iteration;
 }

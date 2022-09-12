@@ -24,13 +24,9 @@ constexpr State::State(
   , allcoinscollected_(false)
   , coininfov_(false)
   , gameover_(false)
-  , closestenemydistx_(0)
-  , closestenemydisty_(0)
-  , closestdestinationdistx_(0)
-  , closestdestinationdisty_(0)
   , reward_(0)
-  , clocktime_(0)
-  , iteration_(0){}
+  , stepscount_(0)
+  , episodecount_(0){}
 struct StateDefaultTypeInternal {
   constexpr StateDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -83,14 +79,10 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, mapmatrix_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydistx_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestenemydisty_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestdestinationdistx_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestdestinationdisty_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, clocktime_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, stepscount_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, gameover_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, iteration_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, episodecount_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::GameMessage::Action, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -109,8 +101,8 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::State)},
-  { 18, -1, -1, sizeof(::GameMessage::Action)},
-  { 26, -1, -1, sizeof(::GameMessage::Reset)},
+  { 14, -1, -1, sizeof(::GameMessage::Action)},
+  { 22, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -120,28 +112,25 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\246\002\n\005State\022\034\n\024c"
+  "\n\ngame.proto\022\013GameMessage\"\262\001\n\005State\022\034\n\024c"
   "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
   "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\022\021\n\tmapMa"
-  "trix\030\004 \001(\t\022\031\n\021closestEnemyDistX\030\005 \001(\002\022\031\n"
-  "\021closestEnemyDistY\030\006 \001(\002\022\037\n\027closestDesti"
-  "nationDistX\030\007 \001(\002\022\037\n\027closestDestinationD"
-  "istY\030\010 \001(\002\022\016\n\006reward\030\t \001(\005\022\021\n\tclockTime\030"
-  "\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\021\n\titeration\030\014 \001"
-  "(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162#.G"
-  "ameMessage.Action.ActionDirection\022:\n\rsho"
-  "tDirection\030\002 \001(\0162#.GameMessage.Action.Ac"
-  "tionDirection\"B\n\017ActionDirection\022\010\n\004IDLE"
-  "\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020"
-  "\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023Stat"
-  "eActionExchange\0228\n\013StateAction\022\022.GameMes"
-  "sage.State\032\023.GameMessage.Action\"\000\0226\n\nSta"
-  "teReset\022\022.GameMessage.State\032\022.GameMessag"
-  "e.Reset\"\000b\006proto3"
+  "trix\030\004 \001(\t\022\016\n\006reward\030\t \001(\005\022\022\n\nstepsCount"
+  "\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\024\n\014episodeCount"
+  "\030\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\016"
+  "2#.GameMessage.Action.ActionDirection\022:\n"
+  "\rshotDirection\030\002 \001(\0162#.GameMessage.Actio"
+  "n.ActionDirection\"B\n\017ActionDirection\022\010\n\004"
+  "IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004L"
+  "EFT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023"
+  "StateActionExchange\0228\n\013StateAction\022\022.Gam"
+  "eMessage.State\032\023.GameMessage.Action\"\000\0226\n"
+  "\nStateReset\022\022.GameMessage.State\032\022.GameMe"
+  "ssage.Reset\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 697, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 581, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -208,8 +197,8 @@ State::State(const State& from)
       GetArenaForAllocation());
   }
   ::memcpy(&closestobstacleisbox_, &from.closestobstacleisbox_,
-    static_cast<size_t>(reinterpret_cast<char*>(&iteration_) -
-    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+    static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
+    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
   // @@protoc_insertion_point(copy_constructor:GameMessage.State)
 }
 
@@ -220,8 +209,8 @@ mapmatrix_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAl
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&closestobstacleisbox_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&iteration_) -
-    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
+    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
 }
 
 State::~State() {
@@ -254,8 +243,8 @@ void State::Clear() {
 
   mapmatrix_.ClearToEmpty();
   ::memset(&closestobstacleisbox_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&iteration_) -
-      reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(iteration_));
+      reinterpret_cast<char*>(&episodecount_) -
+      reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -299,38 +288,6 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // float closestEnemyDistX = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
-          closestenemydistx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float closestEnemyDistY = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
-          closestenemydisty_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float closestDestinationDistX = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
-          closestdestinationdistx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float closestDestinationDistY = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 69)) {
-          closestdestinationdisty_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
       // int32 reward = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
@@ -339,10 +296,10 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // int32 clockTime = 10;
+      // int32 stepsCount = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
-          clocktime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          stepscount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -355,10 +312,10 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // int32 iteration = 12;
+      // int32 episodeCount = 12;
       case 12:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
-          iteration_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          episodecount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -420,56 +377,16 @@ uint8_t* State::_InternalSerialize(
         4, this->_internal_mapmatrix(), target);
   }
 
-  // float closestEnemyDistX = 5;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydistx = this->_internal_closestenemydistx();
-  uint32_t raw_closestenemydistx;
-  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
-  if (raw_closestenemydistx != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_closestenemydistx(), target);
-  }
-
-  // float closestEnemyDistY = 6;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydisty = this->_internal_closestenemydisty();
-  uint32_t raw_closestenemydisty;
-  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
-  if (raw_closestenemydisty != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_closestenemydisty(), target);
-  }
-
-  // float closestDestinationDistX = 7;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdistx = this->_internal_closestdestinationdistx();
-  uint32_t raw_closestdestinationdistx;
-  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
-  if (raw_closestdestinationdistx != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->_internal_closestdestinationdistx(), target);
-  }
-
-  // float closestDestinationDistY = 8;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdisty = this->_internal_closestdestinationdisty();
-  uint32_t raw_closestdestinationdisty;
-  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
-  if (raw_closestdestinationdisty != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(8, this->_internal_closestdestinationdisty(), target);
-  }
-
   // int32 reward = 9;
   if (this->_internal_reward() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_reward(), target);
   }
 
-  // int32 clockTime = 10;
-  if (this->_internal_clocktime() != 0) {
+  // int32 stepsCount = 10;
+  if (this->_internal_stepscount() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_clocktime(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_stepscount(), target);
   }
 
   // bool gameOver = 11;
@@ -478,10 +395,10 @@ uint8_t* State::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_gameover(), target);
   }
 
-  // int32 iteration = 12;
-  if (this->_internal_iteration() != 0) {
+  // int32 episodeCount = 12;
+  if (this->_internal_episodecount() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(12, this->_internal_iteration(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(12, this->_internal_episodecount(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -527,55 +444,19 @@ size_t State::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  // float closestEnemyDistX = 5;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydistx = this->_internal_closestenemydistx();
-  uint32_t raw_closestenemydistx;
-  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
-  if (raw_closestenemydistx != 0) {
-    total_size += 1 + 4;
-  }
-
-  // float closestEnemyDistY = 6;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydisty = this->_internal_closestenemydisty();
-  uint32_t raw_closestenemydisty;
-  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
-  if (raw_closestenemydisty != 0) {
-    total_size += 1 + 4;
-  }
-
-  // float closestDestinationDistX = 7;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdistx = this->_internal_closestdestinationdistx();
-  uint32_t raw_closestdestinationdistx;
-  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
-  if (raw_closestdestinationdistx != 0) {
-    total_size += 1 + 4;
-  }
-
-  // float closestDestinationDistY = 8;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdisty = this->_internal_closestdestinationdisty();
-  uint32_t raw_closestdestinationdisty;
-  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
-  if (raw_closestdestinationdisty != 0) {
-    total_size += 1 + 4;
-  }
-
   // int32 reward = 9;
   if (this->_internal_reward() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
   }
 
-  // int32 clockTime = 10;
-  if (this->_internal_clocktime() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_clocktime());
+  // int32 stepsCount = 10;
+  if (this->_internal_stepscount() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_stepscount());
   }
 
-  // int32 iteration = 12;
-  if (this->_internal_iteration() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_iteration());
+  // int32 episodeCount = 12;
+  if (this->_internal_episodecount() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_episodecount());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -615,42 +496,14 @@ void State::MergeFrom(const State& from) {
   if (from._internal_gameover() != 0) {
     _internal_set_gameover(from._internal_gameover());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydistx = from._internal_closestenemydistx();
-  uint32_t raw_closestenemydistx;
-  memcpy(&raw_closestenemydistx, &tmp_closestenemydistx, sizeof(tmp_closestenemydistx));
-  if (raw_closestenemydistx != 0) {
-    _internal_set_closestenemydistx(from._internal_closestenemydistx());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestenemydisty = from._internal_closestenemydisty();
-  uint32_t raw_closestenemydisty;
-  memcpy(&raw_closestenemydisty, &tmp_closestenemydisty, sizeof(tmp_closestenemydisty));
-  if (raw_closestenemydisty != 0) {
-    _internal_set_closestenemydisty(from._internal_closestenemydisty());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdistx = from._internal_closestdestinationdistx();
-  uint32_t raw_closestdestinationdistx;
-  memcpy(&raw_closestdestinationdistx, &tmp_closestdestinationdistx, sizeof(tmp_closestdestinationdistx));
-  if (raw_closestdestinationdistx != 0) {
-    _internal_set_closestdestinationdistx(from._internal_closestdestinationdistx());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_closestdestinationdisty = from._internal_closestdestinationdisty();
-  uint32_t raw_closestdestinationdisty;
-  memcpy(&raw_closestdestinationdisty, &tmp_closestdestinationdisty, sizeof(tmp_closestdestinationdisty));
-  if (raw_closestdestinationdisty != 0) {
-    _internal_set_closestdestinationdisty(from._internal_closestdestinationdisty());
-  }
   if (from._internal_reward() != 0) {
     _internal_set_reward(from._internal_reward());
   }
-  if (from._internal_clocktime() != 0) {
-    _internal_set_clocktime(from._internal_clocktime());
+  if (from._internal_stepscount() != 0) {
+    _internal_set_stepscount(from._internal_stepscount());
   }
-  if (from._internal_iteration() != 0) {
-    _internal_set_iteration(from._internal_iteration());
+  if (from._internal_episodecount() != 0) {
+    _internal_set_episodecount(from._internal_episodecount());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -677,8 +530,8 @@ void State::InternalSwap(State* other) {
       &other->mapmatrix_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(State, iteration_)
-      + sizeof(State::iteration_)
+      PROTOBUF_FIELD_OFFSET(State, episodecount_)
+      + sizeof(State::episodecount_)
       - PROTOBUF_FIELD_OFFSET(State, closestobstacleisbox_)>(
           reinterpret_cast<char*>(&closestobstacleisbox_),
           reinterpret_cast<char*>(&other->closestobstacleisbox_));

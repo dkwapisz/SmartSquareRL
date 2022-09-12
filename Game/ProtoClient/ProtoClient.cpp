@@ -2,22 +2,18 @@
 
 using namespace GameMessage;
 
-char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t clockTime, int32_t iteration) {
+char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t iteration) {
 
     State request;
 
-    request.set_clocktime(clockTime);
-    request.set_iteration(iteration);
+    request.set_stepscount(gameStateHandling->stepsCount);
+    request.set_episodecount(iteration);
 
     request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
     request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
     request.set_coininfov(gameStateHandling->coinInFoV);
 
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
-    request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
-    request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
-    request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);
-    request.set_closestenemydisty(gameStateHandling->closestEnemyDirY);
 
 
     Action response;
@@ -48,10 +44,6 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
     request.set_coininfov(gameStateHandling->coinInFoV);
 
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
-    request.set_closestdestinationdistx(gameStateHandling->closestDestinationDirX);
-    request.set_closestdestinationdisty(gameStateHandling->closestDestinationDirY);
-    request.set_closestenemydistx(gameStateHandling->closestEnemyDirX);
-    request.set_closestenemydisty(gameStateHandling->closestEnemyDirY);
 
     Reset response;
     ClientContext context;

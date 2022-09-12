@@ -5,6 +5,7 @@ GameStateHandling::GameStateHandling() {
     resetAllStates();
     mapMatrix = new int[20 * 20];
     mapMatrixAsString = "";
+    stepsCount = 0;
     for (int i = 0; i < 400; i++) {
         mapMatrix[i] = 0;
         mapMatrixAsString.push_back('0');

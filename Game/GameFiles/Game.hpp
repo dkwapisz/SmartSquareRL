@@ -12,7 +12,7 @@ class Game {
 
 private:
     sf::RenderWindow *window;
-    sf::Text *clockLabel;
+    sf::Text *stepsLabel;
     sf::Text *coinCountLabel;
     sf::Text *iterationCountLabel;
     sf::Font *font;

@@ -23,6 +23,7 @@ public:
     int32_t reward;
     float lastDistToCoin;
     float lastFinishDist;
+    int stepsCount;
 
     std::string rayDistances;
 

@@ -229,13 +229,9 @@ class State final :
     kAllCoinsCollectedFieldNumber = 2,
     kCoinInFoVFieldNumber = 3,
     kGameOverFieldNumber = 11,
-    kClosestEnemyDistXFieldNumber = 5,
-    kClosestEnemyDistYFieldNumber = 6,
-    kClosestDestinationDistXFieldNumber = 7,
-    kClosestDestinationDistYFieldNumber = 8,
     kRewardFieldNumber = 9,
-    kClockTimeFieldNumber = 10,
-    kIterationFieldNumber = 12,
+    kStepsCountFieldNumber = 10,
+    kEpisodeCountFieldNumber = 12,
   };
   // string mapMatrix = 4;
   void clear_mapmatrix();
@@ -287,42 +283,6 @@ class State final :
   void _internal_set_gameover(bool value);
   public:
 
-  // float closestEnemyDistX = 5;
-  void clear_closestenemydistx();
-  float closestenemydistx() const;
-  void set_closestenemydistx(float value);
-  private:
-  float _internal_closestenemydistx() const;
-  void _internal_set_closestenemydistx(float value);
-  public:
-
-  // float closestEnemyDistY = 6;
-  void clear_closestenemydisty();
-  float closestenemydisty() const;
-  void set_closestenemydisty(float value);
-  private:
-  float _internal_closestenemydisty() const;
-  void _internal_set_closestenemydisty(float value);
-  public:
-
-  // float closestDestinationDistX = 7;
-  void clear_closestdestinationdistx();
-  float closestdestinationdistx() const;
-  void set_closestdestinationdistx(float value);
-  private:
-  float _internal_closestdestinationdistx() const;
-  void _internal_set_closestdestinationdistx(float value);
-  public:
-
-  // float closestDestinationDistY = 8;
-  void clear_closestdestinationdisty();
-  float closestdestinationdisty() const;
-  void set_closestdestinationdisty(float value);
-  private:
-  float _internal_closestdestinationdisty() const;
-  void _internal_set_closestdestinationdisty(float value);
-  public:
-
   // int32 reward = 9;
   void clear_reward();
   int32_t reward() const;
@@ -332,22 +292,22 @@ class State final :
   void _internal_set_reward(int32_t value);
   public:
 
-  // int32 clockTime = 10;
-  void clear_clocktime();
-  int32_t clocktime() const;
-  void set_clocktime(int32_t value);
+  // int32 stepsCount = 10;
+  void clear_stepscount();
+  int32_t stepscount() const;
+  void set_stepscount(int32_t value);
   private:
-  int32_t _internal_clocktime() const;
-  void _internal_set_clocktime(int32_t value);
+  int32_t _internal_stepscount() const;
+  void _internal_set_stepscount(int32_t value);
   public:
 
-  // int32 iteration = 12;
-  void clear_iteration();
-  int32_t iteration() const;
-  void set_iteration(int32_t value);
+  // int32 episodeCount = 12;
+  void clear_episodecount();
+  int32_t episodecount() const;
+  void set_episodecount(int32_t value);
   private:
-  int32_t _internal_iteration() const;
-  void _internal_set_iteration(int32_t value);
+  int32_t _internal_episodecount() const;
+  void _internal_set_episodecount(int32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:GameMessage.State)
@@ -362,13 +322,9 @@ class State final :
   bool allcoinscollected_;
   bool coininfov_;
   bool gameover_;
-  float closestenemydistx_;
-  float closestenemydisty_;
-  float closestdestinationdistx_;
-  float closestdestinationdisty_;
   int32_t reward_;
-  int32_t clocktime_;
-  int32_t iteration_;
+  int32_t stepscount_;
+  int32_t episodecount_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_game_2eproto;
 };
@@ -833,86 +789,6 @@ inline void State::set_allocated_mapmatrix(std::string* mapmatrix) {
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.mapMatrix)
 }
 
-// float closestEnemyDistX = 5;
-inline void State::clear_closestenemydistx() {
-  closestenemydistx_ = 0;
-}
-inline float State::_internal_closestenemydistx() const {
-  return closestenemydistx_;
-}
-inline float State::closestenemydistx() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.closestEnemyDistX)
-  return _internal_closestenemydistx();
-}
-inline void State::_internal_set_closestenemydistx(float value) {
-  
-  closestenemydistx_ = value;
-}
-inline void State::set_closestenemydistx(float value) {
-  _internal_set_closestenemydistx(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestEnemyDistX)
-}
-
-// float closestEnemyDistY = 6;
-inline void State::clear_closestenemydisty() {
-  closestenemydisty_ = 0;
-}
-inline float State::_internal_closestenemydisty() const {
-  return closestenemydisty_;
-}
-inline float State::closestenemydisty() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.closestEnemyDistY)
-  return _internal_closestenemydisty();
-}
-inline void State::_internal_set_closestenemydisty(float value) {
-  
-  closestenemydisty_ = value;
-}
-inline void State::set_closestenemydisty(float value) {
-  _internal_set_closestenemydisty(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestEnemyDistY)
-}
-
-// float closestDestinationDistX = 7;
-inline void State::clear_closestdestinationdistx() {
-  closestdestinationdistx_ = 0;
-}
-inline float State::_internal_closestdestinationdistx() const {
-  return closestdestinationdistx_;
-}
-inline float State::closestdestinationdistx() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.closestDestinationDistX)
-  return _internal_closestdestinationdistx();
-}
-inline void State::_internal_set_closestdestinationdistx(float value) {
-  
-  closestdestinationdistx_ = value;
-}
-inline void State::set_closestdestinationdistx(float value) {
-  _internal_set_closestdestinationdistx(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestDestinationDistX)
-}
-
-// float closestDestinationDistY = 8;
-inline void State::clear_closestdestinationdisty() {
-  closestdestinationdisty_ = 0;
-}
-inline float State::_internal_closestdestinationdisty() const {
-  return closestdestinationdisty_;
-}
-inline float State::closestdestinationdisty() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.closestDestinationDistY)
-  return _internal_closestdestinationdisty();
-}
-inline void State::_internal_set_closestdestinationdisty(float value) {
-  
-  closestdestinationdisty_ = value;
-}
-inline void State::set_closestdestinationdisty(float value) {
-  _internal_set_closestdestinationdisty(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestDestinationDistY)
-}
-
 // int32 reward = 9;
 inline void State::clear_reward() {
   reward_ = 0;
@@ -933,24 +809,24 @@ inline void State::set_reward(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.reward)
 }
 
-// int32 clockTime = 10;
-inline void State::clear_clocktime() {
-  clocktime_ = 0;
+// int32 stepsCount = 10;
+inline void State::clear_stepscount() {
+  stepscount_ = 0;
 }
-inline int32_t State::_internal_clocktime() const {
-  return clocktime_;
+inline int32_t State::_internal_stepscount() const {
+  return stepscount_;
 }
-inline int32_t State::clocktime() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.clockTime)
-  return _internal_clocktime();
+inline int32_t State::stepscount() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.stepsCount)
+  return _internal_stepscount();
 }
-inline void State::_internal_set_clocktime(int32_t value) {
+inline void State::_internal_set_stepscount(int32_t value) {
   
-  clocktime_ = value;
+  stepscount_ = value;
 }
-inline void State::set_clocktime(int32_t value) {
-  _internal_set_clocktime(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.clockTime)
+inline void State::set_stepscount(int32_t value) {
+  _internal_set_stepscount(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.stepsCount)
 }
 
 // bool gameOver = 11;
@@ -973,24 +849,24 @@ inline void State::set_gameover(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
 }
 
-// int32 iteration = 12;
-inline void State::clear_iteration() {
-  iteration_ = 0;
+// int32 episodeCount = 12;
+inline void State::clear_episodecount() {
+  episodecount_ = 0;
 }
-inline int32_t State::_internal_iteration() const {
-  return iteration_;
+inline int32_t State::_internal_episodecount() const {
+  return episodecount_;
 }
-inline int32_t State::iteration() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.iteration)
-  return _internal_iteration();
+inline int32_t State::episodecount() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.episodeCount)
+  return _internal_episodecount();
 }
-inline void State::_internal_set_iteration(int32_t value) {
+inline void State::_internal_set_episodecount(int32_t value) {
   
-  iteration_ = value;
+  episodecount_ = value;
 }
-inline void State::set_iteration(int32_t value) {
-  _internal_set_iteration(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.iteration)
+inline void State::set_episodecount(int32_t value) {
+  _internal_set_episodecount(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.episodeCount)
 }
 
 // -------------------------------------------------------------------

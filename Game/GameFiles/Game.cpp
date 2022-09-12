@@ -6,7 +6,7 @@ Game::Game() {
     this->initializeLabels();
 
     this->gameFinished = false;
-    this->level = new Level(2);
+    this->level = new Level(1);
 }
 
 Game::~Game() {
@@ -33,40 +33,40 @@ void Game::initializeWindow() {
 }
 
 void Game::initializeLabels() {
-    this->clockLabel = new sf::Text();
+    this->stepsLabel = new sf::Text();
     this->iterationCountLabel = new sf::Text();
     this->coinCountLabel = new sf::Text();
 
-    clockLabel->setFont(*font);
+    stepsLabel->setFont(*font);
     iterationCountLabel->setFont(*font);
     coinCountLabel->setFont(*font);
 
-    clockLabel->setPosition(10.f, 10.f);
+    stepsLabel->setPosition(10.f, 10.f);
     iterationCountLabel->setPosition(240.f, 10.f);
     coinCountLabel->setPosition(480.f, 10.f);
 
-    clockLabel->setFillColor(sf::Color::White);
+    stepsLabel->setFillColor(sf::Color::White);
     iterationCountLabel->setFillColor(sf::Color::White);
     coinCountLabel->setFillColor(sf::Color::White);
 
-    clockLabel->setCharacterSize(22);
+    stepsLabel->setCharacterSize(22);
     iterationCountLabel->setCharacterSize(22);
     coinCountLabel->setCharacterSize(22);
 }
 
 void Game::deleteLabels() {
-    delete this->clockLabel;
+    delete this->stepsLabel;
     delete this->iterationCountLabel;
     delete this->coinCountLabel;
     delete this->font;
 }
 
 void Game::updateLabels() {
-    std::string time = std::to_string(this->level->getClockTime());
-    clockLabel->setString("Time: " + time + " [s]");
+    std::string step = std::to_string(this->level->gameStateHandling->stepsCount);
+    stepsLabel->setString("Step: " + step);
 
-    std::string iteration = std::to_string(this->level->getPlayer()->getIteration());
-    iterationCountLabel->setString("Iteration: " + iteration);
+    std::string episodes = std::to_string(this->level->getPlayer()->getEpisodeNumber());
+    iterationCountLabel->setString("Episode: " + episodes);
 
     std::string coinsCollected = std::to_string(this->level->getPlayerCoinsCount());
     std::string allCoins = std::to_string(this->level->getCoinsCount());
@@ -74,7 +74,7 @@ void Game::updateLabels() {
 }
 
 void Game::renderLabels() {
-    this->window->draw(*clockLabel);
+    this->window->draw(*stepsLabel);
     this->window->draw(*iterationCountLabel);
     this->window->draw(*coinCountLabel);
 }
@@ -91,15 +91,14 @@ void Game::run() {
             this->level->gameStateHandling->reward = 0;
 
             actions = client.StateAction(level->gameStateHandling,
-                                         level->getClockTime(),
-                                         level->getPlayer()->getIteration());
+                                         level->getPlayer()->getEpisodeNumber());
 
             gameOver = this->playStep(actions[0], actions[1]);
-
             std::cout << "Move action: " << actions[0] << "\n";
             this->render();
 
             reset = client.StateReset(level->gameStateHandling);
+            level->gameStateHandling->stepsCount++;
 
             performResetIfNeeded(gameOver || reset);
         } else {
@@ -188,13 +187,14 @@ void Game::render() {
 
 void Game::performResetIfNeeded(bool reset) {
     if (reset) {
-        int iteration_count = this->level->getPlayer()->getIteration() + 1;
+        int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
+        int levelNum = level->getLevelNumber();
         delete this->level;
         // TODO rand() will be replaced in future
         //this->level = new Level(rand() % 24);
-        this->level = new Level(2);
+        this->level = new Level(levelNum);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
-        this->level->getPlayer()->setIteration(iteration_count);
+        this->level->getPlayer()->setEpisodes(episodes_count);
     }
 }

@@ -51,9 +51,9 @@ public:
 
     void setPosition(float positionX, float positionY);
 
-    int getIteration() const;
+    int getEpisodeNumber() const;
 
-    void setIteration(int iteration);
+    void setEpisodes(int iteration);
 
     void render(sf::RenderTarget &target);
 };

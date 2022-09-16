@@ -3,6 +3,7 @@ from AI.GameDataHandling import GameDataHandling
 import grpc
 import game_pb2
 import game_pb2_grpc
+import logging
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
@@ -10,11 +11,19 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def __init__(self):
         self.gameDataHandling = GameDataHandling()
         self.lastActions = []
+        self.rewardInEpisode = 0
+
+        logging.basicConfig(filename="learning.log", level=logging.DEBUG)
+        logging.debug("Episode, Reward, Reward with gameOver punishment")
 
     # CURRENTLY UNUSED: closestEnemy, closestObstacleIsBox, shotDir (!!!)
 
     def StateAction(self, request, context):
         self.gameDataHandling.set_state(request)
+
+        # for line in request.mapMatrix.split("#"):
+        #     print(" ".join(line))
+        # print("\n")
 
         moveDir, shotDir = self.gameDataHandling.get_action()
         self.add_action_to_list(moveAction=moveDir)
@@ -23,12 +32,18 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
-
-        if self.gameDataHandling.steps_count > 256 or self.check_action_duplicates():
+        self.rewardInEpisode += request.reward
+        if self.gameDataHandling.steps_count >= 256 or self.check_action_duplicates():
+            logging.debug("{}, {}".format(request.episodeCount, (self.rewardInEpisode - 150)))
+            self.rewardInEpisode = 0
             self.lastActions = []
-            self.gameDataHandling.reward = -200
+            self.gameDataHandling.reward = -150
+            self.rewardInEpisode += -150
             self.gameDataHandling.game_over = True
             self.gameDataHandling.reset_env = True
+        elif request.gameOver:
+            logging.debug("{}, {}".format(request.episodeCount, self.rewardInEpisode))
+            self.rewardInEpisode = 0
 
         self.gameDataHandling.remember()
         self.gameDataHandling.learn()

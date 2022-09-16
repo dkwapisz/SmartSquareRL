@@ -225,12 +225,9 @@ class State final :
 
   enum : int {
     kMapMatrixFieldNumber = 4,
-    kClosestObstacleIsBoxFieldNumber = 1,
-    kAllCoinsCollectedFieldNumber = 2,
-    kCoinInFoVFieldNumber = 3,
-    kGameOverFieldNumber = 11,
     kRewardFieldNumber = 9,
     kStepsCountFieldNumber = 10,
+    kGameOverFieldNumber = 11,
     kEpisodeCountFieldNumber = 12,
   };
   // string mapMatrix = 4;
@@ -245,42 +242,6 @@ class State final :
   const std::string& _internal_mapmatrix() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_mapmatrix(const std::string& value);
   std::string* _internal_mutable_mapmatrix();
-  public:
-
-  // bool closestObstacleIsBox = 1;
-  void clear_closestobstacleisbox();
-  bool closestobstacleisbox() const;
-  void set_closestobstacleisbox(bool value);
-  private:
-  bool _internal_closestobstacleisbox() const;
-  void _internal_set_closestobstacleisbox(bool value);
-  public:
-
-  // bool allCoinsCollected = 2;
-  void clear_allcoinscollected();
-  bool allcoinscollected() const;
-  void set_allcoinscollected(bool value);
-  private:
-  bool _internal_allcoinscollected() const;
-  void _internal_set_allcoinscollected(bool value);
-  public:
-
-  // bool coinInFoV = 3;
-  void clear_coininfov();
-  bool coininfov() const;
-  void set_coininfov(bool value);
-  private:
-  bool _internal_coininfov() const;
-  void _internal_set_coininfov(bool value);
-  public:
-
-  // bool gameOver = 11;
-  void clear_gameover();
-  bool gameover() const;
-  void set_gameover(bool value);
-  private:
-  bool _internal_gameover() const;
-  void _internal_set_gameover(bool value);
   public:
 
   // int32 reward = 9;
@@ -301,6 +262,15 @@ class State final :
   void _internal_set_stepscount(int32_t value);
   public:
 
+  // bool gameOver = 11;
+  void clear_gameover();
+  bool gameover() const;
+  void set_gameover(bool value);
+  private:
+  bool _internal_gameover() const;
+  void _internal_set_gameover(bool value);
+  public:
+
   // int32 episodeCount = 12;
   void clear_episodecount();
   int32_t episodecount() const;
@@ -318,12 +288,9 @@ class State final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr mapmatrix_;
-  bool closestobstacleisbox_;
-  bool allcoinscollected_;
-  bool coininfov_;
-  bool gameover_;
   int32_t reward_;
   int32_t stepscount_;
+  bool gameover_;
   int32_t episodecount_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_game_2eproto;
@@ -677,66 +644,6 @@ class Reset final :
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // State
-
-// bool closestObstacleIsBox = 1;
-inline void State::clear_closestobstacleisbox() {
-  closestobstacleisbox_ = false;
-}
-inline bool State::_internal_closestobstacleisbox() const {
-  return closestobstacleisbox_;
-}
-inline bool State::closestobstacleisbox() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.closestObstacleIsBox)
-  return _internal_closestobstacleisbox();
-}
-inline void State::_internal_set_closestobstacleisbox(bool value) {
-  
-  closestobstacleisbox_ = value;
-}
-inline void State::set_closestobstacleisbox(bool value) {
-  _internal_set_closestobstacleisbox(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.closestObstacleIsBox)
-}
-
-// bool allCoinsCollected = 2;
-inline void State::clear_allcoinscollected() {
-  allcoinscollected_ = false;
-}
-inline bool State::_internal_allcoinscollected() const {
-  return allcoinscollected_;
-}
-inline bool State::allcoinscollected() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.allCoinsCollected)
-  return _internal_allcoinscollected();
-}
-inline void State::_internal_set_allcoinscollected(bool value) {
-  
-  allcoinscollected_ = value;
-}
-inline void State::set_allcoinscollected(bool value) {
-  _internal_set_allcoinscollected(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.allCoinsCollected)
-}
-
-// bool coinInFoV = 3;
-inline void State::clear_coininfov() {
-  coininfov_ = false;
-}
-inline bool State::_internal_coininfov() const {
-  return coininfov_;
-}
-inline bool State::coininfov() const {
-  // @@protoc_insertion_point(field_get:GameMessage.State.coinInFoV)
-  return _internal_coininfov();
-}
-inline void State::_internal_set_coininfov(bool value) {
-  
-  coininfov_ = value;
-}
-inline void State::set_coininfov(bool value) {
-  _internal_set_coininfov(value);
-  // @@protoc_insertion_point(field_set:GameMessage.State.coinInFoV)
-}
 
 // string mapMatrix = 4;
 inline void State::clear_mapmatrix() {

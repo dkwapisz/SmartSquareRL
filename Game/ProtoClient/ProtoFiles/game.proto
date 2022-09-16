@@ -13,9 +13,6 @@ service StateActionExchange {
 }
 
 message State {
-  bool closestObstacleIsBox = 1;
-  bool allCoinsCollected = 2;
-  bool coinInFoV = 3;
   string mapMatrix = 4;
 
   int32 reward = 9;

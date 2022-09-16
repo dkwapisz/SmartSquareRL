@@ -9,13 +9,12 @@
 #include "GameObjects/Player.hpp"
 #include "GameObjects/MovingDanger.hpp"
 #include "GameObjects/Finish.hpp"
+#include "GameObjects/Floor.hpp"
 
 class GameStateHandling {
 
 private:
-    int lastCoinsCount;
 public:
-    bool closestObstacleIsBox;
     bool allCoinsCollected;
     bool coinInFoV;
     bool finishInFoV;
@@ -24,13 +23,10 @@ public:
     float lastDistToCoin;
     float lastFinishDist;
     int stepsCount;
+    int discoveredFloorCount;
 
     std::string rayDistances;
 
-    float closestDestinationDirX;
-    float closestDestinationDirY;
-    float closestEnemyDirX;
-    float closestEnemyDirY;
     int* mapMatrix;
     std::string mapMatrixAsString;
 
@@ -44,11 +40,9 @@ public:
 
     void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player);
 
-//    void calculateRayDistances(float playerX, float playerY, float *rayVertexes, int arrayLen);
-
     void resetAllStates();
 
-    void calculateMapMatrix(float playerX, float playerY);
+    void calculateMapMatrix(float playerX, float playerY, std::vector<Floor *> *floors);
 };
 
 #endif

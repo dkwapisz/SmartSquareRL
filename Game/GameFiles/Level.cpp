@@ -5,7 +5,7 @@ Level::Level() = default;
 Level::Level(int levelNumber) {
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
-    initializeGameObjects();
+    initializeObjectsShapes();
     this->gameStateHandling = new GameStateHandling();
 
     generateMap();
@@ -30,6 +30,10 @@ Level::~Level() {
 
     for (auto *wall: this->walls) {
         delete wall;
+    }
+
+    for (auto *floor : this->floors) {
+        delete floor;
     }
 
     for (auto *box: this->boxes) {
@@ -69,7 +73,8 @@ void Level::initializeLevelAttributes(int levelNr) {
     this->levelNumber = levelNr;
 }
 
-void Level::initializeGameObjects() {
+void Level::initializeObjectsShapes() {
+    this->squareShapes["Floor"] = new sf::RectangleShape();
     this->squareShapes["Bullet"] = new sf::RectangleShape();
     this->squareShapes["Wall"] = new sf::RectangleShape();
     this->squareShapes["Box"] = new sf::RectangleShape();
@@ -96,7 +101,11 @@ void Level::generateMap() {
                 float posY = (30.f * (float) y) + 50;
                 this->gameStateHandling->mapMatrix[x + y * 20] = number;
 
-                if (number == 1) {
+                if (number == 0) {
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"],
+                                                     posX, posY));
+                }
+                else if (number == 1) {
                     this->walls.push_back(new Wall(this->squareShapes["Wall"],
                                                    posX, posY));
                 } else if (number == 2) {
@@ -120,6 +129,7 @@ void Level::generateMap() {
                                                         posX, posY));
                 } else if (number == 8) {
                     this->player = new Player(posX, posY);
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"], posX, posY));
                 }
             }
         }
@@ -188,7 +198,7 @@ bool Level::checkCollision() {
     }
 
     this->playerFoV->setCoinInView(false);
-    this->playerFoV->calculateRays(&walls, &boxes, &coins, &finishes,
+    this->playerFoV->calculateRays(&walls, &boxes, &coins, &finishes, &floors,
                                    player->getCenterPosX(), player->getCenterPosY());
 
     return false;
@@ -218,8 +228,8 @@ void Level::resetLevel() {
     this->gameStateHandling->resetAllStates();
     this->gameStateHandling->gameOver = true;
 
-    for (auto *wall: this->walls) {
-        wall->discovered = false;
+    for (auto *floor: this->floors) {
+        floor->discovered = false;
     }
 
     for (int i = 0; i < this->movingDangers.size(); i++) {
@@ -250,6 +260,7 @@ void Level::resetLevel() {
 
                 float posX = 30.f * (float) x;
                 float posY = (30.f * (float) y) + 50;
+                this->gameStateHandling->mapMatrix[x + y * 20] = number;
 
                 if (number == 2) {
                     this->boxes.push_back(new Box(this->squareShapes["Box"],
@@ -384,10 +395,7 @@ void Level::calculateClosestObjectsDir() {
                                                playerFoV->getClosestCoin(), playerCoinsCount);
     gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
     gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
-//    gameStateHandling->calculateRayDistances(player->getCenterPosX(), player->getCenterPosY(),
-//                                             playerFoV->getRayVertexes(),
-//                                             playerFoV->getNumberOfRays());
-    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY());
+    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY(), &floors);
 }
 
 Player *Level::getPlayer() const {

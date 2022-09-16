@@ -7,8 +7,8 @@ from keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 
-MEM_SIZE = 100_000
-BATCH_SIZE = 256
+MEM_SIZE = 1000000
+BATCH_SIZE = 128
 
 
 class Memory:
@@ -57,7 +57,7 @@ def build_dqn(lr, action_dims):
 
 
 class DoubleDQN:
-    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=1e-4, eps_min=0.05, replace_target=100):
+    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=1e-4, eps_min=0.01, replace_target=100):
         self.action_space = [i for i in range(action_dims)]
         self.gamma = gamma
         self.epsilon = eps

@@ -9,10 +9,6 @@ char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t ite
     request.set_stepscount(gameStateHandling->stepsCount);
     request.set_episodecount(iteration);
 
-    request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
-    request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
-    request.set_coininfov(gameStateHandling->coinInFoV);
-
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
 
 
@@ -38,10 +34,6 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
 
     request.set_reward(gameStateHandling->reward);
     request.set_gameover(gameStateHandling->gameOver);
-
-    request.set_closestobstacleisbox(gameStateHandling->closestObstacleIsBox);
-    request.set_allcoinscollected(gameStateHandling->allCoinsCollected);
-    request.set_coininfov(gameStateHandling->coinInFoV);
 
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
 

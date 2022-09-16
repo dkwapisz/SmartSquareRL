@@ -13,7 +13,7 @@ PlayerFoV::PlayerFoV(int numberOfRays, bool drawRays) {
 }
 
 void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
-                              std::vector<Finish *> *finishes, float playerX, float playerY) {
+                              std::vector<Finish *> *finishes, std::vector<Floor *> *floors, float playerX, float playerY) {
     float dirX, dirY, vertexX, vertexY;
     int arrayIterator = 0;
     int fullAngle = 360;
@@ -61,24 +61,18 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                 mapY += stepY;
                 side = 1;
             }
+
+            for (const auto &floor: *floors) {
+                if (floor->getBounds().contains(sf::Vector2f(mapX, mapY))) {
+                    if (!floor->discovered) {
+                        floor->discovered = true;
+                    }
+                }
+            }
+
             for (const auto &wall: *walls) {
                 if (wall->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     hit = 1;
-                    if (!wall->discovered) {
-                        wall->discovered = true;
-                        lastDiscoveredWall = wall;
-                    }
-                }
-                if (drawRays) {
-                    if (!wall->discovered) {
-                        wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
-                    } else {
-                        wall->getObjectShape().setFillColor(sf::Color(200, 100, 100));
-                    }
-                } else {
-                    if (wall->getObjectShape().getFillColor() != sf::Color(100, 100, 100)) {
-                        wall->getObjectShape().setFillColor(sf::Color(100, 100, 100));
-                    }
                 }
             }
 
@@ -184,10 +178,6 @@ bool PlayerFoV::isFinishInView() const {
 
 void PlayerFoV::setFinishInView(bool finishInView) {
     PlayerFoV::finishInView = finishInView;
-}
-
-Wall *PlayerFoV::getLastDiscoveredWall() const {
-    return lastDiscoveredWall;
 }
 
 float *PlayerFoV::getRayVertexes() const {

@@ -11,6 +11,7 @@
 #include "GameObjects/Finish.hpp"
 #include "GameObjects/PlayerFoV.hpp"
 #include "GameStateHandling.hpp"
+#include "GameObjects/Floor.hpp"
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <fstream>
@@ -22,6 +23,7 @@ private:
     std::map<std::string, sf::RectangleShape *> squareShapes;
     std::map<std::string, sf::CircleShape *> circleShapes;
     std::vector<Bullet *> bullets;
+    std::vector<Floor *> floors;
     std::vector<Wall *> walls;
     std::vector<Box *> boxes;
     std::vector<StaticDanger *> staticDangers;
@@ -43,7 +45,7 @@ private:
 
     void initializeLevelAttributes(int levelNr);
 
-    void initializeGameObjects();
+    void initializeObjectsShapes();
 
     void generateMap();
 
@@ -86,8 +88,6 @@ public:
 
     int getMapsCount() const;
 
-    // gRPC message
-    // --------
     void calculateClosestObjectsDir();
 
     PlayerFoV *getPlayerFoV();

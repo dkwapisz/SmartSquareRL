@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "../GameStateHandling.hpp"
+#include "Floor.hpp"
 
 class PlayerFoV {
 private:
@@ -14,13 +15,12 @@ private:
     float getRadians(float degree);
 
     Coin *closestCoin;
-    Wall *lastDiscoveredWall;
 
 public:
     PlayerFoV(int numberOfRays, bool drawRays);
 
     void calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *boxes, std::vector<Coin *> *coins,
-                       std::vector<Finish *> *finishes, float playerX, float playerY);
+                       std::vector<Finish *> *finishes, std::vector<Floor *> *floors, float playerX, float playerY);
 
     void render(sf::RenderTarget &target, float playerX, float playerY);
 
@@ -40,9 +40,7 @@ public:
 
     void setDrawRays(bool setDrawRays);
 
-    Wall *getLastDiscoveredWall() const;
-
-    float *getRayVertexes() const;
+    float* getRayVertexes() const;
 
     int getNumberOfRays() const;
 };

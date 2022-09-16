@@ -10,7 +10,6 @@ public:
 
     Wall(sf::RectangleShape *wallShape, float positionX, float positionY);
 
-    bool discovered;
 };
 
 

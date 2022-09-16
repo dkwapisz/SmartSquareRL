@@ -20,12 +20,9 @@ namespace GameMessage {
 constexpr State::State(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : mapmatrix_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , closestobstacleisbox_(false)
-  , allcoinscollected_(false)
-  , coininfov_(false)
-  , gameover_(false)
   , reward_(0)
   , stepscount_(0)
+  , gameover_(false)
   , episodecount_(0){}
 struct StateDefaultTypeInternal {
   constexpr StateDefaultTypeInternal()
@@ -75,9 +72,6 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, closestobstacleisbox_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, allcoinscollected_),
-  PROTOBUF_FIELD_OFFSET(::GameMessage::State, coininfov_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, mapmatrix_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, stepscount_),
@@ -101,8 +95,8 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::State)},
-  { 14, -1, -1, sizeof(::GameMessage::Action)},
-  { 22, -1, -1, sizeof(::GameMessage::Reset)},
+  { 11, -1, -1, sizeof(::GameMessage::Action)},
+  { 19, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -112,25 +106,23 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"\262\001\n\005State\022\034\n\024c"
-  "losestObstacleIsBox\030\001 \001(\010\022\031\n\021allCoinsCol"
-  "lected\030\002 \001(\010\022\021\n\tcoinInFoV\030\003 \001(\010\022\021\n\tmapMa"
-  "trix\030\004 \001(\t\022\016\n\006reward\030\t \001(\005\022\022\n\nstepsCount"
-  "\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\024\n\014episodeCount"
-  "\030\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\016"
-  "2#.GameMessage.Action.ActionDirection\022:\n"
-  "\rshotDirection\030\002 \001(\0162#.GameMessage.Actio"
-  "n.ActionDirection\"B\n\017ActionDirection\022\010\n\004"
-  "IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004L"
-  "EFT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023"
-  "StateActionExchange\0228\n\013StateAction\022\022.Gam"
-  "eMessage.State\032\023.GameMessage.Action\"\000\0226\n"
-  "\nStateReset\022\022.GameMessage.State\032\022.GameMe"
-  "ssage.Reset\"\000b\006proto3"
+  "\n\ngame.proto\022\013GameMessage\"f\n\005State\022\021\n\tma"
+  "pMatrix\030\004 \001(\t\022\016\n\006reward\030\t \001(\005\022\022\n\nstepsCo"
+  "unt\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\024\n\014episodeCo"
+  "unt\030\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 "
+  "\001(\0162#.GameMessage.Action.ActionDirection"
+  "\022:\n\rshotDirection\030\002 \001(\0162#.GameMessage.Ac"
+  "tion.ActionDirection\"B\n\017ActionDirection\022"
+  "\010\n\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010"
+  "\n\004LEFT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207"
+  "\001\n\023StateActionExchange\0228\n\013StateAction\022\022."
+  "GameMessage.State\032\023.GameMessage.Action\"\000"
+  "\0226\n\nStateReset\022\022.GameMessage.State\032\022.Gam"
+  "eMessage.Reset\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 581, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 504, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -196,9 +188,9 @@ State::State(const State& from)
     mapmatrix_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_mapmatrix(), 
       GetArenaForAllocation());
   }
-  ::memcpy(&closestobstacleisbox_, &from.closestobstacleisbox_,
+  ::memcpy(&reward_, &from.reward_,
     static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
-    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
+    reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
   // @@protoc_insertion_point(copy_constructor:GameMessage.State)
 }
 
@@ -208,9 +200,9 @@ mapmatrix_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAl
   mapmatrix_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&closestobstacleisbox_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&reward_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
-    reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
+    reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
 }
 
 State::~State() {
@@ -242,9 +234,9 @@ void State::Clear() {
   (void) cached_has_bits;
 
   mapmatrix_.ClearToEmpty();
-  ::memset(&closestobstacleisbox_, 0, static_cast<size_t>(
+  ::memset(&reward_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&episodecount_) -
-      reinterpret_cast<char*>(&closestobstacleisbox_)) + sizeof(episodecount_));
+      reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -254,30 +246,6 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // bool closestObstacleIsBox = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          closestobstacleisbox_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool allCoinsCollected = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          allcoinscollected_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // bool coinInFoV = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          coininfov_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
       // string mapMatrix = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
@@ -349,24 +317,6 @@ uint8_t* State::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool closestObstacleIsBox = 1;
-  if (this->_internal_closestobstacleisbox() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_closestobstacleisbox(), target);
-  }
-
-  // bool allCoinsCollected = 2;
-  if (this->_internal_allcoinscollected() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_allcoinscollected(), target);
-  }
-
-  // bool coinInFoV = 3;
-  if (this->_internal_coininfov() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->_internal_coininfov(), target);
-  }
-
   // string mapMatrix = 4;
   if (!this->_internal_mapmatrix().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
@@ -424,26 +374,6 @@ size_t State::ByteSizeLong() const {
         this->_internal_mapmatrix());
   }
 
-  // bool closestObstacleIsBox = 1;
-  if (this->_internal_closestobstacleisbox() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool allCoinsCollected = 2;
-  if (this->_internal_allcoinscollected() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool coinInFoV = 3;
-  if (this->_internal_coininfov() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool gameOver = 11;
-  if (this->_internal_gameover() != 0) {
-    total_size += 1 + 1;
-  }
-
   // int32 reward = 9;
   if (this->_internal_reward() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
@@ -452,6 +382,11 @@ size_t State::ByteSizeLong() const {
   // int32 stepsCount = 10;
   if (this->_internal_stepscount() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_stepscount());
+  }
+
+  // bool gameOver = 11;
+  if (this->_internal_gameover() != 0) {
+    total_size += 1 + 1;
   }
 
   // int32 episodeCount = 12;
@@ -484,23 +419,14 @@ void State::MergeFrom(const State& from) {
   if (!from._internal_mapmatrix().empty()) {
     _internal_set_mapmatrix(from._internal_mapmatrix());
   }
-  if (from._internal_closestobstacleisbox() != 0) {
-    _internal_set_closestobstacleisbox(from._internal_closestobstacleisbox());
-  }
-  if (from._internal_allcoinscollected() != 0) {
-    _internal_set_allcoinscollected(from._internal_allcoinscollected());
-  }
-  if (from._internal_coininfov() != 0) {
-    _internal_set_coininfov(from._internal_coininfov());
-  }
-  if (from._internal_gameover() != 0) {
-    _internal_set_gameover(from._internal_gameover());
-  }
   if (from._internal_reward() != 0) {
     _internal_set_reward(from._internal_reward());
   }
   if (from._internal_stepscount() != 0) {
     _internal_set_stepscount(from._internal_stepscount());
+  }
+  if (from._internal_gameover() != 0) {
+    _internal_set_gameover(from._internal_gameover());
   }
   if (from._internal_episodecount() != 0) {
     _internal_set_episodecount(from._internal_episodecount());
@@ -532,9 +458,9 @@ void State::InternalSwap(State* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(State, episodecount_)
       + sizeof(State::episodecount_)
-      - PROTOBUF_FIELD_OFFSET(State, closestobstacleisbox_)>(
-          reinterpret_cast<char*>(&closestobstacleisbox_),
-          reinterpret_cast<char*>(&other->closestobstacleisbox_));
+      - PROTOBUF_FIELD_OFFSET(State, reward_)>(
+          reinterpret_cast<char*>(&reward_),
+          reinterpret_cast<char*>(&other->reward_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata State::GetMetadata() const {

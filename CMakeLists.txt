@@ -36,7 +36,7 @@ add_executable(
         Game/GameFiles/GameObjects/CircleObject.cpp Game/GameFiles/GameObjects/CircleObject.hpp
         Game/GameFiles/GameObjects/MovingDanger.cpp Game/GameFiles/GameObjects/MovingDanger.hpp
         Game/GameFiles/GameObjects/Finish.cpp Game/GameFiles/GameObjects/Finish.hpp
-        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/ProtoClient.cpp Game/ProtoClient/ProtoClient.hpp Game/GameFiles/GameObjects/PlayerFoV.cpp Game/GameFiles/GameObjects/PlayerFoV.hpp Game/GameFiles/GameStateHandling.cpp Game/GameFiles/GameStateHandling.hpp)
+        Game/GameFiles/Level.cpp Game/GameFiles/Level.hpp Game/ProtoClient/ProtoClient.cpp Game/ProtoClient/ProtoClient.hpp Game/GameFiles/GameObjects/PlayerFoV.cpp Game/GameFiles/GameObjects/PlayerFoV.hpp Game/GameFiles/GameStateHandling.cpp Game/GameFiles/GameStateHandling.hpp Game/GameFiles/GameObjects/Floor.cpp Game/GameFiles/GameObjects/Floor.hpp)
 
 target_link_libraries(SmartSquareRL
         gRPC_Client

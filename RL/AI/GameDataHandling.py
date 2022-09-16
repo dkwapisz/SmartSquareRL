@@ -5,10 +5,11 @@ from sklearn import preprocessing
 import numpy as np
 
 blocks_mapping = {
-    0: [0, 0, 0, 1],  # floor
-    1: [0, 0, 1, 0],  # wall
-    7: [0, 1, 0, 0],  # finish
-    8: [1, 0, 0, 0]   # player
+    0: [0, 0, 0, 0, 1],  # floor [undiscovered]
+    1: [0, 0, 0, 1, 0],  # wall
+    7: [0, 0, 1, 0, 0],  # finish
+    8: [0, 1, 0, 0, 0],  # player
+    9: [1, 0, 0, 0, 0]   # floor [discovered]
 }
 
 
@@ -21,7 +22,7 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=1600, eps=0.10)
+        self.agent = DoubleDQN(lr=0.001, gamma=0.9, action_dims=4, input_dims=2000, eps=0.99)
         self.reward = 0
         self.steps_count = 0
 

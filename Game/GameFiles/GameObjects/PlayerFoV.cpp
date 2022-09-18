@@ -66,6 +66,7 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                 if (floor->getBounds().contains(sf::Vector2f(mapX, mapY))) {
                     if (!floor->discovered) {
                         floor->discovered = true;
+                        floor->getObjectShape().setFillColor(sf::Color(10, 40, 10));
                     }
                 }
             }
@@ -124,9 +125,6 @@ void PlayerFoV::render(sf::RenderTarget &target, float playerX, float playerY) {
     for (int i = 0; i < numberOfRays; i++) {
         line[0] = sf::Vertex(sf::Vector2f(playerX, playerY));
         line[1] = sf::Vertex(sf::Vector2f(rayVertexes[arrayIterator], rayVertexes[arrayIterator + 1]));
-        if (i % 6 == 0) {
-            line->color = sf::Color::Red;
-        }
         target.draw(line, 2, sf::Lines);
         arrayIterator += 2;
     }

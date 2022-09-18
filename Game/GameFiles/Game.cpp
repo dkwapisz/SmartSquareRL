@@ -6,7 +6,7 @@ Game::Game() {
     this->initializeLabels();
 
     this->gameFinished = false;
-    this->level = new Level(1);
+    this->level = new Level(2);
 }
 
 Game::~Game() {

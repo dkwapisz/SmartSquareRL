@@ -76,7 +76,7 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 
     if (coinInFoV_) {
         if (lastDistToCoin > coinDist) {
-            //reward += 3;
+            reward += 3;
         } else {
             reward -= 10;
         }
@@ -109,7 +109,7 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
 
         if (this->finishInFoV) {
             if (lastFinishDist > finishDist) {
-                //reward += 5;
+                reward += 5;
             } else {
                 reward -= 10;
             }

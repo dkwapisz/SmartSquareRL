@@ -9,7 +9,7 @@ Level::Level(int levelNumber) {
     this->gameStateHandling = new GameStateHandling();
 
     generateMap();
-    this->playerFoV = new PlayerFoV(120, false);
+    this->playerFoV = new PlayerFoV(8, false);
 }
 
 Level::~Level() {
@@ -111,19 +111,23 @@ void Level::generateMap() {
                 } else if (number == 2) {
                     this->boxes.push_back(new Box(this->squareShapes["Box"],
                                                   posX, posY));
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"], posX, posY));
                 } else if (number == 3) {
                     this->staticDangers.push_back(new StaticDanger(this->squareShapes["StaticDanger"],
                                                                    posX, posY));
                 } else if (number == 4) {
                     this->coins.push_back(new Coin(this->circleShapes["Coin"],
                                                    posX, posY));
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"], posX, posY));
                     coinsCount++;
                 } else if (number == 5) {
                     this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
                                                                    posX, posY, true));
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"], posX, posY));
                 } else if (number == 6) {
                     this->movingDangers.push_back(new MovingDanger(this->circleShapes["MovingDanger"],
                                                                    posX, posY, false));
+                    this->floors.push_back(new Floor(this->squareShapes["Floor"], posX, posY));
                 } else if (number == 7) {
                     this->finishes.push_back(new Finish(this->squareShapes["Finish"],
                                                         posX, posY));
@@ -190,7 +194,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i]->getBounds().intersects(this->player->getBounds())) {
-            gameStateHandling->reward += 100;
+            gameStateHandling->reward += 50;
             delete coins[i];
             coins.erase(coins.begin() + i);
             this->playerCoinsCount++;
@@ -356,6 +360,12 @@ void Level::checkDangerCollision(MovingDanger *movingDanger) {
 void Level::renderGameObjects(sf::RenderTarget &target) {
     for (auto *finish: this->finishes) {
         finish->render(target);
+    }
+
+    if (this->playerFoV->isDrawRaysSet()) {
+        for (auto *floor : this->floors) {
+            floor->render(target);
+        }
     }
 
     this->player->render(target);

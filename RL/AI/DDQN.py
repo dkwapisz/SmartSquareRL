@@ -6,6 +6,7 @@ from keras import backend as keras_back
 from keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
+import os
 
 MEM_SIZE = 1000000
 BATCH_SIZE = 128
@@ -47,9 +48,13 @@ class Memory:
 
 
 def build_dqn(lr, action_dims):
+    os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+    os.environ['CUDA_VISIBLE_DEVICES'] = "0"
+    print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+
     model = Sequential()
-    model.add(Dense(1024, activation='relu'))
-    model.add(Dense(1024, activation='relu'))
+    model.add(Dense(1300, activation='relu'))
+    model.add(Dense(1300, activation='relu'))
     model.add(Dense(action_dims))
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.35))
 
@@ -57,7 +62,7 @@ def build_dqn(lr, action_dims):
 
 
 class DoubleDQN:
-    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=1e-4, eps_min=0.01, replace_target=100):
+    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=5e-5, eps_min=0.01, replace_target=100):
         self.action_space = [i for i in range(action_dims)]
         self.gamma = gamma
         self.epsilon = eps

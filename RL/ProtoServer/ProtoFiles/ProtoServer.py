@@ -14,9 +14,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode = 0
 
         logging.basicConfig(filename="learning.log", level=logging.DEBUG)
-        logging.debug("Episode, Reward, Reward with gameOver punishment")
-
-    # CURRENTLY UNUSED: closestEnemy, closestObstacleIsBox, shotDir (!!!)
+        logging.debug("Reward")
 
     def StateAction(self, request, context):
         self.gameDataHandling.set_state(request)
@@ -33,16 +31,16 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
         self.rewardInEpisode += request.reward
-        if self.gameDataHandling.steps_count >= 256 or self.check_action_duplicates():
-            logging.debug("{}, {}".format(request.episodeCount, (self.rewardInEpisode - 150)))
+        if self.gameDataHandling.steps_count >= 400 or self.check_action_duplicates():
+            logging.debug("{}".format(self.rewardInEpisode - 200))
             self.rewardInEpisode = 0
             self.lastActions = []
-            self.gameDataHandling.reward = -150
-            self.rewardInEpisode += -150
+            self.gameDataHandling.reward = -200
+            self.rewardInEpisode += -200
             self.gameDataHandling.game_over = True
             self.gameDataHandling.reset_env = True
         elif request.gameOver:
-            logging.debug("{}, {}".format(request.episodeCount, self.rewardInEpisode))
+            logging.debug("{}".format(self.rewardInEpisode))
             self.rewardInEpisode = 0
 
         self.gameDataHandling.remember()

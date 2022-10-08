@@ -8,36 +8,36 @@ GameStateHandling::GameStateHandling() {
 
 void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
                                                  std::vector<MovingDanger *> *movingDangers, Player *player) {
-
-    float playerDistanceToStaticDanger = 99999999.f;
-    float tempDistanceStaticDanger;
-    float playerDistanceToMovingDanger = 99999999.f;
-    float tempDistanceMovingDanger;
-
-    StaticDanger closestStaticDanger;
-    MovingDanger closestMovingDanger;
-
-    for (const auto &staticDanger: *staticDangers) {
-        tempDistanceStaticDanger = std::sqrt(
-                powf((player->getCenterPosX() - staticDanger->getCenterPosX()), 2.f) +
-                powf((player->getCenterPosY() - staticDanger->getCenterPosY()), 2.f));
-
-        if (playerDistanceToStaticDanger > tempDistanceStaticDanger) {
-            playerDistanceToStaticDanger = tempDistanceStaticDanger;
-            closestStaticDanger = *staticDanger;
-        }
-    }
-
-    for (const auto &movingDanger: *movingDangers) {
-        tempDistanceMovingDanger = std::sqrt(
-                powf((player->getCenterPosX() - movingDanger->getCenterPosX()), 2.f) +
-                powf((player->getCenterPosY() - movingDanger->getCenterPosY()), 2.f));
-
-        if (playerDistanceToMovingDanger > tempDistanceMovingDanger) {
-            playerDistanceToMovingDanger = tempDistanceMovingDanger;
-            closestMovingDanger = *movingDanger;
-        }
-    }
+//
+//    float playerDistanceToStaticDanger = 99999999.f;
+//    float tempDistanceStaticDanger;
+//    float playerDistanceToMovingDanger = 99999999.f;
+//    float tempDistanceMovingDanger;
+//
+//    StaticDanger closestStaticDanger;
+//    MovingDanger closestMovingDanger;
+//
+//    for (const auto &staticDanger: *staticDangers) {
+//        tempDistanceStaticDanger = std::sqrt(
+//                powf((player->getCenterPosX() - staticDanger->getCenterPosX()), 2.f) +
+//                powf((player->getCenterPosY() - staticDanger->getCenterPosY()), 2.f));
+//
+//        if (playerDistanceToStaticDanger > tempDistanceStaticDanger) {
+//            playerDistanceToStaticDanger = tempDistanceStaticDanger;
+//            closestStaticDanger = *staticDanger;
+//        }
+//    }
+//
+//    for (const auto &movingDanger: *movingDangers) {
+//        tempDistanceMovingDanger = std::sqrt(
+//                powf((player->getCenterPosX() - movingDanger->getCenterPosX()), 2.f) +
+//                powf((player->getCenterPosY() - movingDanger->getCenterPosY()), 2.f));
+//
+//        if (playerDistanceToMovingDanger > tempDistanceMovingDanger) {
+//            playerDistanceToMovingDanger = tempDistanceMovingDanger;
+//            closestMovingDanger = *movingDanger;
+//        }
+//    }
 
 }
 
@@ -57,7 +57,7 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
     if (!this->coinInFoV) {
         float playerDistanceToCoin = 99999999.f;
         float tempDistanceCoin;
-        std::cout << "Coin is not in fov" << "\n";
+        //std::cout << "Coin is not in fov" << "\n";
         for (const auto &coin: *coins) {
             tempDistanceCoin = std::sqrt(
                     powf((player->getCenterPosX() - coin->getCenterPosX()), 2.f) +
@@ -76,48 +76,46 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 
     if (coinInFoV_) {
         if (lastDistToCoin > coinDist) {
-            reward += 3;
+            //reward += 1;
         } else {
-            reward -= 10;
+            reward -= 5;
         }
         lastDistToCoin = coinDist;
     }
 }
 
 void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player) {
-    float playerDistanceToFinish = 99999999.f;
-    float tempDistanceFinish;
-
-    Finish closestFinish;
-    this->finishInFoV = finishInFoV_;
-
-    for (const auto &finish: *finishes) {
-        tempDistanceFinish = std::sqrt(
-                powf((player->getCenterPosX() - finish->getCenterPosX()), 2.f) +
-                powf((player->getCenterPosY() - finish->getCenterPosY()), 2.f));
-
-        if (playerDistanceToFinish > tempDistanceFinish) {
-            playerDistanceToFinish = tempDistanceFinish;
-            closestFinish = *finish;
-        }
-    }
-
     if (allCoinsCollected) {
+        float playerDistanceToFinish = 99999999.f;
+        float tempDistanceFinish;
+
+        Finish closestFinish;
+        this->finishInFoV = finishInFoV_;
+
+        for (const auto &finish: *finishes) {
+            tempDistanceFinish = std::sqrt(
+                    powf((player->getCenterPosX() - finish->getCenterPosX()), 2.f) +
+                    powf((player->getCenterPosY() - finish->getCenterPosY()), 2.f));
+
+            if (playerDistanceToFinish > tempDistanceFinish) {
+                playerDistanceToFinish = tempDistanceFinish;
+                closestFinish = *finish;
+            }
+        }
+
         float finishDist = std::sqrt(
                 powf((player->getCenterPosX() - closestFinish.getCenterPosX()), 2.f) +
                 powf((player->getCenterPosY() - closestFinish.getCenterPosY()), 2.f));
 
         if (this->finishInFoV) {
             if (lastFinishDist > finishDist) {
-                reward += 5;
+                reward += 3;
             } else {
                 reward -= 10;
             }
             lastFinishDist = finishDist;
         }
-
     }
-
 }
 
 void GameStateHandling::resetAllStates() {
@@ -150,20 +148,13 @@ void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::ve
         }
     }
 
-    int discoveredFloorActualStep = 0;
     for (auto &floor : *floors) {
         if (floor->discovered) {
-            discoveredFloorActualStep++;
             int floorX = (int) floor->getCenterPosX() / 30;
             int floorY = (int) (floor->getCenterPosY() - 50) / 30;
             mapMatrix[floorX + floorY * 20] = 9;
         }
     }
-
-    if (discoveredFloorCount < discoveredFloorActualStep && stepsCount > 3) {
-        reward += (discoveredFloorActualStep - discoveredFloorCount)*2;
-    }
-    discoveredFloorCount = discoveredFloorActualStep;
 
     mapMatrix[playerMapPosX + playerMapPosY * 20] = 8;
     mapMatrixAsString = "";

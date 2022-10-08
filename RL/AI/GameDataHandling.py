@@ -1,8 +1,4 @@
-import math
-
-from AI.DDQN import DoubleDQN
-from sklearn import preprocessing
-import numpy as np
+from DDQN import DoubleDQN
 
 blocks_mapping = {
     0: [0, 0, 0, 0, 0, 1],  # floor [undiscovered]
@@ -10,20 +6,20 @@ blocks_mapping = {
     4: [0, 0, 0, 1, 0, 0],  # coin
     7: [0, 0, 1, 0, 0, 0],  # finish
     8: [0, 1, 0, 0, 0, 0],  # player
-    9: [1, 0, 0, 0, 0, 0]   # floor [discovered]
+    9: [1, 0, 0, 0, 0, 0]  # floor [discovered]
 }
 
 
 class GameDataHandling:
 
-    def __init__(self):
+    def __init__(self, worker_id_):
         self.move_dir = 0
         self.shot_dir = 0
         self.state = []
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(lr=0.001, gamma=0.95, action_dims=4, input_dims=2400, eps=1)
+        self.agent = DoubleDQN(action_dims=4, input_dims=2400, worker_id=worker_id_)
         self.reward = 0
         self.steps_count = 0
 
@@ -54,8 +50,8 @@ class GameDataHandling:
         self.game_over = gameOver
         self.reset_env = resetEnv
 
-    def save_agent(self):
-        self.agent.save_neural_network()
+    def save_agent(self, episodeCount, worker_id):
+        self.agent.save_neural_network(episodeCount, worker_id)
 
     @staticmethod
     def __reformat_map_matrix_state(input_state: str):

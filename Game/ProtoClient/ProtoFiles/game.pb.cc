@@ -20,6 +20,7 @@ namespace GameMessage {
 constexpr State::State(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : mapmatrix_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , coinsleft_(0)
   , reward_(0)
   , stepscount_(0)
   , gameover_(false)
@@ -73,6 +74,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, mapmatrix_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, coinsleft_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, stepscount_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, gameover_),
@@ -95,8 +97,8 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::State)},
-  { 11, -1, -1, sizeof(::GameMessage::Action)},
-  { 19, -1, -1, sizeof(::GameMessage::Reset)},
+  { 12, -1, -1, sizeof(::GameMessage::Action)},
+  { 20, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -106,23 +108,24 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"f\n\005State\022\021\n\tma"
-  "pMatrix\030\004 \001(\t\022\016\n\006reward\030\t \001(\005\022\022\n\nstepsCo"
-  "unt\030\n \001(\005\022\020\n\010gameOver\030\013 \001(\010\022\024\n\014episodeCo"
-  "unt\030\014 \001(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 "
-  "\001(\0162#.GameMessage.Action.ActionDirection"
-  "\022:\n\rshotDirection\030\002 \001(\0162#.GameMessage.Ac"
-  "tion.ActionDirection\"B\n\017ActionDirection\022"
-  "\010\n\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010"
-  "\n\004LEFT\020\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207"
-  "\001\n\023StateActionExchange\0228\n\013StateAction\022\022."
-  "GameMessage.State\032\023.GameMessage.Action\"\000"
-  "\0226\n\nStateReset\022\022.GameMessage.State\032\022.Gam"
-  "eMessage.Reset\"\000b\006proto3"
+  "\n\ngame.proto\022\013GameMessage\"y\n\005State\022\021\n\tma"
+  "pMatrix\030\001 \001(\t\022\021\n\tcoinsLeft\030\002 \001(\005\022\016\n\006rewa"
+  "rd\030\003 \001(\005\022\022\n\nstepsCount\030\004 \001(\005\022\020\n\010gameOver"
+  "\030\005 \001(\010\022\024\n\014episodeCount\030\006 \001(\005\"\304\001\n\006Action\022"
+  ":\n\rmoveDirection\030\001 \001(\0162#.GameMessage.Act"
+  "ion.ActionDirection\022:\n\rshotDirection\030\002 \001"
+  "(\0162#.GameMessage.Action.ActionDirection\""
+  "B\n\017ActionDirection\022\010\n\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005"
+  "RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020\004\"\034\n\005Reset\022\023\n\013"
+  "resetNeeded\030\001 \001(\0102\207\001\n\023StateActionExchang"
+  "e\0228\n\013StateAction\022\022.GameMessage.State\032\023.G"
+  "ameMessage.Action\"\000\0226\n\nStateReset\022\022.Game"
+  "Message.State\032\022.GameMessage.Reset\"\000b\006pro"
+  "to3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 504, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 523, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -188,9 +191,9 @@ State::State(const State& from)
     mapmatrix_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_mapmatrix(), 
       GetArenaForAllocation());
   }
-  ::memcpy(&reward_, &from.reward_,
+  ::memcpy(&coinsleft_, &from.coinsleft_,
     static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
-    reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
+    reinterpret_cast<char*>(&coinsleft_)) + sizeof(episodecount_));
   // @@protoc_insertion_point(copy_constructor:GameMessage.State)
 }
 
@@ -200,9 +203,9 @@ mapmatrix_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAl
   mapmatrix_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&reward_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&coinsleft_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&episodecount_) -
-    reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
+    reinterpret_cast<char*>(&coinsleft_)) + sizeof(episodecount_));
 }
 
 State::~State() {
@@ -234,9 +237,9 @@ void State::Clear() {
   (void) cached_has_bits;
 
   mapmatrix_.ClearToEmpty();
-  ::memset(&reward_, 0, static_cast<size_t>(
+  ::memset(&coinsleft_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&episodecount_) -
-      reinterpret_cast<char*>(&reward_)) + sizeof(episodecount_));
+      reinterpret_cast<char*>(&coinsleft_)) + sizeof(episodecount_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -246,9 +249,9 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string mapMatrix = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+      // string mapMatrix = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_mapmatrix();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "GameMessage.State.mapMatrix"));
@@ -256,33 +259,41 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // int32 reward = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+      // int32 coinsLeft = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          coinsleft_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 reward = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           reward_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 stepsCount = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
+      // int32 stepsCount = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           stepscount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // bool gameOver = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+      // bool gameOver = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           gameover_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 episodeCount = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 96)) {
+      // int32 episodeCount = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           episodecount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -317,38 +328,44 @@ uint8_t* State::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string mapMatrix = 4;
+  // string mapMatrix = 1;
   if (!this->_internal_mapmatrix().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_mapmatrix().data(), static_cast<int>(this->_internal_mapmatrix().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "GameMessage.State.mapMatrix");
     target = stream->WriteStringMaybeAliased(
-        4, this->_internal_mapmatrix(), target);
+        1, this->_internal_mapmatrix(), target);
   }
 
-  // int32 reward = 9;
+  // int32 coinsLeft = 2;
+  if (this->_internal_coinsleft() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_coinsleft(), target);
+  }
+
+  // int32 reward = 3;
   if (this->_internal_reward() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_reward(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_reward(), target);
   }
 
-  // int32 stepsCount = 10;
+  // int32 stepsCount = 4;
   if (this->_internal_stepscount() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(10, this->_internal_stepscount(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_stepscount(), target);
   }
 
-  // bool gameOver = 11;
+  // bool gameOver = 5;
   if (this->_internal_gameover() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_gameover(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_gameover(), target);
   }
 
-  // int32 episodeCount = 12;
+  // int32 episodeCount = 6;
   if (this->_internal_episodecount() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(12, this->_internal_episodecount(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_episodecount(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -367,29 +384,34 @@ size_t State::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string mapMatrix = 4;
+  // string mapMatrix = 1;
   if (!this->_internal_mapmatrix().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_mapmatrix());
   }
 
-  // int32 reward = 9;
+  // int32 coinsLeft = 2;
+  if (this->_internal_coinsleft() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_coinsleft());
+  }
+
+  // int32 reward = 3;
   if (this->_internal_reward() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_reward());
   }
 
-  // int32 stepsCount = 10;
+  // int32 stepsCount = 4;
   if (this->_internal_stepscount() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_stepscount());
   }
 
-  // bool gameOver = 11;
+  // bool gameOver = 5;
   if (this->_internal_gameover() != 0) {
     total_size += 1 + 1;
   }
 
-  // int32 episodeCount = 12;
+  // int32 episodeCount = 6;
   if (this->_internal_episodecount() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_episodecount());
   }
@@ -418,6 +440,9 @@ void State::MergeFrom(const State& from) {
 
   if (!from._internal_mapmatrix().empty()) {
     _internal_set_mapmatrix(from._internal_mapmatrix());
+  }
+  if (from._internal_coinsleft() != 0) {
+    _internal_set_coinsleft(from._internal_coinsleft());
   }
   if (from._internal_reward() != 0) {
     _internal_set_reward(from._internal_reward());
@@ -458,9 +483,9 @@ void State::InternalSwap(State* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(State, episodecount_)
       + sizeof(State::episodecount_)
-      - PROTOBUF_FIELD_OFFSET(State, reward_)>(
-          reinterpret_cast<char*>(&reward_),
-          reinterpret_cast<char*>(&other->reward_));
+      - PROTOBUF_FIELD_OFFSET(State, coinsleft_)>(
+          reinterpret_cast<char*>(&coinsleft_),
+          reinterpret_cast<char*>(&other->coinsleft_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata State::GetMetadata() const {

@@ -20,7 +20,10 @@ void Game::loadFont() {
     this->font = new sf::Font();
 
     if (!font->loadFromFile("../Game/GameFiles/Upheaval-font.ttf")) {
-        std::cout << "Font cannot be loaded";
+        std::cerr << "Font cannot be loaded. Trying second path..." << "\n";
+        if (!font->loadFromFile("/home/dkwapisz/SmartSquareRL/cmake-build-release/Upheaval-font.ttf")) {
+            std::cerr << "Font cannot be loaded anyway. Aborted..." << "\n";
+        }
     }
 }
 
@@ -79,25 +82,36 @@ void Game::renderLabels() {
     this->window->draw(*coinCountLabel);
 }
 
-void Game::run() {
-    ProtoClient client{grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials())};
+void Game::run(int argc, char **argv) {
+    std::string client_address = "localhost:";
+    client_address.append(argv[1]);
+
+    std::cout << "Client starts in address: " << client_address << "\n";
+    ProtoClient client{grpc::CreateChannel(client_address, grpc::InsecureChannelCredentials())};
+
     bool gameOver;
     char *actions;
     bool reset;
+    int coinsLeft;
 
     while (this->window->isOpen()) {
         if (!gameFinished) {
-            // TODO Refactor
             this->level->gameStateHandling->reward = 0;
 
-            actions = client.StateAction(level->gameStateHandling,
+            coinsLeft = level->getCoinsCount() - level->getPlayerCoinsCount();
+
+            actions = client.StateAction(level->gameStateHandling, coinsLeft,
                                          level->getPlayer()->getEpisodeNumber());
 
             gameOver = this->playStep(actions[0], actions[1]);
-            std::cout << "Move action: " << actions[0] << "\n";
-            this->render();
+            //std::cout << "Move action: " << actions[0] << "\n";
 
-            reset = client.StateReset(level->gameStateHandling);
+            if (false) {
+                // TEST PURPOSE, RENDER IS NOT NEEDED TO RL TRAINING
+                this->render();
+            }
+
+            reset = client.StateReset(level->gameStateHandling, level->getPlayer()->getEpisodeNumber(), coinsLeft);
             level->gameStateHandling->stepsCount++;
 
             performResetIfNeeded(gameOver || reset);

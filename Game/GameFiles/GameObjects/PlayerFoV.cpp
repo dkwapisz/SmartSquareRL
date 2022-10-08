@@ -62,14 +62,18 @@ void PlayerFoV::calculateRays(std::vector<Wall *> *walls, std::vector<Box *> *bo
                 side = 1;
             }
 
-            for (const auto &floor: *floors) {
-                if (floor->getBounds().contains(sf::Vector2f(mapX, mapY))) {
-                    if (!floor->discovered) {
-                        floor->discovered = true;
-                        floor->getObjectShape().setFillColor(sf::Color(10, 40, 10));
-                    }
-                }
-            }
+//            if (std::hypot((playerX - mapX), (playerY - mapY)) > 3) {
+//                hit = 1;
+//            }
+
+//            for (const auto &floor: *floors) {
+//                if (floor->getBounds().contains(sf::Vector2f(mapX, mapY))) {
+//                    if (!floor->discovered) {
+//                        floor->discovered = true;
+//                        floor->getObjectShape().setFillColor(sf::Color(10, 30, 10));
+//                    }
+//                }
+//            }
 
             for (const auto &wall: *walls) {
                 if (wall->getBounds().contains(sf::Vector2f(mapX, mapY))) {

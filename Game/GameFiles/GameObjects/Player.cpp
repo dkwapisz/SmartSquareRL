@@ -3,7 +3,7 @@
 Player::Player() = default;
 
 Player::Player(float positionX, float positionY) {
-    this->moveSpeed = 10.f;
+    this->moveSpeed = 30.f;
     this->shotCooldown = 10;
     this->shotCooldownMax = 10;
     this->shotSpeed = 4.f;
@@ -14,7 +14,7 @@ Player::Player(float positionX, float positionY) {
 
     this->playerShape.setPosition(positionX, positionY);
     this->playerShape.setFillColor(sf::Color::Blue);
-    this->playerShape.setSize(sf::Vector2f(20.f, 20.f));
+    this->playerShape.setSize(sf::Vector2f(30.f, 30.f));
 }
 
 void Player::render(sf::RenderTarget &target) {

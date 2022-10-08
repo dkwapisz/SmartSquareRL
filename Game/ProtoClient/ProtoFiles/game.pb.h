@@ -224,13 +224,14 @@ class State final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMapMatrixFieldNumber = 4,
-    kRewardFieldNumber = 9,
-    kStepsCountFieldNumber = 10,
-    kGameOverFieldNumber = 11,
-    kEpisodeCountFieldNumber = 12,
+    kMapMatrixFieldNumber = 1,
+    kCoinsLeftFieldNumber = 2,
+    kRewardFieldNumber = 3,
+    kStepsCountFieldNumber = 4,
+    kGameOverFieldNumber = 5,
+    kEpisodeCountFieldNumber = 6,
   };
-  // string mapMatrix = 4;
+  // string mapMatrix = 1;
   void clear_mapmatrix();
   const std::string& mapmatrix() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -244,7 +245,16 @@ class State final :
   std::string* _internal_mutable_mapmatrix();
   public:
 
-  // int32 reward = 9;
+  // int32 coinsLeft = 2;
+  void clear_coinsleft();
+  int32_t coinsleft() const;
+  void set_coinsleft(int32_t value);
+  private:
+  int32_t _internal_coinsleft() const;
+  void _internal_set_coinsleft(int32_t value);
+  public:
+
+  // int32 reward = 3;
   void clear_reward();
   int32_t reward() const;
   void set_reward(int32_t value);
@@ -253,7 +263,7 @@ class State final :
   void _internal_set_reward(int32_t value);
   public:
 
-  // int32 stepsCount = 10;
+  // int32 stepsCount = 4;
   void clear_stepscount();
   int32_t stepscount() const;
   void set_stepscount(int32_t value);
@@ -262,7 +272,7 @@ class State final :
   void _internal_set_stepscount(int32_t value);
   public:
 
-  // bool gameOver = 11;
+  // bool gameOver = 5;
   void clear_gameover();
   bool gameover() const;
   void set_gameover(bool value);
@@ -271,7 +281,7 @@ class State final :
   void _internal_set_gameover(bool value);
   public:
 
-  // int32 episodeCount = 12;
+  // int32 episodeCount = 6;
   void clear_episodecount();
   int32_t episodecount() const;
   void set_episodecount(int32_t value);
@@ -288,6 +298,7 @@ class State final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr mapmatrix_;
+  int32_t coinsleft_;
   int32_t reward_;
   int32_t stepscount_;
   bool gameover_;
@@ -645,7 +656,7 @@ class Reset final :
 #endif  // __GNUC__
 // State
 
-// string mapMatrix = 4;
+// string mapMatrix = 1;
 inline void State::clear_mapmatrix() {
   mapmatrix_.ClearToEmpty();
 }
@@ -696,7 +707,27 @@ inline void State::set_allocated_mapmatrix(std::string* mapmatrix) {
   // @@protoc_insertion_point(field_set_allocated:GameMessage.State.mapMatrix)
 }
 
-// int32 reward = 9;
+// int32 coinsLeft = 2;
+inline void State::clear_coinsleft() {
+  coinsleft_ = 0;
+}
+inline int32_t State::_internal_coinsleft() const {
+  return coinsleft_;
+}
+inline int32_t State::coinsleft() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.coinsLeft)
+  return _internal_coinsleft();
+}
+inline void State::_internal_set_coinsleft(int32_t value) {
+  
+  coinsleft_ = value;
+}
+inline void State::set_coinsleft(int32_t value) {
+  _internal_set_coinsleft(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.coinsLeft)
+}
+
+// int32 reward = 3;
 inline void State::clear_reward() {
   reward_ = 0;
 }
@@ -716,7 +747,7 @@ inline void State::set_reward(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.reward)
 }
 
-// int32 stepsCount = 10;
+// int32 stepsCount = 4;
 inline void State::clear_stepscount() {
   stepscount_ = 0;
 }
@@ -736,7 +767,7 @@ inline void State::set_stepscount(int32_t value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.stepsCount)
 }
 
-// bool gameOver = 11;
+// bool gameOver = 5;
 inline void State::clear_gameover() {
   gameover_ = false;
 }
@@ -756,7 +787,7 @@ inline void State::set_gameover(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
 }
 
-// int32 episodeCount = 12;
+// int32 episodeCount = 6;
 inline void State::clear_episodecount() {
   episodecount_ = 0;
 }

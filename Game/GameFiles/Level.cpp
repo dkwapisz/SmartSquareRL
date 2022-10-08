@@ -158,6 +158,14 @@ void Level::movePlayer(float directionX, float directionY) {
 }
 
 bool Level::checkCollision() {
+    for (const auto &floor: floors) {
+        if (floor->getBounds().intersects(this->player->getBounds()) && !floor->discovered) {
+            floor->discovered = true;
+            floor->getObjectShape().setFillColor(sf::Color(10, 30, 10));
+            gameStateHandling->reward += 1;
+        }
+    }
+
     for (const auto &wall: walls) {
         if (wall->getBounds().intersects(this->player->getBounds())) {
             gameStateHandling->reward += -20;
@@ -184,7 +192,7 @@ bool Level::checkCollision() {
         if (finish->getBounds().intersects(this->player->getBounds())) {
 
             if (this->coinsCount == this->playerCoinsCount) {
-                gameStateHandling->reward += 300;
+                gameStateHandling->reward += 500;
                 levelFinished = true;
             }
 
@@ -194,7 +202,7 @@ bool Level::checkCollision() {
 
     for (int i = 0; i < coins.size(); i++) {
         if (coins[i]->getBounds().intersects(this->player->getBounds())) {
-            gameStateHandling->reward += 50;
+            gameStateHandling->reward += 75;
             delete coins[i];
             coins.erase(coins.begin() + i);
             this->playerCoinsCount++;
@@ -362,7 +370,7 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
         finish->render(target);
     }
 
-    if (this->playerFoV->isDrawRaysSet()) {
+    if (true) {
         for (auto *floor : this->floors) {
             floor->render(target);
         }

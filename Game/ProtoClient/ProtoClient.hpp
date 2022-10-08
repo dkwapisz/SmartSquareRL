@@ -23,8 +23,8 @@ private:
 public:
     ProtoClient(std::shared_ptr<Channel> channel) : _stub{StateActionExchange::NewStub(channel)} {}
 
-    char *StateAction(GameStateHandling *gameStateHandling, int32_t iteration);
+    char *StateAction(GameStateHandling *gameStateHandling, int32_t coinsLeft, int32_t iteration);
 
-    bool StateReset(GameStateHandling *gameStateHandling);
+    bool StateReset(GameStateHandling *gameStateHandling, int32_t iteration, int32_t coinsLeft);
 };
 

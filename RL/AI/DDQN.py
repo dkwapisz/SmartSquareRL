@@ -1,15 +1,16 @@
+import json
+
 import numpy as np
 import tensorflow as tf
 from keras import Sequential
 from keras.layers import Dense
-from keras import backend as keras_back
 from keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 import os
 
 MEM_SIZE = 1000000
-BATCH_SIZE = 128
+BATCH_SIZE = 64
 
 
 class Memory:
@@ -47,38 +48,64 @@ class Memory:
         return states, actions, rewards, new_state, terminal
 
 
-def build_dqn(lr, action_dims):
+def set_tf_gpu():
     os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
     os.environ['CUDA_VISIBLE_DEVICES'] = "0"
+    gpu_devices = tf.config.experimental.list_physical_devices('GPU')
+    for device in gpu_devices:
+        tf.config.experimental.set_memory_growth(device, True)
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
+
+def get_param(param_name, worker_id):
+    with open("../LearningData/learning_params.json") as paramsFile:
+        params = json.load(paramsFile)
+
+    if len(params[param_name]) == 1:
+        return params[param_name][0]
+    else:
+        return params[param_name][worker_id]
+
+
+def build_dqn(worker_id, action_dims):
+    set_tf_gpu()
+
+    lr = get_param("learning_rate", worker_id)
+    huber_delta = get_param("huber_delta", worker_id)
+    layers = get_param("network_layers", worker_id)
+    neurons = get_param("neurons", worker_id)
+
     model = Sequential()
-    model.add(Dense(1300, activation='relu'))
-    model.add(Dense(1300, activation='relu'))
+
+    for i in range(0, layers):
+        model.add(Dense(neurons[i], activation='relu'))
     model.add(Dense(action_dims))
-    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=1.35))
+    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
 
     return model
 
 
 class DoubleDQN:
-    def __init__(self, lr, gamma, action_dims, input_dims, eps, eps_decay=5e-5, eps_min=0.01, replace_target=100):
+    def __init__(self, action_dims, input_dims, worker_id):
         self.action_space = [i for i in range(action_dims)]
-        self.gamma = gamma
-        self.epsilon = eps
-        self.epsilon_decay = eps_decay
-        self.epsilon_min = eps_min
-        self.replace_target = replace_target
+        self.gamma = get_param("gamma", worker_id)
+        self.epsilon = get_param("epsilon", worker_id)
+        self.epsilon_decay = get_param("epsilon_decay", worker_id)
+        self.epsilon_min = get_param("epsilon_min", worker_id)
+        self.replace_target = get_param("replace_target", worker_id)
         self.memory = Memory(input_dims, action_dims)
-        self.neural_network_eval = build_dqn(lr, action_dims)
-        self.neural_network_target = build_dqn(lr, action_dims)
+        self.neural_network_eval = build_dqn(worker_id, action_dims)
+        self.neural_network_target = build_dqn(worker_id, action_dims)
 
-    def save_neural_network(self):
-        self.neural_network_eval.save("Double_DQN_1.h5")
+    def save_neural_network(self, episodeCount, worker_id):
+        filename = "../LearningData/NeuralNetworks/Worker{}/DDQN_episode_{}_worker_{}.h5".format(worker_id,
+                                                                                                 episodeCount,
+                                                                                                 worker_id)
+        self.neural_network_eval.save(filename)
 
     def load_neural_network(self):
-        self.neural_network_eval = load_model("Double_DQN_1.h5")
-        if self.epsilon == 0.0:
+        self.neural_network_eval = load_model("DDQN_episode_0.h5")
+        if self.epsilon == self.epsilon_min:
             self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
 
     def write_to_memory(self, state, action, reward, new_state, done):
@@ -110,17 +137,19 @@ class DoubleDQN:
             q_target = q_pred
 
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
-            q_target[batch_index, action_indices] = reward + self.gamma * q_next[batch_index, max_actions.astype(int) * done]
+            q_target[batch_index, action_indices] = reward + self.gamma * q_next[
+                batch_index, max_actions.astype(int) * done]
 
             _ = self.neural_network_eval.fit(state, q_target, verbose=0)
 
-            if self.epsilon > self.epsilon_min:
-                self.epsilon -= self.epsilon_decay
-            else:
-                self.epsilon = self.epsilon_min
+            # if self.epsilon > self.epsilon_min:
+            #     self.epsilon -= self.epsilon_decay
+            # else:
+            #     self.epsilon = self.epsilon_min
+
+            self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
 
             print("Epsilon: {}".format(self.epsilon))
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
-

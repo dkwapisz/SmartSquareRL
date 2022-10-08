@@ -13,12 +13,12 @@ service StateActionExchange {
 }
 
 message State {
-  string mapMatrix = 4;
-
-  int32 reward = 9;
-  int32 stepsCount = 10;
-  bool gameOver = 11;
-  int32 episodeCount = 12;
+  string mapMatrix = 1;
+  int32 coinsLeft = 2;
+  int32 reward = 3;
+  int32 stepsCount = 4;
+  bool gameOver = 5;
+  int32 episodeCount = 6;
 }
 
 message Action {

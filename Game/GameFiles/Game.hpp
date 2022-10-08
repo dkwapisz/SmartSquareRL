@@ -51,6 +51,6 @@ public:
 
     virtual ~Game();
 
-    void run();
+    void run(int argc, char **argv);
 
 };

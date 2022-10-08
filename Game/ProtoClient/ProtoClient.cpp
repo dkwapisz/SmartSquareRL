@@ -2,13 +2,13 @@
 
 using namespace GameMessage;
 
-char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t iteration) {
+char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t coinsLeft, int32_t iteration) {
 
     State request;
 
     request.set_stepscount(gameStateHandling->stepsCount);
     request.set_episodecount(iteration);
-
+    request.set_coinsleft(coinsLeft);
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
 
 
@@ -28,13 +28,14 @@ char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t ite
 }
 
 
-bool ProtoClient::StateReset(GameStateHandling *gameStateHandling) {
+bool ProtoClient::StateReset(GameStateHandling *gameStateHandling, int32_t iteration, int32_t coinsLeft) {
 
     State request;
 
     request.set_reward(gameStateHandling->reward);
     request.set_gameover(gameStateHandling->gameOver);
-
+    request.set_episodecount(iteration);
+    request.set_coinsleft(coinsLeft);
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
 
     Reset response;

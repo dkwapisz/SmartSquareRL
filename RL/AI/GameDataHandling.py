@@ -33,7 +33,7 @@ class GameDataHandling:
         self.game_over = request.gameOver
 
     def learn(self):
-        print("Step: {}, Actual Reward: {}".format(self.steps_count, self.reward))
+        #print("Step: {}, Actual Reward: {}".format(self.steps_count, self.reward))
         self.agent.learn()
 
     def remember(self):

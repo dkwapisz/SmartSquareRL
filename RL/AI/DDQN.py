@@ -78,10 +78,18 @@ def build_dqn(worker_id, action_dims):
     model = Sequential()
 
     for i in range(0, layers):
-        model.add(Dense(neurons[i], activation='relu'))
-    model.add(Dense(action_dims))
-    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
+        model.add(
+            Dense(neurons[i],
+                  activation='relu',
+                  kernel_initializer=tf.keras.initializers.VarianceScaling(scale=2.0,
+                                                                           mode='fan_in',
+                                                                           distribution='truncated_normal'))
+        )
+    model.add(Dense(action_dims,
+              kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
+              bias_initializer=tf.keras.initializers.Constant(-0.2)))
 
+    model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
     return model
 
 
@@ -110,6 +118,9 @@ class DoubleDQN:
 
     def write_to_memory(self, state, action, reward, new_state, done):
         self.memory.write_to_memory(state, action, reward, new_state, done)
+
+    def get_epsilon(self):
+        return self.epsilon
 
     def calculate_action(self, state):
         state = np.array(state)
@@ -149,7 +160,7 @@ class DoubleDQN:
 
             self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
 
-            print("Epsilon: {}".format(self.epsilon))
+            # print("Epsilon: {}".format(self.epsilon))
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())

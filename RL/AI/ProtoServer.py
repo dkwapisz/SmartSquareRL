@@ -25,7 +25,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.gameDataHandling = GameDataHandling(params.WORKER_ID)
         self.lastActions = []
         self.rewardInEpisode = 0
-
+        print(params.WORKER_ID)
         logging.basicConfig(filename="../LearningData/reward_worker_{}.logs".format(params.WORKER_ID),
                             level=logging.DEBUG)
         self.log_test_purpose()
@@ -58,15 +58,19 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
             self.lastActions = []
             self.gameDataHandling.reward = -300 + (request.coinsLeft * (-200))
             logging.debug(
-                "Reward: {}, Ep: {}, Coins: {}, [LOSE]".format((self.rewardInEpisode + self.gameDataHandling.reward),
-                                                               request.episodeCount, request.coinsLeft))
+                "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, [LOSE]".format(
+                    (self.rewardInEpisode + self.gameDataHandling.reward),
+                    request.episodeCount, request.coinsLeft, self.gameDataHandling.agent.get_epsilon()))
             self.gameDataHandling.game_over = True
             self.gameDataHandling.reset_env = True
             self.rewardInEpisode = 0
         elif request.gameOver:
             self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
-            logging.debug("Reward: {}, Ep: {}, Coins: {}, [WIN]".format(self.rewardInEpisode, request.episodeCount,
-                                                                        request.coinsLeft))
+            logging.debug(
+                "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, [WIN]".format(self.rewardInEpisode,
+                                                                                request.episodeCount,
+                                                                                request.coinsLeft,
+                                                                                self.gameDataHandling.agent.get_epsilon()))
             self.gameDataHandling.game_over = True
             self.rewardInEpisode = 0
 

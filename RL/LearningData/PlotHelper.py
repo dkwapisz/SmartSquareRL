@@ -26,8 +26,9 @@ nr_of_plots = 8
 
 for j in range(0, nr_of_workers, nr_of_plots):
     pylab.figure(dpi=600)
+    pylab.title("Batch_size")
     pylab.xticks([i for i in range(0, 500, 50)])
-    pylab.yticks([i for i in range(-2000, 0, 100)])
+    pylab.yticks([i for i in range(-3600, 0, 200)])
     print(j, j+nr_of_plots)
     for i in range(j, j+nr_of_plots, 1):
         pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.4, label="worker{}".format(i))

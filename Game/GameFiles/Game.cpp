@@ -1,9 +1,9 @@
 #include "Game.hpp"
 
 Game::Game() {
-    this->loadFont();
-    this->initializeWindow();
-    this->initializeLabels();
+    //this->loadFont();
+    //this->initializeWindow();
+    //this->initializeLabels();
 
     this->gameFinished = false;
     this->level = new Level(2);
@@ -11,8 +11,8 @@ Game::Game() {
 
 Game::~Game() {
     delete this->level;
-    deleteLabels();
-    delete this->window;
+    //deleteLabels();
+    //delete this->window;
     exit(0);
 }
 
@@ -94,7 +94,8 @@ void Game::run(int argc, char **argv) {
     bool reset;
     int coinsLeft;
 
-    while (this->window->isOpen()) {
+    //while (this->window->isOpen()) {
+    while (true) {
         if (!gameFinished) {
             this->level->gameStateHandling->reward = 0;
 
@@ -116,7 +117,7 @@ void Game::run(int argc, char **argv) {
 
             performResetIfNeeded(gameOver || reset);
         } else {
-            this->window->close();
+            //this->window->close();
             delete actions;
             delete this;
             return;
@@ -174,9 +175,9 @@ void Game::inputShooting(char direction) {
 }
 
 bool Game::playStep(char moveDirection, char shotDirection) {
-    this->updateWindowEvents();
+    //this->updateWindowEvents();
     this->updatePlayerInput(moveDirection, shotDirection);
-    this->updateLabels();
+    //this->updateLabels();
 
     this->level->updateBullets();
     this->level->updateDangerMovement();

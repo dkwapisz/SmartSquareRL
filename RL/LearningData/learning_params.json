@@ -1,6 +1,6 @@
 {
   "steps_per_episode":  [150],
-  "batch_size": [4, 16, 32, 64, 128, 256],
+  "batch_size": [4, 8, 16, 32, 64, 128, 256, 512, 768, 1024],
   "mem_size":  [1000000],
   "network_layers": [2],
   "neurons":  [[2000, 1750]],
@@ -8,7 +8,7 @@
   "learning_rate":  [1e-4],
   "gamma": [0.95],
   "epsilon":  [1.0],
-  "epsilon_decay": [0.99993],
+  "epsilon_decay": [0.99995],
   "epsilon_min":  [0.01],
   "replace_target": [100]
 }

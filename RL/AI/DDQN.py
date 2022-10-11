@@ -9,13 +9,26 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 import os
 
-MEM_SIZE = 1000000
-BATCH_SIZE = 64
+global MEM_SIZE
+global BATCH_SIZE
+
+
+def get_param(param_name, worker_id):
+    with open("../LearningData/learning_params.json") as paramsFile:
+        params = json.load(paramsFile)
+
+    if len(params[param_name]) == 1:
+        return params[param_name][0]
+    else:
+        return params[param_name][worker_id]
 
 
 class Memory:
+    def __init__(self, input_dims, action_dims, worker_id):
+        global MEM_SIZE, BATCH_SIZE
+        MEM_SIZE = get_param("mem_size", worker_id)
+        BATCH_SIZE = get_param("batch_size", worker_id)
 
-    def __init__(self, input_dims, action_dims):
         self.state_memory = np.zeros((MEM_SIZE, input_dims))
         self.new_state_memory = np.zeros((MEM_SIZE, input_dims))
         self.action_memory = np.zeros((MEM_SIZE, action_dims), dtype=np.int8)
@@ -57,16 +70,6 @@ def set_tf_gpu():
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 
-def get_param(param_name, worker_id):
-    with open("../LearningData/learning_params.json") as paramsFile:
-        params = json.load(paramsFile)
-
-    if len(params[param_name]) == 1:
-        return params[param_name][0]
-    else:
-        return params[param_name][worker_id]
-
-
 def build_dqn(worker_id, action_dims):
     set_tf_gpu()
 
@@ -101,7 +104,7 @@ class DoubleDQN:
         self.epsilon_decay = get_param("epsilon_decay", worker_id)
         self.epsilon_min = get_param("epsilon_min", worker_id)
         self.replace_target = get_param("replace_target", worker_id)
-        self.memory = Memory(input_dims, action_dims)
+        self.memory = Memory(input_dims, action_dims, worker_id)
         self.neural_network_eval = build_dqn(worker_id, action_dims)
         self.neural_network_target = build_dqn(worker_id, action_dims)
 

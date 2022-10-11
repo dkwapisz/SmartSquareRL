@@ -141,8 +141,6 @@ void Level::generateMap() {
         std::cerr << "Could not open map file" << "\n";
     }
 
-
-
     mapFile.close();
 }
 

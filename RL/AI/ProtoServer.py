@@ -25,9 +25,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.gameDataHandling = GameDataHandling(params.WORKER_ID)
         self.lastActions = []
         self.rewardInEpisode = 0
-        print(params.WORKER_ID)
-        logging.basicConfig(filename="../LearningData/reward_worker_{}.logs".format(params.WORKER_ID),
-                            level=logging.DEBUG)
+        logging.basicConfig(filename="../LearningData/reward_worker_{}.logs".format(params.WORKER_ID), level=logging.DEBUG)
         self.log_test_purpose()
 
     def log_test_purpose(self):
@@ -105,7 +103,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 def serve():
     port = params.PORT
     worker_id = params.WORKER_ID
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=50))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     game_pb2_grpc.add_StateActionExchangeServicer_to_server(StateActionExchange(), server)
     server.add_insecure_port('[::]:{}'.format(port))
     server.start()

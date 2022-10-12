@@ -1,5 +1,5 @@
 import json
-
+import psutil
 import numpy as np
 import tensorflow as tf
 from keras import Sequential
@@ -38,6 +38,10 @@ class Memory:
 
     def write_to_memory(self, state, action, reward, new_state, done):
         index = self.memory_index % MEM_SIZE
+        if index == 0:
+            print("MEMORY INDEX IS 0. RAM USAGE: {} MB".format(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2))
+        if index != 0 and index % 500 == 0:
+            print("MEMORY BUFFER HITS {}. RAM USAGE: {}".format(index, psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2))
         self.state_memory[index] = state
         self.new_state_memory[index] = new_state
         self.reward_memory[index] = reward
@@ -162,8 +166,6 @@ class DoubleDQN:
             #     self.epsilon = self.epsilon_min
 
             self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
-
-            # print("Epsilon: {}".format(self.epsilon))
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())

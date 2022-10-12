@@ -52,9 +52,9 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
         self.rewardInEpisode += request.reward
-        if self.gameDataHandling.steps_count >= 200 or self.check_action_duplicates():
+        if self.gameDataHandling.steps_count >= 175 or self.check_action_duplicates():
             self.lastActions = []
-            self.gameDataHandling.reward = -300 + (request.coinsLeft * (-200))
+            self.gameDataHandling.reward = -300 + (request.coinsLeft * (-125))
             logging.debug(
                 "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, [LOSE]".format(
                     (self.rewardInEpisode + self.gameDataHandling.reward),
@@ -103,7 +103,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 def serve():
     port = params.PORT
     worker_id = params.WORKER_ID
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
     game_pb2_grpc.add_StateActionExchangeServicer_to_server(StateActionExchange(), server)
     server.add_insecure_port('[::]:{}'.format(port))
     server.start()

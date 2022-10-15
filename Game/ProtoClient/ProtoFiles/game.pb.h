@@ -229,7 +229,8 @@ class State final :
     kRewardFieldNumber = 3,
     kStepsCountFieldNumber = 4,
     kGameOverFieldNumber = 5,
-    kEpisodeCountFieldNumber = 6,
+    kWinFieldNumber = 6,
+    kEpisodeCountFieldNumber = 7,
   };
   // string mapMatrix = 1;
   void clear_mapmatrix();
@@ -281,7 +282,16 @@ class State final :
   void _internal_set_gameover(bool value);
   public:
 
-  // int32 episodeCount = 6;
+  // bool win = 6;
+  void clear_win();
+  bool win() const;
+  void set_win(bool value);
+  private:
+  bool _internal_win() const;
+  void _internal_set_win(bool value);
+  public:
+
+  // int32 episodeCount = 7;
   void clear_episodecount();
   int32_t episodecount() const;
   void set_episodecount(int32_t value);
@@ -302,6 +312,7 @@ class State final :
   int32_t reward_;
   int32_t stepscount_;
   bool gameover_;
+  bool win_;
   int32_t episodecount_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_game_2eproto;
@@ -787,7 +798,27 @@ inline void State::set_gameover(bool value) {
   // @@protoc_insertion_point(field_set:GameMessage.State.gameOver)
 }
 
-// int32 episodeCount = 6;
+// bool win = 6;
+inline void State::clear_win() {
+  win_ = false;
+}
+inline bool State::_internal_win() const {
+  return win_;
+}
+inline bool State::win() const {
+  // @@protoc_insertion_point(field_get:GameMessage.State.win)
+  return _internal_win();
+}
+inline void State::_internal_set_win(bool value) {
+  
+  win_ = value;
+}
+inline void State::set_win(bool value) {
+  _internal_set_win(value);
+  // @@protoc_insertion_point(field_set:GameMessage.State.win)
+}
+
+// int32 episodeCount = 7;
 inline void State::clear_episodecount() {
   episodecount_ = 0;
 }

@@ -39,7 +39,6 @@ private:
     int coinsCount;
     int playerCoinsCount;
     int levelNumber;
-    bool levelFinished;
 
     void initializeMapPaths();
 
@@ -61,8 +60,6 @@ public:
     virtual ~Level();
 
     GameStateHandling *gameStateHandling;
-
-    bool isLevelFinished() const;
 
     void setLevelFinished(bool levelFinished);
 

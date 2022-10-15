@@ -1,12 +1,12 @@
 from DDQN import DoubleDQN
 
 blocks_mapping = {
-    0: [0, 0, 0, 0, 0, 1],  # floor [undiscovered]
-    1: [0, 0, 0, 0, 1, 0],  # wall
-    4: [0, 0, 0, 1, 0, 0],  # coin
-    7: [0, 0, 1, 0, 0, 0],  # finish
-    8: [0, 1, 0, 0, 0, 0],  # player
-    9: [1, 0, 0, 0, 0, 0]  # floor [discovered]
+    0: [0, 0, 0, 0, 1],  # floor [undiscovered]
+    1: [0, 0, 0, 1, 0],  # wall
+    4: [0, 0, 1, 0, 0],  # coin
+    8: [0, 1, 0, 0, 0],  # player
+    9: [1, 0, 0, 0, 0]   # floor [discovered]
+    # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
 
@@ -19,7 +19,7 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(action_dims=4, input_dims=2400, worker_id=worker_id_)
+        self.agent = DoubleDQN(action_dims=4, input_dims=2000, worker_id=worker_id_)
         self.reward = 0
         self.steps_count = 0
 

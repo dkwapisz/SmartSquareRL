@@ -24,6 +24,7 @@ constexpr State::State(
   , reward_(0)
   , stepscount_(0)
   , gameover_(false)
+  , win_(false)
   , episodecount_(0){}
 struct StateDefaultTypeInternal {
   constexpr StateDefaultTypeInternal()
@@ -78,6 +79,7 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, reward_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, stepscount_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, gameover_),
+  PROTOBUF_FIELD_OFFSET(::GameMessage::State, win_),
   PROTOBUF_FIELD_OFFSET(::GameMessage::State, episodecount_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::GameMessage::Action, _internal_metadata_),
@@ -97,8 +99,8 @@ const uint32_t TableStruct_game_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::GameMessage::State)},
-  { 12, -1, -1, sizeof(::GameMessage::Action)},
-  { 20, -1, -1, sizeof(::GameMessage::Reset)},
+  { 13, -1, -1, sizeof(::GameMessage::Action)},
+  { 21, -1, -1, sizeof(::GameMessage::Reset)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -108,24 +110,24 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_game_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ngame.proto\022\013GameMessage\"y\n\005State\022\021\n\tma"
-  "pMatrix\030\001 \001(\t\022\021\n\tcoinsLeft\030\002 \001(\005\022\016\n\006rewa"
-  "rd\030\003 \001(\005\022\022\n\nstepsCount\030\004 \001(\005\022\020\n\010gameOver"
-  "\030\005 \001(\010\022\024\n\014episodeCount\030\006 \001(\005\"\304\001\n\006Action\022"
-  ":\n\rmoveDirection\030\001 \001(\0162#.GameMessage.Act"
-  "ion.ActionDirection\022:\n\rshotDirection\030\002 \001"
-  "(\0162#.GameMessage.Action.ActionDirection\""
-  "B\n\017ActionDirection\022\010\n\004IDLE\020\000\022\006\n\002UP\020\001\022\t\n\005"
-  "RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020\004\"\034\n\005Reset\022\023\n\013"
-  "resetNeeded\030\001 \001(\0102\207\001\n\023StateActionExchang"
-  "e\0228\n\013StateAction\022\022.GameMessage.State\032\023.G"
-  "ameMessage.Action\"\000\0226\n\nStateReset\022\022.Game"
-  "Message.State\032\022.GameMessage.Reset\"\000b\006pro"
-  "to3"
+  "\n\ngame.proto\022\013GameMessage\"\206\001\n\005State\022\021\n\tm"
+  "apMatrix\030\001 \001(\t\022\021\n\tcoinsLeft\030\002 \001(\005\022\016\n\006rew"
+  "ard\030\003 \001(\005\022\022\n\nstepsCount\030\004 \001(\005\022\020\n\010gameOve"
+  "r\030\005 \001(\010\022\013\n\003win\030\006 \001(\010\022\024\n\014episodeCount\030\007 \001"
+  "(\005\"\304\001\n\006Action\022:\n\rmoveDirection\030\001 \001(\0162#.G"
+  "ameMessage.Action.ActionDirection\022:\n\rsho"
+  "tDirection\030\002 \001(\0162#.GameMessage.Action.Ac"
+  "tionDirection\"B\n\017ActionDirection\022\010\n\004IDLE"
+  "\020\000\022\006\n\002UP\020\001\022\t\n\005RIGHT\020\002\022\010\n\004DOWN\020\003\022\010\n\004LEFT\020"
+  "\004\"\034\n\005Reset\022\023\n\013resetNeeded\030\001 \001(\0102\207\001\n\023Stat"
+  "eActionExchange\0228\n\013StateAction\022\022.GameMes"
+  "sage.State\032\023.GameMessage.Action\"\000\0226\n\nSta"
+  "teReset\022\022.GameMessage.State\032\022.GameMessag"
+  "e.Reset\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_game_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_game_2eproto = {
-  false, false, 523, descriptor_table_protodef_game_2eproto, "game.proto", 
+  false, false, 537, descriptor_table_protodef_game_2eproto, "game.proto", 
   &descriptor_table_game_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_game_2eproto::offsets,
   file_level_metadata_game_2eproto, file_level_enum_descriptors_game_2eproto, file_level_service_descriptors_game_2eproto,
@@ -291,9 +293,17 @@ const char* State::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
         } else
           goto handle_unusual;
         continue;
-      // int32 episodeCount = 6;
+      // bool win = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          win_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 episodeCount = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           episodecount_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -362,10 +372,16 @@ uint8_t* State::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_gameover(), target);
   }
 
-  // int32 episodeCount = 6;
+  // bool win = 6;
+  if (this->_internal_win() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(6, this->_internal_win(), target);
+  }
+
+  // int32 episodeCount = 7;
   if (this->_internal_episodecount() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_episodecount(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_episodecount(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -411,7 +427,12 @@ size_t State::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  // int32 episodeCount = 6;
+  // bool win = 6;
+  if (this->_internal_win() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 episodeCount = 7;
   if (this->_internal_episodecount() != 0) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_episodecount());
   }
@@ -452,6 +473,9 @@ void State::MergeFrom(const State& from) {
   }
   if (from._internal_gameover() != 0) {
     _internal_set_gameover(from._internal_gameover());
+  }
+  if (from._internal_win() != 0) {
+    _internal_set_win(from._internal_win());
   }
   if (from._internal_episodecount() != 0) {
     _internal_set_episodecount(from._internal_episodecount());

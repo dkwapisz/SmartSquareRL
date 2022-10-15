@@ -18,7 +18,8 @@ message State {
   int32 reward = 3;
   int32 stepsCount = 4;
   bool gameOver = 5;
-  int32 episodeCount = 6;
+  bool win = 6;
+  int32 episodeCount = 7;
 }
 
 message Action {

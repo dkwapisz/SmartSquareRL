@@ -99,7 +99,12 @@ void Level::generateMap() {
 
                 float posX = 30.f * (float) x;
                 float posY = (30.f * (float) y) + 50;
-                this->gameStateHandling->mapMatrix[x + y * 20] = number;
+
+                if (number != 7) { // don't add finish to mapMatrix.
+                    this->gameStateHandling->mapMatrix[x + y * 20] = number;
+                } else {
+                    this->gameStateHandling->mapMatrix[x + y * 20] = 0;
+                }
 
                 if (number == 0) {
                     this->floors.push_back(new Floor(this->squareShapes["Floor"],
@@ -189,9 +194,9 @@ bool Level::checkCollision() {
     for (const auto &finish: finishes) {
         if (finish->getBounds().intersects(this->player->getBounds())) {
 
-            if (this->coinsCount == this->playerCoinsCount) {
+            if (this->gameStateHandling->allCoinsCollected) {
                 gameStateHandling->reward += 500;
-                levelFinished = true;
+                gameStateHandling->win = true;
             }
 
             return false;
@@ -226,10 +231,6 @@ void Level::shot(float directionX, float directionY) {
     } else {
         player->incrementCooldown();
     }
-}
-
-bool Level::isLevelFinished() const {
-    return levelFinished;
 }
 
 void Level::resetLevel() {
@@ -270,7 +271,12 @@ void Level::resetLevel() {
 
                 float posX = 30.f * (float) x;
                 float posY = (30.f * (float) y) + 50;
-                this->gameStateHandling->mapMatrix[x + y * 20] = number;
+
+                if (number != 7) { // don't add finish to mapMatrix.
+                    this->gameStateHandling->mapMatrix[x + y * 20] = number;
+                } else {
+                    this->gameStateHandling->mapMatrix[x + y * 20] = 0;
+                }
 
                 if (number == 2) {
                     this->boxes.push_back(new Box(this->squareShapes["Box"],
@@ -406,12 +412,12 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
 }
 
 void Level::calculateClosestObjectsDir() {
-    gameStateHandling->calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
+    //gameStateHandling->calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
     gameStateHandling->calculateClosestCoinDir(&coins, player, playerFoV->isCoinInView(),
                                                playerFoV->getClosestCoin(), playerCoinsCount);
-    gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
+    //gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
     gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
-    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY(), &floors);
+    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY(), &floors, &finishes);
 }
 
 Player *Level::getPlayer() const {

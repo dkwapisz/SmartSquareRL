@@ -1,3 +1,6 @@
+import logging
+
+
 def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target_episodes_amount):
     # all values are in MB
     default_server_usage = 1150
@@ -33,31 +36,29 @@ def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target
           .format(thousand_iteration_after_buffer_fill_usage))
     print("----------------------------------------------------------------------------------------")
 
-def count_episodes_to_reach_eps_min():
-    epsilon = 1.0
-    epsilon_decay_exp = 0.99995
-    epsilon_decay_lin = 1e-5
-    epsilon_min = 0.01
 
-    mode = "exp"
+def count_episodes_to_reach_eps_min(epsilon_decay, mode):
+    epsilon = 1.0
+    epsilon_min = 0.01
 
     steps = 0
     max_steps_per_episode = 175
 
     while epsilon > epsilon_min:
         if mode == "exp":
-            epsilon *= epsilon_decay_exp
+            epsilon *= epsilon_decay
         elif mode == "linear":
-            epsilon -= epsilon_decay_lin
+            epsilon -= epsilon_decay
 
         steps += 1
 
     episodes = steps / max_steps_per_episode
-    eps_decay = epsilon_decay_lin if mode == "linear" else epsilon_decay_exp
-    print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(eps_decay,
+    print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(epsilon_decay,
                                                                                                    episodes,
                                                                                                    mode))
 
 
 if __name__ == "__main__":
-    count_mem_usage(buffer_size=50_000, worker_amount=6, max_iteration_in_episode=175, target_episodes_amount=1000)
+    count_mem_usage(buffer_size=50_000, worker_amount=7, max_iteration_in_episode=180, target_episodes_amount=2000)
+    count_episodes_to_reach_eps_min(epsilon_decay=0.999964, mode="exp")
+

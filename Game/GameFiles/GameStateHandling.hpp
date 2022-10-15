@@ -19,6 +19,7 @@ public:
     bool coinInFoV;
     bool finishInFoV;
     bool gameOver;
+    bool win;
     int32_t reward;
     float lastDistToCoin;
     float lastFinishDist;
@@ -42,7 +43,7 @@ public:
 
     void resetAllStates();
 
-    void calculateMapMatrix(float playerX, float playerY, std::vector<Floor *> *floors);
+    void calculateMapMatrix(float playerX, float playerY, std::vector<Floor *> *floors, std::vector<Finish *> *finishes);
 };
 
 #endif

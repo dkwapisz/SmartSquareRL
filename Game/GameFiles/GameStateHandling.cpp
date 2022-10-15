@@ -85,37 +85,37 @@ void GameStateHandling::calculateClosestCoinDir(std::vector<Coin *> *coins, Play
 }
 
 void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player) {
-    if (allCoinsCollected) {
-        float playerDistanceToFinish = 99999999.f;
-        float tempDistanceFinish;
-
-        Finish closestFinish;
-        this->finishInFoV = finishInFoV_;
-
-        for (const auto &finish: *finishes) {
-            tempDistanceFinish = std::sqrt(
-                    powf((player->getCenterPosX() - finish->getCenterPosX()), 2.f) +
-                    powf((player->getCenterPosY() - finish->getCenterPosY()), 2.f));
-
-            if (playerDistanceToFinish > tempDistanceFinish) {
-                playerDistanceToFinish = tempDistanceFinish;
-                closestFinish = *finish;
-            }
-        }
-
-        float finishDist = std::sqrt(
-                powf((player->getCenterPosX() - closestFinish.getCenterPosX()), 2.f) +
-                powf((player->getCenterPosY() - closestFinish.getCenterPosY()), 2.f));
-
-        if (this->finishInFoV) {
-            if (lastFinishDist > finishDist) {
-                reward += 3;
-            } else {
-                reward -= 10;
-            }
-            lastFinishDist = finishDist;
-        }
-    }
+//    if (allCoinsCollected) {
+//        float playerDistanceToFinish = 99999999.f;
+//        float tempDistanceFinish;
+//
+//        Finish closestFinish;
+//        this->finishInFoV = finishInFoV_;
+//
+//        for (const auto &finish: *finishes) {
+//            tempDistanceFinish = std::sqrt(
+//                    powf((player->getCenterPosX() - finish->getCenterPosX()), 2.f) +
+//                    powf((player->getCenterPosY() - finish->getCenterPosY()), 2.f));
+//
+//            if (playerDistanceToFinish > tempDistanceFinish) {
+//                playerDistanceToFinish = tempDistanceFinish;
+//                closestFinish = *finish;
+//            }
+//        }
+//
+//        float finishDist = std::sqrt(
+//                powf((player->getCenterPosX() - closestFinish.getCenterPosX()), 2.f) +
+//                powf((player->getCenterPosY() - closestFinish.getCenterPosY()), 2.f));
+//
+//        if (this->finishInFoV) {
+//            if (lastFinishDist > finishDist) {
+//                reward += 3;
+//            } else {
+//                reward -= 10;
+//            }
+//            lastFinishDist = finishDist;
+//        }
+//    }
 }
 
 void GameStateHandling::resetAllStates() {
@@ -126,6 +126,7 @@ void GameStateHandling::resetAllStates() {
     coinInFoV = false;
     finishInFoV = false;
     gameOver = false;
+    win = false;
     reward = 0;
     discoveredFloorCount = 0;
     lastDistToCoin = 9999999.f;
@@ -136,7 +137,7 @@ void GameStateHandling::resetAllStates() {
     }
 }
 
-void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::vector<Floor *> *floors) {
+void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::vector<Floor *> *floors, std::vector<Finish *> *finishes) {
     int playerMapPosX = (int) playerX / 30;
     int playerMapPosY = (int) (playerY - 50) / 30;
 
@@ -153,6 +154,14 @@ void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::ve
             int floorX = (int) floor->getCenterPosX() / 30;
             int floorY = (int) (floor->getCenterPosY() - 50) / 30;
             mapMatrix[floorX + floorY * 20] = 9;
+        }
+    }
+
+    if (allCoinsCollected) {
+        for (auto &finish : *finishes) {
+            int finishX = (int) finish->getCenterPosX() / 30;
+            int finishY = (int) (finish->getCenterPosY() - 50) / 30;
+            mapMatrix[finishX + finishY * 20] = 4; // If all coins are collected, set finish as coin.
         }
     }
 

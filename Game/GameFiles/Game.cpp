@@ -183,10 +183,10 @@ bool Game::playStep(char moveDirection, char shotDirection) {
     this->level->updateDangerMovement();
     this->level->calculateClosestObjectsDir();
 
-    if (this->level->isLevelFinished()) {
-        level->setLevelFinished(false);
-        return true;
-    }
+//    if (this->level->isLevelFinished()) {
+//        level->setLevelFinished(false);
+//        return true;
+//    }
 
     return this->level->gameStateHandling->gameOver;
 }

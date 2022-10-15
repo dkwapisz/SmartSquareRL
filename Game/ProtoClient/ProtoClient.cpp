@@ -35,7 +35,7 @@ bool ProtoClient::StateReset(GameStateHandling *gameStateHandling, int32_t itera
     request.set_stepscount(gameStateHandling->stepsCount);
     request.set_reward(gameStateHandling->reward);
     request.set_gameover(gameStateHandling->gameOver);
-    request.set_win(gameStateHandling);
+    request.set_win(gameStateHandling->win);
     request.set_episodecount(iteration);
     request.set_coinsleft(coinsLeft);
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);

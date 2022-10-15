@@ -69,7 +69,6 @@ void Level::initializeMapPaths() {
 void Level::initializeLevelAttributes(int levelNr) {
     this->coinsCount = 0;
     this->playerCoinsCount = 0;
-    this->levelFinished = false;
     this->levelNumber = levelNr;
 }
 
@@ -442,8 +441,4 @@ int Level::getMapsCount() const {
 
 PlayerFoV *Level::getPlayerFoV() {
     return this->playerFoV;
-}
-
-void Level::setLevelFinished(bool levelFinished) {
-    Level::levelFinished = levelFinished;
 }

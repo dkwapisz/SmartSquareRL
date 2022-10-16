@@ -44,7 +44,7 @@ class GameDataHandling:
         return self.move_dir, -1
 
     def get_reset(self):
-        return self.reset_env
+        return self.reset_env or self.game_over
 
     def set_reset(self, resetEnv, gameOver):
         self.game_over = gameOver

@@ -8,7 +8,7 @@ multiple_z = []
 nr_of_workers = 6
 
 for i in range(0, nr_of_workers, 1):
-    with open("4_Iteration_per_episode_choosing2/reward_worker_{}.logs".format(i), "r") as file:
+    with open("1_Learning_Rate_choosing/reward_worker_{}.logs".format(i), "r") as file:
         x = []
         y = []
         z = []
@@ -31,9 +31,11 @@ nr_of_plots = 6
 
 for j in range(0, nr_of_workers, nr_of_plots):
     pylab.figure(dpi=800, figsize=[8, 4])
-    pylab.title("Batch_size")
+    pylab.title("Learning rate")
     pylab.xticks([i for i in range(0, 2000, 200)])
     pylab.yticks([i for i in range(-3000, 500, 200)])
+    pylab.xlabel("Episode")
+    pylab.ylabel("Reward")
     print(j, j+nr_of_plots)
     for i in range(j, j+nr_of_plots, 1):
         pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label="worker{}".format(i))

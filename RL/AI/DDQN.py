@@ -93,8 +93,8 @@ def build_dqn(worker_id, action_dims):
                                                                            distribution='truncated_normal'))
         )
     model.add(Dense(action_dims,
-              kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
-              bias_initializer=tf.keras.initializers.Constant(-0.2)))
+                    kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
+                    bias_initializer=tf.keras.initializers.Constant(-0.2)))
 
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
     return model
@@ -113,10 +113,14 @@ class DoubleDQN:
         self.neural_network_target = build_dqn(worker_id, action_dims)
 
     def save_neural_network(self, episodeCount, worker_id):
-        filename = "../LearningData/NeuralNetworks/Worker{}/DDQN_episode_{}_worker_{}.h5".format(worker_id,
-                                                                                                 episodeCount,
-                                                                                                 worker_id)
-        self.neural_network_eval.save(filename)
+        eval_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_{}_worker_{}.h5".format(worker_id,
+                                                                                                          episodeCount,
+                                                                                                          worker_id)
+        target_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_target_episode_{}_worker_{}.h5".format(worker_id,
+                                                                                                              episodeCount,
+                                                                                                              worker_id)
+        self.neural_network_eval.save(eval_network)
+        self.neural_network_eval.save(target_network)
 
     def load_neural_network(self):
         self.neural_network_eval = load_model("DDQN_episode_0.h5")

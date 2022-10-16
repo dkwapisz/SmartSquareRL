@@ -18,12 +18,12 @@ parser.add_argument("--PORT", type=int)
 params = parser.parse_args()
 
 blocks_mapping = {
-    0: [0, 0, 0, 0, 0, 1],  # floor [undiscovered]
-    1: [0, 0, 0, 0, 1, 0],  # wall
-    4: [0, 0, 0, 1, 0, 0],  # coin
-    7: [0, 0, 1, 0, 0, 0],  # finish
-    8: [0, 1, 0, 0, 0, 0],  # player
-    9: [1, 0, 0, 0, 0, 0]  # floor [discovered]
+    0: [0, 0, 0, 0, 1],  # floor [undiscovered]
+    1: [0, 0, 0, 1, 0],  # wall
+    4: [0, 0, 1, 0, 0],  # coin
+    8: [0, 1, 0, 0, 0],  # player
+    9: [1, 0, 0, 0, 0]   # floor [discovered]
+    # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
 
@@ -41,7 +41,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
         self.model = load_model(
-            "../LearningData/4_Iteration_per_episode_choosing2/NeuralNetworks/Worker4/DDQN_episode_2000_worker_4.h5")
+            "../LearningData/NeuralNetworks/Worker5/DDQN_episode_936_worker_5.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))

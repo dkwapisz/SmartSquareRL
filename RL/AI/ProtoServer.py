@@ -43,6 +43,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.lastActions = []
         self.rewardInEpisode = 0
         self.winGameNNSaved = False
+        self.steps_if_win = []
         self.steps_per_episode = get_learning_params()["iter_per_episode"][params.WORKER_ID] if len(get_learning_params()["iter_per_episode"]) > 1 else get_learning_params()["iter_per_episode"][0]
         self.target_episodes = get_learning_params()["target_episodes"][params.WORKER_ID] if len(get_learning_params()["target_episodes"]) > 1 else get_learning_params()["target_episodes"][0]
         print("Worker {}, steps per episode: {}".format(params.WORKER_ID, self.steps_per_episode))
@@ -50,6 +51,52 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         logging.basicConfig(filename="../LearningData/reward_worker_{}.logs".format(params.WORKER_ID),
                             level=logging.DEBUG)
         log_test_purpose()
+
+    def check_if_win_is_faster(self, steps_count):
+        if len(self.steps_if_win) == 0:
+            self.steps_if_win.append(steps_count)
+            return True
+
+        # return true if all values in steps_if_win are lower than steps_count -> save neural network if AI solved it faster
+        return all(steps > steps_count for steps in self.steps_if_win)
+
+    def perform_lost_operations(self, request):
+        self.lastActions = []
+        if request.coinsLeft == 0:
+            self.gameDataHandling.reward = -500
+        else:
+            self.gameDataHandling.reward = -300 + (request.coinsLeft * (-125))
+        logging.debug(
+            "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, Steps in episode: {}, [LOSE]".format(
+                (self.rewardInEpisode + self.gameDataHandling.reward),
+                request.episodeCount, request.coinsLeft, self.gameDataHandling.agent.get_epsilon(),
+                request.stepsCount))
+        self.gameDataHandling.game_over = True
+        self.gameDataHandling.reset_env = True
+        self.rewardInEpisode = 0
+
+    def perform_win_operations(self, request):
+        if self.check_if_win_is_faster(request.stepsCount):
+            self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
+        logging.debug(
+            "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {} Steps in episode: {}, [WIN]".format(
+                self.rewardInEpisode,
+                request.episodeCount,
+                request.coinsLeft,
+                self.gameDataHandling.agent.get_epsilon(),
+                request.stepsCount))
+        self.gameDataHandling.game_over = True
+        self.rewardInEpisode = 0
+
+    def save_NN_every_n_iterations(self, episode_count, n, reset_env):
+        if episode_count >= self.target_episodes:
+            self.gameDataHandling.save_agent(episode_count, params.WORKER_ID)
+        elif episode_count >= (self.target_episodes + 1):
+            print("Server stopped at {}. Worker_ID: {}".format(datetime.now(), params.WORKER_ID))
+            server.stop(None)
+
+        if reset_env and episode_count % n == 0 and episode_count != 0:
+            self.gameDataHandling.save_agent(episode_count, params.WORKER_ID)
 
     def StateAction(self, request, context):
         self.gameDataHandling.set_state(request)
@@ -67,32 +114,9 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.gameDataHandling.set_new_state(request)
         self.rewardInEpisode += request.reward
         if self.gameDataHandling.steps_count >= self.steps_per_episode or self.check_action_duplicates() or request.gameOver:
-            self.lastActions = []
-            if request.coinsLeft == 0:
-                self.gameDataHandling.reward = -500
-            else:
-                self.gameDataHandling.reward = -300 + (request.coinsLeft * (-125))
-            logging.debug(
-                "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, Steps in episode: {}, [LOSE]".format(
-                    (self.rewardInEpisode + self.gameDataHandling.reward),
-                    request.episodeCount, request.coinsLeft, self.gameDataHandling.agent.get_epsilon(),
-                    request.stepsCount))
-            self.gameDataHandling.game_over = True
-            self.gameDataHandling.reset_env = True
-            self.rewardInEpisode = 0
+            self.perform_lost_operations(request)
         elif request.win:
-            if not self.winGameNNSaved:
-                self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
-                self.winGameNNSaved = True
-            logging.debug(
-                "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {} Steps in episode: {}, [WIN]".format(
-                    self.rewardInEpisode,
-                    request.episodeCount,
-                    request.coinsLeft,
-                    self.gameDataHandling.agent.get_epsilon(),
-                    request.stepsCount))
-            self.gameDataHandling.game_over = True
-            self.rewardInEpisode = 0
+            self.perform_win_operations(request)
 
         self.gameDataHandling.remember()
         self.gameDataHandling.learn()
@@ -100,14 +124,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         resetEnv = self.gameDataHandling.get_reset()
         self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
 
-        if request.episodeCount >= self.target_episodes:
-            self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
-        elif request.episodeCOunt >= (self.target_episodes + 1):
-            print("Server stopped at {}. Worker_ID: {}".format(datetime.now(), params.WORKER_ID))
-            server.stop(None)
-
-        if resetEnv and request.episodeCount % 1000 == 0 and request.episodeCount != 0:
-            self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
+        self.save_NN_every_n_iterations(episode_count=request.episodeCount, n=1000, reset_env=resetEnv)
 
         return game_pb2.Reset(resetNeeded=resetEnv)
 

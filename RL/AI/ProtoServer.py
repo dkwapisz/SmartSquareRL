@@ -23,7 +23,7 @@ server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
 
 
 def get_learning_params():
-    with open("../LearningData/2_Gamma_choosing/learning_params.json") as paramsFile:
+    with open("../LearningData/learning_params.json") as paramsFile:
         config_params = json.load(paramsFile)
     return config_params
 
@@ -34,6 +34,8 @@ def log_test_purpose():
     for key, value in config_params.items():
         if len(value) > 1:
             logging.debug("WORKER: {} TESTING: {} WITH VALUES: {}".format(params.WORKER_ID, key, value[params.WORKER_ID]))
+        else:
+            logging.debug("WORKER: {}".format(params.WORKER_ID))
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):

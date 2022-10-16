@@ -19,6 +19,7 @@ private:
 
     Level *level;
     bool gameFinished;
+    bool renderGame;
 
     void loadFont();
 

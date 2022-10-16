@@ -68,7 +68,10 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode += request.reward
         if self.gameDataHandling.steps_count >= self.steps_per_episode or self.check_action_duplicates() or request.gameOver:
             self.lastActions = []
-            self.gameDataHandling.reward = -300 + (request.coinsLeft * (-125))
+            if request.coinsLeft == 0:
+                self.gameDataHandling.reward = -500
+            else:
+                self.gameDataHandling.reward = -300 + (request.coinsLeft * (-125))
             logging.debug(
                 "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, Steps in episode: {}, [LOSE]".format(
                     (self.rewardInEpisode + self.gameDataHandling.reward),
@@ -99,6 +102,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
         if request.episodeCount >= self.target_episodes:
             self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
+        elif request.episodeCOunt >= (self.target_episodes + 1):
             print("Server stopped at {}. Worker_ID: {}".format(datetime.now(), params.WORKER_ID))
             server.stop(None)
 

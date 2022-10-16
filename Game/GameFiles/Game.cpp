@@ -1,9 +1,13 @@
 #include "Game.hpp"
 
 Game::Game() {
-    //this->loadFont();
-    //this->initializeWindow();
-    //this->initializeLabels();
+    this->renderGame = false;
+
+    if (renderGame) {
+        this->loadFont();
+        this->initializeWindow();
+        this->initializeLabels();
+    }
 
     this->gameFinished = false;
     this->level = new Level(2);
@@ -11,8 +15,10 @@ Game::Game() {
 
 Game::~Game() {
     delete this->level;
-    //deleteLabels();
-    //delete this->window;
+    if (renderGame) {
+        deleteLabels();
+        delete this->window;
+    }
     exit(0);
 }
 
@@ -95,7 +101,7 @@ void Game::run(int argc, char **argv) {
     int coinsLeft;
 
     //while (this->window->isOpen()) {
-    while (true) {
+    while (!renderGame || (this->window->isOpen())) {
         if (!gameFinished) {
             this->level->gameStateHandling->reward = 0;
 
@@ -107,8 +113,7 @@ void Game::run(int argc, char **argv) {
             gameOver = this->playStep(actions[0], actions[1]);
             //std::cout << "Move action: " << actions[0] << "\n";
 
-            if (false) {
-                // TEST PURPOSE, RENDER IS NOT NEEDED TO RL TRAINING
+            if (renderGame) {
                 this->render();
             }
 
@@ -117,7 +122,9 @@ void Game::run(int argc, char **argv) {
 
             performResetIfNeeded(gameOver || reset);
         } else {
-            //this->window->close();
+            if (renderGame) {
+                this->window->close();
+            }
             delete actions;
             delete this;
             return;
@@ -175,9 +182,14 @@ void Game::inputShooting(char direction) {
 }
 
 bool Game::playStep(char moveDirection, char shotDirection) {
-    //this->updateWindowEvents();
+    if (renderGame) {
+        this->updateWindowEvents();
+    }
     this->updatePlayerInput(moveDirection, shotDirection);
-    //this->updateLabels();
+    if (renderGame) {
+        this->updateLabels();
+    }
+
 
     this->level->updateBullets();
     this->level->updateDangerMovement();

@@ -120,8 +120,7 @@ class DoubleDQN:
 
     def load_neural_network(self):
         self.neural_network_eval = load_model("DDQN_episode_0.h5")
-        if self.epsilon == self.epsilon_min:
-            self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
+        self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
 
     def write_to_memory(self, state, action, reward, new_state, done):
         self.memory.write_to_memory(state, action, reward, new_state, done)

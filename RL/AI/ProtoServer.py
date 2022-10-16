@@ -34,8 +34,6 @@ def log_test_purpose():
     for key, value in config_params.items():
         if len(value) > 1:
             logging.debug("WORKER: {} TESTING: {} WITH VALUES: {}".format(params.WORKER_ID, key, value[params.WORKER_ID]))
-        else:
-            logging.debug("WORKER: {}".format(params.WORKER_ID))
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):

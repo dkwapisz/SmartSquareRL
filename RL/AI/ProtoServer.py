@@ -58,7 +58,11 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
             return True
 
         # return true if all values in steps_if_win are lower than steps_count -> save neural network if AI solved it faster
-        return all(steps > steps_count for steps in self.steps_if_win)
+        if all(steps > steps_count for steps in self.steps_if_win):
+            self.steps_if_win.append(steps_count)
+            return True
+        else:
+            return False
 
     def perform_lost_operations(self, request):
         self.lastActions = []

@@ -6,15 +6,15 @@ multiple_y = []
 multiple_z = []
 tested_param = {}
 
-nr_of_workers = 6
+nr_of_workers = 5
 
 for i in range(0, nr_of_workers, 1):
-    with open("./reward_worker_{}.logs".format(i), "r") as file:
+    with open("./2_Gamma_choosing/reward_worker_{}.logs".format(i), "r") as file:
         line = file.read().splitlines()[0].split(" ")
-        tested_param[int(line[6])] = line[3]
+        tested_param[line[6]] = line[3]
 
 for i in range(0, nr_of_workers, 1):
-    with open("./reward_worker_{}.logs".format(i), "r") as file:
+    with open("./2_Gamma_choosing/reward_worker_{}.logs".format(i), "r") as file:
         x = []
         y = []
         z = []
@@ -33,12 +33,12 @@ for i in range(0, nr_of_workers, 1):
         multiple_y.append(y)
         multiple_z.append(z)
 
-nr_of_plots = 6
+nr_of_plots = nr_of_workers
 
 tested_parameter = list(tested_param.values())[0]
 
 for j in range(0, nr_of_workers, nr_of_plots):
-    pylab.figure(dpi=800, figsize=[12, 6])
+    pylab.figure(dpi=800, figsize=[12, 4])
     pylab.title(tested_parameter)
     pylab.xticks([i for i in range(0, 2000, 200)])
     pylab.yticks([i for i in range(-3000, 1200, 200)])
@@ -46,9 +46,10 @@ for j in range(0, nr_of_workers, nr_of_plots):
     pylab.ylabel("Reward")
     print(j, j+nr_of_plots)
     for i in range(j, j+nr_of_plots, 1):
-        pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label=list(tested_param.keys())[i])
+        plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label=list(tested_param.keys())[i])
     pylab.legend(loc='lower right')
 
+    pylab.savefig("Gamma_Choosing.png")
     pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):

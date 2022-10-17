@@ -1,5 +1,5 @@
 {
-  "iter_per_episode": [130, 140, 150, 160, 170, 180],
+  "iter_per_episode": [150],
   "target_episodes": [2000],
   "batch_size": [64],
   "mem_size":  [50000],
@@ -7,7 +7,7 @@
   "neurons":  [[1800, 1500]],
   "huber_delta": [1.35],
   "learning_rate":  [1e-4],
-  "gamma": [0.85],
+  "gamma": [0.85, 0.85, 0.85, 0.85, 0.99, 0.85],
   "epsilon":  [1.0],
   "epsilon_decay": [0.999964],
   "epsilon_min":  [0.01],

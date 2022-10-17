@@ -33,7 +33,8 @@ def log_test_purpose():
 
     for key, value in config_params.items():
         if len(value) > 1:
-            logging.debug("WORKER: {} TESTING: {} WITH VALUES: {}".format(params.WORKER_ID, key, value[params.WORKER_ID]))
+            logging.debug(
+                "WORKER: {} TESTING: {} WITH VALUES: {}".format(params.WORKER_ID, key, value[params.WORKER_ID]))
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
@@ -44,8 +45,10 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode = 0
         self.winGameNNSaved = False
         self.steps_if_win = []
-        self.steps_per_episode = get_learning_params()["iter_per_episode"][params.WORKER_ID] if len(get_learning_params()["iter_per_episode"]) > 1 else get_learning_params()["iter_per_episode"][0]
-        self.target_episodes = get_learning_params()["target_episodes"][params.WORKER_ID] if len(get_learning_params()["target_episodes"]) > 1 else get_learning_params()["target_episodes"][0]
+        self.steps_per_episode = get_learning_params()["iter_per_episode"][params.WORKER_ID] \
+            if len(get_learning_params()["iter_per_episode"]) > 1 else get_learning_params()["iter_per_episode"][0]
+        self.target_episodes = get_learning_params()["target_episodes"][params.WORKER_ID] \
+            if len(get_learning_params()["target_episodes"]) > 1 else get_learning_params()["target_episodes"][0]
         print("Worker {}, steps per episode: {}".format(params.WORKER_ID, self.steps_per_episode))
         print("Worker {}, target episodes: {}".format(params.WORKER_ID, self.target_episodes))
         logging.basicConfig(filename="../LearningData/reward_worker_{}.logs".format(params.WORKER_ID),

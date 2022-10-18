@@ -15,18 +15,29 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 [Here you can check how game looks like.](https://youtube.com/shorts/BdZh8jy2RsA?feature=share)
 
 ## Technologies/libraries used:
-- C++ 20
-- SFML Library
+- C++ 17
+- SFML Library 2.5.1
 - Python 3.10
 - Pillow Library
-- gRPC
-- Protobuf
+- gRPC 1.46.3
+- Protobuf 3.19.4.0
 
 
-## Reinforcement Learning algorithms:
-
-1. Deep Q-Learning
+## Reinforcement Learning algorithm:
+### Double Deep Q-Network
 
 ### Rewards:
-#### Map 1
-TBD
+**Positive:**
+- Collecting coin: +75
+- Discovering new floor part: +1
+- Winning level: +500
+
+**Negative:**
+- Collision with wall: -20
+- Moving away from coin (counting in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): -5
+- Losing level when all coins have not been collected: `-300 + (coinsLeft * (-125))`
+- Losing level when all coins have been collected: -500
+
+**Rewards/punishments TBD:**
+- Collision with box: -20
+- Collision with enemy: -100

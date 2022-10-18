@@ -96,7 +96,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode = 0
 
     def save_NN_every_n_iterations(self, episode_count, n, reset_env):
-        if episode_count >= self.target_episodes:
+        if episode_count == self.target_episodes + 1:
             self.gameDataHandling.save_agent(episode_count, params.WORKER_ID)
         elif episode_count >= (self.target_episodes + 1):
             print("Server stopped at {}. Worker_ID: {}".format(datetime.now(), params.WORKER_ID))

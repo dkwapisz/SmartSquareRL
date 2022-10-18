@@ -6,15 +6,15 @@ multiple_y = []
 multiple_z = []
 tested_param = {}
 
-nr_of_workers = 5
+nr_of_workers = 6
 
 for i in range(0, nr_of_workers, 1):
-    with open("./2_Gamma_choosing/reward_worker_{}.logs".format(i), "r") as file:
+    with open("./reward_worker_{}.logs".format(i), "r") as file:
         line = file.read().splitlines()[0].split(" ")
         tested_param[line[6]] = line[3]
 
 for i in range(0, nr_of_workers, 1):
-    with open("./2_Gamma_choosing/reward_worker_{}.logs".format(i), "r") as file:
+    with open("./reward_worker_{}.logs".format(i), "r") as file:
         x = []
         y = []
         z = []
@@ -49,7 +49,7 @@ for j in range(0, nr_of_workers, nr_of_plots):
         plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label=list(tested_param.keys())[i])
     pylab.legend(loc='lower right')
 
-    pylab.savefig("Gamma_Choosing.png")
+    #pylab.savefig("Gamma_Choosing.png")
     pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):

@@ -54,7 +54,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateReset(self, request, context):
         if request.win is True:
             print("WIN!")
-        return game_pb2.Reset(resetNeeded=False)
+        return game_pb2.Reset(resetNeeded=request.win)
 
 
 def serve():

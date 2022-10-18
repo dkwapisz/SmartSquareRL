@@ -30,11 +30,12 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 **Positive:**
 - Collecting coin: +75
 - Discovering new floor part: +1
+- Getting closer to coin (checking in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): +1
 - Winning level: +500
 
 **Negative:**
 - Collision with wall: -20
-- Moving away from coin (counting in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): -5
+- Moving away from coin (checking in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): -5
 - Losing level when all coins have not been collected: `-300 + (coinsLeft * (-125))`
 - Losing level when all coins have been collected: -500
 

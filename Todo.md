@@ -1,51 +1,50 @@
-## TODO LIST
-#### New states:
-* Distances to walls around player (120 rays -> 1 in 6 will be sent as state -> 20 distances)
-* DistanceX, DistanceY (unit vectors) to destination (coin/finish depends on that if player collect all coins or not)
-* 6 maps, each rotated (0, 90, 180, 270) -> 24 maps, selected randomly after gameOver
-* 
-#### Bugs: 
-[ ] - repair iteration counter
-[ ] - add score to create graph of learning
+## TODO List and planned tests:
+#### 1. Discovering floor - is this needed?
+- **Planned date:** Night 18/19 Oct
+- **Description:** Remove giving reward for discovering floor fragments (+1), and remove "discovered floor" from state
+matrix. State matrix will reduce to 20x20x4 because of this.
+- **Status:** In progress
+- **Result:** TBD
 
-## TODO LIST 2 [DEPRECATED]:
-- [x] Set new reward system for coins: 
-  - **if coin is IN FoV** and:
-    - player getting closer to closer coin -> +10
-    - player move away from closer coin -> -10
-  - getting coin with no change -> +50
-- [x] Change direction states -> if something is for example UP and RIGHT (diagonal), it should be [1, 1, 0, 0] in state vector, not only closest direction
-- [x] Direction to the closest coin -> should be exposed for DQN if coin is not in FoV?
-- [x] "coinInFoV" should be as separate boolean state? -> yes
-- [x] Shorten state vector for "isClosestObstacleBox" and "coinsNeeded" from [0, 1], [1, 0] to [0], [1]
-- [x] Think what about finish -> use finish in FoV mechanic same as coins?
-- [x] **IMPORTANT - FIX REWARDS (CHECK GIVING REWARDS PLAYING AT GAME AS NORMAL PLAYER) - broken reward: after collecting coin (GameStateHandling 167), collecting all coins (finish), check lastDistanceWall reward.**
-- [ ] bug with finish area and rays
+#### 2. Add static enemies to level.
+- **Planned date:** Night 19/20 Oct
+- **Description:** Add static enemies to level and learn AI to win level with enemies. State matrix will be 
+expanded to 20x20x5.
+- **Status:** Waiting to be done
+- **Result:** TBD
 
-### New Reward System:
+#### 3. Neural network size tests.
+- **Planned date:** Day 20 Oct, Night 20-21 Oct  
+- **Description:** If the results after adding enemies will be encouraging, several cases will be tested. Depending 
+on the results, the tests will be repeated or not.
+- **Status:** Waiting to be done
+- **Result:** TBD
 
-- Touching wall: -10
-- Touching box: -10
-- Collecting coin: +50
-- Touching enemy: -100
-- Getting closer to coin **IF** coin is in FoV: +3
-- Moving away from coin **IF** coin is in FoV: -5
-- Reaching finish if all coins were collected: +100
-- Out of time (20s): -100 -> time is reset after collecting coin
-- Getting closer to finish **AFTER** collecting every coin **IF** finish is in FoV: +5
-- Moving away from finish **AFTER** collecting every coin **IF** finish is in FoV: -5
-- Getting closer to lastDiscoveredWall **IF** coin not in FoV: +3
-- Moving away from lastDiscoveredWall **IF** coin not in FoV: -5
-- Else: 0
+**Case 1:**
+- Layers: 1
+- Neurons: [600], [1000], [1400], [1800], [2200], [2600]
 
-### New State:
+**Case 2:**
+- Layers: 2
+- Neurons: [800, 600], [1000, 1000], [1400, 1000], [1600, 1200], [1800, 1400], [2000, 1600]
 
-- coinsNeeded 1x1 - boolean
-- closestObstacle 1x4
-- closestCoin 1x4
-- finishDirection 1x4
-- coinInFoV 1x1 - boolean
-- lastDiscoveredWall 1x4
+#### 4. Adding moving enemies to level:
+- **Planned date:** After (3) tests, date TBD
+- **Description:** Add moving enemies to level and learn AI to win level with moving enemies as well. State matrix
+will not be expanded, as moving enemy will have same state as static enemy.
+- **Status:** Waiting to be done
+- **Result:** TBD
 
-- closestObstacleBox Nx1 - boolean [not used]
-- closestEnemy Nx4 [not used]
+#### 5. Attempt to eliminate overfitting:
+- **Planned date:** After (4) tests with success
+- **Description:** Actually, AI learns how to win level, but target NN is strong overfitted with level in which AI
+were learning. There are idea to solve it - levels will be drawn from a pool of 20-30.
+- **Status:** Waiting to be done
+- **Result:** TBD
+
+#### 6. Rest of hiperparameters tuning:
+- **Planned date:** TBD
+- **Description:** These parameters should be tested with different values: batch_size, huber_delta, epsilon, 
+replace_target and maybe mem_size.
+- **Status:** TBD
+- **Result:** TBD

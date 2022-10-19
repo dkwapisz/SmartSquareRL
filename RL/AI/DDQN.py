@@ -155,13 +155,12 @@ class DoubleDQN:
             q_pred = self.neural_network_eval.predict(state)
 
             max_actions = np.argmax(q_eval, axis=1)
-            q_target = q_pred
 
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
-            q_target[batch_index, action_indices] = reward + self.gamma * q_next[
+            q_pred[batch_index, action_indices] = reward + self.gamma * q_next[
                 batch_index, max_actions.astype(int) * done]
 
-            _ = self.neural_network_eval.fit(state, q_target, verbose=0)
+            self.neural_network_eval.fit(state, q_pred, verbose=0)
 
             # if self.epsilon > self.epsilon_min:
             #     self.epsilon -= self.epsilon_decay

@@ -37,7 +37,7 @@ def convert_map(map_name, input_image):
     print("{} correctly converted from PNG to TXT \n".format(map_name))
 
 
-map_count = 6
+map_count = 8
 
 # not rotated
 for i in range(0, map_count, 1):
@@ -46,16 +46,16 @@ for i in range(0, map_count, 1):
 
 # rotated
 for i in range(map_count, map_count*2, 1):
-    image = Image.open("map" + str(i-6) + ".png")
+    image = Image.open("map" + str(i-map_count) + ".png")
     image = image.rotate(90)
     convert_map("map" + str(i), image)
 
 for i in range(map_count*2, map_count*3, 1):
-    image = Image.open("map" + str(i-12) + ".png")
+    image = Image.open("map" + str(i-map_count*2) + ".png")
     image = image.rotate(180)
     convert_map("map" + str(i), image)
 
 for i in range(map_count*3, map_count*4, 1):
-    image = Image.open("map" + str(i-18) + ".png")
+    image = Image.open("map" + str(i-map_count*3) + ".png")
     image = image.rotate(270)
     convert_map("map" + str(i), image)

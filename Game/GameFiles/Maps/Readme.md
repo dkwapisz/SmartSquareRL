@@ -27,7 +27,7 @@ file when creating the map.
 | MovingDangerH | (255, 0, 0)     | 5   |
 | MovingDangerV | (120, 0, 0)     | 6   |
 | Finish        | (80, 120, 0)    | 7   |
-| Player        | (0, 255, 0)     | 9   |
+| Player        | (0, 255, 0)     | 8   |
 
 
 

@@ -17,6 +17,7 @@ parser.add_argument("--PORT", type=int)
 
 params = parser.parse_args()
 
+# TODO Remember to correct this mapping
 blocks_mapping = {
     0: [0, 0, 0, 0, 1],  # floor [undiscovered]
     1: [0, 0, 0, 1, 0],  # wall
@@ -41,7 +42,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
         self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker3/DDQN_eval_episode_1786_worker_3.h5")
+            "../LearningData/5_Iteration_per_episode_choosing3/NeuralNetworks/Worker3/DDQN_eval_episode_1786_worker_3.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))

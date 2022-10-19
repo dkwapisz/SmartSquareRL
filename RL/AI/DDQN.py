@@ -11,6 +11,7 @@ import os
 
 global MEM_SIZE
 global BATCH_SIZE
+global ACTIONS
 
 
 def get_param(param_name, worker_id):
@@ -22,10 +23,9 @@ def get_param(param_name, worker_id):
     else:
         return params[param_name][worker_id]
 
-
 class Memory:
     def __init__(self, input_dims, action_dims, worker_id):
-        global MEM_SIZE, BATCH_SIZE
+        global MEM_SIZE, BATCH_SIZE, ACTIONS
         MEM_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
 
@@ -35,6 +35,8 @@ class Memory:
         self.reward_memory = np.zeros(MEM_SIZE)
         self.terminal_memory = np.zeros(MEM_SIZE, dtype=np.int32)
         self.memory_index = 0
+
+        ACTIONS = self.get_init_actions(action_dims)
 
     def write_to_memory(self, state, action, reward, new_state, done):
         index = self.memory_index % MEM_SIZE
@@ -46,12 +48,18 @@ class Memory:
         self.new_state_memory[index] = new_state
         self.reward_memory[index] = reward
 
-        actions = np.zeros(self.action_memory.shape[1])
-        actions[action] = 1.0
-        self.action_memory[index] = actions
+        # actions = np.zeros(self.action_memory.shape[1])
+        # actions[action] = 1.0
+        self.action_memory[index] = ACTIONS[action]
 
         self.terminal_memory[index] = 1 - int(done)
         self.memory_index += 1
+
+    def get_init_actions(self, action_dims):
+        for i in range(0, action_dims, 1):
+            ACTIONS[i] = np.zeros(self.action_memory.shape[1])
+            ACTIONS[i][i] = 1.0
+        return ACTIONS
 
     def get_sample_batch(self):
         max_mem = min(self.memory_index, MEM_SIZE)
@@ -93,6 +101,7 @@ def build_dqn(worker_id, action_dims):
                                                                            distribution='truncated_normal'))
         )
     model.add(Dense(action_dims,
+                    activation='softmax',
                     kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
                     bias_initializer=tf.keras.initializers.Constant(-0.2)))
 

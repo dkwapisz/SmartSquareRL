@@ -1,0 +1,7 @@
+/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" -S /home/dkwapisz/SmartSquareRL -B /home/dkwapisz/SmartSquareRL/cmake-build-release
+-- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
+-- Using protobuf 3.19.4.0
+-- Using gRPC 1.46.3
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dkwapisz/SmartSquareRL/cmake-build-release

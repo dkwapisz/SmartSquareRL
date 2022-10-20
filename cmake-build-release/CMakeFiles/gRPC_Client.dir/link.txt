@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgRPC_Client.a CMakeFiles/gRPC_Client.dir/Game/ProtoClient/ProtoFiles/game.pb.cc.o CMakeFiles/gRPC_Client.dir/Game/ProtoClient/ProtoFiles/game.grpc.pb.cc.o
+/usr/bin/ranlib libgRPC_Client.a

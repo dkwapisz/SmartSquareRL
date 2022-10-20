@@ -1,0 +1,4 @@
+/home/dkwapisz/SmartSquareRL/cmake-build-release/CMakeFiles/gRPC_Client.dir
+/home/dkwapisz/SmartSquareRL/cmake-build-release/CMakeFiles/SmartSquareRL.dir
+/home/dkwapisz/SmartSquareRL/cmake-build-release/CMakeFiles/edit_cache.dir
+/home/dkwapisz/SmartSquareRL/cmake-build-release/CMakeFiles/rebuild_cache.dir

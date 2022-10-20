@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from keras import Sequential
 from keras.layers import Dense
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 import os

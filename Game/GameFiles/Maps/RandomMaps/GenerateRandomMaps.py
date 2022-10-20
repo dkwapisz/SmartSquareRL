@@ -108,17 +108,24 @@ def generate_maps(map_size):
     return game_map
 
 
+def generate_map_list(nr_of_maps, map_size):
+    map_list = []
+    for i in range(nr_of_maps):
+        map_list.append(generate_maps(map_size))
+
+    return map_list
+
+
 if __name__ == "__main__":
-    map1 = generate_maps(map_size=20)
-    map2 = generate_maps(map_size=20)
-    map3 = generate_maps(map_size=20)
-    map4 = generate_maps(map_size=20)
+    map_list = generate_map_list(nr_of_maps=5, map_size=20)
 
-    for line, line2 in zip(map1, map2):
-        print("{} \t {}".format(line, line2))
+    map_index = 0
 
-    print("\n")
-
-    for line, line2 in zip(map3, map4):
-        print("{} \t {}".format(line, line2))
+    for created_map in map_list:
+        with open('map{}.txt'.format(map_index), 'w') as f:
+            for line in created_map:
+                for item in line:
+                    f.write("{} ".format(item))
+                f.write("\n")
+            map_index += 1
 

@@ -1,5 +1,3 @@
-conda activate RL
-
 cd /home/dawidml/SmartSquareRL/RL/AI
 
 /home/dawidml/miniconda3/envs/RL/bin/python /home/dawidml/SmartSquareRL/RL/AI/ProtoServer.py --WORKER_ID 0 --PORT 50051 &
@@ -14,10 +12,10 @@ sleep 5
 
 cd /home/dawidml/SmartSquareRL/cmake-build-release
 
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50051 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50052 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50053 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50054 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50055 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50056 &
-/home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50057
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50051 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50052 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50053 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50054 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50055 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50056 &
+sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & /home/dawidml/SmartSquareRL/cmake-build-release/SmartSquareRL 50057

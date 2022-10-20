@@ -7,7 +7,7 @@
 cmake-build-debug
 cmake-build-debug-mingw
 cmake-build-release-mingw
-#cmake-build-release
+cmake-build-release
 
 RL/.idea
 .idea

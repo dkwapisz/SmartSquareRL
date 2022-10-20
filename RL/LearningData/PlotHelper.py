@@ -6,7 +6,7 @@ multiple_y = []
 multiple_z = []
 tested_param = {}
 
-nr_of_workers = 6
+nr_of_workers = 7
 
 for i in range(0, nr_of_workers, 1):
     with open("./reward_worker_{}.logs".format(i), "r") as file:

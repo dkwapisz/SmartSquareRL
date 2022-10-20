@@ -28,6 +28,7 @@ class Memory:
         global MEM_SIZE, BATCH_SIZE, ACTIONS
         MEM_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
+        ACTIONS = {}
 
         self.state_memory = np.zeros((MEM_SIZE, input_dims))
         self.new_state_memory = np.zeros((MEM_SIZE, input_dims))

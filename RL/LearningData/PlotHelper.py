@@ -45,8 +45,9 @@ for j in range(0, nr_of_workers, nr_of_plots):
     pylab.xlabel("Episode")
     pylab.ylabel("Reward")
     print(j, j+nr_of_plots)
+    print(list(tested_param.keys()))
     for i in range(j, j+nr_of_plots, 1):
-        plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label=list(tested_param.keys())[i])
+        plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label='x')
     pylab.legend(loc='lower right')
 
     #pylab.savefig("Gamma_Choosing.png")

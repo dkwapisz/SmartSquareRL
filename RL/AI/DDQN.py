@@ -102,7 +102,6 @@ def build_dqn(worker_id, action_dims):
                                                                            distribution='truncated_normal'))
         )
     model.add(Dense(action_dims,
-                    activation='softmax',
                     kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
                     bias_initializer=tf.keras.initializers.Constant(-0.2)))
 

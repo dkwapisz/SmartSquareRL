@@ -1,0 +1,4 @@
+/home/dawidml/SmartSquareRL/CMakeFiles/rebuild_cache.dir
+/home/dawidml/SmartSquareRL/CMakeFiles/edit_cache.dir
+/home/dawidml/SmartSquareRL/CMakeFiles/SmartSquareRL.dir
+/home/dawidml/SmartSquareRL/CMakeFiles/gRPC_Client.dir

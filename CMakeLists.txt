@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(SmartSquareRL)
 
-find_package(SFML COMPONENTS system window graphics REQUIRED)
+find_package(SFML COMPONENTS system graphics REQUIRED)
 
 include(gRPC.cmake)
 

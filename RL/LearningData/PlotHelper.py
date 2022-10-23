@@ -6,7 +6,7 @@ multiple_y = []
 multiple_z = []
 tested_param = {}
 
-nr_of_workers = 7
+nr_of_workers = 5
 
 for i in range(0, nr_of_workers, 1):
     with open("./reward_worker_{}.logs".format(i), "r") as file:
@@ -33,14 +33,14 @@ for i in range(0, nr_of_workers, 1):
         multiple_y.append(y)
         multiple_z.append(z)
 
-nr_of_plots = nr_of_workers
+nr_of_plots = 1
 
 tested_parameter = list(tested_param.values())[0]
 
 for j in range(0, nr_of_workers, nr_of_plots):
     pylab.figure(dpi=800, figsize=[12, 4])
     pylab.title(tested_parameter)
-    pylab.xticks([i for i in range(0, 2000, 200)])
+    pylab.xticks([i for i in range(0, 4000, 200)])
     pylab.yticks([i for i in range(-3000, 1200, 200)])
     pylab.xlabel("Episode")
     pylab.ylabel("Reward")

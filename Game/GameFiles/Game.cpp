@@ -215,11 +215,10 @@ void Game::render() {
 void Game::performResetIfNeeded(bool reset) {
     if (reset) {
         int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
-        int levelNum = level->getLevelNumber();
+        //int levelNum = level->getLevelNumber();
         delete this->level;
-        // TODO rand() will be replaced in future
-        //this->level = new Level(rand() % 24);
-        this->level = new Level(levelNum);
+        this->level = new Level(rand() % 99);
+        //this->level = new Level(levelNum);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
         this->level->getPlayer()->setEpisodes(episodes_count);

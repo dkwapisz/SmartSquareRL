@@ -1,7 +1,7 @@
 {
   "iter_per_episode": [170],
-  "target_episodes": [2500],
-  "batch_size": [64],
+  "target_episodes": [3000],
+  "batch_size": [10, 30, 64, 100, 150, 200, 400, 500],
   "mem_size":  [50000],
   "network_layers": [2],
   "neurons":  [[1400, 1200]],

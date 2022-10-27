@@ -3,12 +3,12 @@
 Level::Level() = default;
 
 Level::Level(int levelNumber) {
+    MAP_SIZE = 7;
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
     initializeObjectsShapes();
     this->gameStateHandling = new GameStateHandling();
 
-    MAP_SIZE = 7;
     generateMap();
     this->playerFoV = new PlayerFoV(8, false);
 }
@@ -59,7 +59,7 @@ Level::~Level() {
 }
 
 void Level::initializeMapPaths() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 180; i++) {
         this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i) + ".txt";
     }
 //    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
@@ -96,8 +96,6 @@ void Level::generateMap() {
         for (int y = 0; y < mapSizeY; y++) {
             for (int x = 0; x < mapSizeX; x++) {
                 mapFile >> number;
-
-                std::cout << number << '\n';
 
                 float posX = 30.f * (float) x;
                 float posY = (30.f * (float) y) + 50;

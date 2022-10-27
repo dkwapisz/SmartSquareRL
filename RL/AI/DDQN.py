@@ -99,12 +99,11 @@ def build_dqn(worker_id, action_dims):
 
     lr = get_param("learning_rate", worker_id)
     huber_delta = get_param("huber_delta", worker_id)
-    layers = get_param("network_layers", worker_id)
     neurons = get_param("neurons", worker_id)
 
     model = Sequential()
 
-    for i in range(0, layers):
+    for i in range(0, len(neurons)):
         model.add(
             Dense(neurons[i],
                   activation='relu',

@@ -3,8 +3,8 @@
 
 
 GameStateHandling::GameStateHandling() {
-    resetAllStates();
     MAP_SIZE = 7;
+    resetAllStates();
 }
 
 void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,

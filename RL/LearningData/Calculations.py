@@ -28,12 +28,6 @@ def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target
     print("  -> single worker will use {} MB memory (excluding system usage).".format(int(worker_usage)))
     print("  -> all workers will use {} MB memory (including system usage).".format(int(all_workers_usage)))
     print("  -> buffer can hold approximately: {} episodes.".format(int(max_episodes_in_buffer)))
-    print("  -> to reach {} episodes, single worker will use {} MB memory (excluding system usage)."
-          .format(target_episodes_amount, worker_usage_to_reach_target_episodes))
-    print("  -> to reach {} episodes, all workers will use {} MB memory (including system usage)."
-          .format(target_episodes_amount, all_workers_usage_to_reach_target_episodes))
-    print("Every 1000 iteration after filling buffer use ~{} MB memory."
-          .format(thousand_iteration_after_buffer_fill_usage))
     print("----------------------------------------------------------------------------------------")
 
 
@@ -59,6 +53,8 @@ def count_episodes_to_reach_eps_min(epsilon_decay, mode):
 
 
 if __name__ == "__main__":
-    count_mem_usage(buffer_size=70_000, worker_amount=5, max_iteration_in_episode=200, target_episodes_amount=3000)
-    count_episodes_to_reach_eps_min(epsilon_decay=0.999983, mode="exp")
+    count_mem_usage(buffer_size=70_000, worker_amount=5, max_iteration_in_episode=200, target_episodes_amount=10000)
+    eps = [5e-6, 3e-6, 2e-6, 1.5e-6, 1e-6, 9e-7, 6e-7]
+    for e in eps:
+        count_episodes_to_reach_eps_min(epsilon_decay=e, mode="linear")
 

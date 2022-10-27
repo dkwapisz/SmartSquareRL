@@ -1,16 +1,18 @@
 {
-  "iter_per_episode": [200],
-  "target_episodes": [5000],
+  "iter_per_episode": [30],
+  "target_episodes": [20000],
   "batch_size": [64],
   "mem_size":  [70000],
   "network_layers": [2],
-  "neurons":  [[1000, 200]],
+  "neurons":  [[100, 100]],
   "huber_delta": [1.35],
   "learning_rate":  [1e-4],
   "gamma": [0.85],
   "epsilon":  [1.0],
-  "epsilon_decay": [0.999983],
+  "epsilon_decay": [5e-4],
   "epsilon_min":  [0.01],
   "replace_target": [100]
 }
+
+
 

@@ -18,7 +18,7 @@ for i in range(0, nr_of_workers, 1):
         x = []
         y = []
         z = []
-        for line in file.readlines()[1:]:
+        for line in file.readlines():
             # print(line.split(" ")) [1] -> reward, [3] -> episode, [6] -> coinsLeft, [8] -> epsilon
             split = line.split(" ")
             reward = split[1][:-1]
@@ -39,18 +39,18 @@ tested_parameter = list(tested_param.values())[0]
 
 for j in range(0, nr_of_workers, nr_of_plots):
     pylab.figure(dpi=800, figsize=[12, 4])
-    pylab.title(tested_parameter)
-    pylab.xticks([i for i in range(0, 4000, 200)])
+    #pylab.title("Worker {}".format(j))
+    pylab.xticks([i for i in range(0, 10000, 1000)])
     pylab.yticks([i for i in range(-3000, 1200, 200)])
     pylab.xlabel("Episode")
     pylab.ylabel("Reward")
     print(j, j+nr_of_plots)
     print(list(tested_param.keys()))
     for i in range(j, j+nr_of_plots, 1):
-        plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label='x')
+        plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label="worker{}".format(j))
     pylab.legend(loc='lower right')
 
-    #pylab.savefig("Gamma_Choosing.png")
+    pylab.savefig("wykres1.png")
     pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):

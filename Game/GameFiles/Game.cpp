@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
 Game::Game() {
-    this->renderGame = false;
+    this->renderGame = true;
 
     if (renderGame) {
         this->loadFont();
@@ -9,6 +9,7 @@ Game::Game() {
         this->initializeLabels();
     }
 
+    MAP_SIZE = 7;
     this->gameFinished = false;
     this->level = new Level(2);
 }
@@ -217,7 +218,7 @@ void Game::performResetIfNeeded(bool reset) {
         int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
         //int levelNum = level->getLevelNumber();
         delete this->level;
-        this->level = new Level(rand() % 99);
+        this->level = new Level(rand() % 10);
         //this->level = new Level(levelNum);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;

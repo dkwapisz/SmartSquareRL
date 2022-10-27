@@ -88,6 +88,8 @@ public:
     void calculateClosestObjectsDir();
 
     PlayerFoV *getPlayerFoV();
+
+    int MAP_SIZE;
 };
 
 

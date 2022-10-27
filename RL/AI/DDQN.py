@@ -1,13 +1,19 @@
 import json
+import logging
+
+import keras.layers
 import psutil
 import numpy as np
 import tensorflow as tf
 from keras import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
+from line_profiler_pycharm import profile
 from tensorflow.keras.models import load_model
 from tensorflow.keras.losses import Huber
 import os
+
+from tensorflow.python.keras.layers import Conv2D, Flatten
 
 global MEM_SIZE
 global BATCH_SIZE
@@ -29,7 +35,9 @@ class Memory:
         MEM_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
         ACTIONS = {}
-
+        # CNN
+        # self.state_memory = np.zeros((MEM_SIZE, 20, 20, 5))
+        # self.new_state_memory = np.zeros((MEM_SIZE, 20, 20, 5))
         self.state_memory = np.zeros((MEM_SIZE, input_dims))
         self.new_state_memory = np.zeros((MEM_SIZE, input_dims))
         self.action_memory = np.zeros((MEM_SIZE, action_dims), dtype=np.int8)
@@ -39,6 +47,7 @@ class Memory:
 
         ACTIONS = self.get_init_actions(action_dims)
 
+    @profile
     def write_to_memory(self, state, action, reward, new_state, done):
         index = self.memory_index % MEM_SIZE
         # if index == 0:
@@ -62,6 +71,7 @@ class Memory:
             ACTIONS[i][i] = 1.0
         return ACTIONS
 
+    @profile
     def get_sample_batch(self):
         max_mem = min(self.memory_index, MEM_SIZE)
         batch = np.random.choice(max_mem, BATCH_SIZE, replace=False)
@@ -75,6 +85,7 @@ class Memory:
 
 
 def set_tf_gpu():
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
     os.environ['CUDA_VISIBLE_DEVICES'] = "0"
     gpu_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -106,6 +117,22 @@ def build_dqn(worker_id, action_dims):
                     bias_initializer=tf.keras.initializers.Constant(-0.2)))
 
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
+    return model
+
+
+def build_conv_dqn(worker_id, action_dims):
+    set_tf_gpu()
+
+    model = Sequential()
+    model.add(Conv2D(16, (8, 8), strides=4, input_shape=(20, 20, 5), activation='relu'))
+    model.add(Conv2D(32, (4, 4), strides=2, activation='relu'))
+    model.add(Flatten())
+    model.add(Dense(256, activation='relu'))
+    model.add(Dense(action_dims, activation='relu'))
+
+    optimizer = keras.optimizers.RMSprop(lr=get_param("learning_rate", worker_id), rho=0.95, epsilon=0.01)
+    model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
+
     return model
 
 
@@ -141,6 +168,7 @@ class DoubleDQN:
     def get_epsilon(self):
         return self.epsilon
 
+    @profile
     def calculate_action(self, state):
         state = np.array(state)
         state = state[np.newaxis, :]
@@ -154,11 +182,13 @@ class DoubleDQN:
 
         return action
 
+    @profile
     def learn(self):
         if self.memory.memory_index > BATCH_SIZE:
             state, action, reward, new_state, done = self.memory.get_sample_batch()
             action_values = np.array(self.action_space, dtype=np.int8)
             action_indices = np.dot(action, action_values)
+            #print(state.shape)
             q_next = self.neural_network_target.predict(new_state)
             q_eval = self.neural_network_eval.predict(new_state)
             q_pred = self.neural_network_eval.predict(state)
@@ -168,15 +198,14 @@ class DoubleDQN:
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
             q_pred[batch_index, action_indices] = reward + self.gamma * q_next[
                 batch_index, max_actions.astype(int) * done]
-
             self.neural_network_eval.fit(state, q_pred, verbose=0)
 
-            # if self.epsilon > self.epsilon_min:
-            #     self.epsilon -= self.epsilon_decay
-            # else:
-            #     self.epsilon = self.epsilon_min
+            if self.epsilon > self.epsilon_min:
+                self.epsilon -= self.epsilon_decay
+            else:
+                self.epsilon = self.epsilon_min
 
-            self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
+            #self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())

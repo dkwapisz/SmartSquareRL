@@ -2,6 +2,8 @@ import json
 import sys
 from datetime import datetime
 
+from line_profiler_pycharm import profile
+
 sys.path.insert(0, "./ProtoFiles")
 
 from concurrent import futures
@@ -67,6 +69,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         else:
             return False
 
+    @profile
     def perform_lost_operations(self, request):
         self.lastActions = []
         if request.coinsLeft == 0:
@@ -105,6 +108,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         if reset_env and episode_count % n == 0 and episode_count != 0:
             self.gameDataHandling.save_agent(episode_count, params.WORKER_ID)
 
+    @profile
     def StateAction(self, request, context):
         self.gameDataHandling.set_state(request)
 
@@ -117,6 +121,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
         return game_pb2.Action(moveDirection=moveDir + 1, shotDirection=shotDir + 1)
 
+    @profile
     def StateReset(self, request, context):
         self.gameDataHandling.set_new_state(request)
         self.rewardInEpisode += request.reward
@@ -125,8 +130,9 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         elif request.win:
             self.perform_win_operations(request)
 
-        self.gameDataHandling.remember()
-        self.gameDataHandling.learn()
+        if request.stepsCount != 0:
+            self.gameDataHandling.remember()
+            self.gameDataHandling.learn()
 
         resetEnv = self.gameDataHandling.get_reset()
         self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
@@ -135,6 +141,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
         return game_pb2.Reset(resetNeeded=resetEnv)
 
+    @profile
     def add_action_to_list(self, moveAction):
         if len(self.lastActions) < 6:
             self.lastActions.append(moveAction)
@@ -142,6 +149,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
             self.lastActions.pop(0)
             self.lastActions.append(moveAction)
 
+    @profile
     def check_action_duplicates(self):
         if len(self.lastActions) < 6:
             return False

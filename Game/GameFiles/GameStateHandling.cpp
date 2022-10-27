@@ -4,6 +4,7 @@
 
 GameStateHandling::GameStateHandling() {
     resetAllStates();
+    MAP_SIZE = 7;
 }
 
 void GameStateHandling::calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
@@ -119,7 +120,7 @@ void GameStateHandling::calculateFinishDirectionDir(std::vector<Finish *> *finis
 }
 
 void GameStateHandling::resetAllStates() {
-    mapMatrix = new int[20 * 20];
+    mapMatrix = new int[MAP_SIZE * MAP_SIZE];
     mapMatrixAsString = "";
     stepsCount = 0;
     allCoinsCollected = false;
@@ -131,7 +132,7 @@ void GameStateHandling::resetAllStates() {
     discoveredFloorCount = 0;
     lastDistToCoin = 9999999.f;
     lastFinishDist = 9999999.f;
-    for (int i = 0; i < 400; i++) {
+    for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++) {
         mapMatrix[i] = 0;
         mapMatrixAsString.push_back('0');
     }
@@ -141,10 +142,10 @@ void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::ve
     int playerMapPosX = (int) playerX / 30;
     int playerMapPosY = (int) (playerY - 50) / 30;
 
-    for (int y = 0; y < 20; y++) {
-        for (int x = 0; x < 20; x++) {
-            if (mapMatrix[x + y * 20] == 8) {
-                mapMatrix[x + y * 20] = 0;
+    for (int y = 0; y < MAP_SIZE; y++) {
+        for (int x = 0; x < MAP_SIZE; x++) {
+            if (mapMatrix[x + y * MAP_SIZE] == 8) {
+                mapMatrix[x + y * MAP_SIZE] = 0;
             }
         }
     }
@@ -153,7 +154,7 @@ void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::ve
         if (floor->discovered) {
             int floorX = (int) floor->getCenterPosX() / 30;
             int floorY = (int) (floor->getCenterPosY() - 50) / 30;
-            mapMatrix[floorX + floorY * 20] = 9;
+            mapMatrix[floorX + floorY * MAP_SIZE] = 9;
         }
     }
 
@@ -161,16 +162,16 @@ void GameStateHandling::calculateMapMatrix(float playerX, float playerY, std::ve
         for (auto &finish : *finishes) {
             int finishX = (int) finish->getCenterPosX() / 30;
             int finishY = (int) (finish->getCenterPosY() - 50) / 30;
-            mapMatrix[finishX + finishY * 20] = 4; // If all coins are collected, set finish as coin.
+            mapMatrix[finishX + finishY * MAP_SIZE] = 4; // If all coins are collected, set finish as coin.
         }
     }
 
-    mapMatrix[playerMapPosX + playerMapPosY * 20] = 8;
+    mapMatrix[playerMapPosX + playerMapPosY * MAP_SIZE] = 8;
     mapMatrixAsString = "";
 
-    for (int y = 0; y < 20; y++) {
-        for (int x = 0; x < 20; x++) {
-            mapMatrixAsString.append(std::to_string(mapMatrix[x + y * 20]));
+    for (int y = 0; y < MAP_SIZE; y++) {
+        for (int x = 0; x < MAP_SIZE; x++) {
+            mapMatrixAsString.append(std::to_string(mapMatrix[x + y * MAP_SIZE]));
         }
         mapMatrixAsString.append("#");
     }

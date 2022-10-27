@@ -49,6 +49,7 @@ private:
 
 public:
     Game();
+    int MAP_SIZE;
 
     virtual ~Game();
 

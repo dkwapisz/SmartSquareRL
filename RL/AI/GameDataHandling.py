@@ -1,3 +1,6 @@
+import numpy as np
+from line_profiler_pycharm import profile
+
 from DDQN import DoubleDQN
 
 blocks_mapping = {
@@ -9,20 +12,25 @@ blocks_mapping = {
     # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
+MAP_SIZE = 7
+
 
 class GameDataHandling:
 
     def __init__(self, worker_id_):
+        input_dims = MAP_SIZE * MAP_SIZE * len(blocks_mapping)
+
         self.move_dir = 0
         self.shot_dir = 0
         self.state = []
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(action_dims=4, input_dims=2000, worker_id=worker_id_)
+        self.agent = DoubleDQN(action_dims=4, input_dims=input_dims, worker_id=worker_id_)
         self.reward = 0
         self.steps_count = 0
 
+    @profile
     def set_state(self, request):
         self.state = GameDataHandling.__reformat_map_matrix_state(request.mapMatrix)
         self.steps_count = request.stepsCount
@@ -54,6 +62,7 @@ class GameDataHandling:
         self.agent.save_neural_network(episodeCount, worker_id)
 
     @staticmethod
+    @profile
     def __reformat_map_matrix_state(input_state: str):
         input_list = []
         if len(input_state) != 0:
@@ -62,3 +71,13 @@ class GameDataHandling:
                     input_list += blocks_mapping[int(num)]
 
         return input_list
+        # CNN
+        # input_list = []
+        # input_state = input_state[:-1]
+        # if len(input_state) != 0:
+        #     for sequence in input_state.split("#"):
+        #         line = [*sequence]
+        #         line = [blocks_mapping[int(x)] for x in line]
+        #         input_list.append(line)
+        #
+        # return np.asarray(input_list)

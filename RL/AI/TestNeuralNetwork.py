@@ -41,8 +41,10 @@ def reformat_map_matrix_state(input_state: str):
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
+        self.winCounter = 0
+        self.loseCounter = 0
         self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker0/DDQN_eval_episode_9169_worker_0.h5")
+            "../LearningData/NeuralNetworks/Worker6/DDQN_eval_episode_8886_worker_6.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))
@@ -54,12 +56,17 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def StateReset(self, request, context):
         reset = False
-        if request.stepsCount > 200:
+        if request.stepsCount > 30:
+            self.loseCounter += 1
             reset = True
 
         if request.win is True:
+            self.winCounter += 1
             print("WIN!")
             reset = True
+
+        if reset:
+            print("Win percentage: {}, maps tested: {}".format(self.winCounter/(self.winCounter+self.loseCounter), (self.winCounter+self.loseCounter)))
         return game_pb2.Reset(resetNeeded=reset)
 
 

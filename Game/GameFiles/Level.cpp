@@ -59,8 +59,8 @@ Level::~Level() {
 }
 
 void Level::initializeMapPaths() {
-    for (int i = 0; i < 180; i++) {
-        this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i) + ".txt";
+    for (int i = 0; i < 200; i++) {
+        this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i+800) + ".txt";
     }
 //    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
 //    this->mapPath[2] = R"(../Game/GameFiles/Maps/TrainingMaps/map2.txt)";

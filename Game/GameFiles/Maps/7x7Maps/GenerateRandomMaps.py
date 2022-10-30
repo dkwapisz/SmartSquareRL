@@ -70,7 +70,6 @@ def generate_maps(map_size):
                    (pos_y + 1 < map_size - 1),
                    pos_x > 0,
                    pos_y > 0]):
-
         pos_x = random.randint(1, map_size - 2)
         pos_y = random.randint(1, map_size - 2)
 
@@ -95,7 +94,9 @@ def generate_maps(map_size):
     pos_x = 0
     pos_y = 0
 
-    while not (game_map[pos_x][pos_y] != mapping["wall"] and game_map[pos_x][pos_y] != mapping["coin"]):
+    while not (game_map[pos_x][pos_y] != mapping["wall"] and
+               game_map[pos_x][pos_y] != mapping["coin"] and
+               game_map[pos_x][pos_y] != mapping["finish"]):
 
         pos_x = random.randint(1, map_size - 2)
         pos_y = random.randint(1, map_size - 2)
@@ -117,7 +118,7 @@ def generate_map_list(nr_of_maps, map_size):
 
 
 if __name__ == "__main__":
-    map_list = generate_map_list(nr_of_maps=200, map_size=7)
+    map_list = generate_map_list(nr_of_maps=1000, map_size=7)
 
     map_index = 0
 
@@ -128,4 +129,3 @@ if __name__ == "__main__":
                     f.write("{} ".format(item))
                 f.write("\n")
             map_index += 1
-

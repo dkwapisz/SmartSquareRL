@@ -4,9 +4,10 @@ import numpy as np
 multiple_x = []
 multiple_y = []
 multiple_z = []
+wins = []
 tested_param = {}
 
-nr_of_workers = 5
+nr_of_workers = 7
 
 for i in range(0, nr_of_workers, 1):
     with open("./reward_worker_{}.logs".format(i), "r") as file:
@@ -18,13 +19,17 @@ for i in range(0, nr_of_workers, 1):
         x = []
         y = []
         z = []
-        for line in file.readlines():
+        win = 0
+        for line in file.readlines()[1:]:
             # print(line.split(" ")) [1] -> reward, [3] -> episode, [6] -> coinsLeft, [8] -> epsilon
             split = line.split(" ")
             reward = split[1][:-1]
             episode = split[3][:-1]
             coins_left = split[6][:-1]
-            print("Episode: {}, Reward: {}".format(episode, reward))
+            #print(split[-1])
+            if "[WIN]" in split[-1]:
+                win += 1
+            #print("Episode: {}, Reward: {}".format(episode, reward))
             x.append(episode)
             y.append(int(reward))
             z.append(int(coins_left))
@@ -32,25 +37,28 @@ for i in range(0, nr_of_workers, 1):
         multiple_x.append(x)
         multiple_y.append(y)
         multiple_z.append(z)
+        wins.append(win)
 
-nr_of_plots = 1
+nr_of_plots = 7
+
+print(wins)
 
 tested_parameter = list(tested_param.values())[0]
 
 for j in range(0, nr_of_workers, nr_of_plots):
-    pylab.figure(dpi=800, figsize=[12, 4])
+    pylab.figure(dpi=800, figsize=[16, 4])
     #pylab.title("Worker {}".format(j))
     pylab.xticks([i for i in range(0, 10000, 1000)])
     pylab.yticks([i for i in range(-3000, 1200, 200)])
     pylab.xlabel("Episode")
     pylab.ylabel("Reward")
-    print(j, j+nr_of_plots)
-    print(list(tested_param.keys()))
+    #print(j, j+nr_of_plots)
+    #print(list(tested_param.keys()))
     for i in range(j, j+nr_of_plots, 1):
         plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label="worker{}".format(j))
     pylab.legend(loc='lower right')
 
-    pylab.savefig("wykres1.png")
+    #pylab.savefig("wykres1.png")
     pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):

@@ -104,16 +104,9 @@ def build_dqn(worker_id, action_dims):
     model = Sequential()
 
     for i in range(0, len(neurons)):
-        model.add(
-            Dense(neurons[i],
-                  activation='relu',
-                  kernel_initializer=tf.keras.initializers.VarianceScaling(scale=2.0,
-                                                                           mode='fan_in',
-                                                                           distribution='truncated_normal'))
-        )
-    model.add(Dense(action_dims,
-                    kernel_initializer=tf.keras.initializers.RandomUniform(minval=-0.03, maxval=0.03),
-                    bias_initializer=tf.keras.initializers.Constant(-0.2)))
+        model.add(Dense(neurons[i], activation='relu'))
+
+    model.add(Dense(action_dims))
 
     model.compile(optimizer=Adam(learning_rate=lr), loss=Huber(delta=huber_delta))
     return model
@@ -151,11 +144,11 @@ class DoubleDQN:
         eval_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_{}_worker_{}.h5".format(worker_id,
                                                                                                           episodeCount,
                                                                                                           worker_id)
-        target_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_target_episode_{}_worker_{}.h5".format(worker_id,
-                                                                                                              episodeCount,
-                                                                                                              worker_id)
+        # target_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_target_episode_{}_worker_{}.h5".format(worker_id,
+        #                                                                                                       episodeCount,
+        #                                                                                                       worker_id)
         self.neural_network_eval.save(eval_network)
-        self.neural_network_eval.save(target_network)
+        # self.neural_network_eval.save(target_network)
 
     def load_neural_network(self):
         self.neural_network_eval = load_model("DDQN_episode_0.h5")
@@ -199,12 +192,14 @@ class DoubleDQN:
                 batch_index, max_actions.astype(int) * done]
             self.neural_network_eval.fit(state, q_pred, verbose=0)
 
-            if self.epsilon > self.epsilon_min:
-                self.epsilon -= self.epsilon_decay
-            else:
-                self.epsilon = self.epsilon_min
+            # linear epsilon greedy
+            # if self.epsilon > self.epsilon_min:
+            #     self.epsilon -= self.epsilon_decay
+            # else:
+            #     self.epsilon = self.epsilon_min
 
-            #self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
+            # exponential epsilon greedy
+            self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
 
             if self.memory.memory_index % self.replace_target == 0:
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())

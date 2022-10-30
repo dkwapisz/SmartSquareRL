@@ -86,8 +86,8 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode = 0
 
     def perform_win_operations(self, request):
-        if self.check_if_win_is_faster(request.stepsCount):
-            self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
+        #if self.check_if_win_is_faster(request.stepsCount):
+        self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
         logging.debug(
             "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, Steps in episode: {}, [WIN]".format(
                 self.rewardInEpisode,

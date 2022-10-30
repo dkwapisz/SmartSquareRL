@@ -117,7 +117,7 @@ def generate_map_list(nr_of_maps, map_size):
 
 
 if __name__ == "__main__":
-    map_list = generate_map_list(nr_of_maps=100, map_size=20)
+    map_list = generate_map_list(nr_of_maps=2000, map_size=20)
 
     map_index = 0
 

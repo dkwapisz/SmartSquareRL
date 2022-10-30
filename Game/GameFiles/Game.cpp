@@ -2,7 +2,7 @@
 
 Game::Game() {
     MAP_SIZE = 7;
-    this->renderGame = true;
+    this->renderGame = false;
 
     if (renderGame) {
         this->loadFont();
@@ -216,10 +216,10 @@ void Game::render() {
 void Game::performResetIfNeeded(bool reset) {
     if (reset) {
         int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
-        int levelNum = level->getLevelNumber();
+        //int levelNum = level->getLevelNumber();
         delete this->level;
-        //this->level = new Level(rand() % 799);
-        this->level = new Level(levelNum+1);
+        this->level = new Level(rand() % 1599);
+        //this->level = new Level(levelNum+1);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
         this->level->getPlayer()->setEpisodes(episodes_count);

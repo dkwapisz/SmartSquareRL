@@ -1,0 +1,59 @@
+Maps in training: 1600
+Maps in testing: 400
+Episodes: 10000
+
+Worker 0:
+    Training:
+        Win rate: 66.13%
+        Wins: 6613/10000
+    Testing:
+        Win rate: 85%
+        Wins: 340/400
+
+Worker 1:
+    Training:
+        Win rate: 79.40%
+        Wins: 7940/10000
+    Testing:
+        Win rate: 91.5%
+        Wins: 366/400
+
+Worker 2:
+    Training:
+        Win rate: 67.28%
+        Wins: 6728/10000
+    Testing:
+        Win rate: 87.25%
+        Wins: 349/400
+
+Worker 3:
+    Training:
+        Win rate: 77.47%
+        Wins: 7747/10000
+    Testing:
+        Win rate: 90.75%
+        Wins: 363/400
+
+Worker 4:
+    Training:
+        Win rate: 78.1%
+        Wins: 7810/10000
+    Testing:
+        Win rate: 90.75%
+        Wins: 363/400
+
+Worker 5:
+    Training:
+        Win rate: 67.3%
+        Wins: 6730/10000
+    Testing:
+        Win rate: 86%
+        Wins: 344/400
+
+Worker 6:
+    Training:
+        Win rate: 76.88%
+        Wins: 7688/10000
+    Testing:
+        Win rate: 91%
+        Wins: 364/400

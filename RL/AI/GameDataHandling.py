@@ -1,4 +1,3 @@
-import numpy as np
 from line_profiler_pycharm import profile
 
 from DDQN import DoubleDQN
@@ -12,7 +11,7 @@ blocks_mapping = {
     # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
-MAP_SIZE = 7
+MAP_SIZE = 13
 
 
 class GameDataHandling:

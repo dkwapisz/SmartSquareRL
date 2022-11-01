@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
 Game::Game() {
-    MAP_SIZE = 7;
+    MAP_SIZE = 13;
     this->renderGame = false;
 
     if (renderGame) {
@@ -218,7 +218,7 @@ void Game::performResetIfNeeded(bool reset) {
         int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
         //int levelNum = level->getLevelNumber();
         delete this->level;
-        this->level = new Level(rand() % 2399);
+        this->level = new Level(rand() % 3999);
         //this->level = new Level(levelNum+1);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;

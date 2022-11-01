@@ -1,14 +1,14 @@
 {
-  "iter_per_episode": [70],
+  "iter_per_episode": [40],
   "target_episodes": [10000],
   "batch_size": [64],
   "mem_size":  [60000],
-  "neurons":  [[512, 256], [1024, 128], [1024, 512], [768, 256, 32], [512, 256, 128], [1024, 256, 128, 32], [768, 512, 256, 64]],
+  "neurons":  [[512, 64], [512, 256], [512, 128, 32], [256, 128, 64, 32], [512, 256, 128, 64]],
   "huber_delta": [1.35],
   "learning_rate":  [1e-4],
   "gamma": [0.85],
   "epsilon":  [1.0],
-  "epsilon_decay": [0.9999861],
+  "epsilon_decay": [0.9999864],
   "epsilon_min":  [0.01],
   "replace_target": [100]
 }

@@ -3,7 +3,7 @@
 Level::Level() = default;
 
 Level::Level(int levelNumber) {
-    MAP_SIZE = 7;
+    MAP_SIZE = 13;
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
     initializeObjectsShapes();
@@ -59,8 +59,8 @@ Level::~Level() {
 }
 
 void Level::initializeMapPaths() {
-    for (int i = 0; i < 2400; i++) {
-        this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i) + ".txt";
+    for (int i = 0; i < 4000; i++) {
+        this->mapPath[i] = R"(../Game/GameFiles/Maps/13x13Maps/map)" + std::to_string(i) + ".txt";
     }
 //    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
 //    this->mapPath[2] = R"(../Game/GameFiles/Maps/TrainingMaps/map2.txt)";

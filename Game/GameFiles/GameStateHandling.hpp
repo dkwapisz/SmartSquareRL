@@ -25,6 +25,7 @@ public:
     float lastFinishDist;
     int stepsCount;
     int discoveredFloorCount;
+    int MAP_SIZE;
 
     std::string rayDistances;
 

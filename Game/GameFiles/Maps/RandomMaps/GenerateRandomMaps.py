@@ -10,7 +10,7 @@ mapping = {
 
 
 def create_map_with_border(map_size):
-    map_ = [[0 for _ in range(0, 20, 1)] for _ in range(0, 20, 1)]
+    map_ = [[0 for _ in range(0, map_size, 1)] for _ in range(0, map_size, 1)]
     for i in range(0, map_size, 1):
         for j in range(0, map_size, 1):
             if any([i == 0, i == map_size - 1, j == 0, j == map_size - 1]):
@@ -30,10 +30,10 @@ def generate_maps(map_size):
     max_walls = 20
 
     min_wall_height = 1
-    max_wall_height = 5
+    max_wall_height = 1
 
     min_wall_width = 1
-    max_wall_width = 2
+    max_wall_width = 1
 
     # finish_size = 4  # square 2x2
 
@@ -117,7 +117,7 @@ def generate_map_list(nr_of_maps, map_size):
 
 
 if __name__ == "__main__":
-    map_list = generate_map_list(nr_of_maps=100, map_size=20)
+    map_list = generate_map_list(nr_of_maps=2000, map_size=20)
 
     map_index = 0
 

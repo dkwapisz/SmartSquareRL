@@ -1,4 +1,4 @@
-import logging
+import matplotlib.pyplot as plt
 
 
 def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target_episodes_amount):
@@ -28,21 +28,17 @@ def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target
     print("  -> single worker will use {} MB memory (excluding system usage).".format(int(worker_usage)))
     print("  -> all workers will use {} MB memory (including system usage).".format(int(all_workers_usage)))
     print("  -> buffer can hold approximately: {} episodes.".format(int(max_episodes_in_buffer)))
-    print("  -> to reach {} episodes, single worker will use {} MB memory (excluding system usage)."
-          .format(target_episodes_amount, worker_usage_to_reach_target_episodes))
-    print("  -> to reach {} episodes, all workers will use {} MB memory (including system usage)."
-          .format(target_episodes_amount, all_workers_usage_to_reach_target_episodes))
-    print("Every 1000 iteration after filling buffer use ~{} MB memory."
-          .format(thousand_iteration_after_buffer_fill_usage))
     print("----------------------------------------------------------------------------------------")
 
 
 def count_episodes_to_reach_eps_min(epsilon_decay, mode):
+    x_values = []
+    epsilon_y_values = []
     epsilon = 1.0
     epsilon_min = 0.01
 
     steps = 0
-    max_steps_per_episode = 175
+    max_steps_per_episode = 80
 
     while epsilon > epsilon_min:
         if mode == "exp":
@@ -52,13 +48,31 @@ def count_episodes_to_reach_eps_min(epsilon_decay, mode):
 
         steps += 1
 
+        x_values.append(steps)
+        epsilon_y_values.append(epsilon)
+
+
+
     episodes = steps / max_steps_per_episode
+
+    x_values = [x / max_steps_per_episode for x in x_values]
+
+    plt.figure()
+    plt.plot(x_values, epsilon_y_values)
+    plt.show()
+
     print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(epsilon_decay,
                                                                                                    episodes,
                                                                                                    mode))
 
 
 if __name__ == "__main__":
-    count_mem_usage(buffer_size=70_000, worker_amount=5, max_iteration_in_episode=200, target_episodes_amount=3000)
-    count_episodes_to_reach_eps_min(epsilon_decay=0.999983, mode="exp")
+    count_mem_usage(buffer_size=60_000, worker_amount=7, max_iteration_in_episode=40, target_episodes_amount=5000)
+    eps = [0.9999986]
+    for e in eps:
+        count_episodes_to_reach_eps_min(epsilon_decay=e, mode="exp")
+
+    # eps = [1e-6]
+    # for e in eps:
+    #     count_episodes_to_reach_eps_min(epsilon_decay=e, mode="linear")
 

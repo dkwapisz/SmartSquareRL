@@ -3,6 +3,7 @@
 Level::Level() = default;
 
 Level::Level(int levelNumber) {
+    MAP_SIZE = 7;
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
     initializeObjectsShapes();
@@ -58,8 +59,8 @@ Level::~Level() {
 }
 
 void Level::initializeMapPaths() {
-    for (int i = 0; i < 100; i++) {
-        this->mapPath[i] = R"(../Game/GameFiles/Maps/RandomMaps/map)" + std::to_string(i) + ".txt";
+    for (int i = 0; i < 600; i++) {
+        this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i+2400) + ".txt";
     }
 //    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
 //    this->mapPath[2] = R"(../Game/GameFiles/Maps/TrainingMaps/map2.txt)";
@@ -87,8 +88,8 @@ void Level::generateMap() {
 
     std::fstream mapFile;
     mapFile.open(mapPath[this->levelNumber]);
-    int mapSizeX = 20;
-    int mapSizeY = 20;
+    int mapSizeX = MAP_SIZE;
+    int mapSizeY = MAP_SIZE;
     int number = 0;
 
     if (mapFile.is_open()) {
@@ -100,9 +101,9 @@ void Level::generateMap() {
                 float posY = (30.f * (float) y) + 50;
 
                 if (number != 7) { // don't add finish to mapMatrix.
-                    this->gameStateHandling->mapMatrix[x + y * 20] = number;
+                    this->gameStateHandling->mapMatrix[x + y * MAP_SIZE] = number;
                 } else {
-                    this->gameStateHandling->mapMatrix[x + y * 20] = 0;
+                    this->gameStateHandling->mapMatrix[x + y * MAP_SIZE] = 0;
                 }
 
                 if (number == 0) {
@@ -259,8 +260,8 @@ void Level::resetLevel() {
 
     std::fstream mapFile;
     mapFile.open(mapPath[this->levelNumber]);
-    int mapSizeX = 20;
-    int mapSizeY = 20;
+    int mapSizeX = MAP_SIZE;
+    int mapSizeY = MAP_SIZE;
     int number = 0;
 
     if (mapFile.is_open()) {
@@ -272,9 +273,9 @@ void Level::resetLevel() {
                 float posY = (30.f * (float) y) + 50;
 
                 if (number != 7) { // don't add finish to mapMatrix.
-                    this->gameStateHandling->mapMatrix[x + y * 20] = number;
+                    this->gameStateHandling->mapMatrix[x + y * MAP_SIZE] = number;
                 } else {
-                    this->gameStateHandling->mapMatrix[x + y * 20] = 0;
+                    this->gameStateHandling->mapMatrix[x + y * MAP_SIZE] = 0;
                 }
 
                 if (number == 2) {

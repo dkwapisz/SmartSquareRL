@@ -114,20 +114,20 @@ def create_neural_network(worker_id, action_dims):
     return model
 
 
-def build_conv_dqn(worker_id, action_dims):
-    set_tf_gpu()
-
-    model = Sequential()
-    model.add(Conv2D(16, (8, 8), strides=4, input_shape=(20, 20, 5), activation='relu'))
-    model.add(Conv2D(32, (4, 4), strides=2, activation='relu'))
-    model.add(Flatten())
-    model.add(Dense(256, activation='relu'))
-    model.add(Dense(action_dims, activation='relu'))
-
-    optimizer = keras.optimizers.RMSprop(lr=get_param("learning_rate", worker_id), rho=0.95, epsilon=0.01)
-    model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
-
-    return model
+# def build_conv_dqn(worker_id, action_dims):
+#     set_tf_gpu()
+#
+#     model = Sequential()
+#     model.add(Conv2D(16, (8, 8), strides=4, input_shape=(20, 20, 5), activation='relu'))
+#     model.add(Conv2D(32, (4, 4), strides=2, activation='relu'))
+#     model.add(Flatten())
+#     model.add(Dense(256, activation='relu'))
+#     model.add(Dense(action_dims, activation='relu'))
+#
+#     optimizer = keras.optimizers.RMSprop(lr=get_param("learning_rate", worker_id), rho=0.95, epsilon=0.01)
+#     model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
+#
+#     return model
 
 
 class DoubleDQN:

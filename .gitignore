@@ -241,8 +241,12 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
+test_logs
+
 # Cython debug symbols
 cython_debug/
+
+.pclprof
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
@@ -253,3 +257,4 @@ cython_debug/
 
 Game/GameFiles/Maps/7x7Maps
 Game/GameFiles/Maps/13x13Maps
+/RL/AI/test_logs/

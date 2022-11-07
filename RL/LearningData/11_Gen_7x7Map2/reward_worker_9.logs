@@ -1973,7 +1973,7 @@ DEBUG:root:Reward: -558, Ep: 1970, Coins left: 2, Epsilon: 0.01, Steps in episod
 DEBUG:root:Reward: -557, Ep: 1971, Coins left: 2, Epsilon: 0.01, Steps in episode: 8, [LOSE]
 DEBUG:root:Reward: -567, Ep: 1972, Coins left: 2, Epsilon: 0.01, Steps in episode: 7, [LOSE]
 DEBUG:root:Reward: -576, Ep: 1973, Coins left: 2, Epsilon: 0.01, Steps in episode: 12, [LOSE]
-DEBUG:root:Reward: -561, Ep: 1974, Coins left: 2, Epsilon: 0.01, Steps in episode: 8, [LOSE]
+DEBUG:root:Reward: -561, Ep: 1974, Coins left: 2, Epsilon: 0.01, Steps in episode: 8, [LOSE][64, 16], [32, 32], [64, 64], [128, 64], [16, 16, 16], [32, 16, 16], [32, 32, 16], [32, 16, 8, 8], [16, 8, 8, 8], [32, 8, 4, 4, 4]
 DEBUG:root:Reward: -558, Ep: 1975, Coins left: 2, Epsilon: 0.01, Steps in episode: 5, [LOSE]
 DEBUG:root:Reward: -562, Ep: 1976, Coins left: 2, Epsilon: 0.01, Steps in episode: 7, [LOSE]
 DEBUG:root:Reward: -563, Ep: 1977, Coins left: 2, Epsilon: 0.01, Steps in episode: 7, [LOSE]

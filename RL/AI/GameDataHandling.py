@@ -1,3 +1,4 @@
+import numpy as np
 from line_profiler_pycharm import profile
 
 from DDQN import DoubleDQN
@@ -63,20 +64,21 @@ class GameDataHandling:
     @staticmethod
     @profile
     def __reformat_map_matrix_state(input_state: str):
-        input_list = []
-        if len(input_state) != 0:
-            for sequence in input_state.split("#"):
-                for num in sequence:
-                    input_list += blocks_mapping[int(num)]
-
-        return input_list
-        # CNN
+        # NN
         # input_list = []
-        # input_state = input_state[:-1]
         # if len(input_state) != 0:
         #     for sequence in input_state.split("#"):
-        #         line = [*sequence]
-        #         line = [blocks_mapping[int(x)] for x in line]
-        #         input_list.append(line)
+        #         for num in sequence:
+        #             input_list += blocks_mapping[int(num)]
         #
-        # return np.asarray(input_list)
+        # return input_list
+        # CNN
+        input_list = []
+        input_state = input_state[:-1]
+        if len(input_state) != 0:
+            for sequence in input_state.split("#"):
+                line = [*sequence]
+                line = [blocks_mapping[int(x)] for x in line]
+                input_list.append(line)
+
+        return np.asarray(input_list)

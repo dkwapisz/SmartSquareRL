@@ -31,35 +31,43 @@ def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target
     print("----------------------------------------------------------------------------------------")
 
 
-def count_episodes_to_reach_eps_min(epsilon_decay, mode):
-    x_values = []
-    epsilon_y_values = []
-    epsilon = 1.0
-    epsilon_min = 0.01
+def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
+    episodes = 0
+    count = 0
+    labels = []
+    for m in mode:
+        x_values = []
+        epsilon_y_values = []
+        epsilon = 1.0
+        epsilon_min = 0.01
+        steps = 0
+        episodes = 0
+        while epsilon > epsilon_min:
+            if m == "exp":
+                epsilon *= epsilon_decay[count]
+                labels.append("$\epsilon$ = $\epsilon$ - 0.01x")
+            elif m == "linear":
+                epsilon -= epsilon_decay[count]
+                labels.append("$\epsilon$ = $\epsilon$ * $0.999^x$")
 
-    steps = 0
-    max_steps_per_episode = 80
+            steps += 1
 
-    while epsilon > epsilon_min:
-        if mode == "exp":
-            epsilon *= epsilon_decay
-        elif mode == "linear":
-            epsilon -= epsilon_decay
+            x_values.append(steps)
+            epsilon_y_values.append(epsilon)
 
-        steps += 1
+        episodes = steps / max_steps_per_episode
 
-        x_values.append(steps)
-        epsilon_y_values.append(epsilon)
+        x_values = [x / max_steps_per_episode for x in x_values]
 
+        #plt.figure()
+        plt.plot(x_values, epsilon_y_values)
+        plt.title("Przykłady funkcji rozkładu $\epsilon$")
+        plt.xlabel("Kroki algorytmu")
+        plt.ylabel("$\epsilon$")
+        count += 1
 
+    plt.show(label=labels)
 
-    episodes = steps / max_steps_per_episode
-
-    x_values = [x / max_steps_per_episode for x in x_values]
-
-    plt.figure()
-    plt.plot(x_values, epsilon_y_values)
-    plt.show()
 
     print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(epsilon_decay,
                                                                                                    episodes,
@@ -68,9 +76,9 @@ def count_episodes_to_reach_eps_min(epsilon_decay, mode):
 
 if __name__ == "__main__":
     count_mem_usage(buffer_size=75_000, worker_amount=5, max_iteration_in_episode=80, target_episodes_amount=5000)
-    eps = [0.999993]
-    for e in eps:
-        count_episodes_to_reach_eps_min(epsilon_decay=e, mode="exp")
+    eps = [0.99953, 0.0001]
+    mode = ["exp", "linear"]
+    count_episodes_to_reach_eps_min(epsilon_decay=eps, max_steps_per_episode=80, mode=mode)
 
     # eps = [1e-6]
     # for e in eps:

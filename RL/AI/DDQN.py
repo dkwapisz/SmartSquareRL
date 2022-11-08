@@ -36,11 +36,12 @@ class ExperienceReplayBuffer:
         BUFFER_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
         ACTIONS = {}
+        # NN
+        # self.state_buffer = np.zeros((BUFFER_SIZE, input_dims))
+        # self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims))
         # CNN
-        # self.state_buffer = np.zeros((MEM_SIZE, 20, 20, 5))
-        # self.new_state_buffer = np.zeros((MEM_SIZE, 20, 20, 5))
-        self.state_buffer = np.zeros((BUFFER_SIZE, input_dims))
-        self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims))
+        self.state_buffer = np.zeros((BUFFER_SIZE, 13, 13, 5))
+        self.new_state_buffer = np.zeros((BUFFER_SIZE, 13, 13, 5))
         self.action_buffer = np.zeros((BUFFER_SIZE, action_dims), dtype=np.int8)
         self.reward_buffer = np.zeros(BUFFER_SIZE)
         self.terminal_buffer = np.zeros(BUFFER_SIZE, dtype=np.int32)
@@ -58,9 +59,6 @@ class ExperienceReplayBuffer:
         self.state_buffer[index] = state
         self.new_state_buffer[index] = new_state
         self.reward_buffer[index] = reward
-
-        # actions = np.zeros(self.action_memory.shape[1])
-        # actions[action] = 1.0
         self.action_buffer[index] = ACTIONS[action]
 
         self.terminal_buffer[index] = 1 - int(done)
@@ -90,6 +88,7 @@ def set_tf_gpu():
     os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
     os.environ['CUDA_VISIBLE_DEVICES'] = "0"
     os.environ['TF_GPU_THREAD_MODE'] = 'gpu_private'
+    os.environ['KERAS_BACKEND'] = 'tensorflow'
     gpu_devices = tf.config.experimental.list_physical_devices('GPU')
     for device in gpu_devices:
         tf.config.experimental.set_memory_growth(device, True)
@@ -114,20 +113,27 @@ def create_neural_network(worker_id, action_dims):
     return model
 
 
-# def build_conv_dqn(worker_id, action_dims):
-#     set_tf_gpu()
-#
-#     model = Sequential()
-#     model.add(Conv2D(16, (8, 8), strides=4, input_shape=(20, 20, 5), activation='relu'))
-#     model.add(Conv2D(32, (4, 4), strides=2, activation='relu'))
-#     model.add(Flatten())
-#     model.add(Dense(256, activation='relu'))
-#     model.add(Dense(action_dims, activation='relu'))
-#
-#     optimizer = keras.optimizers.RMSprop(lr=get_param("learning_rate", worker_id), rho=0.95, epsilon=0.01)
-#     model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
-#
-#     return model
+def create_conv_neural_network(worker_id, action_dims):
+    set_tf_gpu()
+
+    layer1_neurons = get_param("neurons", worker_id)[0]
+    layer2_neurons = get_param("neurons", worker_id)[1]
+
+    model = Sequential()
+    model.add(Conv2D(16, (3, 3), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
+    model.add(Conv2D(32, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Conv2D(64, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Flatten())
+    model.add(Dense(layer1_neurons, activation='relu'))
+    model.add(Dense(layer2_neurons, activation='relu'))
+    model.add(Dense(action_dims, activation='softmax'))
+
+    model.summary()
+
+    optimizer = keras.optimizers.Adam(lr=get_param("learning_rate", worker_id))
+    model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
+
+    return model
 
 
 class DoubleDQN:
@@ -139,18 +145,15 @@ class DoubleDQN:
         self.epsilon_min = get_param("epsilon_min", worker_id)
         self.replace_target = get_param("replace_target", worker_id)
         self.memory = ExperienceReplayBuffer(input_dims, action_dims, worker_id)
-        self.neural_network_eval = create_neural_network(worker_id, action_dims)
-        self.neural_network_target = create_neural_network(worker_id, action_dims)
+        self.neural_network_eval = create_conv_neural_network(worker_id, action_dims)
+        self.neural_network_target = create_conv_neural_network(worker_id, action_dims)
+        self.ZEROS = np.asarray([0, 0, 0, 0, 1])
 
     def save_neural_network(self, episodeCount, worker_id):
         eval_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_{}_worker_{}.h5".format(worker_id,
                                                                                                           episodeCount,
                                                                                                           worker_id)
-        # target_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_target_episode_{}_worker_{}.h5".format(worker_id,
-        #                                                                                                       episodeCount,
-        #                                                                                                       worker_id)
         self.neural_network_eval.save(eval_network)
-        # self.neural_network_eval.save(target_network)
 
     def load_neural_network(self):
         self.neural_network_eval = load_model("DDQN_episode_0.h5")
@@ -168,7 +171,7 @@ class DoubleDQN:
         state = state[np.newaxis, :]
 
         rand = np.random.random()
-        if rand < self.epsilon:
+        if rand < self.epsilon or np.all(state == self.ZEROS):
             action = np.random.choice(self.action_space)
         else:
             predicted_actions = self.neural_network_eval.predict(state)
@@ -193,7 +196,7 @@ class DoubleDQN:
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
             q_pred[batch_index, action_indices] = reward + self.gamma * q_next[batch_index, max_actions.astype(int) * done]
 
-            self.neural_network_eval.fit(state, q_pred, verbose=0)
+            self.neural_network_eval.fit(state, q_pred, batch_size=BATCH_SIZE, verbose=0)  # batch size, epochs
             #self.neural_network_eval.fit(state, q_pred, verbose=0, callbacks=[tensorboard_callback])
 
             # linear epsilon greedy

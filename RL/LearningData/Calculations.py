@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import pylab
 
 
 def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target_episodes_amount):
@@ -42,13 +42,16 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
         epsilon_min = 0.01
         steps = 0
         episodes = 0
+        if m == "exp":
+            labels.append("$\epsilon$ = $\epsilon$ - 0.0001x")
+        elif m == "linear":
+            labels.append("$\epsilon$ = $\epsilon$ $\cdot$  $0.99953^x$")
+
         while epsilon > epsilon_min:
             if m == "exp":
                 epsilon *= epsilon_decay[count]
-                labels.append("$\epsilon$ = $\epsilon$ - 0.01x")
             elif m == "linear":
                 epsilon -= epsilon_decay[count]
-                labels.append("$\epsilon$ = $\epsilon$ * $0.999^x$")
 
             steps += 1
 
@@ -60,13 +63,14 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
         x_values = [x / max_steps_per_episode for x in x_values]
 
         #plt.figure()
-        plt.plot(x_values, epsilon_y_values)
-        plt.title("Przykłady funkcji rozkładu $\epsilon$")
-        plt.xlabel("Kroki algorytmu")
-        plt.ylabel("$\epsilon$")
+        pylab.plot(x_values, epsilon_y_values)
+        pylab.title("Przykłady funkcji rozkładu $\epsilon$")
+        pylab.xlabel("Epizod (1 epizod = 100 iteracji)")
+        pylab.ylabel("$\epsilon$")
         count += 1
 
-    plt.show(label=labels)
+    pylab.legend(labels)
+    pylab.show()
 
 
     print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(epsilon_decay,
@@ -78,7 +82,7 @@ if __name__ == "__main__":
     count_mem_usage(buffer_size=75_000, worker_amount=5, max_iteration_in_episode=80, target_episodes_amount=5000)
     eps = [0.99953, 0.0001]
     mode = ["exp", "linear"]
-    count_episodes_to_reach_eps_min(epsilon_decay=eps, max_steps_per_episode=80, mode=mode)
+    count_episodes_to_reach_eps_min(epsilon_decay=eps, max_steps_per_episode=100, mode=mode)
 
     # eps = [1e-6]
     # for e in eps:

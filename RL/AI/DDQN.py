@@ -171,7 +171,7 @@ class DoubleDQN:
         state = state[np.newaxis, :]
 
         rand = np.random.random()
-        if rand < self.epsilon or np.all(state == self.ZEROS):
+        if rand < self.epsilon:
             action = np.random.choice(self.action_space)
         else:
             predicted_actions = self.neural_network_eval.predict(state)
@@ -196,7 +196,7 @@ class DoubleDQN:
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
             q_pred[batch_index, action_indices] = reward + self.gamma * q_next[batch_index, max_actions.astype(int) * done]
 
-            self.neural_network_eval.fit(state, q_pred, batch_size=BATCH_SIZE, verbose=0)  # batch size, epochs
+            self.neural_network_eval.fit(state, q_pred, verbose=0)  # batch size, epochs
             #self.neural_network_eval.fit(state, q_pred, verbose=0, callbacks=[tensorboard_callback])
 
             # linear epsilon greedy

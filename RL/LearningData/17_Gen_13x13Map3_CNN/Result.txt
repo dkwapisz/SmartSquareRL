@@ -1,0 +1,66 @@
+Maps in training: 4000
+Maps in testing: 1000
+Episodes: 16000
+
+Worker 0:
+    Training:
+        Win rate:
+        Wins:
+    Testing:
+        Win rate: 35.1%
+        Wins: 351/1000
+
+Worker 1:
+    Training:
+        Win rate:
+        Wins:
+    Testing:
+        Win rate: 37.9%
+        Wins: 379/1000
+
+Worker 2:
+    Training:
+        Win rate:
+        Wins:
+    Testing:
+        Win rate: 42.7%
+        Wins: 427/1000
+
+Worker 3:
+    Training:
+        Win rate:
+        Wins:
+    Testing:
+        Win rate: 37.2%
+        Wins: 372/1000
+
+Worker 4:
+    Training:
+        Win rate:
+        Wins:
+    Testing:
+        Win rate: 40.6%
+        Wins: 406/1000
+
+WINS in 16000 episodes in training:
+    Worker 0:
+        1968
+    Worker 1:
+        1710
+    Worker 2:
+        3094
+    Worker 3:
+        2869
+    Worker 4:
+        3504
+
+
+    model = Sequential()
+    model.add(Conv2D(16, (3, 3), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
+    model.add(Conv2D(32, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Conv2D(64, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Flatten())
+    model.add(Dense(layer1_neurons, activation='relu'))
+    model.add(Dense(layer2_neurons, activation='relu'))
+    model.add(Dense(action_dims, activation='softmax'))
+

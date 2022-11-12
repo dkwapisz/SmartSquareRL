@@ -145,6 +145,7 @@ void Level::generateMap() {
     } else {
         std::cerr << "Could not open map file" << "\n";
     }
+    gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY(), &floors, &finishes);
 
     mapFile.close();
 }

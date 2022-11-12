@@ -17,7 +17,6 @@ parser.add_argument("--PORT", type=int)
 
 params = parser.parse_args()
 
-# TODO Remember to correct this mapping
 blocks_mapping = {
     0: [0, 0, 0, 0, 1],  # floor [undiscovered]
     1: [0, 0, 0, 1, 0],  # wall
@@ -29,13 +28,24 @@ blocks_mapping = {
 
 
 def reformat_map_matrix_state(input_state: str):
+    # NN
+    # input_list = []
+    # if len(input_state) != 0:
+    #     for sequence in input_state.split("#"):
+    #         for num in sequence:
+    #             input_list += blocks_mapping[int(num)]
+    #
+    # return input_list
+    # CNN
     input_list = []
+    input_state = input_state[:-1]
     if len(input_state) != 0:
         for sequence in input_state.split("#"):
-            for num in sequence:
-                input_list += blocks_mapping[int(num)]
+            line = [*sequence]
+            line = [blocks_mapping[int(x)] for x in line]
+            input_list.append(line)
 
-    return input_list
+    return np.asarray(input_list)
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
@@ -44,7 +54,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.winCounter = 0
         self.loseCounter = 0
         self.model = load_model(
-            "../LearningData/14_Gen_7x7Map5/NeuralNetworks/Worker2/DDQN_eval_episode_10001_worker_2.h5")
+            "../LearningData/NeuralNetworks/Worker3/DDQN_eval_episode_16000_worker_3.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))
@@ -56,7 +66,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def StateReset(self, request, context):
         reset = False
-        if request.stepsCount > 30:
+        if request.stepsCount > 80:
             self.loseCounter += 1
             reset = True
 

@@ -39,7 +39,7 @@ for i in range(0, nr_of_workers, 1):
         multiple_z.append(z)
         wins.append(win)
 
-nr_of_plots = 5
+nr_of_plots = 1
 
 print(wins)
 
@@ -59,7 +59,7 @@ for j in range(0, nr_of_workers, nr_of_plots):
     pylab.legend(loc='lower right')
 
     #pylab.savefig("wykres1.png")
-    #pylab.show()
+    pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):
 #     pylab.figure(dpi=600)

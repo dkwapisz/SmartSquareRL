@@ -11,7 +11,7 @@ from keras.optimizers import Adam
 from line_profiler_pycharm import profile
 from tensorflow.keras.losses import Huber
 from tensorflow.keras.models import load_model
-from tensorflow.python.keras.layers import Conv2D, Flatten, MaxPooling2D, Dropout
+from tensorflow.python.keras.layers import Conv2D, Flatten, MaxPooling2D, Dropout, BatchNormalization
 
 global BUFFER_SIZE
 global BATCH_SIZE
@@ -116,36 +116,36 @@ def create_neural_network(worker_id, action_dims):
 def create_conv_neural_network(worker_id, action_dims):
     set_tf_gpu()
 
-    layer1_neurons = get_param("neurons", worker_id)[0]
-    layer2_neurons = get_param("neurons", worker_id)[1]
-    conv1_filter = get_param("conv_filter", worker_id)[0]
-    conv2_filter = get_param("conv_filter", worker_id)[1]
-    conv3_filter = get_param("conv_filter", worker_id)[2]
-    conv1_kernel = get_param("conv_kernel", worker_id)[0]
-    conv2_kernel = get_param("conv_kernel", worker_id)[1]
-    conv3_kernel = get_param("conv_kernel", worker_id)[2]
-    pooling_layer = get_param("pooling_layer", worker_id)
+    # layer1_neurons = get_param("neurons", worker_id)[0]
+    # layer2_neurons = get_param("neurons", worker_id)[1]
+    # conv1_filter = get_param("conv_filter", worker_id)
+    # conv1_kernel = get_param("conv_kernel", worker_id)
+    #
+    # model = Sequential()
+    # model.add(Conv2D(conv1_filter, (7, 7), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
+    # model.add(BatchNormalization())
+    #
+    # model.add(Conv2D(conv1_filter*2, (5, 5), strides=(1, 1), padding='same', activation='relu'))
+    # model.add(BatchNormalization())
+    #
+    # model.add(Conv2D(conv1_filter*4, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    # model.add(BatchNormalization())
+    #
+    # model.add(Flatten())
+    # model.add(Dropout(0.8))
+    # model.add(Dense(layer1_neurons, activation='relu'))
+    # model.add(Dense(layer2_neurons, activation='relu'))
+    # model.add(Dense(action_dims))
+    #
+    # tf.compat.v2.keras.utils.plot_model(model, show_shapes=True, to_file="model{}.png".format(worker_id+1))
+    # model.summary()
+    #
+    # optimizer = keras.optimizers.Adam(lr=get_param("learning_rate", worker_id))
+    # model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
 
-    model = Sequential()
-    model.add(Conv2D(conv1_filter, (conv1_kernel, conv1_kernel), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
-    if pooling_layer:
-        model.add(MaxPooling2D((2, 2), padding='valid'))
-    model.add(Conv2D(conv2_filter, (conv2_kernel, conv2_kernel), strides=(1, 1), padding='same', activation='relu'))
-    if pooling_layer:
-        model.add(MaxPooling2D((2, 2), padding='valid'))
-    model.add(Conv2D(conv3_filter, (conv3_kernel, conv3_kernel), strides=(1, 1), padding='same', activation='relu'))
-    if pooling_layer:
-        model.add(MaxPooling2D((2, 2), padding='valid'))
-    model.add(Flatten())
-    model.add(Dropout(0.9))
-    model.add(Dense(layer1_neurons, activation='relu'))
-    model.add(Dense(layer2_neurons, activation='relu'))
-    model.add(Dense(action_dims))
+    model = load_model("Models/model{}.h5".format(worker_id+1))
 
     model.summary()
-
-    optimizer = keras.optimizers.Adam(lr=get_param("learning_rate", worker_id))
-    model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
 
     return model
 
@@ -210,14 +210,7 @@ class DoubleDQN:
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
             q_pred[batch_index, action_indices] = reward + self.gamma * q_next[batch_index, max_actions.astype(int) * done]
 
-            self.neural_network_eval.fit(state, q_pred, verbose=0)  # batch size, epochs
-            #self.neural_network_eval.fit(state, q_pred, verbose=0, callbacks=[tensorboard_callback])
-
-            # linear epsilon greedy
-            # if self.epsilon > self.epsilon_min:
-            #     self.epsilon -= self.epsilon_decay
-            # else:
-            #     self.epsilon = self.epsilon_min
+            self.neural_network_eval.fit(state, q_pred, verbose=0)
 
             # exponential epsilon greedy
             self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min

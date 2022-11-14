@@ -113,14 +113,10 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def StateAction(self, request, context):
         self.gameDataHandling.set_state(request)
 
-        # for line in request.mapMatrix.split("#"):
-        #     print(" ".join(line))
-        # print("\n")
-
-        moveDir, shotDir = self.gameDataHandling.get_action()
+        moveDir = self.gameDataHandling.get_action()
         self.add_action_to_list(moveAction=moveDir)
 
-        return game_pb2.Action(moveDirection=moveDir + 1, shotDirection=shotDir + 1)
+        return game_pb2.Action(moveDirection=moveDir + 1, shotDirection=0)
 
     @profile
     def StateReset(self, request, context):
@@ -138,7 +134,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         resetEnv = self.gameDataHandling.get_reset()
         self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)
 
-        self.save_NN_every_n_iterations(episode_count=request.episodeCount, n=1000, reset_env=resetEnv)
+        self.save_NN_every_n_iterations(episode_count=request.episodeCount, n=500, reset_env=resetEnv)
 
         return game_pb2.Reset(resetNeeded=resetEnv)
 

@@ -220,7 +220,7 @@ void Game::performResetIfNeeded(bool reset) {
         delete this->level;
         //this->level = new Level(rand() % 3999);
 
-        if (levelNum >= 10000) {
+        if (levelNum > 9999) {
             levelNum = 0;
         }
 

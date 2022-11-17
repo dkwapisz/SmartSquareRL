@@ -1999,3 +1999,4 @@ DEBUG:root:Reward: -30, Ep: 1996, Coins left: 1, Epsilon: 0.01, Steps in episode
 DEBUG:root:Reward: -277, Ep: 1997, Coins left: 2, Epsilon: 0.01, Steps in episode: 93, [LOSE]
 DEBUG:root:Reward: -277, Ep: 1998, Coins left: 2, Epsilon: 0.01, Steps in episode: 150, [LOSE]
 DEBUG:root:Reward: -277, Ep: 1999, Coins left: 2, Epsilon: 0.01, Steps in episode: 84, [LOSE]
+DEBUG:root:Reward: -277, Ep: 2000, Coins left: 2, Epsilon: 0.01, Steps in episode: 84, [LOSE]

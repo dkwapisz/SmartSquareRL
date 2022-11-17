@@ -54,7 +54,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.winCounter = 0
         self.loseCounter = 0
         self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker4/DDQN_eval_episode_4000_worker_4.h5")
+            "../LearningData/NeuralNetworks/Worker6/DDQN_eval_episode_5500_worker_6.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))

@@ -79,7 +79,7 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
 
 
 if __name__ == "__main__":
-    count_mem_usage(buffer_size=60_000, worker_amount=6, max_iteration_in_episode=90, target_episodes_amount=5000)
+    count_mem_usage(buffer_size=75_000, worker_amount=5, max_iteration_in_episode=200, target_episodes_amount=5000)
     eps = [0.99953, 0.0001]
     mode = ["exp", "linear"]
     #count_episodes_to_reach_eps_min(epsilon_decay=eps, max_steps_per_episode=100, mode=mode)

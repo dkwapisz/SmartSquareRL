@@ -1,0 +1,15 @@
+Wins: [19, 0, 0, 0, 0]
+Collected coins in all episodes: [16387, 15817, 15438, 15892, 15410]
+Average coins in episode: [1.638372325534893, 1.581383723255349, 1.543491301739652, 1.5888822235552889, 1.5406918616276746]
+Number of cases coins in episode: {0: 8224, 1: 16857, 2: 15196, 3: 7310, 4: 2350, 5: 54, 'WIN': 19}
+If collected 0 coins, average reward is: -1136.889469844358
+If collected 1 coins, average reward is: -905.6600225425639
+If collected 2 coins, average reward is: -724.6408923400895
+If collected 3 coins, average reward is: -569.4272229822161
+If collected 4 coins, average reward is: -405.7868085106383
+If collected 5 coins, average reward is: -697.5
+If collected WIN coins, average reward is: 844.4736842105264
+
+
+
+USED 1000 RANDOM MAPS

@@ -40,8 +40,8 @@ class ExperienceReplayBuffer:
         # self.state_buffer = np.zeros((BUFFER_SIZE, input_dims))
         # self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims))
         # CNN
-        self.state_buffer = np.zeros((BUFFER_SIZE, 13, 13, 5))
-        self.new_state_buffer = np.zeros((BUFFER_SIZE, 13, 13, 5))
+        self.state_buffer = np.zeros((BUFFER_SIZE, 20, 20, 5))
+        self.new_state_buffer = np.zeros((BUFFER_SIZE, 20, 20, 5))
         self.action_buffer = np.zeros((BUFFER_SIZE, action_dims), dtype=np.int8)
         self.reward_buffer = np.zeros(BUFFER_SIZE)
         self.terminal_buffer = np.zeros(BUFFER_SIZE, dtype=np.int32)

@@ -6,7 +6,7 @@ import numpy as np
 ####################### INPUT PARAMETERS ##########################
 
 tested_parameter = ()
-episodes_limit = 16000
+episodes_limit = 10000
 coins_in_level = 4
 nr_of_workers = 7
 
@@ -35,7 +35,7 @@ for i in range(0, nr_of_workers, 1):
         z = []
         win = 0
         coin = 0
-        for line in file.readlines()[1:]:
+        for line in file.readlines():
             # print(line.split(" ")) [1] -> reward, [3] -> episode, [6] -> coinsLeft, [8] -> epsilon
             split = line.split(" ")
             reward = split[1][:-1]
@@ -93,7 +93,7 @@ for j in range(0, nr_of_workers, nr_of_plots):
         plot = pylab.plot(multiple_x[i], multiple_y[i], linewidth=0.5, label="Instancja " + str(i))
     pylab.legend(loc='lower right')
 
-    pylab.savefig("WykresGen7x7Proba5.png")
+    pylab.savefig("VariousModelsCNN13x13.png")
     pylab.show()
 
 # for j in range(0, nr_of_workers, nr_of_plots):

@@ -12,7 +12,7 @@ blocks_mapping = {
     # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
-MAP_SIZE = 13
+MAP_SIZE = 20
 
 
 class GameDataHandling:

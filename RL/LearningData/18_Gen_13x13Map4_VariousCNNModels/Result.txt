@@ -4,19 +4,19 @@ Episodes: 10000
 
 Worker 0:
     Training:
-        Win rate:
-        Wins:
+        Win rate: 39.86%
+        Wins: 3986/10000
     Testing:
-        Win rate:
-        Wins:
+        Win rate: 43.4%
+        Wins: 434/1000
 
 Worker 1:
     Training:
-        Win rate:
-        Wins:
+        Win rate: 32.61%
+        Wins: 3261/10000
     Testing:
-        Win rate:
-        Wins:
+        Win rate: 42.2%
+        Wins: 422/1000
 
 Worker 2:
     Training:
@@ -36,11 +36,11 @@ Worker 3:
 
 Worker 4:
     Training:
-        Win rate:
-        Wins:
+        Win rate: 0.06%
+        Wins: 4/6000
     Testing:
-        Win rate:
-        Wins:
+        Win rate: not tested
+        Wins: not tested
 
 Worker 5:
     Training:
@@ -48,7 +48,7 @@ Worker 5:
         Wins:
     Testing:
         Win rate:
-        Wins:
+        Wins: 902/1000
 
 Worker 6:
     Training:
@@ -56,4 +56,4 @@ Worker 6:
         Wins:
     Testing:
         Win rate:
-        Wins:
+        Wins: 902/1000

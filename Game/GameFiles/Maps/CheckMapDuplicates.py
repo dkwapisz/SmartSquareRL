@@ -1,6 +1,6 @@
 from os import listdir
 
-directory = "13x13Maps"
+directory = "20x20Maps"
 count_files = len(listdir(directory))
 maps = set()
 

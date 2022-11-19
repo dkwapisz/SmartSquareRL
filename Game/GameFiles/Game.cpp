@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
 Game::Game() {
-    MAP_SIZE = 13;
+    MAP_SIZE = 20;
     this->renderGame = false;
 
     if (renderGame) {

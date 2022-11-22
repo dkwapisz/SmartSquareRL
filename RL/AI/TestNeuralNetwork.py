@@ -54,7 +54,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.winCounter = 0
         self.loseCounter = 0
         self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker2/DDQN_eval_episode_7500_worker_2.h5")
+            "../LearningData/NeuralNetworks/Worker0/DDQN_eval_episode_9500_worker_0.h5")
 
     def StateAction(self, request, context):
         state = np.array(reformat_map_matrix_state(request.mapMatrix))
@@ -66,7 +66,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def StateReset(self, request, context):
         reset = False
-        if request.stepsCount > 80:
+        if request.stepsCount > 200:
             self.loseCounter += 1
             reset = True
 

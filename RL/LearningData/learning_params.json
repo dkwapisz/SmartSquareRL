@@ -2,7 +2,7 @@
   "iter_per_episode": [200],
   "target_episodes": [20000],
   "batch_size": [64],
-  "mem_size":  [75000],
+  "mem_size":  [80000],
   "huber_delta": [1.35],
   "learning_rate":  [1e-4],
   "gamma": [0.85],

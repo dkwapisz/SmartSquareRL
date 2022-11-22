@@ -1,0 +1,75 @@
+Maps in training: 10000
+Maps in testing: 1000
+Episodes: 10000
+
+Worker 0:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 1:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 2:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 3:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 4:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 5:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 6:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 7:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000
+
+Worker 8:
+    Training:
+        Win rate: %
+        Wins: /10000
+    Testing:
+        Win rate: %
+        Wins: /1000

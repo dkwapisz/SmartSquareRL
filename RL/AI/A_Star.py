@@ -1,4 +1,5 @@
 ##############################################################################
+import math
 
 # import packages
 
@@ -31,25 +32,16 @@ grid = np.array([
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+ [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+ [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 1, 0, 0, 0, 0, 1],
  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
-
-# start point and goal
-
-start = tuple(np.argwhere(grid == 8).tolist()[0])
-
-goal = (5, 12)
-
-
-# def calculate_coins_order():
 
 
 
@@ -72,7 +64,7 @@ def heuristic(a, b):
 
 
 def astar(array, start, goal):
-    neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     close_set = set()
 
@@ -143,13 +135,53 @@ def astar(array, start, goal):
     return False
 
 
-route = astar(grid, start, goal)
+def create_action_list(root):
+    actions = []
+    for coord in range(0, len(root) - 1, 1):
+        if root[coord][0] > root[coord + 1][0]:
+            actions.append("UP")
+        if root[coord][0] < root[coord + 1][0]:
+            actions.append("DOWN")
+        if root[coord][1] > root[coord + 1][1]:
+            actions.append("LEFT")
+        if root[coord][1] < root[coord + 1][1]:
+            actions.append("RIGHT")
+    return actions
 
-route = route + [start]
 
-route = route[::-1]
+coins = np.argwhere(grid == 4).tolist()
+whole_root = []
 
-print(route)
+for i in range(0, 5, 1):
+    if i == 0:
+        start = tuple(np.argwhere(grid == 8).tolist()[0])
+    else:
+        start = tuple(distance[sorted(distance.keys())[0]])
+        coins.remove(list(distance[sorted(distance.keys())[0]]))
+        distance.pop(sorted(distance.keys())[0])
+
+    distance = {}
+
+    for coin in coins:
+        dist = math.sqrt(math.hypot((coin[0] - start[0]), (coin[1] - start[1])))
+        distance[dist] = coin
+
+    goal = tuple(distance[sorted(distance.keys())[0]])
+
+    route = astar(grid, start, goal)
+
+    if i == 0:
+        route = route + [start]
+
+    route = route[::-1]
+
+    whole_root += route
+
+print(create_action_list(whole_root))
+print(len(create_action_list(whole_root)))
+
+print("Route len: {}".format(len(whole_root)))
+print("Whole root: {}".format(whole_root))
 
 ##############################################################################
 
@@ -164,10 +196,10 @@ x_coords = []
 
 y_coords = []
 
-for i in (range(0, len(route))):
-    x = route[i][0]
+for i in (range(0, len(whole_root))):
+    x = whole_root[i][0]
 
-    y = route[i][1]
+    y = whole_root[i][1]
 
     x_coords.append(x)
 

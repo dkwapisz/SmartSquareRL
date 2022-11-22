@@ -50,5 +50,5 @@ Worker 4:
     model.add(Flatten())
     model.add(Dense(layer1_neurons, activation='relu'))
     model.add(Dense(layer2_neurons, activation='relu'))
-    model.add(Dense(action_dims, activation='softmax'))
+    model.add(Dense(action_dims))
 

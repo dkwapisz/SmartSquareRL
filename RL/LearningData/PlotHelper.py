@@ -6,15 +6,18 @@ multiple_y = []
 multiple_z = []
 wins = []
 tested_param = {}
+all_cases = []
 
-nr_of_workers = 5
+nr_of_workers = 1
 
 for i in range(0, nr_of_workers, 1):
+    i = 2
     with open("./reward_worker_{}.logs".format(i), "r") as file:
         line = file.read().splitlines()[0].split(" ")
         tested_param[line[6]] = line[3]
 
 for i in range(0, nr_of_workers, 1):
+    i = 2
     with open("./reward_worker_{}.logs".format(i), "r") as file:
         x = []
         y = []
@@ -29,6 +32,7 @@ for i in range(0, nr_of_workers, 1):
             #print(split[-1])
             if "[WIN]" in split[-1]:
                 win += 1
+            all_cases.append(split[-1])
             #print("Episode: {}, Reward: {}".format(episode, reward))
             x.append(episode)
             y.append(int(reward))
@@ -59,7 +63,14 @@ for j in range(0, nr_of_workers, nr_of_plots):
     pylab.legend(loc='lower right')
 
     #pylab.savefig("wykres1.png")
-    pylab.show()
+    #pylab.show()
+
+for i in range(0, 8400, 100):
+    count = 0
+    for j in range(0, 100, 1):
+        if "[WIN]" in all_cases[i+j]:
+            count += 1
+    print("Maps: {} - {}, wins: {}".format(i, i+100, count))
 
 # for j in range(0, nr_of_workers, nr_of_plots):
 #     pylab.figure(dpi=600)

@@ -1,7 +1,6 @@
 import sys
 
 import numpy as np
-from tensorflow.python.keras.models import load_model
 
 sys.path.insert(0, "./ProtoFiles")
 
@@ -10,57 +9,38 @@ import ProtoFiles.game_pb2 as game_pb2
 import ProtoFiles.game_pb2_grpc as game_pb2_grpc
 
 import grpc
-import argparse
-
-parser = argparse.ArgumentParser(description="Config for multiple workers")
-parser.add_argument("--PORT", type=int)
-
-params = parser.parse_args()
-
-blocks_mapping = {
-    0: [0, 0, 0, 0, 1],  # floor [undiscovered]
-    1: [0, 0, 0, 1, 0],  # wall
-    4: [0, 0, 1, 0, 0],  # coin
-    8: [0, 1, 0, 0, 0],  # player
-    9: [1, 0, 0, 0, 0]   # floor [discovered]
-    # 7: [0, 0, 1, 0, 0, 0],  # finish
-}
 
 
 def reformat_map_matrix_state(input_state: str):
-    # NN
-    # input_list = []
-    # if len(input_state) != 0:
-    #     for sequence in input_state.split("#"):
-    #         for num in sequence:
-    #             input_list += blocks_mapping[int(num)]
-    #
-    # return input_list
-    # CNN
     input_list = []
     input_state = input_state[:-1]
     if len(input_state) != 0:
         for sequence in input_state.split("#"):
             line = [*sequence]
-            line = [blocks_mapping[int(x)] for x in line]
+            line = [int(x) for x in line]
             input_list.append(line)
+
+    print(np.asarray(input_list))
 
     return np.asarray(input_list)
 
+def get_action():
+    return 0
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
         self.winCounter = 0
         self.loseCounter = 0
-        self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker2/DDQN_eval_episode_7500_worker_2.h5")
+        self.actualEpisode = 0
+        self.actualMap = None
 
     def StateAction(self, request, context):
-        state = np.array(reformat_map_matrix_state(request.mapMatrix))
-        state = state[np.newaxis, :]
-        actions = self.model.predict(state)
-        action = np.argmax(actions)
+        if request.episodeCount != self.actualEpisode:
+            self.actualEpisode = request.episodeCount
+            self.actualEpisode = reformat_map_matrix_state(request.mapMatrix)
+
+        action = get_action()
 
         return game_pb2.Action(moveDirection=action + 1, shotDirection=0)
 

@@ -2,12 +2,12 @@
 
 using namespace GameMessage;
 
-char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t coinsLeft, int32_t iteration) {
+char *ProtoClient::StateAction(GameStateHandling *gameStateHandling, int32_t coinsLeft, int32_t episode) {
 
     State request;
 
     request.set_stepscount(gameStateHandling->stepsCount);
-    request.set_episodecount(iteration);
+    request.set_episodecount(episode);
     request.set_coinsleft(coinsLeft);
     request.set_mapmatrix(gameStateHandling->mapMatrixAsString);
 

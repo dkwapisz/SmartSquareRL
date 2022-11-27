@@ -11,13 +11,13 @@ all_cases = []
 nr_of_workers = 1
 
 for i in range(0, nr_of_workers, 1):
-    i = 2
+    i = 6
     with open("./reward_worker_{}.logs".format(i), "r") as file:
         line = file.read().splitlines()[0].split(" ")
         tested_param[line[6]] = line[3]
 
 for i in range(0, nr_of_workers, 1):
-    i = 2
+    i = 6
     with open("./reward_worker_{}.logs".format(i), "r") as file:
         x = []
         y = []

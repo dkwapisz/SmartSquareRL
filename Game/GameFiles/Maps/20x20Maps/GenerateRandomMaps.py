@@ -26,11 +26,11 @@ def generate_maps(map_size):
     min_coins = 5
     max_coins = 5
 
-    min_walls = 2
-    max_walls = 8
+    min_walls = 1
+    max_walls = 7
 
     min_wall_height = 2
-    max_wall_height = 6
+    max_wall_height = 5
 
     min_wall_width = 1
     max_wall_width = 1

@@ -7,21 +7,10 @@ from tensorflow.python.keras.losses import Huber
 model_num = 7
 
 model = Sequential()
-model.add(Conv2D(16, (3, 3), strides=(1, 1), padding='same', input_shape=(20, 20, 5), activation='relu'))
-model.add(Conv2D(16, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Conv2D(32, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(Conv2D(32, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+model.add(Conv2D(32, (3, 3), strides=(1, 1), padding='same', input_shape=(20, 20, 5), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(64, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(Conv2D(64, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Conv2D(128, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(Conv2D(128, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))

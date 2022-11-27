@@ -203,19 +203,20 @@ class DoubleDQN:
             action_values = np.array(self.action_space, dtype=np.int8)
             action_indices = np.dot(action, action_values)
 
-            q_next = self.neural_network_target.predict(new_state)
-            q_eval = self.neural_network_eval.predict(new_state)
-            q_pred = self.neural_network_eval.predict(state)
+            new_state_target_pred = self.neural_network_target.predict(new_state)
+            new_state_eval_pred = self.neural_network_eval.predict(new_state)
+            state_eval_pred = self.neural_network_eval.predict(state)
 
-            max_actions = np.argmax(q_eval, axis=1)
+            max_actions = np.argmax(new_state_eval_pred, axis=1)
 
             batch_index = np.arange(BATCH_SIZE, dtype=np.int32)
-            q_pred[batch_index, action_indices] = reward + self.gamma * q_next[batch_index, max_actions.astype(int) * done]
+            state_eval_pred[batch_index, action_indices] = reward + self.gamma * new_state_target_pred[
+                batch_index, max_actions.astype(int) * done]
 
-            self.neural_network_eval.fit(state, q_pred, verbose=0)
+            self.neural_network_eval.fit(state, state_eval_pred, verbose=0)
 
-            # exponential epsilon greedy
+            # Exponential epsilon greedy decay
             self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
 
-            if self.memory.buffer_index % self.replace_target == 0:
+            if self.memory.buffer_index % self.replace_target == 0:  # replace every 100 iteration by default
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())

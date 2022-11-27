@@ -14,36 +14,6 @@ import matplotlib.pyplot as plt
 
 from matplotlib.pyplot import figure
 
-##############################################################################
-
-# plot grid
-
-##############################################################################
-
-
-grid = np.array([
- [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
- [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 1, 0, 0, 0, 0, 1],
- [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])
-
-
 
 ##############################################################################
 
@@ -149,39 +119,48 @@ def create_action_list(root):
     return actions
 
 
-coins = np.argwhere(grid == 4).tolist()
-whole_root = []
+def calculate_path(grid, finish):
 
-for i in range(0, 5, 1):
-    if i == 0:
-        start = tuple(np.argwhere(grid == 8).tolist()[0])
-    else:
-        start = tuple(distance[sorted(distance.keys())[0]])
-        coins.remove(list(distance[sorted(distance.keys())[0]]))
-        distance.pop(sorted(distance.keys())[0])
+    coins = np.argwhere(grid == 4).tolist()
+    whole_root = []
 
-    distance = {}
+    max_i = 2 # coins
 
-    for coin in coins:
-        dist = math.sqrt(math.hypot((coin[0] - start[0]), (coin[1] - start[1])))
-        distance[dist] = coin
+    if finish:
+        max_i = 1
 
-    goal = tuple(distance[sorted(distance.keys())[0]])
+    for i in range(0, max_i, 1):
+        if i == 0:
+            start = tuple(np.argwhere(grid == 8).tolist()[0])
+        else:
+            start = tuple(distance[sorted(distance.keys())[0]])
+            coins.remove(list(distance[sorted(distance.keys())[0]]))
+            distance.pop(sorted(distance.keys())[0])
 
-    route = astar(grid, start, goal)
+        distance = {}
 
-    if i == 0:
-        route = route + [start]
+        for coin in coins:
+            dist = math.sqrt(math.hypot((coin[0] - start[0]), (coin[1] - start[1])))
+            distance[dist] = coin
 
-    route = route[::-1]
+        goal = tuple(distance[sorted(distance.keys())[0]])
 
-    whole_root += route
+        route = astar(grid, start, goal)
 
-print(create_action_list(whole_root))
-print(len(create_action_list(whole_root)))
+        if i == 0:
+            route = route + [start]
 
-print("Route len: {}".format(len(whole_root)))
-print("Whole root: {}".format(whole_root))
+        route = route[::-1]
+
+        whole_root += route
+    #
+    # print(create_action_list(whole_root))
+    # print(len(create_action_list(whole_root)))
+    #
+    # print("Route len: {}".format(len(whole_root)))
+    # print("Whole root: {}".format(whole_root))
+
+    return create_action_list(whole_root)
 
 ##############################################################################
 
@@ -192,29 +171,29 @@ print("Whole root: {}".format(whole_root))
 
 # extract x and y coordinates from route list
 
-x_coords = []
-
-y_coords = []
-
-for i in (range(0, len(whole_root))):
-    x = whole_root[i][0]
-
-    y = whole_root[i][1]
-
-    x_coords.append(x)
-
-    y_coords.append(y)
-
-# plot map and path
-
-fig, ax = plt.subplots(figsize=(20, 20))
-
-ax.imshow(grid, cmap=plt.cm.Dark2)
-
-ax.scatter(start[1], start[0], marker="*", color="yellow", s=200)
-
-ax.scatter(goal[1], goal[0], marker="*", color="red", s=200)
-
-ax.plot(y_coords, x_coords, color="black")
-
-plt.show()
+    # x_coords = []
+    #
+    # y_coords = []
+    #
+    # for i in (range(0, len(whole_root))):
+    #     x = whole_root[i][0]
+    #
+    #     y = whole_root[i][1]
+    #
+    #     x_coords.append(x)
+    #
+    #     y_coords.append(y)
+    #
+    # # plot map and path
+    #
+    # fig, ax = plt.subplots(figsize=(20, 20))
+    #
+    # ax.imshow(grid, cmap=plt.cm.Dark2)
+    #
+    # ax.scatter(start[1], start[0], marker="*", color="yellow", s=200)
+    #
+    # ax.scatter(goal[1], goal[0], marker="*", color="red", s=200)
+    #
+    # ax.plot(y_coords, x_coords, color="black")
+    #
+    # plt.show()

@@ -1,6 +1,8 @@
+import logging
 import sys
 
 import numpy as np
+from A_Star import calculate_path
 
 sys.path.insert(0, "./ProtoFiles")
 
@@ -9,6 +11,8 @@ import ProtoFiles.game_pb2 as game_pb2
 import ProtoFiles.game_pb2_grpc as game_pb2_grpc
 
 import grpc
+
+logging.basicConfig(filename="../LearningData/Test.logs", level=logging.DEBUG)
 
 
 def reformat_map_matrix_state(input_state: str):
@@ -20,43 +24,79 @@ def reformat_map_matrix_state(input_state: str):
             line = [int(x) for x in line]
             input_list.append(line)
 
-    print(np.asarray(input_list))
-
     return np.asarray(input_list)
 
-def get_action():
-    return 0
+
+def get_action(index, path):
+    # print(path)
+    # print(index)
+    action = path[index]
+
+    if "UP" in action:
+        return 1
+    elif "DOWN" in action:
+        return 3
+    elif "RIGHT" in action:
+        return 2
+    elif "LEFT" in action:
+        return 4
+
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
     def __init__(self):
         self.winCounter = 0
         self.loseCounter = 0
-        self.actualEpisode = 0
-        self.actualMap = None
+        self.actualEpisode = -1
+        self.index = 0
+        self.path = None
+        self.setIfNoCoins = True
+        self.setIfBeginEpisode = True
 
     def StateAction(self, request, context):
-        if request.episodeCount != self.actualEpisode:
-            self.actualEpisode = request.episodeCount
-            self.actualEpisode = reformat_map_matrix_state(request.mapMatrix)
+        # if request.stepsCount == 0:
+        #     print("x")
+        #     return game_pb2.Action(moveDirection=0, shotDirection=0)
+        if (request.episodeCount != self.actualEpisode and self.setIfBeginEpisode) or \
+                (request.coinsLeft == 0 and self.setIfNoCoins):
 
-        action = get_action()
+            if request.episodeCount != self.actualEpisode:
+                self.setIfBeginEpisode = False
+                self.actualEpisode = request.episodeCount
+                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), False)
 
-        return game_pb2.Action(moveDirection=action + 1, shotDirection=0)
+            if request.coinsLeft == 0:
+                self.setIfNoCoins = False
+                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), True)
+
+            self.index = 0
+
+
+        action = get_action(self.index, self.path)
+        self.index += 1
+
+        return game_pb2.Action(moveDirection=action, shotDirection=0)
 
     def StateReset(self, request, context):
         reset = False
-        if request.stepsCount > 80:
+        status = "[NO_STATUS]"
+        if request.stepsCount > 200:
             self.loseCounter += 1
             reset = True
+            status = "[LOSE]"
 
         if request.win is True:
             self.winCounter += 1
             #print("WIN!")
             reset = True
+            status = "[WIN]"
 
         if reset:
-            print("Win percentage: {}, maps won/tested: {}/{}".format(self.winCounter/(self.winCounter+self.loseCounter), self.winCounter, (self.winCounter+self.loseCounter)))
+            print("Win percentage: {}, maps won/tested: {}/{} Episodes: {} {}".format(
+                self.winCounter / (self.winCounter + self.loseCounter), self.winCounter,
+                (self.winCounter + self.loseCounter), request.stepsCount, status))
+            self.setIfNoCoins = True
+            self.setIfBeginEpisode = True
         return game_pb2.Reset(resetNeeded=reset)
 
 

@@ -12,7 +12,7 @@ blocks_mapping = {
     # 7: [0, 0, 1, 0, 0, 0],  # finish
 }
 
-MAP_SIZE = 7
+MAP_SIZE = 20
 
 
 class GameDataHandling:
@@ -26,7 +26,7 @@ class GameDataHandling:
         self.new_state = []
         self.game_over = False
         self.reset_env = False
-        self.agent = DoubleDQN(action_dims=4, input_dims=input_dims, worker_id=worker_id_)
+        self.agent = DoubleDQN(action_dims=4, input_dims=input_dims, worker_id=worker_id_, map_size=MAP_SIZE)
         self.reward = 0
         self.steps_count = 0
 
@@ -41,11 +41,13 @@ class GameDataHandling:
         self.game_over = request.gameOver
 
     def learn(self):
-        #print("Step: {}, Actual Reward: {}".format(self.steps_count, self.reward))
         self.agent.learn()
 
     def remember(self):
         self.agent.write_to_memory(self.state, self.move_dir, self.reward, self.new_state, self.game_over)
+
+    def reduce_epsilon_value(self):
+        self.agent.reduce_epsilon_value()
 
     def get_action(self):
         self.move_dir = self.agent.calculate_action(self.state)
@@ -65,20 +67,20 @@ class GameDataHandling:
     @profile
     def __reformat_map_matrix_state(input_state: str):
         # NN
-        # input_list = []
-        # if len(input_state) != 0:
-        #     for sequence in input_state.split("#"):
-        #         for num in sequence:
-        #             input_list += blocks_mapping[int(num)]
-        #
-        # return input_list
-        # CNN
         input_list = []
-        input_state = input_state[:-1]
         if len(input_state) != 0:
             for sequence in input_state.split("#"):
-                line = [*sequence]
-                line = [blocks_mapping[int(x)] for x in line]
-                input_list.append(line)
+                for num in sequence:
+                    input_list += blocks_mapping[int(num)]
 
-        return np.asarray(input_list)
+        return input_list
+        # CNN
+        # input_list = []
+        # input_state = input_state[:-1]
+        # if len(input_state) != 0:
+        #     for sequence in input_state.split("#"):
+        #         line = [*sequence]
+        #         line = [blocks_mapping[int(x)] for x in line]
+        #         input_list.append(line)
+        #
+        # return np.asarray(input_list)

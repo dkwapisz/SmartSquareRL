@@ -2,12 +2,12 @@
 
 Level::Level() = default;
 
-Level::Level(int levelNumber) {
-    MAP_SIZE = 7;
+Level::Level(int levelNumber, int mapSize) {
+    MAP_SIZE = mapSize;
     initializeMapPaths();
     initializeLevelAttributes(levelNumber);
     initializeObjectsShapes();
-    this->gameStateHandling = new GameStateHandling();
+    this->gameStateHandling = new GameStateHandling(mapSize);
 
     generateMap();
     this->playerFoV = new PlayerFoV(8, false);
@@ -60,11 +60,8 @@ Level::~Level() {
 
 void Level::initializeMapPaths() {
     for (int i = 0; i < 600; i++) {
-        this->mapPath[i] = R"(../Game/GameFiles/Maps/7x7Maps/map)" + std::to_string(i+2400) + ".txt";
+        this->mapPath[i] = R"(../Game/GameFiles/Maps/20x20Maps/map)" + std::to_string(i+2400) + ".txt";
     }
-//    this->mapPath[1] = R"(../Game/GameFiles/Maps/TrainingMaps/map1.txt)";
-//    this->mapPath[2] = R"(../Game/GameFiles/Maps/TrainingMaps/map2.txt)";
-//    std::cout << mapPath[0];
 }
 
 void Level::initializeLevelAttributes(int levelNr) {
@@ -414,10 +411,8 @@ void Level::renderGameObjects(sf::RenderTarget &target) {
 }
 
 void Level::calculateClosestObjectsDir() {
-    //gameStateHandling->calculateClosestEnemyDir(&staticDangers, &movingDangers, player);
     gameStateHandling->calculateClosestCoinDir(&coins, player, playerFoV->isCoinInView(),
                                                playerFoV->getClosestCoin(), playerCoinsCount);
-    //gameStateHandling->calculateFinishDirectionDir(&finishes, playerFoV->isFinishInView(), player);
     gameStateHandling->allCoinsCollected = ((coinsCount - playerCoinsCount) == 0);
     gameStateHandling->calculateMapMatrix(player->getCenterPosX(), player->getCenterPosY(), &floors, &finishes);
 }

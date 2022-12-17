@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
 Game::Game() {
-    MAP_SIZE = 7;
+    MAP_SIZE = 20;
     this->renderGame = false;
 
     if (renderGame) {
@@ -11,7 +11,7 @@ Game::Game() {
     }
 
     this->gameFinished = false;
-    this->level = new Level(0);
+    this->level = new Level(0, MAP_SIZE);
 }
 
 Game::~Game() {
@@ -101,7 +101,6 @@ void Game::run(int argc, char **argv) {
     bool reset;
     int coinsLeft;
 
-    //while (this->window->isOpen()) {
     while (!renderGame || (this->window->isOpen())) {
         if (!gameFinished) {
             this->level->gameStateHandling->reward = 0;
@@ -112,7 +111,6 @@ void Game::run(int argc, char **argv) {
                                          level->getPlayer()->getEpisodeNumber());
 
             gameOver = this->playStep(actions[0], actions[1]);
-            //std::cout << "Move action: " << actions[0] << "\n";
 
             if (renderGame) {
                 this->render();
@@ -191,15 +189,9 @@ bool Game::playStep(char moveDirection, char shotDirection) {
         this->updateLabels();
     }
 
-
     this->level->updateBullets();
     this->level->updateDangerMovement();
     this->level->calculateClosestObjectsDir();
-
-//    if (this->level->isLevelFinished()) {
-//        level->setLevelFinished(false);
-//        return true;
-//    }
 
     return this->level->gameStateHandling->gameOver;
 }
@@ -218,13 +210,12 @@ void Game::performResetIfNeeded(bool reset) {
         int episodes_count = this->level->getPlayer()->getEpisodeNumber() + 1;
         int levelNum = level->getLevelNumber();
         delete this->level;
-        //this->level = new Level(rand() % 3999);
 
-        if (levelNum >= 9999) {
+        if (levelNum == 9999) {
             levelNum = 0;
         }
 
-        this->level = new Level(levelNum+1);
+        this->level = new Level(levelNum+1, MAP_SIZE);
         this->level->resetLevel();
         this->level->gameStateHandling->gameOver = false;
         this->level->getPlayer()->setEpisodes(episodes_count);

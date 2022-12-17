@@ -44,23 +44,23 @@ def set_tf_gpu():
 
 def reformat_map_matrix_state(input_state: str):
     # NN
-    input_list = []
-    if len(input_state) != 0:
-        for sequence in input_state.split("#"):
-            for num in sequence:
-                input_list += blocks_mapping[int(num)]
-
-    return input_list
-    # CNN
     # input_list = []
-    # input_state = input_state[:-1]
     # if len(input_state) != 0:
     #     for sequence in input_state.split("#"):
-    #         line = [*sequence]
-    #         line = [blocks_mapping[int(x)] for x in line]
-    #         input_list.append(line)
+    #         for num in sequence:
+    #             input_list += blocks_mapping[int(num)]
     #
-    # return np.asarray(input_list)
+    # return input_list
+    # CNN
+    input_list = []
+    input_state = input_state[:-1]
+    if len(input_state) != 0:
+        for sequence in input_state.split("#"):
+            line = [*sequence]
+            line = [blocks_mapping[int(x)] for x in line]
+            input_list.append(line)
+
+    return np.asarray(input_list)
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
@@ -68,14 +68,18 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
     def __init__(self):
         self.winCounter = 0
         self.loseCounter = 0
-        self.modelNum = 2
+        self.modelNum = 4
+        self.countIter = 0
         set_tf_gpu()
         self.model = load_model(
-            "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_10000_worker_{}.h5".format(self.modelNum,
+            "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_9500_worker_{}.h5".format(self.modelNum,
                                                                                                  self.modelNum))
         print("Model: {} in PyCharm, {} in Overleaf".format(self.modelNum, self.modelNum+1))
 
     def StateAction(self, request, context):
+        self.countIter += 1
+        if self.countIter == 1000:
+            print("STOP")
         state = np.array(reformat_map_matrix_state(request.mapMatrix))
         state = state[np.newaxis, :]
         actions = self.model.predict(state)
@@ -107,10 +111,10 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
     game_pb2_grpc.add_StateActionExchangeServicer_to_server(StateActionExchange(), server)
-    server.add_insecure_port('[::]:{}'.format(55611))
+    server.add_insecure_port('[::]:{}'.format(55610))
     server.start()
     print("-----------------------------------------------")
-    print("Test server is ready. Port: {}".format(55611))
+    print("Test server is ready. Port: {}".format(55610))
     print("-----------------------------------------------")
     server.wait_for_termination()
 

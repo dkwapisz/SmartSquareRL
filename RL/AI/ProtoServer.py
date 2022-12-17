@@ -130,6 +130,7 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         if request.stepsCount != 0:
             self.gameDataHandling.remember()
             self.gameDataHandling.learn()
+            self.gameDataHandling.reduce_epsilon_value()
 
         resetEnv = self.gameDataHandling.get_reset()
         self.gameDataHandling.set_reset(resetEnv=False, gameOver=False)

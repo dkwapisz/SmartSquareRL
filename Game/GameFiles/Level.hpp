@@ -55,13 +55,11 @@ private:
 public:
     Level();
 
-    explicit Level(int levelNumber);
+    explicit Level(int levelNumber, int mapSize);
 
     virtual ~Level();
 
     GameStateHandling *gameStateHandling;
-
-    void setLevelFinished(bool levelFinished);
 
     void movePlayer(float directionX, float directionY);
 

@@ -17,8 +17,6 @@ global BUFFER_SIZE
 global BATCH_SIZE
 global ACTIONS
 
-#tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="test_logs", histogram_freq=1, profile_batch=(1, 10000))
-
 
 def get_param(param_name, worker_id):
     with open("../LearningData/learning_params.json") as paramsFile:
@@ -31,19 +29,19 @@ def get_param(param_name, worker_id):
 
 
 class ExperienceReplayBuffer:
-    def __init__(self, input_dims, action_dims, worker_id):
+    def __init__(self, input_dims, action_dims, worker_id, map_size):
         global BUFFER_SIZE, BATCH_SIZE, ACTIONS
         BUFFER_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
         ACTIONS = {}
         # NN
-        # self.state_buffer = np.zeros((BUFFER_SIZE, input_dims))
-        # self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims))
+        self.state_buffer = np.zeros((BUFFER_SIZE, input_dims), dtype=np.int8)
+        self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims), dtype=np.int8)
         # CNN
-        self.state_buffer = np.zeros((BUFFER_SIZE, 20, 20, 5))
-        self.new_state_buffer = np.zeros((BUFFER_SIZE, 20, 20, 5))
+        # self.state_buffer = np.zeros((BUFFER_SIZE, map_size, map_size, 5), dtype=np.int8)
+        # self.new_state_buffer = np.zeros((BUFFER_SIZE, map_size, map_size, 5), dtype=np.int8)
         self.action_buffer = np.zeros((BUFFER_SIZE, action_dims), dtype=np.int8)
-        self.reward_buffer = np.zeros(BUFFER_SIZE)
+        self.reward_buffer = np.zeros(BUFFER_SIZE, dtype=np.int16)
         self.terminal_buffer = np.zeros(BUFFER_SIZE, dtype=np.int32)
         self.buffer_index = 0
 
@@ -153,17 +151,16 @@ def create_conv_neural_network(worker_id, action_dims):
 
 
 class DoubleDQN:
-    def __init__(self, action_dims, input_dims, worker_id):
+    def __init__(self, action_dims, input_dims, worker_id, map_size):
         self.action_space = [i for i in range(action_dims)]
         self.gamma = get_param("gamma", worker_id)
         self.epsilon = get_param("epsilon", worker_id)
         self.epsilon_decay = get_param("epsilon_decay", worker_id)
         self.epsilon_min = get_param("epsilon_min", worker_id)
         self.replace_target = get_param("replace_target", worker_id)
-        self.memory = ExperienceReplayBuffer(input_dims, action_dims, worker_id)
-        self.neural_network_eval = create_conv_neural_network(worker_id, action_dims)
-        self.neural_network_target = create_conv_neural_network(worker_id, action_dims)
-        self.ZEROS = np.asarray([0, 0, 0, 0, 1])
+        self.memory = ExperienceReplayBuffer(input_dims, action_dims, worker_id, map_size)
+        self.neural_network_eval = create_neural_network(worker_id, action_dims)
+        self.neural_network_target = create_neural_network(worker_id, action_dims)
 
     def save_neural_network(self, episodeCount, worker_id):
         eval_network = "../LearningData/NeuralNetworks/Worker{}/DDQN_eval_episode_{}_worker_{}.h5".format(worker_id,
@@ -215,8 +212,10 @@ class DoubleDQN:
 
             self.neural_network_eval.fit(state, state_eval_pred, verbose=0)
 
-            # Exponential epsilon greedy decay
-            self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
-
             if self.memory.buffer_index % self.replace_target == 0:  # replace every 100 iteration by default
                 self.neural_network_target.set_weights(self.neural_network_eval.get_weights())
+
+    def reduce_epsilon_value(self):
+        # Exponential epsilon greedy decay
+        self.epsilon = self.epsilon * self.epsilon_decay if self.epsilon > self.epsilon_min else self.epsilon_min
+

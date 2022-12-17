@@ -124,7 +124,7 @@ def calculate_path(grid, finish):
     coins = np.argwhere(grid == 4).tolist()
     whole_root = []
 
-    max_i = 2 # coins
+    max_i = 5 # coins
 
     if finish:
         max_i = 1

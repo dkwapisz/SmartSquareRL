@@ -17,30 +17,21 @@ private:
 public:
     bool allCoinsCollected;
     bool coinInFoV;
-    bool finishInFoV;
     bool gameOver;
     bool win;
     int32_t reward;
     float lastDistToCoin;
-    float lastFinishDist;
     int stepsCount;
-    int discoveredFloorCount;
     int MAP_SIZE;
 
     std::string rayDistances;
 
-    int* mapMatrix;
+    int *mapMatrix;
     std::string mapMatrixAsString;
 
-    GameStateHandling();
+    explicit GameStateHandling(int mapSize);
 
-    void calculateClosestEnemyDir(std::vector<StaticDanger *> *staticDangers,
-                                  std::vector<MovingDanger *> *movingDangers, Player *player);
-
-    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player,
-                                 bool coinInFoV_, Coin *closestCoin, int playerCoinsCount);
-
-    void calculateFinishDirectionDir(std::vector<Finish *> *finishes, bool finishInFoV_, Player *player);
+    void calculateClosestCoinDir(std::vector<Coin *> *coins, Player *player, bool coinInFoV_, Coin *closestCoin);
 
     void resetAllStates();
 

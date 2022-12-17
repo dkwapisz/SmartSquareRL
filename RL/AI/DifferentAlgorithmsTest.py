@@ -49,14 +49,15 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.loseCounter = 0
         self.actualEpisode = -1
         self.index = 0
+        self.countIter = 0
         self.path = None
         self.setIfNoCoins = True
         self.setIfBeginEpisode = True
 
     def StateAction(self, request, context):
-        # if request.stepsCount == 0:
-        #     print("x")
-        #     return game_pb2.Action(moveDirection=0, shotDirection=0)
+        self.countIter += 1
+        if self.countIter == 1000:
+            print("STOP")
         if (request.episodeCount != self.actualEpisode and self.setIfBeginEpisode) or \
                 (request.coinsLeft == 0 and self.setIfNoCoins):
 

@@ -1,14 +1,32 @@
+import numpy as np
 import pylab
 
 
-def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target_episodes_amount):
+class Buffer:
+
+    def __init__(self, buffer_size, map_size, one_hot_encoding_size):
+        self.state_buffer = np.zeros((buffer_size, map_size, map_size, one_hot_encoding_size), dtype=np.int8)
+        self.new_state_buffer = np.zeros((buffer_size, map_size, map_size, one_hot_encoding_size), dtype=np.int8)
+        self.action_buffer = np.zeros((buffer_size, 4), dtype=np.int8)
+        self.reward_buffer = np.zeros(buffer_size, dtype=np.int16)
+        self.terminal_buffer = np.zeros(buffer_size, dtype=np.int32)
+
+    def calculate_usage(self):
+        return (self.state_buffer.nbytes +
+                self.new_state_buffer.nbytes +
+                self.action_buffer.nbytes +
+                self.reward_buffer.nbytes +
+                self.terminal_buffer.nbytes) / (1024 ** 2)
+
+
+def count_mem_usage(buffer_size, map_size, one_hot_encoding_size, worker_amount, max_iteration_in_episode):
+    buffer = Buffer(buffer_size, map_size, one_hot_encoding_size)
     # all values are in MB
-    default_server_usage = 1150
+    default_server_usage = 1200
     default_client_usage = 20
-    thousand_iteration_usage = 40
-    thousand_iteration_after_buffer_fill_usage = 1.5
+    thousand_iteration_usage = buffer.calculate_usage()
+    print(buffer.calculate_usage())
     usage_per_iteration = thousand_iteration_usage / 1000
-    usage_per_iteration_after_buffer_fill = thousand_iteration_after_buffer_fill_usage / 1000
     system = 1000
 
     max_iteration_in_buffer = buffer_size
@@ -16,12 +34,6 @@ def count_mem_usage(buffer_size, worker_amount, max_iteration_in_episode, target
 
     worker_usage = (max_iteration_in_buffer * usage_per_iteration) + default_client_usage + default_server_usage
     all_workers_usage = worker_usage * worker_amount + system
-
-    target_iterations_amount = target_episodes_amount * max_iteration_in_episode
-    iterations_after_buffer_fill = target_iterations_amount - max_iteration_in_buffer
-
-    worker_usage_to_reach_target_episodes = worker_usage + (iterations_after_buffer_fill * usage_per_iteration_after_buffer_fill)
-    all_workers_usage_to_reach_target_episodes = (worker_usage_to_reach_target_episodes * worker_amount) + system
 
     print("----------------------------------------------------------------------------------------")
     print("With {} workers and {} buffer_size:".format(worker_amount, buffer_size))
@@ -62,16 +74,14 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
 
         x_values = [x / max_steps_per_episode for x in x_values]
 
-        #plt.figure()
+        # plt.figure()
         pylab.plot(x_values, epsilon_y_values)
-        pylab.title("Przykłady funkcji rozkładu $\epsilon$")
-        pylab.xlabel("Epizod (1 epizod = 100 iteracji)")
+        pylab.xlabel("Episodes")
         pylab.ylabel("$\epsilon$")
         count += 1
 
     pylab.legend(labels)
     pylab.show()
-
 
     print("With epsilon_decay {} you need {} full episodes to reach epsilon_min in mode {}".format(epsilon_decay,
                                                                                                    episodes,
@@ -79,12 +89,7 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
 
 
 if __name__ == "__main__":
-    count_mem_usage(buffer_size=80_000, worker_amount=4, max_iteration_in_episode=200, target_episodes_amount=5000)
+    count_mem_usage(buffer_size=1_000, map_size=20, one_hot_encoding_size=5, worker_amount=5, max_iteration_in_episode=200)
     eps = [0.999995]
     mode = ["exp"]
     count_episodes_to_reach_eps_min(epsilon_decay=eps, max_steps_per_episode=200, mode=mode)
-
-    # eps = [1e-6]
-    # for e in eps:
-    #     count_episodes_to_reach_eps_min(epsilon_decay=e, mode="linear")
-

@@ -5,6 +5,7 @@
 - [General](#General)
 - [Gameplay](#Gameplay)
 - [Technologies/libraries used](#Technologies/libraries-used)
+- [How to run](#How-to-run)
 
 ## General
 The repository will contain the game and a Reinforcement Learning algorithm that will learn to play the game. Currently, the game is finished. The base version of the game can be found [here](https://github.com/dkwapisz/SmartSquareGame).
@@ -22,23 +23,25 @@ The game was written in C++ to be as optimized as possible. The RL algorithm wil
 - gRPC 1.46.3
 - Protobuf 3.19.4.0
 
+## How to run
 
-## Reinforcement Learning algorithm:
-### Double Deep Q-Network
+1. Install SFML library: `sudo apt-get install libsfml-dev`. If you use server without GPU for training, you can use [SFML-pi](https://github.com/mickelson/sfml-pi) version, which doesn't required X11 display  
+2. Install gRPC for C++, follow [THIS](https://grpc.io/docs/languages/cpp/quickstart/) steps.  
+3. Provide correct path to gRPC in [cMake file](include_directories("/home/dkwapisz/.local/include")).  
+4. Compile C++ project.  
+5. Run servers and clients by following scripts (it is necessary to fix paths):
+  - [Servers](https://github.com/dkwapisz/SmartSquareRL/blob/main/start_servers.sh) <- provide WORKER_IDs and ports you want to you
+  - [Clients](https://github.com/dkwapisz/SmartSquareRL/blob/main/start_workers.sh) <- provide ports you want to use
+  - To easily kill server processes, use [killServers.sh](https://github.com/dkwapisz/SmartSquareRL/blob/main/kill_servers.sh).  
+6. To test created models, use [TestNeuralNetwork](https://github.com/dkwapisz/SmartSquareRL/blob/main/RL/AI/TestNeuralNetwork.py).
 
-### Rewards:
-**Positive:**
-- Collecting coin: +75
-- Discovering new floor part: +1
-- Getting closer to coin (checking in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): +1
-- Winning level: +500
+To configure Neural Network or hyperparameters, modify [DDQN](https://github.com/dkwapisz/SmartSquareRL/blob/main/RL/AI/DDQN.py) file or provide parameters into [learning_parameters](https://github.com/dkwapisz/SmartSquareRL/blob/main/RL/LearningData/learning_params.json).  
 
-**Negative:**
-- Collision with wall: -20
-- Moving away from coin (checking in 8 directions -> UP, UP-RIGHT, RIGHT, RIGHT-DOWN etc): -5
-- Losing level when all coins have not been collected: `-300 + (coinsLeft * (-125))`
-- Losing level when all coins have been collected: -500
+To calculate: usage of ReplayBuffers or epsilon parameter decay use [Calculations](https://github.com/dkwapisz/SmartSquareRL/blob/main/RL/LearningData/Calculations.py) file.
 
-**Rewards/punishments TBD:**
-- Collision with box: -20
-- Collision with enemy: -100
+To generate random maps, use scripts created in [Maps](https://github.com/dkwapisz/SmartSquareRL/tree/main/Game/GameFiles/Maps) directory. Remember to fix MAP_SIZE variables in [Game](https://github.com/dkwapisz/SmartSquareRL/blob/ca81ff270848b2655b7189561335b594754fd299/Game/GameFiles/Game.cpp#L4) and [GameDataHandling](https://github.com/dkwapisz/SmartSquareRL/blob/ca81ff270848b2655b7189561335b594754fd299/RL/AI/GameDataHandling.py#L15) if needed. Also fix map limit in [Game](https://github.com/dkwapisz/SmartSquareRL/blob/ca81ff270848b2655b7189561335b594754fd299/Game/GameFiles/Game.cpp#L214) file. Provide correct path if you change map size and fix loop parameters for number of maps you want to use in [Level](https://github.com/dkwapisz/SmartSquareRL/blob/ca81ff270848b2655b7189561335b594754fd299/Game/GameFiles/Level.cpp#L61) file.
+
+All trained models will be saved inside [LearningData](https://github.com/dkwapisz/SmartSquareRL/tree/main/RL/LearningData) in NeuralNetworks directory which is created when the network is saved. All logs collected during trainings will also be saved in [LearningData](https://github.com/dkwapisz/SmartSquareRL/tree/main/RL/LearningData).
+
+If you switch between MLP and CNN models, switch everything which is needed in following files:  TBD
+

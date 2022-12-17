@@ -43,24 +43,26 @@ def set_tf_gpu():
 
 
 def reformat_map_matrix_state(input_state: str):
-    # NN
-    # input_list = []
-    # if len(input_state) != 0:
-    #     for sequence in input_state.split("#"):
-    #         for num in sequence:
-    #             input_list += blocks_mapping[int(num)]
-    #
-    # return input_list
-    # CNN
+    # NN ===================================================================================
     input_list = []
-    input_state = input_state[:-1]
     if len(input_state) != 0:
         for sequence in input_state.split("#"):
-            line = [*sequence]
-            line = [blocks_mapping[int(x)] for x in line]
-            input_list.append(line)
+            for num in sequence:
+                input_list += blocks_mapping[int(num)]
 
-    return np.asarray(input_list)
+    return input_list
+    # ======================================================================================
+    # CNN ==================================================================================
+    # input_list = []
+    # input_state = input_state[:-1]
+    # if len(input_state) != 0:
+    #     for sequence in input_state.split("#"):
+    #         line = [*sequence]
+    #         line = [blocks_mapping[int(x)] for x in line]
+    #         input_list.append(line)
+    #
+    # return np.asarray(input_list)
+    # ======================================================================================
 
 
 class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
@@ -97,7 +99,6 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
         if request.win is True:
             self.winCounter += 1
-            #print("WIN!")
             reset = True
             status = "[WIN]"
 

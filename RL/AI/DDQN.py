@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 
 import keras.layers
 import numpy as np
@@ -11,7 +10,7 @@ from keras.optimizers import Adam
 from line_profiler_pycharm import profile
 from tensorflow.keras.losses import Huber
 from tensorflow.keras.models import load_model
-from tensorflow.python.keras.layers import Conv2D, Flatten, MaxPooling2D, Dropout, BatchNormalization
+from tensorflow.python.keras.layers import Conv2D, Flatten, Dropout
 
 global BUFFER_SIZE
 global BATCH_SIZE
@@ -34,12 +33,14 @@ class ExperienceReplayBuffer:
         BUFFER_SIZE = get_param("mem_size", worker_id)
         BATCH_SIZE = get_param("batch_size", worker_id)
         ACTIONS = {}
-        # NN
+        # NN ===================================================================================
         self.state_buffer = np.zeros((BUFFER_SIZE, input_dims), dtype=np.int8)
         self.new_state_buffer = np.zeros((BUFFER_SIZE, input_dims), dtype=np.int8)
-        # CNN
+        # ======================================================================================
+        # CNN ==================================================================================
         # self.state_buffer = np.zeros((BUFFER_SIZE, map_size, map_size, 5), dtype=np.int8)
         # self.new_state_buffer = np.zeros((BUFFER_SIZE, map_size, map_size, 5), dtype=np.int8)
+        # ======================================================================================
         self.action_buffer = np.zeros((BUFFER_SIZE, action_dims), dtype=np.int8)
         self.reward_buffer = np.zeros(BUFFER_SIZE, dtype=np.int16)
         self.terminal_buffer = np.zeros(BUFFER_SIZE, dtype=np.int32)
@@ -50,10 +51,6 @@ class ExperienceReplayBuffer:
     @profile
     def write_to_memory(self, state, action, reward, new_state, done):
         index = self.buffer_index % BUFFER_SIZE
-        # if index == 0:
-        #     print("MEMORY INDEX IS 0. RAM USAGE: {} MB".format(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2))
-        # if index != 0 and index % 500 == 0:
-        #     print("MEMORY BUFFER HITS {}. RAM USAGE: {}".format(index, psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2))
         self.state_buffer[index] = state
         self.new_state_buffer[index] = new_state
         self.reward_buffer[index] = reward
@@ -116,34 +113,26 @@ def create_neural_network(worker_id, action_dims):
 def create_conv_neural_network(worker_id, action_dims):
     set_tf_gpu()
 
-    # layer1_neurons = get_param("neurons", worker_id)[0]
-    # layer2_neurons = get_param("neurons", worker_id)[1]
-    # conv1_filter = get_param("conv_filter", worker_id)
-    # conv1_kernel = get_param("conv_kernel", worker_id)
-    #
-    # model = Sequential()
-    # model.add(Conv2D(conv1_filter, (7, 7), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
-    # model.add(BatchNormalization())
-    #
-    # model.add(Conv2D(conv1_filter*2, (5, 5), strides=(1, 1), padding='same', activation='relu'))
-    # model.add(BatchNormalization())
-    #
-    # model.add(Conv2D(conv1_filter*4, (3, 3), strides=(1, 1), padding='same', activation='relu'))
-    # model.add(BatchNormalization())
-    #
-    # model.add(Flatten())
-    # model.add(Dropout(0.8))
-    # model.add(Dense(layer1_neurons, activation='relu'))
-    # model.add(Dense(layer2_neurons, activation='relu'))
-    # model.add(Dense(action_dims))
-    #
-    # tf.compat.v2.keras.utils.plot_model(model, show_shapes=True, to_file="model{}.png".format(worker_id+1))
-    # model.summary()
-    #
-    # optimizer = keras.optimizers.Adam(lr=get_param("learning_rate", worker_id))
-    # model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
+    layer1_neurons = get_param("neurons", worker_id)[0]
+    layer2_neurons = get_param("neurons", worker_id)[1]
+    conv1_filter = get_param("conv_filter", worker_id)
+    #conv1_kernel = get_param("conv_kernel", worker_id)
 
-    model = load_model("Models/model{}.h5".format(worker_id))
+    model = Sequential()
+    model.add(Conv2D(conv1_filter, (3, 3), strides=(1, 1), padding='same', input_shape=(13, 13, 5), activation='relu'))
+    model.add(Conv2D(conv1_filter*2, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Conv2D(conv1_filter*4, (3, 3), strides=(1, 1), padding='same', activation='relu'))
+    model.add(Flatten())
+    model.add(Dropout(0.8))
+    model.add(Dense(layer1_neurons, activation='relu'))
+    model.add(Dense(layer2_neurons, activation='relu'))
+    model.add(Dense(action_dims))
+
+    tf.compat.v2.keras.utils.plot_model(model, show_shapes=True, to_file="model{}.png".format(worker_id+1))
+    model.summary()
+
+    optimizer = keras.optimizers.Adam(lr=get_param("learning_rate", worker_id))
+    model.compile(optimizer, loss=Huber(delta=get_param("huber_delta", worker_id)))
 
     model.summary()
 

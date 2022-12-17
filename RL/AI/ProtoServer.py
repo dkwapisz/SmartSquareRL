@@ -57,18 +57,6 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
                             level=logging.DEBUG)
         log_test_purpose()
 
-    def check_if_win_is_faster(self, steps_count):
-        if len(self.steps_if_win) == 0:
-            self.steps_if_win.append(steps_count)
-            return True
-
-        # return true if all values in steps_if_win are lower than steps_count -> save neural network if AI solved it faster
-        if all(steps > steps_count for steps in self.steps_if_win):
-            self.steps_if_win.append(steps_count)
-            return True
-        else:
-            return False
-
     @profile
     def perform_lost_operations(self, request):
         self.lastActions = []
@@ -86,9 +74,6 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
         self.rewardInEpisode = 0
 
     def perform_win_operations(self, request):
-        #if self.check_if_win_is_faster(request.stepsCount):
-        # if request.episodeCount > 7000:
-        #     self.gameDataHandling.save_agent(request.episodeCount, params.WORKER_ID)
         logging.debug(
             "Reward: {}, Ep: {}, Coins left: {}, Epsilon: {}, Steps in episode: {}, [WIN]".format(
                 self.rewardInEpisode,

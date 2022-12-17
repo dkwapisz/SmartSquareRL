@@ -53,7 +53,6 @@ def count_episodes_to_reach_eps_min(epsilon_decay, max_steps_per_episode, mode):
         epsilon = 1.0
         epsilon_min = 0.01
         steps = 0
-        episodes = 0
         if m == "exp":
             labels.append("$\epsilon$ = $\epsilon$ - 0.0001x")
         elif m == "linear":

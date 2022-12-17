@@ -28,8 +28,6 @@ def reformat_map_matrix_state(input_state: str):
 
 
 def get_action(index, path):
-    # print(path)
-    # print(index)
     action = path[index]
 
     if "UP" in action:
@@ -64,14 +62,13 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
             if request.episodeCount != self.actualEpisode:
                 self.setIfBeginEpisode = False
                 self.actualEpisode = request.episodeCount
-                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), False)
+                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), False, coins_amount=5)
 
             if request.coinsLeft == 0:
                 self.setIfNoCoins = False
-                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), True)
+                self.path = calculate_path(reformat_map_matrix_state(request.mapMatrix), True, coins_amount=5)
 
             self.index = 0
-
 
         action = get_action(self.index, self.path)
         self.index += 1
@@ -88,7 +85,6 @@ class StateActionExchange(game_pb2_grpc.StateActionExchangeServicer):
 
         if request.win is True:
             self.winCounter += 1
-            #print("WIN!")
             reset = True
             status = "[WIN]"
 

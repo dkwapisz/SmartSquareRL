@@ -66,7 +66,7 @@ class GameDataHandling:
     @staticmethod
     @profile
     def __reformat_map_matrix_state(input_state: str):
-        # NN
+        # NN ===================================================================================
         input_list = []
         if len(input_state) != 0:
             for sequence in input_state.split("#"):
@@ -74,7 +74,8 @@ class GameDataHandling:
                     input_list += blocks_mapping[int(num)]
 
         return input_list
-        # CNN
+        # ======================================================================================
+        # CNN ==================================================================================
         # input_list = []
         # input_state = input_state[:-1]
         # if len(input_state) != 0:
@@ -84,3 +85,4 @@ class GameDataHandling:
         #         input_list.append(line)
         #
         # return np.asarray(input_list)
+        # ======================================================================================

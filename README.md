@@ -43,5 +43,5 @@ To generate random maps, use scripts created in [Maps](https://github.com/dkwapi
 
 All trained models will be saved inside [LearningData](https://github.com/dkwapisz/SmartSquareRL/tree/main/RL/LearningData) in NeuralNetworks directory which is created when the network is saved. All logs collected during trainings will also be saved in [LearningData](https://github.com/dkwapisz/SmartSquareRL/tree/main/RL/LearningData).
 
-If you switch between MLP and CNN models, switch everything which is needed in following files:  TBD
+If you switch between MLP and CNN models, switch everything which is needed in following files:  [DDQN](https://github.com/dkwapisz/SmartSquareRL/blob/faedb7cf720a97479e76718df1be027037d6c122/RL/AI/DDQN.py#L36), [GameDataHandling](https://github.com/dkwapisz/SmartSquareRL/blob/faedb7cf720a97479e76718df1be027037d6c122/RL/AI/GameDataHandling.py#L68), [TestNeuralNetwork](https://github.com/dkwapisz/SmartSquareRL/blob/faedb7cf720a97479e76718df1be027037d6c122/RL/AI/TestNeuralNetwork.py#L45).
 

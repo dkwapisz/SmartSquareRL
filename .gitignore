@@ -258,3 +258,4 @@ cython_debug/
 Game/GameFiles/Maps/7x7Maps
 Game/GameFiles/Maps/13x13Maps
 /RL/AI/test_logs/
+/Game/GameFiles/Maps/20x20Maps/

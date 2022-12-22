@@ -1,5 +1,4 @@
-# Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
-# License:      GPLv3
+# This code is modified version of: https://www.analytics-link.com/post/2018/09/14/applying-the-a-path-finding-algorithm-in-python-part-1-2d-square-grid
 
 import math
 import numpy as np

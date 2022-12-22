@@ -1,5 +1,6 @@
 # Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
 # License:      GPLv3
+# This code is based on https://github.com/philtabor/Youtube-Code-Repository/tree/master/ReinforcementLearning/DeepQLearning
 
 import json
 import os

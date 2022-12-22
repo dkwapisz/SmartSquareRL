@@ -1,3 +1,6 @@
+// Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+// License:      GPLv3
+
 #include <grpcpp/grpcpp.h>
 #include "ProtoFiles/game.grpc.pb.h"
 #include "../GameFiles/GameStateHandling.hpp"

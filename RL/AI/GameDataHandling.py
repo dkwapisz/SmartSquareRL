@@ -1,3 +1,6 @@
+# Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+# License:      GPLv3
+
 import numpy as np
 from line_profiler_pycharm import profile
 

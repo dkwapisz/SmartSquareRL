@@ -1,3 +1,6 @@
+# Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+# License:      GPLv3
+
 import math
 import numpy as np
 import heapq

@@ -1,5 +1,7 @@
-#include "Coin.hpp"
+// Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+// License:      GPLv3
 
+#include "Coin.hpp"
 
 Coin::Coin() = default;
 

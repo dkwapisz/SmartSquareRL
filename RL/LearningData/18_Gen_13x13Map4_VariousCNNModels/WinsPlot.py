@@ -1,3 +1,6 @@
+# Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+# License:      GPLv3
+
 import matplotlib.pyplot as plt
 
 x = [i for i in range(0, 10000, 1)]

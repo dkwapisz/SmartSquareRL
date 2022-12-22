@@ -1,3 +1,6 @@
+// Author:       Dawid Kwapisz (dkwapisz99@gmail.com, dkwapisz@student.agh.edu.pl)
+// License:      GPLv3
+
 #ifndef GAMESTATEHANDLING_H
 #define GAMESTATEHANDLING_H
 
